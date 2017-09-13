@@ -9,6 +9,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="ClientApps\Chatbot\src\chatbot-config.module.ts" />
+    <None Remove="ClientApps\Chatbot\src\core\logger.service.ts" />
+    <None Remove="ClientApps\Chatbot\src\model\DirectLineToken.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ClientApps\Agent\docs\" />
+    <Folder Include="ClientApps\Chatbot\docs\" />
     <Folder Include="wwwroot\" />
     <Folder Include="wwwroot\agentdist\" />
     <Folder Include="wwwroot\chatbotdist\" />
@@ -32,7 +40,6 @@
     <PackageReference Include="Docker.DotNet" Version="3.125.0" />
     <PackageReference Include="MailKit" Version="1.18.0" />
     <PackageReference Include="MimeKit" Version="1.18.0" />
-    <PackageReference Include="Moq" Version="4.7.99" />
     <PackageReference Include="NewtonSoft.Json" Version="10.0.3" />
     <PackageReference Include="Portable.BouncyCastle" Version="1.8.1.3" />
     <PackageReference Include="Serilog.AspNetCore" Version="2.0.0" />
@@ -44,6 +51,11 @@
     <PackageReference Include="Serilog.Sinks.RollingFile" Version="3.3.0" />
     <PackageReference Include="Serilog.Extensions.Logging" Version="2.0.2" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="1.0.0" />
-    <PackageReference Include="xunit" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApps\Chatbot\src\chatbot-config.module.ts" />
+    <TypeScriptCompile Include="ClientApps\Chatbot\src\core\logger.service.ts" />
+    <TypeScriptCompile Include="ClientApps\Chatbot\src\model\DirectLineToken.ts" />
   </ItemGroup>
 </Project>

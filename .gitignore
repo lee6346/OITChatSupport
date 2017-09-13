@@ -63,6 +63,19 @@ Obj/
 /src/Data/obj/
 /src/Data/Obj/
 
+
+/tests/Web.Tests/[Dd]ebug/
+/tests/Web.Tests/[Dd]ebugPublic
+/tests/Web.Tests/[Rr]elease/
+/tests/Web.Tests/[Rr]eleases/
+/tests/Web.Tests/x64
+/tests/Web.Tests/x86/
+/tests/Web.Tests/build/
+/tests/Web.Tests/bin/
+/tests/Web.Tests/Bin/
+/tests/Web.Tests/obj/
+/tests/Web.Tests/Obj/
+
 # Visual Studio 2015 cache/options directory
 .vs/
 
