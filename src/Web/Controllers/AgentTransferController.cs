@@ -56,6 +56,12 @@ namespace OITChatSupport.Web.Controllers
             return Json(Ok());
         }
 
+        [HttpPost("[action]")]
+        public async Task<IActionResult> CancelRequest(LiveTransferDto liveTransfer)
+        {
+            return Json(Ok());
+        }
+
 
     }
 }

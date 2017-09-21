@@ -1,11 +1,14 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 import { HttpModule, JsonpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
+
+import { SharedModule } from './shared/shared.module';
+import { CoreModule } from './core';
 import { ChatbotRoutingModule } from './chatbot-routing.module';
 import { ChatbotConfigModule } from './chatbot-config.module';
 import { ChatbotComponent } from './chatbot.component';
+
+import { ChatModule } from './chat/chat.module';
 
 
 @NgModule({
@@ -13,10 +16,11 @@ import { ChatbotComponent } from './chatbot.component';
     declarations: [ChatbotComponent],
     imports: [
         BrowserModule,
-        CommonModule,
+        SharedModule,
+        CoreModule,
+        ChatModule,
         HttpModule,
         JsonpModule,
-        FormsModule,
         ChatbotConfigModule,
         ChatbotRoutingModule
     ],
