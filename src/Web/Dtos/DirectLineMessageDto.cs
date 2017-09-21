@@ -24,4 +24,7 @@ namespace OITChatSupport.Web.Dtos
         [JsonProperty("id")]
         public string Id { get; set; }
     }
+
+
+
 }

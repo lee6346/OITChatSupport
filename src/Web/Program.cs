@@ -33,9 +33,15 @@ namespace OITChatSupport.Web
                 .ConfigureAppConfiguration((hostingContext, config) =>
                 {
                     var env = hostingContext.HostingEnvironment;
-                    config.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                            .AddJsonFile("appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true);
-                    config.AddEnvironmentVariables();
+                    config
+                        .SetBasePath(env.ContentRootPath)
+                        .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                        .AddJsonFile("appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true)
+                        .AddEnvironmentVariables();
+                    if (env.IsDevelopment())
+                    {
+                        config.AddUserSecrets<Startup>();
+                    }
 
                 })
                 .UseStartup<Startup>()
