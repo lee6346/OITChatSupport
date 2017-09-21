@@ -6,6 +6,7 @@
     <IsPackable>false</IsPackable>
     <StartupObject>OITChatSupport.Web.Program</StartupObject>
     <TypeScriptToolsVersion>2.3</TypeScriptToolsVersion>
+    <UserSecretsId>789bf716-f39d-45b4-ae24-09e48161fc1d</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -17,6 +18,7 @@
   <ItemGroup>
     <Folder Include="ClientApps\Agent\docs\" />
     <Folder Include="ClientApps\Chatbot\docs\" />
+    <Folder Include="Views\Account\" />
     <Folder Include="wwwroot\" />
     <Folder Include="wwwroot\agentdist\" />
     <Folder Include="wwwroot\chatbotdist\" />

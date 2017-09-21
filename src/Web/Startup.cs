@@ -11,6 +11,12 @@ using Microsoft.Extensions.Options;
 using OITChatSupport.Web.ConfigBuilder;
 using Swashbuckle.AspNetCore.Swagger;
 using OITChatSupport.Web.Services;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Rewrite;
+using Microsoft.AspNetCore.Antiforgery;
+using Microsoft.AspNetCore.Http;
+using Web.Services.ConfigBuilder;
 
 namespace OITChatSupport.Web
 {
@@ -18,6 +24,7 @@ namespace OITChatSupport.Web
     {
         public Startup(IConfiguration configuration)
         {
+
             Configuration = configuration;
         }
 
@@ -27,11 +34,69 @@ namespace OITChatSupport.Web
         public void ConfigureServices(IServiceCollection services)
         {
 
-            // Configuration files and options
+            // Add Configuration files and options classes
             services.AddOptions();
             services.Configure<DirectLineApi>(Configuration);
             services.Configure<EmailMessage>(Configuration);
 
+            //bind the ConnectionStrings class to configuration options
+            services.Configure<ConnectionStrings>(options => 
+            {
+                Configuration.Bind(options);
+            });
+            //bind the membership class to configuration options
+            services.Configure<Membership>(options =>
+            {
+                Configuration.Bind(options);
+            });
+
+            //in a controller/service... 
+            // private readonly IOptions<ConnectionStrings> _options;
+            // public Controller(IOptions<ConnectionStrings> options){ _options = options}
+            // _options.Value.ConnectionString
+
+
+            //Add https requirements (ignores any http requests). in Configure(), the middleware will redirect all Http to Https using 'RewriteOptions()'
+            /*
+            services.Configure<MvcOptions>(options =>
+            {
+                options.Filters.Add(new RequireHttpsAttribute());
+            });
+            */
+
+            //Add cross origin requests
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowUTSAOrigin", builder =>
+                {
+                    builder.WithOrigins("http://localhost.com", "https://utsa.edu")
+                        .AllowAnyHeader()
+                        .WithMethods("GET", "POST")
+                        .SetPreflightMaxAge(TimeSpan.FromSeconds(2400));
+                });
+            });
+
+            //Add XSRF (anti-request forgery) services to work with angular
+            /*
+            services.AddAntiforgery(options =>
+            {
+                options.HeaderName = "X-XSRF-TOKEN";
+                options.CookieDomain = "mydomain.com";
+                options.CookieName = "X-CSRF-TOKEN-
+            });
+            */
+
+            //Identity configuration
+            //services.AddIdentity<ApplicationUser>
+
+
+            //Cookie configuration
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.ExpireTimeSpan = TimeSpan.FromHours(8);
+                options.LoginPath = "/Account/Login";
+                options.LogoutPath = "/Account/Logout";
+            });
 
             // scoped services
             services.AddScoped<IDirectLineService, DirectLineService>();
@@ -46,7 +111,7 @@ namespace OITChatSupport.Web
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IAntiforgery antiforgery)
         {
             if (env.IsDevelopment())
             {
@@ -59,6 +124,32 @@ namespace OITChatSupport.Web
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+
+            app.UseCors("AllowUTSAOrigin");
+
+            //redirect http to https
+            /*
+            var options = new RewriteOptions()
+                .AddRedirectToHttps();
+            app.UseRewriter(options);
+            */
+            //configure antiforgery middleware
+            /*
+            app.Use(next => context =>
+            {
+                string path = context.Request.Path.Value;
+                if(
+                    string.Equals(path, "/", StringComparison.OrdinalIgnoreCase) ||
+                    string.Equals(path, "/index.html", StringComparison.OrdinalIgnoreCase))
+                {
+                    var tokens = antiforgery.GetAndStoreTokens(context);
+                    context.Response.Cookies.Append("XSRF-TOKEN", tokens.RequestToken,
+                        new CookieOptions() { HttpOnly = false });
+
+                }
+                return next(context);
+            });
+            */
 
             app.UseStaticFiles();
             app.UseWebSockets();
