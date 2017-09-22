@@ -36,16 +36,15 @@ namespace OITChatSupport.Web
 
             // Add Configuration files and options classes
             services.AddOptions();
-            services.Configure<DirectLineApi>(Configuration);
             services.Configure<EmailMessage>(Configuration);
 
-            //bind the ConnectionStrings class to configuration options
-            services.Configure<ConnectionStrings>(options => 
+            //bind the Ldap class to configuration options
+            services.Configure<Ldap>(options => 
             {
                 Configuration.Bind(options);
             });
-            //bind the membership class to configuration options
-            services.Configure<Membership>(options =>
+            //bind the Direct line config data 
+            services.Configure<DirectLineApi>(options =>
             {
                 Configuration.Bind(options);
             });
