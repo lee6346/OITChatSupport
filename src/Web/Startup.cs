@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Web;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -20,12 +21,14 @@ using Web.Services.ConfigBuilder;
 
 namespace OITChatSupport.Web
 {
+
     public class Startup
     {
         public Startup(IConfiguration configuration)
         {
 
             Configuration = configuration;
+
         }
 
         public IConfiguration Configuration { get; }
@@ -112,6 +115,16 @@ namespace OITChatSupport.Web
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, IAntiforgery antiforgery)
         {
+
+            /*Order is:
+             *  Errors/Exceptions
+             *  Static Files
+             *  Swagger
+             *  Logger
+             *  Cors
+             *  Mvc/Routing
+             * 
+             */
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OITChatSupport.Web.Services.Filters
 {
-    public class ApiExceptionFilter : ExceptionFilterAttribute
+    public class ApiExceptionAttribute : ExceptionFilterAttribute
     {
         public override void OnException(ExceptionContext context)
         {
@@ -14,5 +14,6 @@ namespace OITChatSupport.Web.Services.Filters
             base.OnException(context);
         }
         // also can override Task OnExceptionAsync(ExceptionContext context)
+        
     }
 }

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace OITChatSupport.Web.Services.Filters.Attribute
+namespace OITChatSupport.Web.Services.Filters
 {
     public class ValidationAttribute : ActionFilterAttribute
     {
@@ -19,5 +19,19 @@ namespace OITChatSupport.Web.Services.Filters.Attribute
             }
         }
 
+        public override void OnActionExecuting(ActionExecutingContext context)
+        {
+            base.OnActionExecuting(context);
+        }
+
+        public override void OnResultExecuted(ResultExecutedContext context)
+        {
+            base.OnResultExecuted(context);
+        }
+
+        public override void OnResultExecuting(ResultExecutingContext context)
+        {
+            base.OnResultExecuting(context);
+        }
     }
 }
