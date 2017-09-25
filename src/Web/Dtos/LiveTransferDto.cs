@@ -14,5 +14,7 @@ namespace OITChatSupport.Web.Dtos
         public string TimeStamp { get; set; }
         [JsonProperty("botHandle")]
         public string BotHandle { get; set; }
+        [JsonProperty("department")]
+        public string Department { get; set; }
     }
 }

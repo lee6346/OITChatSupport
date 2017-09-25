@@ -1,14 +1,13 @@
-using Domain.Model.Abstract;
-using Domain.Model.Internal;
+using Domain.Model.Common;
 using System;
 
 namespace Domain.Model
 {
     public class Agent : Faculty
     {
-        public Agent(string id, int department)
+        public Agent(string utsaId, int department)
         {
-            Id = id;
+            UtsaId = utsaId;
             Connected = true;
             UtsaDepartment = (UtsaDepartment)department;
 
@@ -36,7 +35,7 @@ namespace Domain.Model
         public override string ToString()
         {
             return string.Format("Agent: {0}, Department: {1}, Connection status: {2}",
-                Id, UtsaDepartment.ToString(), Connected);
+                UtsaId, UtsaDepartment.ToString(), Connected);
         }
     }
 }

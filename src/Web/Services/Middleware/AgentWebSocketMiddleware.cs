@@ -22,7 +22,12 @@ namespace Web.Services.Middleware
         public async Task Invoke(HttpContext context)
         {
             if (!context.WebSockets.IsWebSocketRequest)
+            {
+                //await _next.Invoke(context);
                 return;
+            }
+            //CancellationToken ct = context.RequestAborted;
+
             var socket = await context.WebSockets.AcceptWebSocketAsync();
             await _agentWebSocketManager.OnConnected(socket);
 

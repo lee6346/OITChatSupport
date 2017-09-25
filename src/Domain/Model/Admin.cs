@@ -1,4 +1,4 @@
-using Domain.Model.Abstract;
+using Domain.Model.Common;
 
 
 namespace Domain.Model
@@ -6,16 +6,16 @@ namespace Domain.Model
     public class Admin : Faculty
     {
 
-        public Admin(string id, bool connected)
+        public Admin(string utsaId, bool connected)
         {
-            Id = id;
+            UtsaId = utsaId;
             Connected = connected;
         }
         public bool Connected { get; set; }
 
         public override string ToString()
         {
-            return string.Format("Admin: {0}, Connection status: {1}", Id, Connected);
+            return string.Format("Admin: {0}, Connection status: {1}", UtsaId, Connected);
         }
     }
 }

@@ -1,21 +1,20 @@
 using System;
 
-namespace Domain.Model.Abstract
+namespace Domain.Model.Common
 {
     /// <summary>
     /// ChatMessage: To be inherited as chat messages of different formatting depending on source of JSON message object
     /// </summary>
-    public abstract class ChatMessage
+    public abstract class ChatMessage: Entity
     {
 
-        public int Id { get; set; }
         /// <summary>
         /// Sender: Can be Utsa Id, Chat bot's bot handler name, or generic 'student' or 'user' values
         /// </summary>
         public string Sender { get; set; }
         public DateTime TimeSent { get; set; }
         public byte[] RowVersion { get; set; }
-
+        /*
         public override bool Equals(object obj)
         {
             return Equals(obj as ChatMessage);
@@ -56,5 +55,6 @@ namespace Domain.Model.Abstract
         {
             return !(message1 == message2);
         }
+        */
     }
 }

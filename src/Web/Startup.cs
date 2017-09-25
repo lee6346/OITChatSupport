@@ -18,6 +18,8 @@ using Microsoft.AspNetCore.Rewrite;
 using Microsoft.AspNetCore.Antiforgery;
 using Microsoft.AspNetCore.Http;
 using Web.Services.ConfigBuilder;
+using System.Net.WebSockets;
+using Web.Services.RealTime.Samples;
 
 namespace OITChatSupport.Web
 {
@@ -52,6 +54,12 @@ namespace OITChatSupport.Web
                 Configuration.Bind(options);
             });
 
+
+
+            //Add Signal R (optionally .AddRedis())
+            services.AddSignalR();
+
+
             //in a controller/service... 
             // private readonly IOptions<ConnectionStrings> _options;
             // public Controller(IOptions<ConnectionStrings> options){ _options = options}
@@ -69,12 +77,12 @@ namespace OITChatSupport.Web
             //Add cross origin requests
             services.AddCors(options =>
             {
-                options.AddPolicy("AllowUTSAOrigin", builder =>
+                options.AddPolicy("AllowAllOrigins", builder =>
                 {
-                    builder.WithOrigins("http://localhost.com", "https://utsa.edu")
+                    builder
+                        .AllowAnyOrigin()
                         .AllowAnyHeader()
-                        .WithMethods("GET", "POST")
-                        .SetPreflightMaxAge(TimeSpan.FromSeconds(2400));
+                        .AllowAnyMethod();
                 });
             });
 
@@ -93,12 +101,14 @@ namespace OITChatSupport.Web
 
 
             //Cookie configuration
+            /*
             services.ConfigureApplicationCookie(options =>
             {
                 options.ExpireTimeSpan = TimeSpan.FromHours(8);
                 options.LoginPath = "/Account/Login";
                 options.LogoutPath = "/Account/Logout";
             });
+            */
 
             // scoped services
             services.AddScoped<IDirectLineService, DirectLineService>();
@@ -132,12 +142,13 @@ namespace OITChatSupport.Web
                 app.UseBrowserLink();
 
             }
+
             else
             {
                 app.UseExceptionHandler("/Home/Error");
             }
 
-            app.UseCors("AllowUTSAOrigin");
+            app.UseCors("AllowAllOrigins");
 
             //redirect http to https
             /*
@@ -164,7 +175,13 @@ namespace OITChatSupport.Web
             */
 
             app.UseStaticFiles();
-            app.UseWebSockets();
+            //app.UseWebSockets();
+
+            app.UseSignalR(routes =>
+            {
+                routes.MapHub<NewsHub>("news");
+                routes.MapHub<Chat1>("chat");
+            });
 
             app.UseMvc(routes => {
                 routes.MapRoute(

@@ -2,9 +2,9 @@ using System.Threading.Tasks;
 
 namespace OITChatSupport.Web.Services
 {
-    public interface IEmailService
+    public interface IEmailSender
     {
-        Task Send();
+        Task SendMessageAsync(string email, string subject, string message);
 
         Task GroupSend();
 

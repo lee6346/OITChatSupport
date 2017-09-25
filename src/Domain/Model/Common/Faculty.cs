@@ -1,22 +1,20 @@
-using System;
-
-namespace Domain.Model.Abstract
+namespace Domain.Model.Common
 {
 
     /// <summary>
     /// Faculty: UTSA faculty to be inherited as Agents, Administrators, etc.
     /// </summary>
-    public abstract class Faculty
+    public abstract class Faculty: Entity
     {
         /// <summary>
         /// Id: Utsa abc123
         /// </summary>
-        public string Id { get; protected set; }
+        public string UtsaId { get; protected set; }
         /// <summary>
         /// Rowversion: Used for database concurrncy check
         /// </summary>
         public byte[] RowVersion { get; set; }
-
+        /*
         public override bool Equals(object obj)
         {
             return Equals(obj as Faculty);
@@ -56,5 +54,6 @@ namespace Domain.Model.Abstract
         {
             return !(faculty1 == faculty2);
         }
+        */
     }
 }

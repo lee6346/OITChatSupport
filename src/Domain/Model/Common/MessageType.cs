@@ -1,4 +1,4 @@
-namespace Domain.Model.Internal
+namespace Domain.Model.Common
 {
     public enum MessageType
     {

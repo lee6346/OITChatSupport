@@ -1,5 +1,4 @@
-using Domain.Model.Abstract;
-using Domain.Model.Internal;
+using Domain.Model.Common;
 
 namespace Domain.Model
 {

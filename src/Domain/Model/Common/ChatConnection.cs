@@ -1,13 +1,12 @@
 using System;
 
-namespace Domain.Model.Abstract
+namespace Domain.Model.Common
 {
-    public abstract class ChatConnection
+    public abstract class ChatConnection: Entity
     {
-        public int Id { get; set; }
         public byte[] RowVersion { get; set; }
 
-
+        /*
         public override bool Equals(object obj)
         {
             return Equals(obj as ChatConnection);
@@ -44,5 +43,7 @@ namespace Domain.Model.Abstract
         {
             return !(connection1 == connection2);
         }
+
+    */
     }
 }

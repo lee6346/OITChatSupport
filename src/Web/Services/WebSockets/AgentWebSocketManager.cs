@@ -14,6 +14,7 @@ namespace Web.Services.WebSockets
 
         public AgentWebSocketManager(AgentWebSocketConnector webSocketConnector)
         {
+
             AgentWebSocketConnector = webSocketConnector;
         }
 

@@ -1,4 +1,4 @@
-using Domain.Model.Abstract;
+using Domain.Model.Common;
 using System;
 
 namespace Domain.Model

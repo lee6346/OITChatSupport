@@ -4,6 +4,9 @@ namespace Domain.Model.Common
 {
     public abstract class Entity
     {
+
+        public virtual long Id { get; protected set; }
+
         public override bool Equals(object obj)
         {
             var other = obj as Entity;
@@ -13,9 +16,6 @@ namespace Domain.Model.Common
 
             if (ReferenceEquals(this, other))
                 return true;
-
-            if (GetRealType() != other.GetRealType())
-                return false;
 
             if (Id == 0 || other.Id == 0)
                 return false;
@@ -41,12 +41,14 @@ namespace Domain.Model.Common
 
         public override int GetHashCode()
         {
-            return (GetRealType().ToString() + Id).GetHashCode();
+            unchecked
+            {
+                int hash = (int)2166136261;
+                if (Id < 0)
+                    return 0;
+                return (hash * 16777619) ^ Id.GetHashCode();
+            }
         }
 
-        private Type GetRealType()
-        {
-            return NHibernateProxyHelper.GetClassWithoutInitializingProxy(this);
-        }
     }
 }
