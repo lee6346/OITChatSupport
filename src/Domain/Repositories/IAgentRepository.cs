@@ -1,20 +1,20 @@
-﻿using Domain.Common;
-using Domain.Model;
+﻿using Domain.Model;
 using Domain.Model.Common;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Domain.Repositories
 {
-    public interface IAgentRepository: IRepository<Agent>
+    public interface IAgentRepository
     {
-        IQueryable<Agent> GetAll();
-        IQueryable<Agent> GetAll(bool connected);
-        IQueryable<Agent> GetByDepartment(UtsaDepartment utsaDepartment);
-        IQueryable<Agent> GetByDepartment(UtsaDepartment utsaDepartment, bool connected);
+        Task<IEnumerable<Agent>> GetAllAsync();
+        Task<IEnumerable<Agent>> GetAllAsync(bool connected);
+        Task<IEnumerable<Agent>> GetByDepartmentAsync(UtsaDepartment utsaDepartment);
+        Task<IEnumerable<Agent>> GetByDepartmentAsync(UtsaDepartment utsaDepartment, bool connected);
+        Task<Agent> GetByIdAsync(long id);
+        Task AddAsync(Agent agent);
+        Task UpdateAsync(Agent agent);
+        Task RemoveAsync(Agent agent);
 
     }
 }

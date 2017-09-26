@@ -1,0 +1,8 @@
+﻿CREATE TABLE [dbo].[Agent]
+(
+	[Id] BIGINT NOT NULL PRIMARY KEY IDENTITY, 
+	[UtsaId] VARCHAR(15) NOT NULL,
+	[Connected] BIT NOT NULL DEFAULT 0, 
+	[Department] INT NOT NULL,
+	[TimeStamp] ROWVERSION
+)

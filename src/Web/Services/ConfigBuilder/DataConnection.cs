@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Web.Services.Logger
+namespace Web.Services.ConfigBuilder
 {
-    public enum LogType
+    public class DataConnection
     {
-        AccessControl,
-        Error
+        public string LocalDb { get; set; }
     }
 }

@@ -8,7 +8,7 @@ namespace Web.Services.Logger
     public enum LogSqlColumns
     {
         Id,
-        Class,
+        EventType,
         Level,
         Timestamp,
         Message,

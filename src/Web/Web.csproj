@@ -11,7 +11,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Domain\Domain.csproj" />
-    <!--<ProjectReference Include="..\Data\Data.csproj" />-->
+    <ProjectReference Include="..\Data\Data.csproj" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="ClientApps\Chatbot\src\chatbot-config.module.ts" />
