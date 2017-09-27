@@ -8,7 +8,7 @@ import { ChatbotRoutingModule } from './chatbot-routing.module';
 import { ChatbotConfigModule } from './chatbot-config.module';
 import { ChatbotComponent } from './chatbot.component';
 
-import { ChatModule } from './chat/chat.module';
+import { HomeModule } from './home/home.module';
 
 
 @NgModule({
@@ -18,7 +18,7 @@ import { ChatModule } from './chat/chat.module';
         BrowserModule,
         SharedModule,
         CoreModule,
-        ChatModule,
+        HomeModule,
         HttpModule,
         JsonpModule,
         ChatbotConfigModule,

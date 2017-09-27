@@ -1,5 +1,5 @@
 ﻿import { Injectable, Inject } from '@angular/core';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { Http, Response, Headers, RequestOptions, RequestOptionsArgs } from '@angular/http';
 import { ERROR_CONFIG, ErrorConfig } from '../chatbot-config.module';
 
 import { ErrorMessage } from '../model/ErrorMessage';

@@ -10,7 +10,7 @@
                 </div>
             </div>
             <div class="chat-window">
-                <chat-window *ngIf="chatDisplayed" (removeWindow)="removeChatWindow($event)"></chat-window>
+                <chat *ngIf="chatDisplayed" (removeWindow)="removeChatWindow($event)"></chat>
             </div>
             <div class="feedback-center">
 

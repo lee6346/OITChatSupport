@@ -114,7 +114,6 @@ export class DirectLineService {
         }));
     }
 
-
     public getConnectionStatus$(directLine: DirectLine): Rx.Observable<ConnectionStatus> {
         return directLine.connectionStatus$;
     }

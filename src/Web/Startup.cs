@@ -22,6 +22,9 @@ using System.Net.WebSockets;
 using Web.Services.RealTime;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
+using Microsoft.AspNetCore.SignalR;
+using Web.Web.Services.RealTime;
+using Web.Services.Hubs;
 
 namespace OITChatSupport.Web
 {
@@ -57,10 +60,10 @@ namespace OITChatSupport.Web
             });
 
 
-
-            //Add Signal R (optionally .AddRedis())
-            //services.AddSignalR();
-
+            services.AddSignalR();
+            services.AddSingleton(typeof(DefaultAgentHubLifetimeManager<>), typeof(DefaultAgentHubLifetimeManager<>));
+            services.AddSingleton(typeof(HubLifetimeManager<>), typeof(DefaultAgentHubLifetimeManager<>));
+            services.AddSingleton(typeof(IAgentTracker<>), typeof(InMemoryAgentTracker<>));
 
             //in a controller/service... 
             // private readonly IOptions<ConnectionStrings> _options;
@@ -76,7 +79,6 @@ namespace OITChatSupport.Web
             });
             */
 
-            //Add cross origin requests
             services.AddCors(options =>
             {
                 options.AddPolicy("AllowAllOrigins", builder =>
@@ -112,7 +114,6 @@ namespace OITChatSupport.Web
             });
             */
 
-            // scoped services
             services.AddScoped<IDirectLineService, DirectLineService>();
 
             services.AddMvc();
@@ -124,27 +125,15 @@ namespace OITChatSupport.Web
 
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, IAntiforgery antiforgery)
         {
 
-            /*Order is:
-             *  Errors/Exceptions
-             *  Static Files
-             *  Swagger
-             *  Logger
-             *  Cors
-             *  Mvc/Routing
-             * 
-             */
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
                 app.UseBrowserLink();
-
             }
-
             else
             {
                 app.UseExceptionHandler("/Home/Error");
@@ -179,14 +168,11 @@ namespace OITChatSupport.Web
             app.UseStaticFiles();
             //app.UseWebSockets();
 
-
-            /*
             app.UseSignalR(routes =>
             {
-                routes.MapHub<NewsHub>("news");
-                routes.MapHub<Chat1>("chat");
+                routes.MapHub<AgentHub>("Agent");
             });
-            */
+
             app.UseMvc(routes => {
                 routes.MapRoute(
                     name: "default",
