@@ -15,20 +15,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Remove="ClientApps\Chatbot\src\chatbot-config.module.ts" />
-    <None Remove="ClientApps\Chatbot\src\chat\direct-line.service.ts" />
-    <None Remove="ClientApps\Chatbot\src\chat\message-storage.service.ts" />
-    <None Remove="ClientApps\Chatbot\src\chat\services\live-request.service.ts" />
     <None Remove="ClientApps\Chatbot\src\home\home.module.ts" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="ClientApps\Agent\docs\" />
     <Folder Include="ClientApps\Chatbot\docs\" />
-    <Folder Include="ClientApps\Chatbot\src\chat\directives\" />
-    <Folder Include="ClientApps\Chatbot\src\chat\models\" />
-    <Folder Include="ClientApps\Chatbot\src\home\components\" />
-    <Folder Include="ClientApps\Chatbot\src\home\services\" />
-    <Folder Include="Services\Hubs\" />
+    <Folder Include="ClientApps\Chatbot\src\home\model\" />
     <Folder Include="Views\Account\" />
     <Folder Include="wwwroot\" />
     <Folder Include="wwwroot\agentdist\" />
@@ -84,10 +77,10 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="ClientApps\Chatbot\src\chatbot-config.module.ts" />
-    <TypeScriptCompile Include="ClientApps\Chatbot\src\chat\chat.module.ts" />
-    <TypeScriptCompile Include="ClientApps\Chatbot\src\chat\services\direct-line.service.ts" />
-    <TypeScriptCompile Include="ClientApps\Chatbot\src\chat\services\live-request.service.ts" />
+    <TypeScriptCompile Include="ClientApps\Chatbot\src\home\services\direct-line.service.ts" />
+    <TypeScriptCompile Include="ClientApps\Chatbot\src\home\services\live-request.service.ts" />
     <TypeScriptCompile Include="ClientApps\Chatbot\src\core\error-handler.service.ts" />
+    <TypeScriptCompile Include="ClientApps\Chatbot\src\home\chatcomponent\chat.component.ts" />
     <TypeScriptCompile Include="ClientApps\Chatbot\src\home\home.module.ts" />
   </ItemGroup>
 </Project>
