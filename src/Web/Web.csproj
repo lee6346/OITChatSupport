@@ -25,6 +25,10 @@
     <Folder Include="ClientApps\Agent\docs\" />
     <Folder Include="ClientApps\Chatbot\docs\" />
     <Folder Include="ClientApps\Chatbot\src\chat\directives\" />
+    <Folder Include="ClientApps\Chatbot\src\chat\models\" />
+    <Folder Include="ClientApps\Chatbot\src\home\components\" />
+    <Folder Include="ClientApps\Chatbot\src\home\services\" />
+    <Folder Include="Services\Hubs\" />
     <Folder Include="Views\Account\" />
     <Folder Include="wwwroot\" />
     <Folder Include="wwwroot\agentdist\" />
