@@ -10,5 +10,7 @@ namespace OITChatSupport.Web.Dtos
         public int? Department { get; set; }
         [JsonProperty("connected")]
         public bool? Connected { get; set; }
+        [JsonProperty("connectionId")]
+        public string ConnectionId { get; set; }
     }
 }

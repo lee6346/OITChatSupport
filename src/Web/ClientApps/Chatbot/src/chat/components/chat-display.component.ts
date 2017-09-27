@@ -44,7 +44,7 @@ export class ChatDisplayComponent implements OnInit, OnDestroy {
     public submitMessage(message: string) {
         this.defaultTrigger = '';
         if (message !== '') {
-            this.directLineService.
+            //this.directLineService.
         }
     }
 

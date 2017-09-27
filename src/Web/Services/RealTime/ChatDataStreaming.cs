@@ -6,7 +6,7 @@ using System.Reactive.Linq;
 using System.Threading.Tasks;
 using System.Threading.Tasks.Channels;
 
-namespace OITChatSupportWeb.Services.RealTime
+namespace Web.Services.RealTime
 {
     public class ChatDataStreaming: Hub<IChatClient>
     {

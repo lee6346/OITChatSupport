@@ -14,12 +14,12 @@ namespace Web.Services.Authentication
         private const string DisplayNameAttribute = "displayName";
         private const string SamAccountNameAttribute = "samAccountName";
 
-        private readonly Ldap _ldap;
+        private readonly LdapConfig _ldapConfig;
         private readonly LdapConnection _ldapConnection;
 
-        public LdapAuthenticationService(IOptions<Ldap> ldapConfig)
+        public LdapAuthenticationService(IOptions<LdapConfig> ldapConfig)
         {
-            _ldap = ldapConfig.Value;
+            _ldapConfig = ldapConfig.Value;
             _ldapConnection = new LdapConnection
             {
                 SecureSocketLayer = true,
@@ -34,10 +34,39 @@ namespace Web.Services.Authentication
         {
             //Connect("ADServrName", PortNo)
             //Bind(@"domain\username", "password")
-            _ldapConnection.Connect(_ldap.ConnectionStrings.ConnectionString, LdapConnection.DEFAULT_SSL_PORT);
-            _ldapConnection.Bind(_ldap.ConnectionStrings.ConnectionString, _ldap.Membership.DefaultProvider);
-            _ldapConnection.
-            var searchFilter = string.Format(_ldap.)
+            _ldapConnection.Connect(_ldapConfig.Url, LdapConnection.DEFAULT_SSL_PORT);
+            _ldapConnection.Bind(_ldapConfig.BindDn, _ldapConfig.BindCredentials);
+            var searchFilter = string.Format(_ldapConfig.SearchFilter, utsaId);
+            var result = _ldapConnection.Search(
+                _ldapConfig.SearchBase,
+                LdapConnection.SCOPE_SUB,
+                searchFilter,
+                new[] { MemberOfAttribute, DisplayNameAttribute, SamAccountNameAttribute },
+                false
+            );
+
+            try
+            {
+                var user = result.next();
+                if(user != null)
+                {
+                    _ldapConnection.Bind(user.DN, password);
+                    if (_ldapConnection.Bound)
+                    {
+                        return new AuthenticatedUser
+                        {
+                            UtsaId = user.getAttribute(DisplayNameAttribute).StringValue,
+                            Password = password
+                        };
+                    }
+                }
+            }
+            catch(Exception e)
+            {
+                throw e;
+            }
+            _ldapConnection.Disconnect();
+            return null;
         }
     }
 }

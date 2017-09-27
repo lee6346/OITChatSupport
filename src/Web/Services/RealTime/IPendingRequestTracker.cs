@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace OITChatSupportWeb.Web.Services.RealTime
+namespace Web.Services.RealTime
 {
     public interface IPendingRequestTracker<out THub>
     {

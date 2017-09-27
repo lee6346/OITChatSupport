@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace OITChatSupportWeb.Services.RealTime
+namespace Web.Services.RealTime
 {
     public interface IAgentTracker<out THub>
     {

@@ -4,7 +4,7 @@ import { ChatModule } from '../chat/chat.module';
 
 @NgModule({
     imports: [
-        SharedModule
+        SharedModule,
         ChatModule
     ],
     declarations: [

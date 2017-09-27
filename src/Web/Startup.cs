@@ -19,7 +19,9 @@ using Microsoft.AspNetCore.Antiforgery;
 using Microsoft.AspNetCore.Http;
 using Web.Services.ConfigBuilder;
 using System.Net.WebSockets;
-using Web.Services.RealTime.Samples;
+using Web.Services.RealTime;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace OITChatSupport.Web
 {
@@ -38,7 +40,7 @@ namespace OITChatSupport.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+           
             // Add Configuration files and options classes
             services.AddOptions();
             services.Configure<EmailMessage>(Configuration);
@@ -57,7 +59,7 @@ namespace OITChatSupport.Web
 
 
             //Add Signal R (optionally .AddRedis())
-            services.AddSignalR();
+            //services.AddSignalR();
 
 
             //in a controller/service... 
@@ -177,12 +179,14 @@ namespace OITChatSupport.Web
             app.UseStaticFiles();
             //app.UseWebSockets();
 
+
+            /*
             app.UseSignalR(routes =>
             {
                 routes.MapHub<NewsHub>("news");
                 routes.MapHub<Chat1>("chat");
             });
-
+            */
             app.UseMvc(routes => {
                 routes.MapRoute(
                     name: "default",

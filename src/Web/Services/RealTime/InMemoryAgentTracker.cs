@@ -1,14 +1,15 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 using OITChatSupport.Web.Dtos;
-using OITChatSupportWeb.Services.RealTime;
-using OITChatSupportWeb.Web.Services.Errors;
+using Web.Services.RealTime;
+using Web.Services.Errors;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using OITChatSupportWeb.Web.Services.Errors;
 
-namespace OITChatSupportWeb.Web.Services.RealTime
+namespace Web.Web.Services.RealTime
 {
     public class InMemoryAgentTracker<THub>: IAgentTracker<THub>
     {
