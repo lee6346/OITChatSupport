@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Data.Repositories
-{
+{/*
     public class DirectLineSessionRepository: IDirectLineSessionRepository
     {
         private readonly IDbConnectionFactory _dbConnectionFactory;
@@ -62,5 +62,5 @@ namespace Data.Repositories
 
             }
         }
-    }
+    }*/
 }

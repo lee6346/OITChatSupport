@@ -1,9 +1,9 @@
 ﻿import { Component, OnInit, OnDestroy, EventEmitter, Output, Inject } from '@angular/core';
 import { DirectLine, Activity, Message, Conversation } from 'botframework-directlinejs';
-
-import { DirectLineService } from '../services/direct-line.service';
-import { LiveRequestService } from '../services/live-request.service';
-import { CHAT_MESSAGE_CONFIG, ChatMsgConfig } from '../../chatbot-config.module';
+import { NgClass } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { DirectLineService, LiveRequestService } from '../../core';
+//import { CHAT_MESSAGE_CONFIG, ChatMsgConfig } from '../../chatbot-config.module';
 
 import * as Rx from 'rxjs/Rx';
 
@@ -36,22 +36,28 @@ export class ChatComponent implements OnInit, OnDestroy {
 
 
     constructor(
-        @Inject(CHAT_MESSAGE_CONFIG) private chatMsgConfig: ChatMsgConfig,
+        //@Inject(CHAT_MESSAGE_CONFIG) private chatMsgConfig: ChatMsgConfig,
         private directLineService: DirectLineService,
-        private liveRequestService: LiveRequestService
+        //private liveRequestService: LiveRequestService
     ) { }
 
     ngOnInit() {
+        
         this.directLineService.getToken$().subscribe(
             result => {
                 this.conversation = result;
+                //test
+                console.log(this.conversation);
+                console.log(this.conversation['conversationId']);
                 this.directLine = this.directLineService.connectToDirectLine(this.conversation);
                 this.messageObservableActivity$ = this.directLine.activity$.share();
                 this.notConnected = false;
+                console.log('connected');
                 this.messageObservableActivity$
-                    .filter(msg => msg.type === 'message' && msg.from.id === this.sender)
+                    .filter(msg => msg.type === 'message' && msg.from.id === 'AskRowdy')
                     .takeUntil(this.botUnsubscribe).subscribe(res => this.activityMessages.push(res));
             });
+        
 
     }
 
@@ -62,13 +68,14 @@ export class ChatComponent implements OnInit, OnDestroy {
         this.botUnsubscribe.complete();
     }
 
-
+    
     public submitMessage(message: string) {
         this.defaultTrigger = '';
         if (message !== '') {
             let act = { from: { id: this.user, name: this.user }, type: 'message', text: message } as Activity;
+            this.activityMessages.push(act);
             this.directLineService.sendMessage$(this.directLine, message).subscribe(
-                next => this.activityMessages.push(act),
+                next => console.log('pushed successfully'),
                 err => console.log("failed to send message"),
                 () => console.log("done")
             );
@@ -76,8 +83,16 @@ export class ChatComponent implements OnInit, OnDestroy {
     }
 
     public closeWindow(): void {
-        this.ngUnsubscribe.next();
-        this.ngUnsubscribe.complete();
+        this.directLineService.endConnection$(this.directLine, this.conversation['conversationId'])
+            .subscribe(
+            result => {
+                console.log('completed');
+                console.log(result);
+                this.removeWindow.emit(false);
+            },
+            err => console.log('err'),
+            () => console.log('done')
+            );
     }
 
     public makeLiveRequest() { }

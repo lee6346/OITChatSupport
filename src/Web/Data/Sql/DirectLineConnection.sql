@@ -1,0 +1,9 @@
+﻿CREATE TABLE [dbo].[DirectLineConnection]
+(
+	[Id] BIGINT NOT NULL PRIMARY KEY CLUSTERED IDENTITY,
+	[ConversationId] VARCHAR(30) NOT NULL,
+	[User] VARCHAR(20) NOT NULL,
+	[TimeConnected] DATETIME2 NOT NULL,
+	[TimeDisconnected] DATETIME2 NULL,
+	[TimeStamp] ROWVERSION
+)

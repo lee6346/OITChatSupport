@@ -58,12 +58,37 @@ namespace OITChatSupport.Web
             {
                 Configuration.Bind(options);
             });
+            /*
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
+            */
+            services.Configure<IdentityOptions>(options =>
+            {
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(10);
+                options.Lockout.MaxFailedAccessAttempts = 10;
+                options.Lockout.AllowedForNewUsers = true;
+                
+            });
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.Cookie.HttpOnly = true;
+                options.Cookie.Expiration = TimeSpan.FromDays(5);
+                options.LoginPath = "/Account/Login";
+                options.LogoutPath = "/Account/Logout";
+                //options.AccessDeniedPath = "/Account/AccessDenied"
+                options.SlidingExpiration = true;
+            });
 
 
+            /*
             services.AddSignalR();
             services.AddSingleton(typeof(DefaultAgentHubLifetimeManager<>), typeof(DefaultAgentHubLifetimeManager<>));
             services.AddSingleton(typeof(HubLifetimeManager<>), typeof(DefaultAgentHubLifetimeManager<>));
             services.AddSingleton(typeof(IAgentTracker<>), typeof(InMemoryAgentTracker<>));
+            */
+
 
             //in a controller/service... 
             // private readonly IOptions<ConnectionStrings> _options;
@@ -168,11 +193,12 @@ namespace OITChatSupport.Web
             app.UseStaticFiles();
             //app.UseWebSockets();
 
+            /*
             app.UseSignalR(routes =>
             {
                 routes.MapHub<AgentHub>("Agent");
             });
-
+            */
             app.UseMvc(routes => {
                 routes.MapRoute(
                     name: "default",

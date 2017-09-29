@@ -1,4 +1,5 @@
-namespace Domain.Model.Common;
+namespace Web.Model.Common
+{ 
     public enum UtsaDepartment
     {
         PrintSpot,

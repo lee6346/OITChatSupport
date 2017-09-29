@@ -1,7 +1,7 @@
-﻿using Domain.Common;
+﻿using Web.Common;
 using System;
 
-namespace Domain.ValueObjects
+namespace Web.ValueObjects
 {
     public class DateRange: ValueObject<DateRange>
     {

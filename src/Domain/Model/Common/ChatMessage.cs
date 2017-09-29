@@ -1,6 +1,6 @@
 using System;
 
-namespace Domain.Model.Common
+namespace Web.Model.Common
 {
     /// <summary>
     /// ChatMessage: To be inherited as chat messages of different formatting depending on source of JSON message object

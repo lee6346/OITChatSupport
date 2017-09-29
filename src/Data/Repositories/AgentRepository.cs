@@ -15,7 +15,7 @@ using Dapper.Contrib.Extensions;
 using Data.Errors;
 
 namespace Data.Repositories
-{
+{/*
     public class AgentRepository: IAgentRepository
     {
         private readonly IDbConnectionFactory _dbConnectionFactory;
@@ -89,5 +89,5 @@ namespace Data.Repositories
 
             }
         }
-    }
+    }*/
 }

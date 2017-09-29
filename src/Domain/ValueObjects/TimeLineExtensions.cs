@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Domain.ValueObjects
+namespace Web.ValueObjects
 {
     public static class TimeLineExtensions
     {

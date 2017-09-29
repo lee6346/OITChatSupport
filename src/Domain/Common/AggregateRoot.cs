@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Domain.Common
+namespace Web.Common
 {
     public abstract class AggregateRoot
     {

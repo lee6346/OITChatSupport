@@ -1,9 +1,9 @@
-﻿using Domain.Common;
+﻿using Web.Common;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Domain.Events
+namespace Web.Events
 {
     public class RequestsPendingChanged: IDomainEvent
     {

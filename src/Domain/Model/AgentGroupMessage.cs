@@ -1,6 +1,6 @@
-using Domain.Model.Common;
+using Web.Model.Common;
 
-namespace Domain.Model
+namespace Web.Model
 {
 
     public class AgentGroupMessage : ChatMessage

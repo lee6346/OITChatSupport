@@ -10,9 +10,9 @@
             <div *ngIf="notConnected" class="loader">
 
             </div>
-
-            <ul *ngIf="Messages">
-                <li *ngFor="let msg of Messages"
+            
+            <ul *ngIf="activityMessages">
+                <li *ngFor="let msg of activityMessages"
                     class="msg-row" [ngClass]="msgAlignment(msg.from.id)">
                     <span class="bubble" [ngClass]="bubbleProperties(msg.from.id)">
                         <span class="message-sender">{{msg['from']['name']}}</span>
@@ -20,11 +20,11 @@
                     </span>
                 </li>
             </ul>
-
+                
         </div>
         <div class="partition"></div>
         <div class="input-area">
-            <input #msgref type="text" [(ngModel)]="defaultVal" class="text-input" (keyup.enter)="submitMessage(msgref.value)" [disabled]="notConnected" />
+            <input #msgref type="text" [(ngModel)]="defaultTrigger" class="text-input" (keyup.enter)="submitMessage(msgref.value)" [disabled]="notConnected" />
         </div>
         <div class="button-container">
             <button type="button" class="req-button" (click)="makeLiveRequest()">Live Request</button>

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Domain.Common
+namespace Web.Common
 {
     public abstract class ValueObject<T> where T : ValueObject<T>
     {

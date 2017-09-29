@@ -1,9 +1,9 @@
-﻿using Domain.Common;
+﻿using Web.Common;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Domain.Aggregates
+namespace Web.Aggregates
 {
     public class AgentActivity: IAggregateRoot
     {

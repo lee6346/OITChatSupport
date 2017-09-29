@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace Data.Repositories
 {
+    /*
     public class AgentGroupMessageRepository: IAgentGroupMessageRepository
     {
         private readonly IDbConnectionFactory _dbConnectionFactory;
@@ -58,5 +59,5 @@ namespace Data.Repositories
 
             }
         }
-    }
+    }*/
 }

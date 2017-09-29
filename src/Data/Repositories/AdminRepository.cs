@@ -6,9 +6,10 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace Data.Repositories
-{
+{/*
     public class AdminRepository: IAdminRepository
     {
+        
         private readonly IDbConnectionFactory _dbConnectionFactory;
         public AdminRepository(IDbConnectionFactory dbConnectionFactory)
         {
@@ -53,5 +54,5 @@ namespace Data.Repositories
 
             }
         }
-    }
+    }*/
 }

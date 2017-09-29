@@ -1,9 +1,9 @@
-﻿using Domain.Model;
-using Domain.Model.Common;
+﻿using Web.Model;
+using Web.Model.Common;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Domain.Repositories
+namespace Web.Repositories
 {
     public interface IAgentRepository
     {

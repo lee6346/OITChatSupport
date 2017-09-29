@@ -1,8 +1,8 @@
-﻿using Domain.Model;
+﻿using Web.Model;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Domain.Repositories
+namespace Web.Repositories
 {
     public interface IAdminRepository
     {

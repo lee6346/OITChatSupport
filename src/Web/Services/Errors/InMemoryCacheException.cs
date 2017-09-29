@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace OITChatSupportWeb.Web.Services.Errors
+namespace Web.Services.Errors
 {
     public class InMemoryCacheException: Exception
     {

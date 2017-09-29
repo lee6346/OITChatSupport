@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text;
 
-namespace Domain.Common
+namespace Web.Common
 {
     public interface ISpecification<T>
     {

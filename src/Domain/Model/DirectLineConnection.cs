@@ -1,7 +1,7 @@
-using Domain.Model.Common;
+using Web.Model.Common;
 using System;
 
-namespace Domain.Model
+namespace Web.Model
 {
     public class DirectLineConnection : ChatConnection
     {

@@ -57,9 +57,21 @@ namespace OITChatSupport.Web.Controllers
         /// <param name="agentDto">Object: conversation id, user, time</param>
         /// <returns>Ok, throw error on failure</returns>
         [HttpPost("[action]")]
-        public async Task<IActionResult> StartConnection(DirectLineConnectionDto connection)
+        public async Task<IActionResult> StartConnection([FromBody] DirectLineConnectionDto connection)
         {
             return Json(Ok());
+        }
+
+        /// <summary>
+        /// End current direct line connection and notify agents
+        /// </summary>
+        /// <param name="connection"></param>
+        /// <returns></returns>
+        [HttpPost("[action]")]
+        [IgnoreAntiforgeryToken]
+        public async Task<IActionResult> EndConnection([FromBody] DirectLineConnectionDto connection)
+        {
+            return Json(connection);
         }
 
 

@@ -1,6 +1,6 @@
 ﻿import { Injectable, Inject } from '@angular/core';
 import { Http, Response, Headers, RequestOptions, RequestOptionsArgs } from '@angular/http';
-import { ERROR_CONFIG, ErrorConfig } from '../chatbot-config.module';
+//import { ERROR_CONFIG, ErrorConfig } from '../chatbot-config.module';
 
 import { ErrorMessage } from '../model/ErrorMessage';
 import * as Rx from 'rxjs/Rx';
@@ -8,14 +8,15 @@ import * as Rx from 'rxjs/Rx';
 @Injectable()
 export class ErrorHandlerService{
 
+    private oitErrorUri: string = 'http://localhost:5000/api/Home/Error';
     constructor(
         private http: Http,
-        @Inject(ERROR_CONFIG) private errorConfig: ErrorConfig
+        //@Inject(ERROR_CONFIG) private errorConfig: ErrorConfig
     ) { }
 
     public sendErrorReport$(error: any, message: string, level: number) {
         this.http.post(
-            this.errorConfig.oitErrorUri,
+            this.oitErrorUri,
             { errorMessage: message, errorStackTrack: error, errorLevel: level } as ErrorMessage,
             this.getRequestOptions())
             .map((res: Response) => res.json())
@@ -27,7 +28,8 @@ export class ErrorHandlerService{
     }
 
     public getRequestOptions(): RequestOptions {
-        return new RequestOptions(new Headers({ 'Content-Type': 'application/json' }));
+        let headers: Headers = new Headers({ 'Content-Type': 'application/json' });
+        return new RequestOptions({ headers: headers });
     }
 
 

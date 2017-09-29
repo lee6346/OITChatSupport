@@ -7,9 +7,10 @@ using System.Threading.Tasks;
 
 namespace Web.Services.Authentication
 {
+    /*
     public class LdapAuthenticationMiddleware: AuthenticationMiddleware
     {
-        /*
+        
         private readonly RequestDelegate _next;
         private LdapUserManager<AuthenticatedUser> _ldapUserManager;
         
@@ -21,6 +22,6 @@ namespace Web.Services.Authentication
         public async Task Invoke(HttpContext context)
         {
             if(context.Request.Form.Body)
-        }*/
-    }
+        }
+    }*/
 }

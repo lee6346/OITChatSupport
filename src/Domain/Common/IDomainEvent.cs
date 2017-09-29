@@ -1,4 +1,4 @@
-﻿namespace Domain.Common
+﻿namespace Web.Common
 {
     public interface IDomainEvent
     {

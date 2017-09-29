@@ -1,6 +1,6 @@
 using System;
 
-namespace OITChatSupport.Web.Services.Errors
+namespace Web.Services.Errors
 {
     public class AuthorizationException : Exception
     {

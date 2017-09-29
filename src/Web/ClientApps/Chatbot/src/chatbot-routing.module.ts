@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ChatbotComponent } from './chatbot.component';
+import { HomeComponent } from './home/home.component';
 
 export const routes: Routes = [
-    { path: 'chatbot', component: ChatbotComponent },
-    { path: '', redirectTo: '/chatbot', pathMatch: 'full' },
+    { path: 'home', component: HomeComponent },
+    { path: '', redirectTo: '/home', pathMatch: 'full' },
 
-    { path: '**', component: ChatbotComponent }
+    { path: '**', component: HomeComponent }
 ];
 
 @NgModule({

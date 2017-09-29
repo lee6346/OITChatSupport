@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Domain.Model.Common
+namespace Web.Model.Common
 {
     [Flags]
     public enum ChatParticipant

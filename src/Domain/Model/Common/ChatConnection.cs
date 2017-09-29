@@ -1,6 +1,6 @@
 using System;
 
-namespace Domain.Model.Common
+namespace Web.Model.Common
 {
     public abstract class ChatConnection: Entity
     {

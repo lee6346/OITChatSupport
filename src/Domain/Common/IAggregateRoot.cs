@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Domain.Common
+namespace Web.Common
 {
     public interface IAggregateRoot
     {

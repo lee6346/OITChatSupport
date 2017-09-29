@@ -18,7 +18,6 @@ namespace Web.Controllers
 
 
         [HttpGet]
-        [AllowAnonymous]
         public IActionResult Login()
         {
             return View();
@@ -26,17 +25,20 @@ namespace Web.Controllers
 
 
         [HttpPost]
-        [AllowAnonymous]
-        public async Task<IActionResult> Login(AgentDto agentDto)
+        public async Task<IActionResult> Login([FromBody] AgentDto agentDto)
         {
-            return Json(Ok());
+            //if authentication checks out
+
+            return RedirectToAction("Agent", "Home");
         }
 
         [HttpPost("[action]")]
-        public async Task<IActionResult> Logout()
+        public async Task<IActionResult> Logout([FromBody] AgentDto agentDto)
         {
-            return Json(Ok());
+            // destroy cookies, change agent table to not connected, and broadcast to agents
+            return RedirectToAction("Login", "Account");
         }
+
 
 
     }

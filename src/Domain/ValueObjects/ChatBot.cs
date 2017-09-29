@@ -1,10 +1,10 @@
-﻿using Domain.Common;
-using Domain.Model.Common;
+﻿using Web.Common;
+using Web.Model.Common;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Domain.ValueObjects
+namespace Web.ValueObjects
 {
     public class ChatBot: ValueObject<ChatBot>
     {

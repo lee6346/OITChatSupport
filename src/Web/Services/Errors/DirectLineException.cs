@@ -1,7 +1,7 @@
 using System;
 using System.Net;
 
-namespace OITChatSupport.Web.Services.Errors
+namespace Web.Services.Errors
 {
     public class DirectLineException : Exception
     {
