@@ -2,23 +2,22 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using OITChatSupport.Web.ConfigBuilder;
-using OITChatSupport.Web.Services;
+using Web.Services.ConfigBuilder;
+using Web.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Rewrite;
 using Microsoft.AspNetCore.Antiforgery;
 using Microsoft.AspNetCore.Http;
-using Web.Services.ConfigBuilder;
 using System.Net.WebSockets;
 using Web.Services.RealTime;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
 using Microsoft.AspNetCore.SignalR;
-using Web.Web.Services.RealTime;
 using Web.Services.Hubs;
 using Web.Data.Context;
 using Microsoft.EntityFrameworkCore;
+using Web.Repositories;
 
 namespace OITChatSupport.Web
 {
@@ -89,6 +88,16 @@ namespace OITChatSupport.Web
             });
             */
 
+            //Add repositories
+            services.AddScoped<IAdminRepository, AdminRepository>();
+            services.AddScoped<IAgentRepository, AgentRepository>();
+            services.AddScoped<IAgentGroupMessageRepository, AgentGroupMessageRepository>();
+            services.AddScoped<IDirectLineMessageRepository, DirectLineMessageRepository>();
+            services.AddScoped<IDirectLineSessionRepository, DirectLineSessionRepository>();
+            services.AddScoped<IEventLogRepository, EventLogRepository>();
+
+
+            //Add services
             services.AddScoped<IDirectLineService, DirectLineService>();
 
             services.AddMvc();

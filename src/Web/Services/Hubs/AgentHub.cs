@@ -1,10 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Web.Services.RealTime;
-using OITChatSupport.Web.Dtos;
+using Web.Dtos;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.AspNetCore.Http.Features;
 

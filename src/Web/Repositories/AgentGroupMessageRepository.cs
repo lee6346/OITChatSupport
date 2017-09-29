@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Web.Data.Context;
-using Web.Data.Dapper;
 using Web.Models;
-using Web.Models.Common;
 using Microsoft.EntityFrameworkCore;
+
 namespace Web.Repositories
 {
     
@@ -17,11 +16,11 @@ namespace Web.Repositories
         {
             _context = context;
         }
-        public async Task<IEnumerable<AgentGroupMessage>> GetByDepartmentAsync(string utsaDepartment)
+        public async Task<IList<AgentGroupMessage>> GetByDepartmentAsync(string utsaDepartment)
         {
             return await GetByDepartmentAsync(utsaDepartment, null);
         }
-        public async Task<IEnumerable<AgentGroupMessage>> GetByDepartmentAsync(string utsaDepartment, DateTime? start)
+        public async Task<IList<AgentGroupMessage>> GetByDepartmentAsync(string utsaDepartment, DateTime? start)
         {
             if(start == null)
             {
@@ -35,11 +34,11 @@ namespace Web.Repositories
             }
 
         }
-        public async Task<IEnumerable<AgentGroupMessage>> GetAllAsync()
+        public async Task<IList<AgentGroupMessage>> GetAllAsync()
         {
             return await GetAllAsync(null);
         }
-        public async Task<IEnumerable<AgentGroupMessage>> GetAllAsync(DateTime? start)
+        public async Task<IList<AgentGroupMessage>> GetAllAsync(DateTime? start)
         {
             if(start == null)
             {
@@ -85,7 +84,18 @@ namespace Web.Repositories
         public async Task RemoveAsync(AgentGroupMessage agentGroupMessage)
         {
             var agm = await _context.AgentGroupMessages.FirstOrDefaultAsync(a => a.Id == agentGroupMessage.Id);
-            if(agm )
+            if(agm != null)
+            {
+                try
+                {
+                    _context.AgentGroupMessages.Remove(agm);
+                    await _context.SaveChangesAsync();
+                }
+                catch(DbUpdateException e)
+                {
+                    throw e;
+                }
+            }
         }
     }
 }

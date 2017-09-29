@@ -1,7 +1,7 @@
-using OITChatSupport.Web.Dtos;
+using Web.Dtos;
 using System.Threading.Tasks;
 
-namespace OITChatSupport.Web.Services
+namespace Web.Services
 {
     /// <summary>
     /// Direct line interface to receive conversation ids, tokens, new connections, etc from the direct line api

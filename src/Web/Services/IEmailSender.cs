@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 
-namespace OITChatSupport.Web.Services
+namespace Web.Services
 {
     public interface IEmailSender
     {

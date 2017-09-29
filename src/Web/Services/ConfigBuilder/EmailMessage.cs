@@ -1,4 +1,4 @@
-namespace OITChatSupport.Web.ConfigBuilder
+namespace Web.Services.ConfigBuilder
 {
     public class EmailMessage
     {

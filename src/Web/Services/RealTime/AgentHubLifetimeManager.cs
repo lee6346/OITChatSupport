@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.DependencyInjection;
-using OITChatSupport.Web.Dtos;
+using Web.Dtos;
 using Serilog;
 using System;
 using System.Collections.Generic;

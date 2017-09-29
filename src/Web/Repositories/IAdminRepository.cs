@@ -8,8 +8,8 @@ namespace Web.Repositories
     {
 
         Task<Admin> GetByIdAsync(string utsaId);
-        Task<IEnumerable<Admin>> GetAllAsync();
-        Task<IEnumerable<Admin>> GetAllAsync(bool connected);
+        Task<IList<Admin>> GetAllAsync();
+        Task<IList<Admin>> GetAllAsync(bool connected);
         Task AddAsync(Admin admin);
         Task UpdateAsync(Admin admin);
         Task RemoveAsync(Admin admin);

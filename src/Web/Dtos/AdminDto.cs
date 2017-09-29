@@ -1,7 +1,7 @@
 
 using Newtonsoft.Json;
 
-namespace OITChatSupport.Web.Dtos
+namespace Web.Dtos
 {
     public class AdminDto
     {

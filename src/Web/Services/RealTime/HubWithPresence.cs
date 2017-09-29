@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.SignalR;
-using OITChatSupport.Web.Dtos;
-using System;
+using Web.Dtos;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Web.Services.RealTime

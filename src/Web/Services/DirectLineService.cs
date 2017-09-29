@@ -1,12 +1,12 @@
-using OITChatSupport.Web.Dtos;
+using Web.Dtos;
 using Newtonsoft.Json;
 using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
-using OITChatSupport.Web.Services.Errors;
+using Web.Services.Errors;
 
-namespace OITChatSupport.Web.Services
+namespace Web.Services
 {
     public class DirectLineService : IDirectLineService
     {

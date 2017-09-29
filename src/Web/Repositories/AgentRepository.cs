@@ -1,86 +1,96 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
-using Dapper.Contrib.Extensions;
-using Web.Data.Dapper;
 using Web.Models;
-using Web.Services.Errors;
-using Web.Models.Common;
+using Microsoft.EntityFrameworkCore;
+using Web.Data.Context;
 
 namespace Web.Repositories
 {
     public class AgentRepository: IAgentRepository
     {
-        private readonly IDbConnectionFactory _dbConnectionFactory;
-        public AgentRepository(IDbConnectionFactory dbConnectionFactory)
+        private readonly OitChatSupportContext _context;
+        public AgentRepository(OitChatSupportContext context)
         {
-            _dbConnectionFactory = dbConnectionFactory;
+            _context = context;
         }
 
-        public async Task<Agent> GetByIdAsync(long id)
+        public async Task<Agent> GetByIdAsync(string utsaId)
         {
-            using(var sqlConnection = _dbConnectionFactory.MakeConnection())
-            {
-                try
-                {
-                    return await sqlConnection.GetAsync<Agent>(id);
-                }
-                catch(Exception e)
-                {
-                    throw new SqlQueryException("Failed to retrieve agent information", e);
-                }
-            }
+            return await _context.Agents.FirstOrDefaultAsync(a => a.UtsaId == utsaId);
         }
 
         public async Task AddAsync(Agent agent)
         {
-            using (var sqlConnection = _dbConnectionFactory.MakeConnection())
+            try
             {
-                if(await sqlConnection.InsertAsync(agent) <= 0)
-                    throw new SqlTransactionException("Failed to store agent information in database");
+                _context.Agents.Add(agent);
+                await _context.SaveChangesAsync();
+            }
+            catch(DbUpdateException e)
+            {
+                throw e;
             }
         }
 
         public async Task UpdateAsync(Agent agent)
         {
-            using (var sqlConnection = _dbConnectionFactory.MakeConnection())
+            var ag = await _context.Agents.FirstOrDefaultAsync(a => a.UtsaId == agent.UtsaId);
+            if(ag != null)
             {
-                await sqlConnection.UpdateAsync(agent);
+                ag.UtsaDepartment = agent.UtsaDepartment;
+                ag.Connected = agent.Connected;
+                try
+                {
+                    _context.Agents.Update(ag);
+                    await _context.SaveChangesAsync();
+                }
+                catch(DbUpdateException e)
+                {
+                    throw e;
+                }
             }
         }
 
         public async Task RemoveAsync(Agent agent)
         {
-            using (var sqlConnection = _dbConnectionFactory.MakeConnection())
+            var ag = await _context.Agents.FirstOrDefaultAsync(a => a.UtsaId == agent.UtsaId);
+            if(ag != null)
             {
-                await sqlConnection.DeleteAsync(agent);
+                try
+                {
+                    _context.Agents.Remove(ag);
+                    await _context.SaveChangesAsync();
+                }
+                catch(DbUpdateException e)
+                {
+                    throw e;
+                }
             }
         }
-
-        public async Task<IEnumerable<Agent>> GetAllAsync()
+        public async Task<IList<Agent>> GetAllAsync()
         {
             return await GetAllAsync(false);
         }
-        public async Task<IEnumerable<Agent>> GetAllAsync(bool connected)
+        public async Task<IList<Agent>> GetAllAsync(bool connected)
         {
-            //var Connected = connected ? 1 : 0;
-            string query = "SELECT * FROM Agent WHERE Connected = @connected;";
-            using (var sqlConnection = _dbConnectionFactory.MakeConnection())
+            if (connected)
             {
-                return null;
-                //return sqlConnection.QueryAsync<Agent>(query, connected);
+                return await _context.Agents.Where(a => a.Connected).ToListAsync();
             }
+            return await _context.Agents.ToListAsync();
         }
-        public async Task<IEnumerable<Agent>> GetByDepartmentAsync(UtsaDepartment utsaDepartment)
+        public async Task<IList<Agent>> GetByDepartmentAsync(string utsaDepartment)
         {
             return await GetByDepartmentAsync(utsaDepartment, false);
         }
-        public async Task<IEnumerable<Agent>> GetByDepartmentAsync(UtsaDepartment utsaDepartment, bool connected)
+        public async Task<IList<Agent>> GetByDepartmentAsync(string utsaDepartment, bool connected)
         {
-            using (var sqlConnection = _dbConnectionFactory.MakeConnection())
+            if (connected)
             {
-                return null;
+                return await _context.Agents.Where(a => a.UtsaDepartment == utsaDepartment && a.Connected).ToListAsync();
             }
+            return await _context.Agents.Where(a => a.UtsaDepartment == utsaDepartment).ToListAsync();
         }
     }
 }

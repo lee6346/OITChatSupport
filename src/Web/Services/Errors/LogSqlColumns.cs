@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Web.Services.Logger
+﻿namespace Web.Services.Errors
 {
     public enum LogSqlColumns
     {

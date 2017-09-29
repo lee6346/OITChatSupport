@@ -16,6 +16,11 @@ namespace OITChatSupport.Web
                 .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
                 .Enrich.FromLogContext()
                 .WriteTo.Console()
+                .WriteTo.Email(
+                    fromEmail: "",
+                    toEmail: "",
+                    mailServer: "smtp.example.com"
+                )
                 .CreateLogger();
 
             try

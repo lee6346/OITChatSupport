@@ -20,11 +20,11 @@ namespace Web.Repositories
                 return await _context.Admins
                     .FirstOrDefaultAsync(a => a.UtsaId == utsaId);
         }
-        public async Task<IEnumerable<Admin>> GetAllAsync()
+        public async Task<IList<Admin>> GetAllAsync()
         {
             return await GetAllAsync(false);
         }
-        public async Task<IEnumerable<Admin>> GetAllAsync(bool connected)
+        public async Task<IList<Admin>> GetAllAsync(bool connected)
         {
             
             if (connected)

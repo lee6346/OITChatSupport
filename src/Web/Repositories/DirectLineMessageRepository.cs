@@ -1,94 +1,101 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Web.Data.Dapper;
 using Web.Models;
-using Web.Models.Common;
+using Microsoft.EntityFrameworkCore;
+using Web.Data.Context;
+using System.Linq;
 
 namespace Web.Repositories
 {
     public class DirectLineMessageRepository: IDirectLineMessageRepository
     {
-        private readonly IDbConnectionFactory _dbConnectionFactory;
-        public DirectLineMessageRepository(IDbConnectionFactory dbConnectionFactory)
+        private readonly OitChatSupportContext _context;
+        public DirectLineMessageRepository(OitChatSupportContext context)
         {
-            _dbConnectionFactory = dbConnectionFactory;
-        }
-        public async Task<DirectLineMessage> GetByIdAsync(long id)
-        {
-            using (var sqlConnection = _dbConnectionFactory.MakeConnection())
-            {
-                return null;
-            }
+            _context = context;
         }
         public async Task AddAsync(DirectLineMessage directLineMessage)
         {
-            using (var sqlConnection = _dbConnectionFactory.MakeConnection())
+            try
             {
-
+                _context.DirectLineMessages.Add(directLineMessage);
+                await _context.SaveChangesAsync();
+            }
+            catch(DbUpdateException e)
+            {
+                throw e;
             }
         }
         public async Task UpdateAsync(DirectLineMessage directLineMessage)
         {
-            using (var sqlConnection = _dbConnectionFactory.MakeConnection())
+            var dlm = await _context.DirectLineMessages.FirstOrDefaultAsync(p => p.Id == directLineMessage.Id);
+            if(dlm != null)
             {
-
+                dlm.ConversationId = directLineMessage.ConversationId;
+                dlm.Sender = directLineMessage.Sender;
+                dlm.Text = directLineMessage.Text;
+                dlm.TimeSent = directLineMessage.TimeSent;
+                try
+                {
+                    _context.DirectLineMessages.Update(dlm);
+                    await _context.SaveChangesAsync();
+                }
+                catch(DbUpdateException e)
+                {
+                    throw e;
+                }
             }
         }
         public async Task RemoveAsync(DirectLineMessage directLineMessage)
         {
-            using (var sqlConnection = _dbConnectionFactory.MakeConnection())
+            var dlm = await _context.DirectLineMessages.FirstOrDefaultAsync(p => p.Id == directLineMessage.Id);
+            if(dlm != null)
             {
+                try
+                {
+                    _context.DirectLineMessages.Remove(dlm);
+                    await _context.SaveChangesAsync();
+                }
+                catch(DbUpdateException e)
+                {
+                    throw e;
+                }
+            }
+        }
+        public async Task<IList<DirectLineMessage>> GetAllFromDateAsync(DateTime startDate)
+        {
+            return await _context.DirectLineMessages.Where(a => a.TimeSent > startDate).ToListAsync();
+        }
+        public async Task<IList<DirectLineMessage>> GetMessagesByConversationAsync(string conversationId)
+        {
+            return await _context.DirectLineMessages.Where(a => a.ConversationId == conversationId).ToListAsync();
+        }
 
-            }
-        }
-        public async Task<IEnumerable<DirectLineMessage>> GetAllFromDateAsync(DateTime startDate, int numDays)
+        public async Task<IList<DirectLineMessage>> GetMessagesByAgentAsync(string utsaId)
         {
-            using (var sqlConnection = _dbConnectionFactory.MakeConnection())
+            return await GetMessagesByAgentAsync(utsaId, null);
+        }
+
+        public async Task<IList<DirectLineMessage>> GetMessagesByAgentAsync(string utsaId, DateTime? start)
+        {
+            if(start != null)
             {
-                return null;
+                return await _context.DirectLineMessages.Where(a => a.Sender == utsaId && a.TimeSent > start).ToListAsync();
             }
+            return await _context.DirectLineMessages.Where(a => a.Sender == utsaId).ToListAsync();
         }
-        public async Task<IEnumerable<DirectLineMessage>> GetMessagesByConversationAsync(string conversationId)
+        public async Task<IList<DirectLineMessage>> GetMessagesByBotAsync(string botHandle)
         {
-            return await GetMessagesByConversationAsync(conversationId, null);
+            return await GetMessagesByBotAsync(botHandle, null);
         }
-        public async Task<IEnumerable<DirectLineMessage>> GetMessagesByConversationAsync(string conversationId, ChatParticipant? chatParticipant)
+        public async Task<IList<DirectLineMessage>> GetMessagesByBotAsync(string botHandle, DateTime? start)
         {
-            using (var sqlConnection = _dbConnectionFactory.MakeConnection())
+            if(start != null)
             {
-                return null;
+                return await _context.DirectLineMessages.Where(a => a.Sender == botHandle && a.TimeSent > start).ToListAsync();
             }
-        }
-        public async Task<IEnumerable<DirectLineMessage>> GetMessagesByAgentAsync(string utsaId)
-        {
-            return await GetMessagesByAgentAsync(utsaId, null, null, 0);
-        }
-        public async Task<IEnumerable<DirectLineMessage>> GetMessagesByAgentAsync(string utsaId, ChatParticipant? chatParticipant)
-        {
-            return await GetMessagesByAgentAsync(utsaId, chatParticipant, null, 0);
-        }
-        public async Task<IEnumerable<DirectLineMessage>> GetMessagesByAgentAsync(string utsaId, ChatParticipant? chatParticipant, DateTime? start, int numDays)
-        {
-            using (var sqlConnection = _dbConnectionFactory.MakeConnection())
-            {
-                return null;
-            }
-        }
-        public async Task<IEnumerable<DirectLineMessage>> GetMessagesByBotAsync(string botHandle)
-        {
-            return await GetMessagesByBotAsync(botHandle, null, null, 0);
-        }
-        public async Task<IEnumerable<DirectLineMessage>> GetMessagesByBotAsync(string botHandle, ChatParticipant? chatParticipant)
-        {
-            return await GetMessagesByBotAsync(botHandle, chatParticipant, null, 0);
-        }
-        public async Task<IEnumerable<DirectLineMessage>> GetMessagesByBotAsync(string botHandle, ChatParticipant? chatParticipant, DateTime? start, int numDays)
-        {
-            using (var sqlConnection = _dbConnectionFactory.MakeConnection())
-            {
-                return null;
-            }
+            return await _context.DirectLineMessages.Where(a => a.Sender == botHandle).ToListAsync();
         }
     }
 }
