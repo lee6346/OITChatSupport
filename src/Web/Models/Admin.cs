@@ -6,11 +6,6 @@ namespace Web.Models
     public class Admin : Faculty
     {
 
-        public Admin(string utsaId, bool connected)
-        {
-            UtsaId = utsaId;
-            Connected = connected;
-        }
         public bool Connected { get; set; }
 
         public override string ToString()

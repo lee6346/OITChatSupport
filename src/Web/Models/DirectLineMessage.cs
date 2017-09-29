@@ -7,7 +7,6 @@ namespace Web.Models
     {
 
         public string ConversationId { get; set; }
-        public MessageType MessageType { get; set; }
         public string Text { get; set; }
     }
 }

@@ -1,20 +1,22 @@
 ﻿using Novell.Directory.Ldap;
+using OITChatSupport.Web.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Web.Services.ConfigBuilder;
 
 namespace Web.Services.Authentication
 {
     public class LdapAuthentication: IDisposable
     {
-        private readonly LdapAuthenticationOptions _ldapAuthenticationOptions;
+        private readonly LdapConnectionOptions _ldapConnectionOptions;
         private readonly LdapConnection _ldapConnection;
         private bool _isDisposed = false;
 
-        public LdapAuthentication(LdapAuthenticationOptions ldapAuthenticationOptions)
+        public LdapAuthentication(LdapConnectionOptions ldapConnectionOptions)
         {
-            _ldapAuthenticationOptions = ldapAuthenticationOptions;
+            _ldapConnectionOptions = ldapConnectionOptions;
             _ldapConnection = new LdapConnection();
         }
 
@@ -29,33 +31,41 @@ namespace Web.Services.Authentication
             _isDisposed = true;
         }
 
-        public bool ValidatePassword(string distinguisedName, string password)
+        public bool AuthenticateUser(AuthenticatedUser authenticatedUser)
         {
             if (_isDisposed)
             {
                 throw new ObjectDisposedException(nameof(LdapConnection));
             }
-            if (string.IsNullOrEmpty(_ldapAuthenticationOptions.Hostname))
+            if (string.IsNullOrEmpty(_ldapConnectionOptions.Hostname))
             {
                 throw new InvalidOperationException("The LDAP Hostname cannot be empty or null");
 
             }
-
-            _ldapConnection.Connect(_ldapAuthenticationOptions.Hostname, _ldapAuthenticationOptions.Port);
+            _ldapConnection.Connect(_ldapConnectionOptions.Hostname, _ldapConnectionOptions.Port);
             try
             {
-                _ldapConnection.Bind(distinguisedName, password);
+                string searchFilter = $"(sAMAccountName={authenticatedUser.UtsaId})";
+                //string searchFilter = $"(&(sAMAccountName={authenticatedUser.UtsaId})(password={authenticatedUser.Password}))";
+                _ldapConnection.Bind(null, null);
+                LdapSearchResults user = _ldapConnection.Search(_ldapConnectionOptions.SearchBase, LdapConnection.SCOPE_BASE, searchFilter, new string[] { "samaccountname" }, false);
+                if(user.Count == 0)
+                {
+                    return false;
+                }
                 return true;
             }
-            catch(Exception ex)
+            catch(LdapException e)
             {
-                throw ex;
+                throw e;
             }
             finally
             {
-                _ldapConnection.Dispose();
+                _ldapConnection.Disconnect();
             }
         }
+
+
 
     }
 }

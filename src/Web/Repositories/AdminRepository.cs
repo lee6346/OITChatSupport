@@ -2,24 +2,23 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Web.Models;
-using Web.Models.Common;
-using Web.Data.Dapper;
+using Web.Data.Context;
+using Microsoft.EntityFrameworkCore;
+
 namespace Web.Repositories
 {
     public class AdminRepository: IAdminRepository
     {
-        
-        private readonly IDbConnectionFactory _dbConnectionFactory;
-        public AdminRepository(IDbConnectionFactory dbConnectionFactory)
+
+        private readonly OitChatSupportContext _context;
+        public AdminRepository(OitChatSupportContext context)
         {
-            _dbConnectionFactory = dbConnectionFactory;
+            _context = context;
         }
         public async Task<Admin> GetByIdAsync(string utsaId)
         {
-            using (var sqlConnection = _dbConnectionFactory.MakeConnection())
-            {
-                return null;
-            }
+                return await _context.Admins
+                    .FirstOrDefaultAsync(a => a.UtsaId == utsaId);
         }
         public async Task<IEnumerable<Admin>> GetAllAsync()
         {
@@ -27,30 +26,57 @@ namespace Web.Repositories
         }
         public async Task<IEnumerable<Admin>> GetAllAsync(bool connected)
         {
-            using (var sqlConnection = _dbConnectionFactory.MakeConnection())
+            
+            if (connected)
             {
-                return null;
+                return await _context.Admins.Where(b => b.Connected).ToListAsync();
             }
+            return await _context.Admins.ToListAsync();
         }
         public async Task AddAsync(Admin admin)
         {
-            using (var sqlConnection = _dbConnectionFactory.MakeConnection())
+            try
             {
-
+                _context.Admins.Add(admin);
+                await _context.SaveChangesAsync();
             }
+            catch(DbUpdateException e)
+            {
+                throw e;
+            }
+
         }
         public async Task UpdateAsync(Admin admin)
         {
-            using (var sqlConnection = _dbConnectionFactory.MakeConnection())
+            var ad = await _context.Admins.FirstOrDefaultAsync(b => b.UtsaId == admin.UtsaId);
+            if(ad != null)
             {
-
+                ad.Connected = admin.Connected;
+                try
+                {
+                    _context.Admins.Update(ad);
+                    await _context.SaveChangesAsync();
+                }
+                catch(DbUpdateException e)
+                {
+                    throw e;
+                }
             }
         }
         public async Task RemoveAsync(Admin admin)
         {
-            using (var sqlConnection = _dbConnectionFactory.MakeConnection())
+            var ad = await _context.Admins.FirstOrDefaultAsync(b => b.UtsaId == admin.UtsaId);
+            if(ad != null)
             {
-
+                try
+                {
+                    _context.Admins.Remove(ad);
+                    await _context.SaveChangesAsync();
+                }
+                catch(DbUpdateException e)
+                {
+                    throw e;
+                }
             }
         }
     }

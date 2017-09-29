@@ -38,6 +38,7 @@ Obj/
 /src/Web/Bin/
 /src/Web/obj/
 /src/Web/Obj/
+/src/Web/appsettings.*
 
 /src/Domain/[Dd]ebug/
 /src/Domain/[Dd]ebugPublic

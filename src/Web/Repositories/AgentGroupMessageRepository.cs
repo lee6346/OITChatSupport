@@ -1,62 +1,91 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using Web.Data.Context;
 using Web.Data.Dapper;
 using Web.Models;
 using Web.Models.Common;
-
+using Microsoft.EntityFrameworkCore;
 namespace Web.Repositories
 {
     
     public class AgentGroupMessageRepository: IAgentGroupMessageRepository
     {
-        private readonly IDbConnectionFactory _dbConnectionFactory;
-        public AgentGroupMessageRepository(IDbConnectionFactory dbConnectionFactory)
+        private readonly OitChatSupportContext _context;
+        public AgentGroupMessageRepository(OitChatSupportContext context)
         {
-            _dbConnectionFactory = dbConnectionFactory;
+            _context = context;
         }
-        public async Task<IEnumerable<AgentGroupMessage>> GetByDepartmentAsync(UtsaDepartment utsaDepartment)
+        public async Task<IEnumerable<AgentGroupMessage>> GetByDepartmentAsync(string utsaDepartment)
         {
-            return await GetByDepartmentAsync(utsaDepartment, null, 0);
+            return await GetByDepartmentAsync(utsaDepartment, null);
         }
-        public async Task<IEnumerable<AgentGroupMessage>> GetByDepartmentAsync(UtsaDepartment utsaDepartment, DateTime? start, int numOfDays)
+        public async Task<IEnumerable<AgentGroupMessage>> GetByDepartmentAsync(string utsaDepartment, DateTime? start)
         {
-            using (var sqlConnection = _dbConnectionFactory.MakeConnection())
+            if(start == null)
             {
-                return null;
+                return await _context.AgentGroupMessages.Where(a => a.UtsaDepartment == utsaDepartment).ToListAsync();
             }
+            else
+            {
+                return await _context.AgentGroupMessages
+                    .Where(a => a.UtsaDepartment == utsaDepartment && a.TimeSent > start)
+                    .ToListAsync();
+            }
+
         }
         public async Task<IEnumerable<AgentGroupMessage>> GetAllAsync()
         {
-            return await GetAllAsync(null, 0);
+            return await GetAllAsync(null);
         }
-        public async Task<IEnumerable<AgentGroupMessage>> GetAllAsync(DateTime? start, int numOfDays)
+        public async Task<IEnumerable<AgentGroupMessage>> GetAllAsync(DateTime? start)
         {
-            using (var sqlConnection = _dbConnectionFactory.MakeConnection())
+            if(start == null)
             {
-                return null;
+                return await _context.AgentGroupMessages.ToListAsync();
+            }
+            else
+            {
+                return await _context.AgentGroupMessages.Where(a => a.TimeSent > start).ToListAsync();
             }
         }
         public async Task AddAsync(AgentGroupMessage agentGroupMessage)
         {
-            using (var sqlConnection = _dbConnectionFactory.MakeConnection())
+            try
             {
-
+                _context.AgentGroupMessages.Add(agentGroupMessage);
+                await _context.SaveChangesAsync();
+            }
+            catch(DbUpdateException e)
+            {
+                throw e;
             }
         }
         public async Task UpdateAsync(AgentGroupMessage agentGroupMessage)
         {
-            using (var sqlConnection = _dbConnectionFactory.MakeConnection())
+            var agm = await _context.AgentGroupMessages.FirstOrDefaultAsync(a => a.Id == agentGroupMessage.Id);
+            if(agm != null)
             {
-
+                agm.Sender = agentGroupMessage.Sender;
+                agm.Text = agentGroupMessage.Text;
+                agm.UtsaDepartment = agentGroupMessage.UtsaDepartment;
+                agm.TimeSent = agentGroupMessage.TimeSent;
+                try
+                {
+                    _context.AgentGroupMessages.Update(agm);
+                    await _context.SaveChangesAsync();
+                }
+                catch(DbUpdateException e)
+                {
+                    throw e;
+                }
             }
         }
         public async Task RemoveAsync(AgentGroupMessage agentGroupMessage)
         {
-            using (var sqlConnection = _dbConnectionFactory.MakeConnection())
-            {
-
-            }
+            var agm = await _context.AgentGroupMessages.FirstOrDefaultAsync(a => a.Id == agentGroupMessage.Id);
+            if(agm )
         }
     }
 }

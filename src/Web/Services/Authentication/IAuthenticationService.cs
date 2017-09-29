@@ -7,6 +7,6 @@ namespace Web.Services.Authentication
 {
     public interface IAuthenticationService
     {
-        AuthenticatedUser Login(string utsaId, string password);
+        bool AuthenticateUser(AuthenticatedUser authenticatedUser);
     }
 }

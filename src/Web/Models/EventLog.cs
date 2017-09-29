@@ -8,7 +8,7 @@ namespace Web.Models
 
         public string Level { get; set; }
         public string Message { get; set; }
-        public EventType EventType { get; set; }
+        public string EventType { get; set; }
         public byte[] RowVersion { get; set; }
         public DateTime Timestamp { get; set; }
         public bool Resolved { get; set; }

@@ -1,16 +1,8 @@
-﻿using System;
-using System.Web;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using OITChatSupport.Web.ConfigBuilder;
-using Swashbuckle.AspNetCore.Swagger;
 using OITChatSupport.Web.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -25,6 +17,8 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.SignalR;
 using Web.Web.Services.RealTime;
 using Web.Services.Hubs;
+using Web.Data.Context;
+using Microsoft.EntityFrameworkCore;
 
 namespace OITChatSupport.Web
 {
@@ -44,66 +38,24 @@ namespace OITChatSupport.Web
         public void ConfigureServices(IServiceCollection services)
         {
            
-            // Add Configuration files and options classes
+            // Add and bind Configuration files to options classes
             services.AddOptions();
-            services.Configure<EmailMessage>(Configuration);
+            services.Configure<EmailMessage>(options => Configuration.Bind(options));
+            services.Configure<LdapConnectionOptions>(options => Configuration.Bind(options));
+            services.Configure<DirectLineApi>(options => Configuration.Bind(options));
+            services.Configure<DataConnectionOptions>(options => Configuration.Bind(options));
 
-            //bind the Ldap class to configuration options
-            services.Configure<Ldap>(options => 
-            {
-                Configuration.Bind(options);
-            });
-            //bind the Direct line config data 
-            services.Configure<DirectLineApi>(options =>
-            {
-                Configuration.Bind(options);
-            });
-            /*
-            services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>()
-                .AddDefaultTokenProviders();
-            */
-            services.Configure<IdentityOptions>(options =>
-            {
-                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(10);
-                options.Lockout.MaxFailedAccessAttempts = 10;
-                options.Lockout.AllowedForNewUsers = true;
-                
-            });
+            // Add ef core
+            services.AddDbContext<OitChatSupportContext>(c => c.UseSqlServer(Configuration.Get<DataConnectionOptions>().LocalDbConnectionString));
+            
 
-            services.ConfigureApplicationCookie(options =>
-            {
-                options.Cookie.HttpOnly = true;
-                options.Cookie.Expiration = TimeSpan.FromDays(5);
-                options.LoginPath = "/Account/Login";
-                options.LogoutPath = "/Account/Logout";
-                //options.AccessDeniedPath = "/Account/AccessDenied"
-                options.SlidingExpiration = true;
-            });
-
-
-            /*
+            //Add Signal R
             services.AddSignalR();
             services.AddSingleton(typeof(DefaultAgentHubLifetimeManager<>), typeof(DefaultAgentHubLifetimeManager<>));
             services.AddSingleton(typeof(HubLifetimeManager<>), typeof(DefaultAgentHubLifetimeManager<>));
             services.AddSingleton(typeof(IAgentTracker<>), typeof(InMemoryAgentTracker<>));
-            */
-
-
-            //in a controller/service... 
-            // private readonly IOptions<ConnectionStrings> _options;
-            // public Controller(IOptions<ConnectionStrings> options){ _options = options}
-            // _options.Value.ConnectionString
-
-
-            //Add https requirements (ignores any http requests). in Configure(), the middleware will redirect all Http to Https using 'RewriteOptions()'
-            /*
-            services.Configure<MvcOptions>(options =>
-            {
-                options.Filters.Add(new RequireHttpsAttribute());
-            });
-            */
-
+            
+            // Add Cross origin request handling
             services.AddCors(options =>
             {
                 options.AddPolicy("AllowAllOrigins", builder =>
@@ -127,8 +79,6 @@ namespace OITChatSupport.Web
 
             //Identity configuration
             //services.AddIdentity<ApplicationUser>
-
-
             //Cookie configuration
             /*
             services.ConfigureApplicationCookie(options =>
@@ -142,12 +92,6 @@ namespace OITChatSupport.Web
             services.AddScoped<IDirectLineService, DirectLineService>();
 
             services.AddMvc();
-
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new Info { Version = "v1", Title = "Chat bot web application" });
-            });
-
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, IAntiforgery antiforgery)
@@ -203,12 +147,6 @@ namespace OITChatSupport.Web
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
-            });
-            app.UseSwagger();
-
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Chatbot Web Application V1");
             });
         }
     }

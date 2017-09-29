@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Threading;
+using Web.Services.ConfigBuilder;
 
 namespace Web.Services.Authentication
 {
@@ -13,11 +14,11 @@ namespace Web.Services.Authentication
         where TUser: class
     {
 
-        private readonly LdapAuthenticationOptions _ldapOptions;
+        private readonly LdapConnectionOptions _ldapOptions;
 
         public LdapUserManager(IUserStore<TUser> store, IOptions<IdentityOptions> optionsAccessor, IPasswordHasher<TUser> passwordHasher,
             IEnumerable<IUserValidator<TUser>> userValidators, IEnumerable<IPasswordValidator<TUser>> passwordValidators, ILookupNormalizer keyNormalizaer,
-            IdentityErrorDescriber errors, IServiceProvider services, ILogger<UserManager<TUser>> logger, IOptions<LdapAuthenticationOptions> ldapOptions): base(store, optionsAccessor,
+            IdentityErrorDescriber errors, IServiceProvider services, ILogger<UserManager<TUser>> logger, IOptions<LdapConnectionOptions> ldapOptions): base(store, optionsAccessor,
                 passwordHasher, userValidators, passwordValidators, keyNormalizaer, errors, services, logger)
         {
             _ldapOptions = ldapOptions.Value;
