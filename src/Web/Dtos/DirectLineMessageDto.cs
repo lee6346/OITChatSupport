@@ -2,6 +2,9 @@ using Newtonsoft.Json;
 
 namespace Web.Dtos
 {
+    /// <summary>
+    /// Inbound DTO used to store Direct line activity messages from users and bot
+    /// </summary>
     public class DirectLineMessageDto
     {
 

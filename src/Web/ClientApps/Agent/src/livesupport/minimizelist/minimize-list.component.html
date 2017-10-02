@@ -1,0 +1,15 @@
+<div class="minimize-container">
+    <div class="minimized-chat">
+        <div class="minimized-chat-header">
+            <h4 class="minimized-chat-title">Chat</h4>
+        </div>
+        <div class="minimized-chat-body">
+            <ul class="chat-items">
+                <li *ngFor="let hiddenChatSession of hiddenChatSessions" (click)="displayHiddenChatSession(hiddenChatSession)">
+                    <span class="users">Conv Id: {{hiddenChatSession['conversationId']}}</span>
+                    <span class="msg-count">{{hiddenChatSession['messageCount']?hiddenChatSession['messageCount']:'' }}</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

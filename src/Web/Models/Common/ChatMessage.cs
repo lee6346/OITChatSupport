@@ -13,6 +13,7 @@ namespace Web.Models.Common
         /// </summary>
         public string Sender { get; set; }
         public DateTime TimeSent { get; set; }
+        public string Text { get; set; }
         public byte[] RowVersion { get; set; }
     }
 }

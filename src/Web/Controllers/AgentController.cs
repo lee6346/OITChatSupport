@@ -1,8 +1,8 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using OITChatSupport.Web.Dtos;
+using Web.Dtos;
 
-namespace OITChatSupport.Web.Controllers
+namespace Web.Controllers
 {
     [Route("api/[controller]")]
     public class AgentController : BaseController
@@ -33,6 +33,12 @@ namespace OITChatSupport.Web.Controllers
 
         [HttpGet("[action]/{id}")]
         public virtual async Task<IActionResult> GetAll(string id)
+        {
+            return Json(Ok());
+        }
+
+        [HttpGet("[action]")]
+        public virtual async Task<IActionResult> GetGroup()
         {
             return Json(Ok());
         }

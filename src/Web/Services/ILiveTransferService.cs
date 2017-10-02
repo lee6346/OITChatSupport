@@ -5,8 +5,8 @@ namespace Web.Services
 {
     public interface ILiveTransferService
     {
-        Task RequestLiveAgentAsync(LiveTransferDto liveTransferDto);
-        Task RemovePendingRequestAsync(LiveTransferDto liveTransferDto);
+        Task RequestLiveAgentAsync(LiveTransferRequestDto liveTransferDto);
+        Task RemovePendingRequestAsync(LiveTransferRequestDto liveTransferDto);
 
     }
 }

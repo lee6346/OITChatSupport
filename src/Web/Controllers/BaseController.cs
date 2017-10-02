@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.Filters;
 using System.Diagnostics;
 using System.Threading.Tasks;
 
-namespace OITChatSupport.Web.Controllers
+namespace Web.Controllers
 {
 
     /// <summary>

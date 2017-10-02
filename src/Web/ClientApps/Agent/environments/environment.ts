@@ -1,11 +1,5 @@
-/* Default environment when prod or dev is not specified */
-
-export const environment = {
+﻿export const environment = {
     production: false,
-    directLineAPI: 'http://directline/api/v3'
+    env: 'dev'
+    //other environment variables
 };
-
-/* to consume in other TS files
- * import { environment } from ../...
- * apiUrl = environment.directLineAPI;
- */

@@ -3,7 +3,7 @@ using Web.Models;
 
 namespace Web.Data.Mappings
 {
-    public class DirectLineConnectionMap : DommelEntityMap<DirectLineConnection>
+    public class DirectLineConnectionMap : DommelEntityMap<DirectLineThread>
     {
         public DirectLineConnectionMap()
         {

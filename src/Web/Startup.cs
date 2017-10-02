@@ -18,6 +18,7 @@ using Web.Services.Hubs;
 using Web.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Web.Repositories;
+using System;
 
 namespace OITChatSupport.Web
 {
@@ -46,7 +47,21 @@ namespace OITChatSupport.Web
 
             // Add ef core
             services.AddDbContext<OitChatSupportContext>(c => c.UseSqlServer(Configuration.Get<DataConnectionOptions>().LocalDbConnectionString));
-            
+
+            /*
+            // Add in-memory distributed cache for session storage
+            services.AddDistributedMemoryCache();
+
+            // Add and configure session states
+            services.AddSession(options =>
+            {
+                // length before session data is abandoned. Independent of cookie expiration time
+                options.IdleTimeout = TimeSpan.FromSeconds(10);
+                options.Cookie.HttpOnly = false;
+                options.Cookie.Name = "SessionCookie";
+                options.Cookie.Expiration = TimeSpan.FromHours(8);
+            }); 
+            */
 
             //Add Signal R
             services.AddSignalR();
@@ -66,27 +81,6 @@ namespace OITChatSupport.Web
                 });
             });
 
-            //Add XSRF (anti-request forgery) services to work with angular
-            /*
-            services.AddAntiforgery(options =>
-            {
-                options.HeaderName = "X-XSRF-TOKEN";
-                options.CookieDomain = "mydomain.com";
-                options.CookieName = "X-CSRF-TOKEN-
-            });
-            */
-
-            //Identity configuration
-            //services.AddIdentity<ApplicationUser>
-            //Cookie configuration
-            /*
-            services.ConfigureApplicationCookie(options =>
-            {
-                options.ExpireTimeSpan = TimeSpan.FromHours(8);
-                options.LoginPath = "/Account/Login";
-                options.LogoutPath = "/Account/Logout";
-            });
-            */
 
             //Add repositories
             services.AddScoped<IAdminRepository, AdminRepository>();
@@ -119,32 +113,11 @@ namespace OITChatSupport.Web
 
             app.UseCors("AllowAllOrigins");
 
-            //redirect http to https
-            /*
-            var options = new RewriteOptions()
-                .AddRedirectToHttps();
-            app.UseRewriter(options);
-            */
-            //configure antiforgery middleware
-            /*
-            app.Use(next => context =>
-            {
-                string path = context.Request.Path.Value;
-                if(
-                    string.Equals(path, "/", StringComparison.OrdinalIgnoreCase) ||
-                    string.Equals(path, "/index.html", StringComparison.OrdinalIgnoreCase))
-                {
-                    var tokens = antiforgery.GetAndStoreTokens(context);
-                    context.Response.Cookies.Append("XSRF-TOKEN", tokens.RequestToken,
-                        new CookieOptions() { HttpOnly = false });
-
-                }
-                return next(context);
-            });
-            */
 
             app.UseStaticFiles();
             //app.UseWebSockets();
+
+
 
             /*
             app.UseSignalR(routes =>
@@ -152,6 +125,7 @@ namespace OITChatSupport.Web
                 routes.MapHub<AgentHub>("Agent");
             });
             */
+            //app.UseSession();
             app.UseMvc(routes => {
                 routes.MapRoute(
                     name: "default",

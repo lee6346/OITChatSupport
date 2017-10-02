@@ -3,6 +3,9 @@ using Newtonsoft.Json;
 
 namespace Web.Dtos
 {
+    /// <summary>
+    /// An Outbound DTO for serving chat messages in message logs
+    /// </summary>
     public class ChatMessageDto
     {
         [JsonProperty("sender")]

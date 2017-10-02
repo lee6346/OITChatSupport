@@ -7,11 +7,11 @@ namespace Web.Repositories
 {
     public interface IDirectLineSessionRepository
     {
-        Task<IList<DirectLineConnection>> GetByIdAsync(string conversationId);
-        Task AddAsync(DirectLineConnection directLineConnection);
-        Task UpdateAsync(DirectLineConnection directLineConnection);
-        Task RemoveAsync(DirectLineConnection directLineConnection);
-        Task<IList<DirectLineConnection>> GetAllFromDateAsync(DateTime startDate);
+        Task<IList<DirectLineThread>> GetByIdAsync(string conversationId);
+        Task AddAsync(DirectLineThread directLineConnection);
+        Task UpdateAsync(DirectLineThread directLineConnection);
+        Task RemoveAsync(DirectLineThread directLineConnection);
+        Task<IList<DirectLineThread>> GetAllFromDateAsync(DateTime startDate);
         //Task<IEnumerable<DirectLineConnection>> GetAllFromDateAsync(DateTime startDate, bool liveRequest);
     }
 }

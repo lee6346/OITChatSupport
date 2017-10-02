@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace OITChatSupport.Web.Controllers
+namespace Web.Controllers
 {
 
     /// <summary>

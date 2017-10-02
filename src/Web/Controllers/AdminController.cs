@@ -1,8 +1,8 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using OITChatSupport.Web.Dtos;
+using Web.Dtos;
 
-namespace OITChatSupport.Web.Controllers
+namespace Web.Controllers
 {
     /// <summary>
     /// 

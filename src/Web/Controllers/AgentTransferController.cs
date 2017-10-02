@@ -1,12 +1,12 @@
 using Microsoft.AspNetCore.Mvc;
-using OITChatSupport.Web.Dtos;
+using Web.Dtos;
 using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace OITChatSupport.Web.Controllers
+namespace Web.Controllers
 {
     /// <summary>
     /// Handles live transfers between agents and users
@@ -28,19 +28,21 @@ namespace OITChatSupport.Web.Controllers
         /// <param name="id">Agent's utsa id</param>
         /// <returns>List of pending requests for agent's department</returns>
         [HttpGet("[action]/{id}")]
-        public async Task<IActionResult> GetRequests(string id)
+        public async Task<IActionResult> PendingRequests(string id)
         {
+
             return Json(Ok());
 
         }
 
+        
         /// <summary>
         /// Make a request for live agent support 
         /// </summary>
         /// <param name="liveTransfer">Object with conversation id, action, and time requested</param>
         /// <returns>Ok, throw error on failure</returns>
         [HttpPost("[action]")]
-        public async Task<IActionResult> MakeRequest(LiveTransferDto liveTransfer)
+        public async Task<IActionResult> MakeRequest(LiveTransferRequestDto liveTransfer)
         {
             return Json(Ok());
         }
@@ -51,13 +53,13 @@ namespace OITChatSupport.Web.Controllers
         /// <param name="liveTransfer">Object with conversation id, action, and time requested</param>
         /// <returns>Ok, throw error on failure</returns>
         [HttpPost("[action]")]
-        public async Task<IActionResult> AcceptRequest(LiveTransferDto liveTransfer)
+        public async Task<IActionResult> AcceptRequest(LiveTransferRequestDto liveTransfer)
         {
             return Json(Ok());
         }
 
         [HttpPost("[action]")]
-        public async Task<IActionResult> CancelRequest(LiveTransferDto liveTransfer)
+        public async Task<IActionResult> CancelRequest(LiveTransferRequestDto liveTransfer)
         {
             return Json(Ok());
         }

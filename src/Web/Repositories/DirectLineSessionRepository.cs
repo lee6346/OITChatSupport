@@ -15,11 +15,11 @@ namespace Web.Repositories
         {
             _context = context;
         }
-        public async Task<IList<DirectLineConnection>> GetByIdAsync(string conversationId)
+        public async Task<IList<DirectLineThread>> GetByIdAsync(string conversationId)
         {
             return await _context.DirectLineConnections.Where(a => a.ConversationId == conversationId).ToListAsync();
         }
-        public async Task AddAsync(DirectLineConnection directLineConnection)
+        public async Task AddAsync(DirectLineThread directLineConnection)
         {
             try
             {
@@ -31,7 +31,7 @@ namespace Web.Repositories
                 throw e;
             }
         }
-        public async Task UpdateAsync(DirectLineConnection directLineConnection)
+        public async Task UpdateAsync(DirectLineThread directLineConnection)
         {
             var dlc = await _context.DirectLineConnections
                 .FirstOrDefaultAsync(a => a.Id== directLineConnection.Id);
@@ -51,7 +51,7 @@ namespace Web.Repositories
             }
 
         }
-        public async Task RemoveAsync(DirectLineConnection directLineConnection)
+        public async Task RemoveAsync(DirectLineThread directLineConnection)
         {
             var dlc = await _context.DirectLineConnections
                 .FirstOrDefaultAsync(a => a.Id == directLineConnection.Id);
@@ -69,7 +69,7 @@ namespace Web.Repositories
             }
         }
 
-        public async Task<IList<DirectLineConnection>> GetAllFromDateAsync(DateTime startDate)
+        public async Task<IList<DirectLineThread>> GetAllFromDateAsync(DateTime startDate)
         {
             return await _context.DirectLineConnections.Where(p => p.TimeConnected > startDate).ToListAsync();
         }

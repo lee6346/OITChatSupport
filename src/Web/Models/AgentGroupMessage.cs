@@ -5,7 +5,6 @@ namespace Web.Models
 
     public class AgentGroupMessage : ChatMessage
     {
-        public string UtsaDepartment { get; set; }
-        public string Text { get; set; }
+        //public string UtsaDepartment { get; set; }
     }
 }

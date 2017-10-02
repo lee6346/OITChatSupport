@@ -10,7 +10,7 @@ namespace Web.Services
     {
         Task<DirectLineTokenDto> RequestDirectLineTokenAsync();
 
-        Task<DirectLineSocketStreamDto> RequestDirectLineSocketAsync(string conversationId);
+        Task<DirectLineConnectionDto> RequestDirectLineSocketAsync(string conversationId);
 
     }
 }

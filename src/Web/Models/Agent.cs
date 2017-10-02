@@ -10,7 +10,7 @@ namespace Web.Models
         public override string ToString()
         {
             return string.Format("Agent: {0}, Department: {1}, Connection status: {2}",
-                UtsaId, UtsaDepartment.ToString(), Connected);
+                Id, UtsaDepartment, Connected);
         }
     }
 }

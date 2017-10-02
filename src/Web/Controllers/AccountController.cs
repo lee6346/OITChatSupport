@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using OITChatSupport.Web.Controllers;
-using OITChatSupport.Web.Dtos;
+using Web.Controllers;
+using Web.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,7 +27,6 @@ namespace Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Login([FromBody] AgentDto agentDto)
         {
-            //if authentication checks out
 
             return RedirectToAction("Agent", "Home");
         }

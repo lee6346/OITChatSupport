@@ -10,7 +10,7 @@ namespace Web.Data.Context
 
         public DbSet<Agent> Agents { get; set; }
         public DbSet<Admin> Admins { get; set; }
-        public DbSet<DirectLineConnection> DirectLineConnections { get; set; }
+        public DbSet<DirectLineThread> DirectLineConnections { get; set; }
         public DbSet<DirectLineMessage> DirectLineMessages { get; set; }
         public DbSet<AgentGroupMessage> AgentGroupMessages { get; set; }
         public DbSet<EventLog> EventLogs { get; set; }
@@ -106,27 +106,27 @@ namespace Web.Data.Context
         }
         public void OnDirectLineConnectionCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<DirectLineConnection>().ToTable("Direct_Line_Connection");
+            modelBuilder.Entity<DirectLineThread>().ToTable("Direct_Line_Connection");
 
-            modelBuilder.Entity<DirectLineConnection>().HasKey(b => b.Id)
+            modelBuilder.Entity<DirectLineThread>().HasKey(b => b.Id)
                 .HasName("Id")
                 .ForSqlServerIsClustered();
 
-            modelBuilder.Entity<DirectLineConnection>().HasAlternateKey(b => b.ConversationId)
+            modelBuilder.Entity<DirectLineThread>().HasAlternateKey(b => b.ConversationId)
                 .ForSqlServerIsClustered(false);
 
-            modelBuilder.Entity<DirectLineConnection>().Property(b => b.User)
+            modelBuilder.Entity<DirectLineThread>().Property(b => b.User)
                 .HasMaxLength(20)
                 .IsRequired();
 
-            modelBuilder.Entity<DirectLineConnection>().Property(b => b.TimeConnected)
+            modelBuilder.Entity<DirectLineThread>().Property(b => b.TimeConnected)
                 .HasColumnType("datetime2")
                 .IsRequired();
 
-            modelBuilder.Entity<DirectLineConnection>().Property(b => b.TimeDisconnected)
+            modelBuilder.Entity<DirectLineThread>().Property(b => b.TimeDisconnected)
                 .HasColumnType("datetime2");
 
-            modelBuilder.Entity<DirectLineConnection>().Property(b => b.RowVersion)
+            modelBuilder.Entity<DirectLineThread>().Property(b => b.RowVersion)
                 .ValueGeneratedOnAddOrUpdate()
                 .IsConcurrencyToken();
 

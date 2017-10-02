@@ -47,9 +47,9 @@ namespace Web.Services.Hubs
             await Clients.Group(groupName).InvokeAsync("AgentLeft", new AgentGroupMessageDto { });
         }
 
-        public Task SendLiveNotification(LiveTransferDto liveTransferDto)
+        public Task SendLiveNotification(LiveTransferRequestDto liveTransferDto)
         {
-            return Clients.Group(liveTransferDto.Department).InvokeAsync("LiveTransfer", liveTransferDto);
+            return Clients.Group(liveTransferDto.BotHandle).InvokeAsync("LiveTransfer", liveTransferDto);
         }
 
         public Task SendGroupMessage(AgentGroupMessageDto agentGroupMessage)

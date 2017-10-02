@@ -1,10 +1,9 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using OITChatSupport.Web.Dtos;
-using OITChatSupport.Web.Services;
 using Web.Dtos;
+using Web.Services;
 
-namespace OITChatSupport.Web.Controllers
+namespace Web.Controllers
 {
     /// <summary>
     /// Handles direct line api calls for tokens, connections, conversation ids
@@ -46,7 +45,7 @@ namespace OITChatSupport.Web.Controllers
         public async Task<IActionResult> GetStreamUrl(string id)
         {
 
-            DirectLineSocketStreamDto connection = await _directLineService.RequestDirectLineSocketAsync(id);
+            DirectLineConnectionDto connection = await _directLineService.RequestDirectLineSocketAsync(id);
             return Json(connection);
         }
 
@@ -57,7 +56,7 @@ namespace OITChatSupport.Web.Controllers
         /// <param name="agentDto">Object: conversation id, user, time</param>
         /// <returns>Ok, throw error on failure</returns>
         [HttpPost("[action]")]
-        public async Task<IActionResult> StartConnection([FromBody] DirectLineConnectionDto connection)
+        public async Task<IActionResult> StartConnection([FromBody] DirectLineThreadDto connection)
         {
             return Json(Ok());
         }
@@ -69,7 +68,7 @@ namespace OITChatSupport.Web.Controllers
         /// <returns></returns>
         [HttpPost("[action]")]
         [IgnoreAntiforgeryToken]
-        public async Task<IActionResult> EndConnection([FromBody] DirectLineConnectionDto connection)
+        public async Task<IActionResult> EndConnection([FromBody] DirectLineThreadDto connection)
         {
             return Json(connection);
         }

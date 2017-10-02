@@ -43,7 +43,7 @@ namespace Web.Services
         /// </summary>
         /// <param name="conversationId"></param>
         /// <returns></returns>
-        public async Task<DirectLineSocketStreamDto> RequestDirectLineSocketAsync(string conversationId)
+        public async Task<DirectLineConnectionDto> RequestDirectLineSocketAsync(string conversationId)
         {
 
             using (var client = new HttpClient() { BaseAddress = new Uri("https://directline.botframework.com") })
@@ -60,7 +60,7 @@ namespace Web.Services
                 else
                 {
                     var msg = await res.Content.ReadAsStringAsync();
-                    return JsonConvert.DeserializeObject<DirectLineSocketStreamDto>(msg);
+                    return JsonConvert.DeserializeObject<DirectLineConnectionDto>(msg);
                 }
             }
 
