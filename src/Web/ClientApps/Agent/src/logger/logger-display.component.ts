@@ -1,7 +1,5 @@
 ﻿import { Component, OnInit, OnDestroy, EventEmitter, Injector } from '@angular/core';
-//may or may not need
 import { NgClass, NgStyle } from '@angular/common';
-import * as Rx from 'rxjs/Rx';
 
 @Component({
     selector: 'logger-display',

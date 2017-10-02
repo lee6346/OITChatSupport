@@ -1,8 +1,6 @@
-import { Component, OnInit, OnDestroy, Output, Input, EventEmitter } from '@angular/core';
-import * as Rx from 'rxjs/Rx';
+import { Component, Output, Input, EventEmitter } from '@angular/core';
 
 import { LiveRequest } from '../../model';
-import { LiveRequestService, MessageTransferService } from '../../core';
 
 
 @Component({
@@ -10,61 +8,45 @@ import { LiveRequestService, MessageTransferService } from '../../core';
     templateUrl: './pending-list.component.html',
     styleUrls: ['./pending-list.component.css'],
 })
-export class PendingListComponent implements OnInit, OnDestroy {
+export class PendingListComponent{
 
+    private _liveRequests: LiveRequest[] = [];
 
-    //to hide and show the pending list (consider using routes and lazy modules)
     @Input()
-    private displayList: boolean = true;
+    set liveRequests(liveRequest: LiveRequest) {
+        this.addToList(liveRequest);
+    }
 
-    private liveRequests: LiveRequest[] = [];
-
-
+    @Input()
+    set removeRequests(liveRequest: LiveRequest) {
+        this.removeFromList(liveRequest);
+    }
 
     @Output()
-    private requestSelection: EventEmitter<LiveRequest> = new EventEmitter<LiveRequest>();
-    private ngUnsubscribe: Rx.Subject<void> = new Rx.Subject<void>();
-    
+    private requestSelect: EventEmitter<LiveRequest> = new EventEmitter<LiveRequest>();
 
-    constructor(
-        private liveRequestService: LiveRequestService,
-        private messageTransferService: MessageTransferService
-    ) { }
-
-    ngOnInit() { }
-
-    ngOnDestroy() {
-        this.ngUnsubscribe.next();
-        this.ngUnsubscribe.complete();
-    }
-
-
-    public subscribeToLiveRequests() {
-        this.liveRequestService.retrievePendingRequests$()
-            .flatMap(requests => requests)
-        .concat()
-    }
+    constructor() { }
 
     public selectPendingRequest(liveRequest: LiveRequest): void {
-
-    }
-    public removeFromList(conversationId: string): void {
-        let index = this.liveRequests
-            .findIndex(item => item.conversationId === conversationId);
-        if (index !== -1)
-            this.liveRequests.splice(index, 1);
+        this.requestSelect.emit(liveRequest);
     }
 
-    public addToList(conversationId: string): void {
-        let index = this.liveRequests
-            .findIndex(item => item.conversationId === conversationId);
+    public removeFromList(liveRequest: LiveRequest): void {
+        let index = this.getListIndex(liveRequest.conversationId);
+        if (index !== -1) {
+            this._liveRequests.splice(index, 1);
+        }
+    }
+
+    public addToList(liveRequest: LiveRequest): void {
+        let index = this.getListIndex(liveRequest.conversationId);
         if (index === -1)
-            this.liveRequests.push()
+            this._liveRequests.push()
     }
-
     
-
-    
-
-
+    public getListIndex(conversationId: string): number {
+        return this._liveRequests.findIndex(
+            item => item.conversationId === conversationId
+        );
+    }
 }

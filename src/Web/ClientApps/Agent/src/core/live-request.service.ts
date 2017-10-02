@@ -1,9 +1,9 @@
 import { Injectable, } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
-import { HubConnection, TransportType, ConsoleLogger } from '@aspnet/signalr-client';
+import { HubConnection } from '@aspnet/signalr-client';
 
 import { LiveRequest, ErrorMessage } from '../model';
-import * as Rx from 'rxjs/Rx';
+import { Observable, Subject } from 'rxjs/Rx';
 
 /**
  * Live request services for agents to retrieve requests and accept them
@@ -11,37 +11,25 @@ import * as Rx from 'rxjs/Rx';
 @Injectable()
 export class LiveRequestService {
 
-    private acceptLiveRequestUrl: string = '/api/AgentTransfer/AcceptRequest';
-    private pendingRequestsUrl: string = './api/AgentTransfer/PendingRequests';
+    private acceptLiveRequestUrl: string = 'http://localhost:5000/api/AgentTransfer/AcceptRequest';
+    private pendingRequestsUrl: string = 'http://localhost:5000/api/AgentTransfer/PendingRequests';
 
     private _hubConnection: HubConnection = new HubConnection('/agent');
+
     
+    constructor(private http: Http) { }
 
-    constructor(private http: Http) {
-
-
-    }
-    /*
-    public acceptLiveRequest$(conversationId: string, user: string, botHandle: string): Rx.Observable<Response> {
-        return this.http.post(
-            this.acceptLiveRequestUrl,
-            { conversationId: conversationId, user: user, botHandle: botHandle} as LiveRequest,
-            this.getRequestOptions())
-            .retry(2)
-            .map((response: Response) => response.json())
-            .catch(this.httpRequestError);
-    }
-    */
-    public retrievePendingRequests$(): Rx.Observable<LiveRequest[]> {
+    public retrievePendingRequests$(): Observable<LiveRequest> {
         return this.http.get(
             this.pendingRequestsUrl,
             this.getRequestOptions())
             .retry(2)
             .map((response: Response) => response.json())
+            .flatMap(item => item)
             .catch(this.httpRequestError);    
     }
 
-    public acceptLiveRequest$(liveRequest: LiveRequest): Rx.Observable<Response> {
+    public acceptLiveRequest$(liveRequest: LiveRequest): Observable<Response> {
         return this.http.post(
             this.acceptLiveRequestUrl,
             liveRequest,
@@ -56,7 +44,7 @@ export class LiveRequestService {
         return new RequestOptions({ headers: headers });
     }
 
-    public httpRequestError(error: any): Rx.Observable<any> {
+    public httpRequestError(error: any): Observable<any> {
         if (error instanceof Response) {
             var errMessage;
             try {
@@ -64,9 +52,25 @@ export class LiveRequestService {
             } catch (err) {
                 errMessage = error.statusText;
             }
-            return Rx.Observable.throw(
+            return Observable.throw(
                 { message: 'Http failure', stackTrace: errMessage, level: 1 } as ErrorMessage);
         }
-        return Rx.Observable.throw(error);
+        return Observable.throw(error);
     }
+
+    private startHubConnection(): void {
+        this._hubConnection.start()
+            .then(() => {
+                console.log('connection has started');
+            })
+            .catch(err => {
+                console.log('error occurred');
+            });
+    }
+
+    public registerServerEvents(): void {
+
+        this.startHubConnection();
+    }
+
 }

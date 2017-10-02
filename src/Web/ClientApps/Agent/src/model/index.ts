@@ -1,5 +1,6 @@
 export { DirectLineConnection } from './DirectLineConnection';
 export { ErrorMessage } from './ErrorMessage';
+export { Agent } from './Agent';
 export { AgentMessage } from './AgentMessage';
 export { LiveRequest } from './LiveRequest';
 export { CurrentConversation } from './CurrentConversation';

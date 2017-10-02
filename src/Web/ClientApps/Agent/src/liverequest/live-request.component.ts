@@ -1,5 +1,5 @@
-﻿import { Component, OnInit, OnDestroy, Output, Input, EventEmitter } from '@angular/core';
-import * as Rx from 'rxjs/Rx';
+﻿import { Component, OnInit, OnDestroy, Input } from '@angular/core';
+import { Observable, Subject } from 'rxjs/Rx';
 
 import { LiveRequestService, MessageTransferService } from '../core';
 import { LiveRequest, CurrentConversation } from '../model';
@@ -14,7 +14,7 @@ export class LiveRequestComponent implements OnInit, OnDestroy {
 
     @Input()
     private agentId: string;
-    private ngUnsubscribe: Rx.Subject<void> = new Rx.Subject<void>();
+    private ngUnsubscribe: Subject<void> = new Subject<void>();
 
     constructor(
         private liveRequestService: LiveRequestService,
@@ -45,6 +45,10 @@ export class LiveRequestComponent implements OnInit, OnDestroy {
                 conversationId: liveRequest.conversationId
             } as CurrentConversation
         );
+    }
+
+    public onRequestSelected(liveRequest: LiveRequest) {
+
     }
 
 }

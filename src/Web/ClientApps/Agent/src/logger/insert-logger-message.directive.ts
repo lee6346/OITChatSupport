@@ -1,5 +1,4 @@
 ﻿import { Directive, ViewContainerRef, ComponentRef, ComponentFactoryResolver, ReflectiveInjector, Type } from '@angular/core';
-
 import { LoggerDisplayComponent } from './logger-display.component';
 import { LogLevel } from './log-level.enum';
 

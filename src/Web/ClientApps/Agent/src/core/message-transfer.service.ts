@@ -1,7 +1,7 @@
 ﻿import { Injectable } from '@angular/core';
 import { HiddenMessage, CurrentConversation } from '../model';
 import { Message } from 'botframework-directlinejs';
-import * as Rx from 'rxjs/Rx';
+import { Observable, Subject } from 'rxjs/Rx';
 /**
  * This service is responsible for transferring messages between components
  * (messages from input-bar to chat-display, messages from chat-display to minimized windows, etc)
@@ -11,13 +11,13 @@ export class MessageTransferService {
 
     constructor() { }
 
-    private hiddenMessageStream: Rx.Subject<HiddenMessage> = new Rx.Subject<HiddenMessage>();
-    private currentConversationStream: Rx.Subject<CurrentConversation> = new Rx.Subject<CurrentConversation>();
-    private inputMessageStream: Rx.Subject<Message> = new Rx.Subject<Message>();
+    private hiddenMessageStream: Subject<HiddenMessage> = new Subject<HiddenMessage>();
+    private currentConversationStream: Subject<CurrentConversation> = new Subject<CurrentConversation>();
+    private inputMessageStream: Subject<Message> = new Subject<Message>();
 
-    public hiddenMessage$: Rx.Observable<HiddenMessage> = this.hiddenMessageStream.asObservable();
-    public currentConversation$: Rx.Observable<CurrentConversation> = this.currentConversationStream.asObservable();
-    public inputMessage$: Rx.Observable<Message> = this.inputMessageStream.asObservable();
+    public hiddenMessage$: Observable<HiddenMessage> = this.hiddenMessageStream.asObservable();
+    public currentConversation$: Observable<CurrentConversation> = this.currentConversationStream.asObservable();
+    public inputMessage$: Observable<Message> = this.inputMessageStream.asObservable();
 
     public sendHiddenMessage(hiddenMessage: HiddenMessage): void {
         this.hiddenMessageStream.next(hiddenMessage);
@@ -27,7 +27,7 @@ export class MessageTransferService {
         this.currentConversationStream.next(currentConversation);
     }
 
-    public sendInputMessage(message: Message) {
+    public sendInputMessage(message: Message): void {
         this.inputMessageStream.next(message);
     }
 

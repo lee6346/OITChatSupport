@@ -8,41 +8,6 @@
     <TypeScriptToolsVersion>2.3</TypeScriptToolsVersion>
     <UserSecretsId>789bf716-f39d-45b4-ae24-09e48161fc1d</UserSecretsId>
   </PropertyGroup>
-
-  <ItemGroup>
-    <None Remove="ClientApps\Agent\agent.server.module.ts" />
-    <None Remove="ClientApps\Agent\boot.server.ts" />
-    <None Remove="ClientApps\Agent\environments\environment.dev.ts" />
-    <None Remove="ClientApps\Agent\environments\environment.prod.ts" />
-    <None Remove="ClientApps\Agent\environments\environment.test.ts" />
-    <None Remove="ClientApps\Agent\environments\environment.ts" />
-    <None Remove="ClientApps\Agent\src\core\agent-message.service.ts" />
-    <None Remove="ClientApps\Agent\src\core\base-http.service.ts" />
-    <None Remove="ClientApps\Agent\src\core\global-error-handler.service.ts" />
-    <None Remove="ClientApps\Agent\src\core\message-transfer.service.ts" />
-    <None Remove="ClientApps\Agent\src\groupchat\group-chat.component.ts" />
-    <None Remove="ClientApps\Agent\src\groupchat\group-chat.module.ts" />
-    <None Remove="ClientApps\Agent\src\liverequest\live-request.component.ts" />
-    <None Remove="ClientApps\Agent\src\liverequest\live-request.module.ts" />
-    <None Remove="ClientApps\Agent\src\livesupport\cachedmessages\cached-messages.component.ts" />
-    <None Remove="ClientApps\Agent\src\livesupport\chatdisplay\chat-display.component.ts" />
-    <None Remove="ClientApps\Agent\src\livesupport\chatsession\chat-session.component.ts" />
-    <None Remove="ClientApps\Agent\src\livesupport\directives\create-chat-session.directive.ts" />
-    <None Remove="ClientApps\Agent\src\livesupport\inputbar\input-bar.component.ts" />
-    <None Remove="ClientApps\Agent\src\livesupport\live-support.component.ts" />
-    <None Remove="ClientApps\Agent\src\livesupport\live-support.module.ts" />
-    <None Remove="ClientApps\Agent\src\logger\insert-logger-message.directive.ts" />
-    <None Remove="ClientApps\Agent\src\logger\log-level.enum.ts" />
-    <None Remove="ClientApps\Agent\src\logger\logger-display.component.ts" />
-    <None Remove="ClientApps\Agent\src\logger\logger.module.ts" />
-    <None Remove="ClientApps\Agent\src\logger\logger.service.ts" />
-    <None Remove="ClientApps\Agent\src\model\CurrentConversation.ts" />
-    <None Remove="ClientApps\Agent\src\model\ErrorMessage.ts" />
-    <None Remove="ClientApps\Agent\src\model\HiddenChatSession.ts" />
-    <None Remove="ClientApps\Agent\src\shared\components\base-form.component.ts" />
-    <None Remove="ClientApps\Agent\src\shared\validators\validator-error.service.ts" />
-    <None Remove="ClientApps\Chatbot\src\model\DirectLineConnection.ts" />
-  </ItemGroup>
 <!--
   <ItemGroup>
     <ProjectReference Include="..\Domain\Domain.csproj" />
@@ -104,46 +69,7 @@
     <PackageReference Include="Serilog.Sinks.SQLite" Version="3.8.3" />
     <PackageReference Include="StackExchange.Redis" Version="1.2.6" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="1.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="System.Reactive" Version="3.1.1" />
-  </ItemGroup>
-  <ItemGroup>
-    <TypeScriptCompile Include="ClientApps\Agent\boot.server.ts" />
-    <TypeScriptCompile Include="ClientApps\Agent\environments\environment.dev.ts" />
-    <TypeScriptCompile Include="ClientApps\Agent\environments\environment.prod.ts" />
-    <TypeScriptCompile Include="ClientApps\Agent\environments\environment.test.ts" />
-    <TypeScriptCompile Include="ClientApps\Agent\environments\environment.ts" />
-    <TypeScriptCompile Include="ClientApps\Agent\src\agent.server.module.ts" />
-    <TypeScriptCompile Include="ClientApps\Agent\src\agent.shared.module.ts" />
-    <TypeScriptCompile Include="ClientApps\Agent\src\core\agent-message.service.ts" />
-    <TypeScriptCompile Include="ClientApps\Agent\src\core\base-http.service.ts" />
-    <TypeScriptCompile Include="ClientApps\Agent\src\core\global-error-handler.service.ts" />
-    <TypeScriptCompile Include="ClientApps\Agent\src\core\message-transfer.service.ts" />
-    <TypeScriptCompile Include="ClientApps\Agent\src\groupchat\group-chat.component.ts" />
-    <TypeScriptCompile Include="ClientApps\Agent\src\groupchat\group-chat.module.ts" />
-    <TypeScriptCompile Include="ClientApps\Agent\src\liverequest\live-request.component.ts" />
-    <TypeScriptCompile Include="ClientApps\Agent\src\liverequest\live-request.module.ts" />
-    <TypeScriptCompile Include="ClientApps\Agent\src\livesupport\cachedmessages\cached-messages.component.ts" />
-    <TypeScriptCompile Include="ClientApps\Agent\src\livesupport\chatdisplay\chat-display.component.ts" />
-    <TypeScriptCompile Include="ClientApps\Agent\src\livesupport\chatsession\chat-session.component.ts" />
-    <TypeScriptCompile Include="ClientApps\Agent\src\livesupport\directives\create-chat-session.directive.ts" />
-    <TypeScriptCompile Include="ClientApps\Agent\src\livesupport\inputbar\input-bar.component.ts" />
-    <TypeScriptCompile Include="ClientApps\Agent\src\livesupport\live-support.component.ts" />
-    <TypeScriptCompile Include="ClientApps\Agent\src\livesupport\live-support.module.ts" />
-    <TypeScriptCompile Include="ClientApps\Agent\src\logger\insert-logger-message.directive.ts" />
-    <TypeScriptCompile Include="ClientApps\Agent\src\logger\log-level.enum.ts" />
-    <TypeScriptCompile Include="ClientApps\Agent\src\logger\logger-display.component.ts" />
-    <TypeScriptCompile Include="ClientApps\Agent\src\logger\logger.module.ts" />
-    <TypeScriptCompile Include="ClientApps\Agent\src\logger\logger.service.ts" />
-    <TypeScriptCompile Include="ClientApps\Agent\src\model\CurrentConversation.ts" />
-    <TypeScriptCompile Include="ClientApps\Agent\src\model\ErrorMessage.ts" />
-    <TypeScriptCompile Include="ClientApps\Agent\src\model\HiddenChatSession.ts" />
-    <TypeScriptCompile Include="ClientApps\Agent\src\model\LiveRequest.ts" />
-    <TypeScriptCompile Include="ClientApps\Agent\src\shared\components\base-form.component.ts" />
-    <TypeScriptCompile Include="ClientApps\Agent\src\shared\validators\base-custom.validators.ts" />
-    <TypeScriptCompile Include="ClientApps\Agent\src\shared\validators\validator-error.service.ts" />
-    <TypeScriptCompile Include="ClientApps\Chatbot\src\model\DirectLineConnection.ts" />
+    <PackageReference Include="System.Interactive" Version="3.1.1" />
   </ItemGroup>
 </Project>

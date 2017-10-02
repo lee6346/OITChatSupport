@@ -1,6 +1,5 @@
 ﻿import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions, RequestOptionsArgs, XHRBackend } from '@angular/http';
-import * as Rx from 'rxjs/Rx';
 /*
 @Injectable()
 export class BaseHttpService extends Http{

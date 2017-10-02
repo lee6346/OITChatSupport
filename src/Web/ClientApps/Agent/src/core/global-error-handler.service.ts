@@ -1,6 +1,5 @@
 ﻿import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { ErrorHandler, Injectable } from '@angular/core';
-import * as Rx from 'rxjs/Rx';
 
 import { LoggerService } from '../logger/logger.service';
 import { ErrorMessage, ErrorLevel } from '../model/ErrorMessage';

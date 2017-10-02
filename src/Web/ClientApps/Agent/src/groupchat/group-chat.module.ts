@@ -1,17 +1,28 @@
 ﻿import { NgModule } from '@angular/core';
 import { SharedModule } from '../shared';
 
-import { GroupChatComponent } from './group-chat.component';
+import {
+    AgentGroupComponent,
+    GroupChatComponent,
+    GroupChatDisplayComponent,
+    GroupChatInputComponent
+ } from './';
 
 @NgModule({
     imports: [
         SharedModule
     ],
     declarations: [
-        GroupChatComponent
+        AgentGroupComponent,
+        GroupChatComponent,
+        GroupChatDisplayComponent,
+        GroupChatInputComponent
     ],
     exports: [
-        GroupChatComponent
+        AgentGroupComponent,
+        GroupChatComponent,
+        GroupChatDisplayComponent,
+        GroupChatInputComponent
     ],
 
 })

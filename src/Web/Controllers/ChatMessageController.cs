@@ -33,5 +33,11 @@ namespace Web.Controllers
         {
             return Json(Ok());
         }
+
+        [HttpGet("[action]/{id}")]
+        public async Task<IActionResult> GetGroupMessages(string agentId)
+        {
+            return Json(Ok());
+        }
     }
 }

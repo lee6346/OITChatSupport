@@ -3,8 +3,7 @@ import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { DirectLine, Conversation, Activity, ConnectionStatus, Message } from 'botframework-directlinejs';
 
 import { ErrorMessage, DirectLineConnection } from '../model';
-
-import * as Rx from 'rxjs/Rx';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class DirectLineService {
@@ -16,16 +15,17 @@ export class DirectLineService {
 
     constructor(
         private http: Http
-    ) { }
+    ) {
+    }
 
-    public getConnectionStream$(conversationId: string): Rx.Observable<Conversation> {
+    public getConnectionStream$(conversationId: string): Observable<Conversation> {
         return this.http.get(this.directLineConnectionUrl + conversationId, this.getRequestOptions())
             .retry(2)
             .map((res: Response) => res.json() as Conversation)
             .catch(this.httpRequestError);
     }
 
-    public getCachedMessages(conversationId: string, token: string): Rx.Observable<Message[]> {
+    public getCachedMessages(conversationId: string, token: string): Observable<Message[]> {
         return this.http.get(
             this.directLineCachedConversationUrl + conversationId + '/activities',
             this.getRequestOptions())
@@ -49,13 +49,13 @@ export class DirectLineService {
         return activityTypes.indexOf(activity.type) !== -1;
     }
 
-    public sendMessage$(directLine: DirectLine, message: string): Rx.Observable<string> {
+    public sendMessage$(directLine: DirectLine, message: string): Observable<string> {
         return directLine.postActivity(
             { from: { id: 'user' }, type: 'message', text: message } as Activity)
             .catch(this.httpRequestError);
     }
 
-    public storeActivity$(activity: Activity): Rx.Observable<Response> {
+    public storeActivity$(activity: Activity): Observable<Response> {
         return this.http.post(
             this.storeDirectLineMessageUrl,
             activity,
@@ -71,7 +71,7 @@ export class DirectLineService {
         return new RequestOptions({ headers: headers });
     }
 
-    public httpRequestError(error: any): Rx.Observable<any> {
+    public httpRequestError(error: any): Observable<any> {
         if (error instanceof Response) {
             var errMessage;
             try {
@@ -79,13 +79,13 @@ export class DirectLineService {
             } catch (err) {
                 errMessage = error.statusText;
             }
-            return Rx.Observable.throw(
-                { errorMessage: 'Http request error', errorStackTrack: errMessage, errorLevel: 2 } as ErrorMessage);
+            return Observable.throw(
+                { message: 'Http request error', stackTrace: errMessage, level: 2 } as ErrorMessage);
         }
-        return Rx.Observable.throw(error);
+        return Observable.throw(error);
     }
 
-    public getConnectionStatus$(directLine: DirectLine): Rx.Observable<ConnectionStatus> {
+    public getConnectionStatus$(directLine: DirectLine): Observable<ConnectionStatus> {
         return directLine.connectionStatus$;
     }
 

@@ -1,8 +1,7 @@
-import { Injectable, Inject } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 
 import { ErrorMessage } from '../model/ErrorMessage';
-import * as Rx from 'rxjs/Rx';
 
 /**
  * Service to send error reports back to the server
@@ -18,7 +17,7 @@ export class ErrorHandlerService {
     public sendErrorReport$(error: any, message: string, level: number) {
         this.http.post(
             this.oitErrorUri,
-            { errorMessage: message, errorStackTrack: error, errorLevel: level } as ErrorMessage,
+            { message: message, stackTrace: error, level: level } as ErrorMessage,
             this.getRequestOptions())
             .map((res: Response) => res.json())
             .subscribe(

@@ -39,7 +39,7 @@ export class ChatSessionComponent implements OnInit, OnDestroy {
 
     public trackChatSessionState(): void {
         this.messageTransferService.currentConversation$
-            .takeUntil(this.ngUnsubscribe)
+            .takeUntil(this.ngUnsubscribe).pluck()
             .subscribe(
             next => this.chatSessionHidden = next.conversationId !== this.conversationId,
             err => console.log('error'),
