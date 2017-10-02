@@ -8,6 +8,10 @@
     <TypeScriptToolsVersion>2.3</TypeScriptToolsVersion>
     <UserSecretsId>789bf716-f39d-45b4-ae24-09e48161fc1d</UserSecretsId>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="ClientApps\Agent\src\core\hub-connection.service.ts" />
+  </ItemGroup>
 <!--
   <ItemGroup>
     <ProjectReference Include="..\Domain\Domain.csproj" />
@@ -71,5 +75,9 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="1.0.0" />
     <PackageReference Include="System.Reactive" Version="3.1.1" />
     <PackageReference Include="System.Interactive" Version="3.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApps\Agent\src\core\hub-connection.service.ts" />
   </ItemGroup>
 </Project>
