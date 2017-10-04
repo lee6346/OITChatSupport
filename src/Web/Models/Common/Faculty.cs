@@ -9,12 +9,13 @@ namespace Web.Models.Common
         /// <summary>
         /// Id: Utsa abc123
         /// </summary>
-        public string Id { get; protected set; }
+        public string UtsaId { get; protected set; }
         /// <summary>
         /// Rowversion: Used for database concurrncy check
         /// </summary>
         public byte[] RowVersion { get; set; }
 
+        /*
         public override bool Equals(object obj)
         {
             var other = obj as Entity;
@@ -57,5 +58,6 @@ namespace Web.Models.Common
                 return (hash * 16777619) ^ Id.GetHashCode();
             }
         }
+        */
     }
 }

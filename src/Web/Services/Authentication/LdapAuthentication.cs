@@ -1,5 +1,5 @@
 ﻿using Novell.Directory.Ldap;
-using OITChatSupport.Web.Dtos;
+using Web.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;

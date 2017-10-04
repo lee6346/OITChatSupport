@@ -16,6 +16,7 @@ namespace Web.Repositories
         {
             _context = context;
         }
+        /*
         public async Task<IList<AgentGroupMessage>> GetByDepartmentAsync(string utsaDepartment)
         {
             return await GetByDepartmentAsync(utsaDepartment, null);
@@ -34,6 +35,7 @@ namespace Web.Repositories
             }
 
         }
+        */
         public async Task<IList<AgentGroupMessage>> GetAllAsync()
         {
             return await GetAllAsync(null);
@@ -61,6 +63,7 @@ namespace Web.Repositories
                 throw e;
             }
         }
+        /*
         public async Task UpdateAsync(AgentGroupMessage agentGroupMessage)
         {
             var agm = await _context.AgentGroupMessages.FirstOrDefaultAsync(a => a.Id == agentGroupMessage.Id);
@@ -81,6 +84,7 @@ namespace Web.Repositories
                 }
             }
         }
+        */
         public async Task RemoveAsync(AgentGroupMessage agentGroupMessage)
         {
             var agm = await _context.AgentGroupMessages.FirstOrDefaultAsync(a => a.Id == agentGroupMessage.Id);

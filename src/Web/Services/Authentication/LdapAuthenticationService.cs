@@ -19,9 +19,11 @@ namespace Web.Services.Authentication
             _ldapConnectionOptions = ldapConnectionOptions.Value;
             _ldapConnection = new LdapConnection();
         }
-
+        
         public bool AuthenticateUser(AuthenticatedUser authenticatedUser)
         {
+            return true;
+            /*
             _ldapConnection.Connect(_ldapConnectionOptions.Hostname, _ldapConnectionOptions.Port);
             _ldapConnection.Bind(null, null);
             var searchFilter = $"(sAMAccountName={authenticatedUser.UtsaId})";
@@ -54,7 +56,8 @@ namespace Web.Services.Authentication
                 throw e;
             }
             _ldapConnection.Disconnect();
-            return null;
+            return null;*/
         }
+        
     }
 }

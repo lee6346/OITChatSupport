@@ -29,7 +29,7 @@ namespace Web.Data.Context
         {
             modelBuilder.Entity<Agent>().ToTable("Agent");
 
-            modelBuilder.Entity<Agent>().HasKey(b => b.Id)
+            modelBuilder.Entity<Agent>().HasKey(b => b.UtsaId)
                 .HasName("Id")
                 .ForSqlServerIsClustered();
 
@@ -54,7 +54,7 @@ namespace Web.Data.Context
         {
             modelBuilder.Entity<Admin>().ToTable("Admin");
 
-            modelBuilder.Entity<Admin>().HasKey(b => b.Id)
+            modelBuilder.Entity<Admin>().HasKey(b => b.UtsaId)
                 .HasName("Id")
                 .ForSqlServerIsClustered();
 
@@ -115,9 +115,6 @@ namespace Web.Data.Context
             modelBuilder.Entity<DirectLineThread>().HasAlternateKey(b => b.ConversationId)
                 .ForSqlServerIsClustered(false);
 
-            modelBuilder.Entity<DirectLineThread>().Property(b => b.User)
-                .HasMaxLength(20)
-                .IsRequired();
 
             modelBuilder.Entity<DirectLineThread>().Property(b => b.TimeConnected)
                 .HasColumnType("datetime2")
@@ -169,9 +166,6 @@ namespace Web.Data.Context
                 .HasName("Id")
                 .ForSqlServerIsClustered();
 
-            modelBuilder.Entity<AgentGroupMessage>().Property(b => b.UtsaDepartment)
-                .HasMaxLength(30)
-                .IsRequired();
 
             modelBuilder.Entity<AgentGroupMessage>().Property(b => b.Sender)
                 .HasMaxLength(20)

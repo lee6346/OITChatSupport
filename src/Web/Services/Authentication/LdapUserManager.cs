@@ -23,6 +23,7 @@ namespace Web.Services.Authentication
         {
             _ldapOptions = ldapOptions.Value;
         }
+        /*
         public override async Task<bool> CheckPasswordAsync(TUser user, string password)
         {
             using (var auth = new LdapAuthentication(_ldapOptions))
@@ -43,7 +44,7 @@ namespace Web.Services.Authentication
             }
             return false;
         }
-
+        */
 
         protected override Task<PasswordVerificationResult> VerifyPasswordAsync(IUserPasswordStore<TUser> store, TUser user, string password)
         {
