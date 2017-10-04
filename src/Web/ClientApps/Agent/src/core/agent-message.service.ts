@@ -1,4 +1,4 @@
-﻿import { Injectable } from '@angular/core';
+﻿import { Injectable, EventEmitter } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { HubConnection } from '@aspnet/signalr-client';
 import { Observable, Subject } from 'rxjs/Rx';
@@ -10,11 +10,12 @@ import { AgentMessage, ErrorMessage, Agent } from '../model';
  */
 @Injectable()
 export class AgentMessageService {
-
+    
     private _hubConnection: HubConnection;
     private connectedAgentsUrl: string = 'http://localhost:5000/api/agent/getconnected/';
     private groupMessagesUrl: string = 'http://localhost:5000/api/getgroupmessages/';
 
+    public hubConnected: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     private agentMessageStream: Subject<AgentMessage> = new Subject<AgentMessage>();
     public agentMessage$: Observable<AgentMessage> = this.agentMessageStream.asObservable();

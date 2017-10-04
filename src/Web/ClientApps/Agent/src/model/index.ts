@@ -1,8 +1,8 @@
 export { DirectLineConnection } from './DirectLineConnection';
 export { ErrorMessage } from './ErrorMessage';
-export { Agent } from './Agent';
-export { AgentMessage } from './AgentMessage';
-export { LiveRequest } from './LiveRequest';
+export { Agent } from './agent.model';
+export { AgentMessage } from './agent-message.model';
+export { LiveRequest } from './live-request.model';
 export { CurrentConversation } from './CurrentConversation';
 export { HiddenMessage } from './HiddenMessage';
 export { HiddenChatSession } from './HiddenChatSession';

@@ -1,4 +1,4 @@
-﻿import { Component, OnInit, OnDestroy, EventEmitter, Injector } from '@angular/core';
+﻿import { Component, OnInit, OnDestroy, EventEmitter, Output, Injector } from '@angular/core';
 import { NgClass, NgStyle } from '@angular/common';
 import * as Rx from 'rxjs/Rx';
 import { DirectLine, Conversation, Message, Activity } from 'botframework-directlinejs';
@@ -20,6 +20,8 @@ export class ChatSessionComponent implements OnInit, OnDestroy {
     private ngUnsubscribe: Rx.Subject<void> = new Rx.Subject<void>();
 
 
+    public close = new EventEmitter();
+
     constructor(
         private injector: Injector,
         private messageTransferService: MessageTransferService,
@@ -39,8 +41,9 @@ export class ChatSessionComponent implements OnInit, OnDestroy {
 
     public trackChatSessionState(): void {
         this.messageTransferService.currentConversation$
-            .takeUntil(this.ngUnsubscribe).pluck()
-            .subscribe(
+            .takeUntil(this.ngUnsubscribe)
+            .subscribe
+            (
             next => this.chatSessionHidden = next.conversationId !== this.conversationId,
             err => console.log('error'),
             () => console.log('complete')

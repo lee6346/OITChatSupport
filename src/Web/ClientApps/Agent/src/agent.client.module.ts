@@ -4,6 +4,7 @@ import { CoreModule } from './core';
 import { AgentModuleShared } from './agent.shared.module';
 import { SharedModule } from './shared/shared.module';
 
+
 import { AgentComponent } from './agent.component';
 
 @NgModule({
@@ -15,8 +16,8 @@ import { AgentComponent } from './agent.component';
         AgentModuleShared
     ],
     providers: [
-        { provide: 'BASE_URL', useFactory: getBaseUrl }
-    ]
+        { provide: 'BASE_URL', useFactory: getBaseUrl },
+    ],
 })
 export class AgentModule {
 }

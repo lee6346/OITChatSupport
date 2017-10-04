@@ -6,4 +6,6 @@ export class LiveRequest {
     public user: string;
     public botHandle: string;
     public timeRequested?: string;
+
+    constructor() { }
 }

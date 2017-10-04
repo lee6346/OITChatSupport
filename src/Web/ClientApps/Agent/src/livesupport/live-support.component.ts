@@ -1,28 +1,31 @@
-﻿import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+﻿import { Component, OnInit, OnDestroy, ViewChild, Input } from '@angular/core';
 
 import * as Rx from 'rxjs/Rx';
-import { WebSocketSubject } from 'rxjs/observable/dom/WebSocketSubject';
 
-import { ChatDisplayComponent } from './chatdisplay/chat-display.component';
-import { InsertWindowDirective } from './directives/insert-window.directive';
+import { ChatSessionComponent} from './chatsession/chat-session.component';
+import { DynamicChatSessionDirective } from './directives/dynamic-chat-session.directive';
+
+import { MessageTransferService } from '../core';
 
 @Component({
     selector: 'live-support',
     templateUrl: './live-support.component.html',
     styleUrls: ['./live-support.component.css'],
 
-    entryComponents: [ChatDisplayComponent],
+    entryComponents: [ChatSessionComponent],
 })
 export class LiveSupportComponent implements OnInit, OnDestroy {
 
-    @ViewChild(InsertWindowDirective) windowAnchor: InsertWindowDirective;
+    @ViewChild(DynamicChatSessionDirective) windowAnchor: DynamicChatSessionDirective;
 
     private ngUnsubscribe: Rx.Subject<void> = new Rx.Subject<void>();
 
-    private userName: string = 'agent';
-    private clickedPending: boolean = true;
+    @Input()
+    private agentId: string;
 
-    constructor(/*private ws: WebsocketService*/) {
+    constructor(
+        private messageTransferService: MessageTransferService
+    ) {
     }
 
     ngOnInit() {
@@ -33,22 +36,15 @@ export class LiveSupportComponent implements OnInit, OnDestroy {
         this.ngUnsubscribe.complete();
     }
 
-    public createChannelDisplay(channel: Channel) {
-        console.log(channel);
-        this.windowAnchor.createChatWindow(channel['conversationId'], 'watch', this.userName, ChatDisplayComponent);
+    public trackInputMessage() {
     }
 
-    public createRequestDisplay(request: LiveRequest) {
-        console.log(request);
-        this.windowAnchor.createChatWindow(request['conv_id'], 'chat', this.userName, ChatDisplayComponent);
-    }
 
-    public changeToPending() {
-        this.clickedPending = true;
-    }
+    public createChatSession() { }
 
-    public changeToChannels() {
-        this.clickedPending = false;
+
+    public onMessageSubmitted(message: string): void {
+
     }
 
 }

@@ -54,7 +54,7 @@ namespace Web.Services.Hubs
 
         public Task SendGroupMessage(AgentGroupMessageDto agentGroupMessage)
         {
-            return Clients.Group(agentGroupMessage.Department).InvokeAsync("GroupMessage", agentGroupMessage);
+            return Clients.Group(agentGroupMessage.GroupName).InvokeAsync("GroupMessage", agentGroupMessage);
         }
 
         public Task BroadcastAgentMessage(AgentGroupMessageDto agentGroupMessage)

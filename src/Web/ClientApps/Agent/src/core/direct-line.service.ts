@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { DirectLine, Conversation, Activity, ConnectionStatus, Message } from 'botframework-directlinejs';
-
 import { ErrorMessage, DirectLineConnection } from '../model';
 import { Observable } from 'rxjs/Observable';
 
@@ -13,6 +12,9 @@ export class DirectLineService {
     private storeDirectLineMessageUrl: string = 'http://localhost:5000/api/ChatMessage/Store';
 
 
+    
+
+
     constructor(
         private http: Http
     ) {
@@ -20,7 +22,6 @@ export class DirectLineService {
 
     public getConnectionStream$(conversationId: string): Observable<Conversation> {
         return this.http.get(this.directLineConnectionUrl + conversationId, this.getRequestOptions())
-            .retry(2)
             .map((res: Response) => res.json() as Conversation)
             .catch(this.httpRequestError);
     }

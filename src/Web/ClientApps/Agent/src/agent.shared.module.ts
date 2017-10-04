@@ -1,10 +1,12 @@
 ﻿import { NgModule } from '@angular/core';
 
 import { HttpModule, JsonpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 import { SharedModule } from './shared';
-import { LiveSupportModule } from './livesupport/live-support.module';
+//import { LiveSupportModule } from './livesupport/live-support.module';
+import { HomeModule } from './home/home.module';
 import { AgentRoutingModule } from './agent-routing.module';
 
 import { AgentComponent } from './agent.component';
@@ -16,9 +18,10 @@ import { AgentComponent } from './agent.component';
     ],
     imports: [
         SharedModule,
+        HomeModule,
+        HttpClientModule,
         HttpModule,
         JsonpModule,
-        LiveSupportModule,
         AgentRoutingModule
     ]
 })

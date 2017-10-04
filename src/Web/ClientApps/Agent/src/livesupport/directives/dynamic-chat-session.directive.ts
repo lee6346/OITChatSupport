@@ -2,8 +2,8 @@
 import { ChatSessionComponent } from '../chatsession/chat-session.component';
 
 
-@Directive({ selector: '[createChatSession]' })
-export class CreateChatSessionDirective {
+@Directive({ selector: '[dynamicChatSession]' })
+export class DynamicChatSessionDirective {
 
     constructor(
         private viewContainer: ViewContainerRef,

@@ -64,10 +64,10 @@ namespace OITChatSupport.Web
             */
 
             //Add Signal R
-            services.AddSignalR();
-            services.AddSingleton(typeof(DefaultAgentHubLifetimeManager<>), typeof(DefaultAgentHubLifetimeManager<>));
-            services.AddSingleton(typeof(HubLifetimeManager<>), typeof(DefaultAgentHubLifetimeManager<>));
-            services.AddSingleton(typeof(IAgentTracker<>), typeof(InMemoryAgentTracker<>));
+            //services.AddSignalR();
+            //services.AddSingleton(typeof(DefaultAgentHubLifetimeManager<>), typeof(DefaultAgentHubLifetimeManager<>));
+            //services.AddSingleton(typeof(HubLifetimeManager<>), typeof(DefaultAgentHubLifetimeManager<>));
+            //services.AddSingleton(typeof(IAgentTracker<>), typeof(InMemoryAgentTracker<>));
             
             // Add Cross origin request handling
             services.AddCors(options =>
