@@ -8,7 +8,6 @@
     <TypeScriptToolsVersion>2.3</TypeScriptToolsVersion>
     <UserSecretsId>789bf716-f39d-45b4-ae24-09e48161fc1d</UserSecretsId>
   </PropertyGroup>
-
 <!--
   <ItemGroup>
     <ProjectReference Include="..\Domain\Domain.csproj" />
@@ -17,6 +16,7 @@
 -->
   <ItemGroup>
     <Folder Include="ClientApps\Agent\docs\" />
+    <Folder Include="ClientApps\Agent\src\core\NewFolder\" />
     <Folder Include="ClientApps\Chatbot\docs\" />
     <Folder Include="Views\Account\" />
     <Folder Include="wwwroot\agentdist\" />

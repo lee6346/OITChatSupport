@@ -3,4 +3,6 @@
  */
 export class CurrentConversation {
     public conversationId: string;
+
+    constructor() { }
 }

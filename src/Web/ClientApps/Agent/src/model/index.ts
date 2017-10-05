@@ -3,7 +3,7 @@ export { ErrorMessage } from './ErrorMessage';
 export { Agent } from './agent.model';
 export { AgentMessage } from './agent-message.model';
 export { LiveRequest } from './live-request.model';
-export { CurrentConversation } from './CurrentConversation';
+export { CurrentConversation } from './current-conversation.model';
 export { HiddenMessage } from './HiddenMessage';
 export { HiddenChatSession } from './HiddenChatSession';
 export { MinimizedChatSession } from './MinimizedChatSession';

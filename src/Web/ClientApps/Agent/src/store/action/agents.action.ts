@@ -1,7 +1,7 @@
 ﻿import { Action } from '@ngrx/store';
 import { Agent } from '../../model';
 
-export const JOIN_GROUP = '[agent] JOIN_GROUP';
+export const JOIN_GROUP = '[Agent] JOIN_GROUP';
 export const LEAVE_GROUP = '[agent] LEAVE_GROUP';
 export const JOIN_GROUP_COMPLETE = '[agent] JOIN_GROUP_COMPLETE';
 export const LEAVE_GROUP_COMPLETE = '[agent] LEAVE_GROUP_COMPLETE';
