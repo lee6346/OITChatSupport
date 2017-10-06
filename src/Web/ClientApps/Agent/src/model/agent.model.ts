@@ -5,4 +5,8 @@
 
     constructor() { }
 
+    sameAgent(agent: Agent): boolean {
+        return this.agentId === agent.agentId;
+    }
+
 }

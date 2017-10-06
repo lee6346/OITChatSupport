@@ -8,6 +8,26 @@
     <TypeScriptToolsVersion>2.3</TypeScriptToolsVersion>
     <UserSecretsId>789bf716-f39d-45b4-ae24-09e48161fc1d</UserSecretsId>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="ClientApps\Agent\src\core\NewFolder\**" />
+    <Content Remove="ClientApps\Agent\src\core\NewFolder\**" />
+    <EmbeddedResource Remove="ClientApps\Agent\src\core\NewFolder\**" />
+    <None Remove="ClientApps\Agent\src\core\NewFolder\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="ClientApps\Agent\src\home\home.facade.ts" />
+    <None Remove="ClientApps\Agent\src\shared\async-services\base.async-service.ts" />
+    <None Remove="ClientApps\Agent\src\shared\commands\base.command.payload.ts" />
+    <None Remove="ClientApps\Agent\src\shared\commands\base.command.ts" />
+    <None Remove="ClientApps\Agent\src\shared\commands\json.command.payload.ts" />
+    <None Remove="ClientApps\Agent\src\shared\commands\restful.command.ts" />
+    <None Remove="ClientApps\Agent\src\shared\facade\base.facade.ts" />
+    <None Remove="ClientApps\Agent\src\shared\gateway\agent.hub.gateway.ts" />
+    <None Remove="ClientApps\Agent\src\shared\gateway\hub.gateway.ts" />
+    <None Remove="ClientApps\Agent\src\shared\gateway\restful.gateway.ts" />
+  </ItemGroup>
 <!--
   <ItemGroup>
     <ProjectReference Include="..\Domain\Domain.csproj" />
@@ -16,7 +36,6 @@
 -->
   <ItemGroup>
     <Folder Include="ClientApps\Agent\docs\" />
-    <Folder Include="ClientApps\Agent\src\core\NewFolder\" />
     <Folder Include="ClientApps\Chatbot\docs\" />
     <Folder Include="Views\Account\" />
     <Folder Include="wwwroot\agentdist\" />
@@ -72,6 +91,20 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="1.0.0" />
     <PackageReference Include="System.Reactive" Version="3.1.1" />
     <PackageReference Include="System.Interactive" Version="3.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApps\Agent\src\home\home.facade.ts" />
+    <TypeScriptCompile Include="ClientApps\Agent\src\shared\async-services\base.async-service.ts" />
+    <TypeScriptCompile Include="ClientApps\Agent\src\shared\commands\base.command.payload.ts" />
+    <TypeScriptCompile Include="ClientApps\Agent\src\shared\commands\base.command.ts" />
+    <TypeScriptCompile Include="ClientApps\Agent\src\shared\commands\json.command.payload.ts" />
+    <TypeScriptCompile Include="ClientApps\Agent\src\shared\commands\restful.command.ts" />
+    <TypeScriptCompile Include="ClientApps\Agent\src\shared\facade\base.facade.ts" />
+    <TypeScriptCompile Include="ClientApps\Agent\src\shared\gateway\agent.hub.gateway.ts" />
+    <TypeScriptCompile Include="ClientApps\Agent\src\shared\gateway\base.gateway.ts" />
+    <TypeScriptCompile Include="ClientApps\Agent\src\shared\gateway\hub.gateway.ts" />
+    <TypeScriptCompile Include="ClientApps\Agent\src\shared\gateway\restful.gateway.ts" />
   </ItemGroup>
 
 </Project>

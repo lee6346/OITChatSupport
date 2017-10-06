@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 import { AgentMessage } from '../../model';
 
@@ -7,20 +7,20 @@ import { AgentMessage } from '../../model';
     templateUrl: './group-chat-display.component.html',
     styleUrls: ['./group-chat-display.component.css'],
 })
-export class GroupChatDisplayComponent implements OnInit, OnDestroy {
+export class GroupChatDisplayComponent {
 
-    
+    /*
     private groupChatMessages: AgentMessage[] = [];
 
     @Input()
     set newAgentMessage(agentMessage: AgentMessage) {
         this.groupChatMessages.push(agentMessage);
     }
+    */
+
+    @Input()
+    private groupMessages: AgentMessage[];
 
     constructor() { }
-
-    ngOnInit() { }
-
-    ngOnDestroy() {}
 
 }

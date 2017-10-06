@@ -1,7 +1,7 @@
 ﻿import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { Observable, Subject } from 'rxjs/Rx';
 
-import { LiveRequestService, MessageTransferService } from '../core';
+import { LiveRequestFacade } from './live-request.facade';
 import { LiveRequest, CurrentConversation } from '../model';
 
 
@@ -12,6 +12,14 @@ import { LiveRequest, CurrentConversation } from '../model';
 })
 export class LiveRequestComponent implements OnInit, OnDestroy {
 
+
+    constructor(
+        private liveRequestFacade: LiveRequestFacade
+    ) { }
+
+
+
+    /*
     @Input()
     private agentId: string;
     private ngUnsubscribe: Subject<void> = new Subject<void>();
@@ -27,8 +35,8 @@ export class LiveRequestComponent implements OnInit, OnDestroy {
         this.ngUnsubscribe.next();
         this.ngUnsubscribe.complete();
     }
-
-
+    */
+    /*
     public acceptLiveRequest(liveRequest: LiveRequest): void {
         this.liveRequestService.acceptLiveRequest$(liveRequest)
             .subscribe(
@@ -46,7 +54,7 @@ export class LiveRequestComponent implements OnInit, OnDestroy {
             } as CurrentConversation
         );
     }
-
+    */
     public onRequestSelected(liveRequest: LiveRequest) {
 
     }
