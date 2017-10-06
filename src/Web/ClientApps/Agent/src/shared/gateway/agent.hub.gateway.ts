@@ -15,13 +15,21 @@ export class AgentHubGateway extends HubGateway{
 
 
 
-    private liveRequestStream: BehaviorSubject<LiveRequest>;
+    private liveRequestStream: BehaviorSubject<LiveRequest> = new BehaviorSubject<LiveRequest>(new LiveRequest());
+    private agentStatusStream: BehaviorSubject<Agent> = new BehaviorSubject<Agent>(new Agent());
+    private agentChatStream: BehaviorSubject<AgentMessage> = new BehaviorSubject<AgentMessage>(new AgentMessage());
+
     liveRequestObservable: Observable<LiveRequest>;
+    agentStatusObservable: Observable<Agent>;
+    agentChatObservable: Observable<AgentMessage>;
 
     constructor() {
         super();
-        this.liveRequestStream = new BehaviorSubject<LiveRequest>(new LiveRequest());
-        this.liveRequestObservable = this.liveRequestStream.asObservable();
+
+        this.liveRequestObservable = this.liveRequestStream.asObservable().share();
+        this.agentStatusObservable = this.agentStatusStream.asObservable().share();
+        this.agentChatObservable = this.agentChatStream.asObservable().share();
+
         this.init();
     }
 

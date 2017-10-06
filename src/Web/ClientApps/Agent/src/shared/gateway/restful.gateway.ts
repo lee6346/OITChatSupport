@@ -1,17 +1,16 @@
-﻿
-import { HttpResponse, HttpResponseBase, HttpEventType, HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+﻿import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-
-
 
 
 export abstract class RestfulGateway {
 
-    private errorUrl: string = '';
+
+    protected baseUrl: 'http://localhost:5000/';
+    protected errorUrl: string = 'home/error';
 
     constructor(protected http: HttpClient) {}
 
-    abstract get(url: string, params: any, ): Observable<any>; 
+    abstract get(url: string, params: any): Observable<any>; 
 
     abstract post(url: string, body: any, params: any): Observable<any>; 
 
