@@ -6,11 +6,9 @@ namespace Web.Dtos
     {
         [JsonProperty("agentId")]
         public string AgentId { get; set; }
-        [JsonProperty("department")]
-        public int? Department { get; set; }
+        [JsonProperty("botHandle")]
+        public string BotHandle { get; set; }
         [JsonProperty("connected")]
         public bool? Connected { get; set; }
-        [JsonProperty("connectionId")]
-        public string ConnectionId { get; set; }
     }
 }

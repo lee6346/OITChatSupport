@@ -42,6 +42,7 @@ module.exports = {
     plugins: [
         new CleanWebpackPlugin([
             helpers.root('wwwroot/chatbotdist'),
+            helpers.root('wwwroot/agentdist')
         ])
     ]
 };

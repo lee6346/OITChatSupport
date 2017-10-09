@@ -10,7 +10,9 @@ namespace OITChatSupport.Web
     {
         public static int Main(string[] args)
         {
-
+            BuildWebHost(args).Run();
+            return 0;
+            /*
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Debug()
                 .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
@@ -22,7 +24,7 @@ namespace OITChatSupport.Web
                     mailServer: "smtp.example.com"
                 )
                 .CreateLogger();
-
+            
             try
             {
                 Log.Information("App is starting...");
@@ -38,6 +40,7 @@ namespace OITChatSupport.Web
             {
                 Log.CloseAndFlush();
             }
+            */
             
         }
 

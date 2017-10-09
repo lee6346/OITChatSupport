@@ -9,7 +9,7 @@ module.exports = merge(common, {
 
     devtool: 'inline-source-map',
     entry: {
-        'agentapp': '../Agent/boot.client.ts',
+        'agentapp': '../AgentPortal/boot.client.ts',
     },
     output: {
         path: helpers.root('wwwroot', 'agentdist'),

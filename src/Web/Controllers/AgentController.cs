@@ -4,7 +4,7 @@ using Web.Dtos;
 
 namespace Web.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     public class AgentController : BaseController
     {
         public AgentController()
@@ -32,13 +32,7 @@ namespace Web.Controllers
         }
 
         [HttpGet("[action]/{id}")]
-        public virtual async Task<IActionResult> GetAll(string id)
-        {
-            return Json(Ok());
-        }
-
-        [HttpGet("[action]")]
-        public virtual async Task<IActionResult> GetGroup()
+        public virtual async Task<IActionResult> GetGroup(string id)
         {
             return Json(Ok());
         }

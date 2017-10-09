@@ -7,7 +7,7 @@ namespace Web.Controllers
     /// <summary>
     /// 
     /// </summary>
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     public class AdminController : BaseController
     {
 

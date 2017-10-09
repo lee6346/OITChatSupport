@@ -8,7 +8,7 @@ namespace Web.Data.Mappings
         public AgentMap()
         {
             ToTable("Agent");
-            Map(d => d.Id).ToColumn("Id").IsKey();
+            Map(d => d.UtsaId).ToColumn("Id").IsKey();
             Map(d => d.RowVersion).Ignore();
         }
     }

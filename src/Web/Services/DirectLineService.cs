@@ -18,6 +18,7 @@ namespace Web.Services
         /// <returns></returns>
         public async Task<DirectLineTokenDto> RequestDirectLineTokenAsync()
         {
+
             using (var client = new HttpClient() { BaseAddress = new Uri("https://directline.botframework.com") })
             {
                 client.DefaultRequestHeaders.Accept.Clear();
