@@ -10,9 +10,6 @@ export abstract class RestfulGateway {
 
     constructor(protected http: HttpClient) {}
 
-    abstract get(url: string, params: any): Observable<any>; 
-
-    abstract post(url: string, body: any, params: any): Observable<any>; 
 
     authorize(value: string): HttpHeaders {
         return new HttpHeaders().set('Authorization', value);

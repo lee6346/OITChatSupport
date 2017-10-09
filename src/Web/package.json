@@ -26,6 +26,7 @@
     "@ngrx/store": "^4.0.3",
     "@ngrx/store-devtools": "^4.0.0",
     "@ngtools/webpack": "1.5.0",
+    "@types/lodash": "^4.14.77",
     "@types/webpack-env": "1.13.0",
     "aspnet-prerendering": "^3.0.1",
     "aspnet-webpack": "^2.0.1",

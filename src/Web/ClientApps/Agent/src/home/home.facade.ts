@@ -1,9 +1,0 @@
-﻿
-
-
-
-export class HomeFacade {
-
-    constructor() { }
-
-}

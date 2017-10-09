@@ -9,6 +9,7 @@
     <UserSecretsId>789bf716-f39d-45b4-ae24-09e48161fc1d</UserSecretsId>
   </PropertyGroup>
 
+
 <!--
   <ItemGroup>
     <ProjectReference Include="..\Domain\Domain.csproj" />
@@ -17,6 +18,10 @@
 -->
   <ItemGroup>
     <Folder Include="ClientApps\Agent\docs\" />
+    <Folder Include="ClientApps\Agent\src\groupchat\components\chat-message\" />
+    <Folder Include="ClientApps\Agent\src\groupchat\components\message-list\" />
+    <Folder Include="ClientApps\Agent\src\groupchat\models\" />
+    <Folder Include="ClientApps\Agent\src\livesupport\components\NewFolder\" />
     <Folder Include="ClientApps\Chatbot\docs\" />
     <Folder Include="Views\Account\" />
     <Folder Include="wwwroot\agentdist\" />
@@ -73,6 +78,7 @@
     <PackageReference Include="System.Reactive" Version="3.1.1" />
     <PackageReference Include="System.Interactive" Version="3.1.1" />
   </ItemGroup>
+
 
 
 </Project>

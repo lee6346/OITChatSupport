@@ -8,27 +8,45 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 
 import * as agentAction from '../action/agents.action';
-import { Agent } from '../../model';
+import { Agent } from '../../shared/model/agent.model';
+import { AgentGroupService } from '../../shared/services/agent-group.service';
 
 
 
 @Injectable()
 export class AgentsEffects {
+    constructor(
+        private actions$: Actions,
+        private agentGroupService: AgentGroupService
+    ) { }
 
     @Effect()
     joinGroup$: Observable<Action> = this.actions$.ofType(agentAction.JOIN_GROUP)
         .switchMap((action: agentAction.JoinGroupAction) => {
-            return Observable.of(new agentAction.JoinGroupActionComplete(action.agent));
+            this.agentGroupService.join(action.group);
+            return Observable.of(new agentAction.JoinGroupActionComplete(action.group));
         });
 
     @Effect()
     leaveGroup$: Observable<Action> = this.actions$.ofType(agentAction.LEAVE_GROUP)
         .switchMap((action: agentAction.LeaveGroupAction) => {
-            return Observable.of(new agentAction.LeaveGroupActionComplete(action.agent));
+            this.agentGroupService.leave(action.group);
+            return Observable.of(new agentAction.LeaveGroupActionComplete(action.group));
         });
 
+    @Effect()
+    getAgentGroup$: Observable<Action> = this.actions$.ofType(agentAction.RETRIEVE_GROUP_AGENTS)
+        .switchMap((action: agentAction.RetrieveGroupAgentsAction) =>
+            this.agentGroupService.getAgentGroup$(action.agentId)
+                .map((data: Agent[]) => {
+                    return new agentAction.RetrieveGroupAgentsCompleteAction(data);
+                })
+                .catch((error: any) => {
+                    return of({ type: 'getAllGroups$' })
+                })
+        );
 
-    constructor(
-        private actions$: Actions
-    ) { }
+
+
+    
 }

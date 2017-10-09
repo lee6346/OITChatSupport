@@ -1,5 +1,5 @@
 ﻿import { Action } from '@ngrx/store';
-import { Agent } from '../../model';
+import { Agent } from '../../shared/model/agent.model';
 import { AgentsState } from '../state/agents.state';
 import * as agentsAction from '../action/agents.action';
 
@@ -32,9 +32,14 @@ export function agentsReducer(state = initalState, action: agentsAction.Actions)
                     return state.agents;
                 }
             });
+
+        case agentsAction.RETRIEVE_GROUP_AGENTS_COMPLETE:
+            return Object.assign({}, state, {
+                agents: state.agents
+            });
+
         default:
             return state;
     }
 };
 export const getAgents = (agentsState: AgentsState) => agentsState.agents;
-export const getLoggedAgents = (agentsState: AgentsState) => agentsState.agents.filter(agent => agent.connected);

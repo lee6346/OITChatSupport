@@ -1,40 +1,18 @@
 ﻿import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-
+import { Store, Action } from '@ngrx/store';
 import { HubConnection } from '@aspnet/signalr-client';
-import { HubGateway } from './hub.gateway';
-import { Agent, AgentMessage, LiveRequest } from '../../model';
+import { Agent } from '../model/agent.model';
+import { AgentMessage } from '../model/agent-message.model';
+import { LiveRequest } from '../model/live-request.model';
 
-import { Observable, BehaviorSubject } from 'rxjs/Rx';
-
-import * as Rx from 'rxjs/Rx';
 
 @Injectable()
-export class AgentHubGateway extends HubGateway{
+export class AgentHubGateway{
 
+    private _hubConnection: HubConnection;
 
-
-
-    private liveRequestStream: BehaviorSubject<LiveRequest> = new BehaviorSubject<LiveRequest>(new LiveRequest());
-    private agentStatusStream: BehaviorSubject<Agent> = new BehaviorSubject<Agent>(new Agent());
-    private agentChatStream: BehaviorSubject<AgentMessage> = new BehaviorSubject<AgentMessage>(new AgentMessage());
-
-    liveRequestObservable: Observable<LiveRequest>;
-    agentStatusObservable: Observable<Agent>;
-    agentChatObservable: Observable<AgentMessage>;
-
-    constructor() {
-        super();
-
-        this.liveRequestObservable = this.liveRequestStream.asObservable().share();
-        this.agentStatusObservable = this.agentStatusStream.asObservable().share();
-        this.agentChatObservable = this.agentChatStream.asObservable().share();
-
+    constructor(private store: Store<any>) {
         this.init();
-    }
-
-    getHubConnection(): HubConnection {
-        return this._hubConnection;
     }
 
     send(message: any): any {
@@ -42,12 +20,12 @@ export class AgentHubGateway extends HubGateway{
         return message;
     }
 
-    joinGroup(agent: Agent): void {
-        this._hubConnection.invoke('JoinGroup', agent);
+    joinGroup(group: string): void {
+        this._hubConnection.invoke('JoinGroup', group);
     }
 
-    leaveGroup(agent: Agent): void {
-        this._hubConnection.invoke('LeaveGroup', agent);
+    leaveGroup(group: string): void {
+        this._hubConnection.invoke('LeaveGroup', group);
     }
 
     acceptLiveRequest(liveRequest: LiveRequest): LiveRequest {
@@ -55,18 +33,20 @@ export class AgentHubGateway extends HubGateway{
         return liveRequest;
     }
 
-    test(): void {
-        this._hubConnection.on('JoinGroup', (agent: Agent) => { return agent; });
-    }
 
     init() {
         this._hubConnection = new HubConnection('/agent');
 
         this._hubConnection.on('JoinGroup', (agent: Agent) => {
-            
+            this.store.dispatch()
         });
 
         this._hubConnection.on('LeaveGroup', (agent: Agent) => {
+            this.store.dispatch()
+        });
+
+        this._hubConnection.on('Send', (message: any) => {
+            this.store.dispatch()
         });
 
         this._hubConnection.start()

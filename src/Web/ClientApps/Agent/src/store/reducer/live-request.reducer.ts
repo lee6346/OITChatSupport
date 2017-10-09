@@ -1,6 +1,6 @@
 ﻿import { Action, ActionReducer } from "@ngrx/store";
 import { PendingListState } from "../state/pending-list.state";
-import { LiveRequest } from "../../model";
+import { LiveRequest } from "../../shared/model/live-request.model";
 import * as liveRequestAction from '../action/live-request.action';
 
 export const initialState: PendingListState = {
