@@ -1,7 +1,7 @@
 ﻿import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
-import { AgentMessage } from '../model/agent-message.model';
+import { AgentMessage } from '../model';
 import { GroupChatGateway } from '../gateway/group-chat.gateway';
 import { AgentHubGateway } from '../gateway/agent.hub.gateway';
 

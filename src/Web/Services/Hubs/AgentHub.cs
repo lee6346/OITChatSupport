@@ -30,6 +30,11 @@ namespace Web.Services.Hubs
             return Clients.Group(liveTransferDto.BotHandle).InvokeAsync("LiveTransfer", liveTransferDto);
         }
 
+        public Task RemoveTransferRequest(LiveTransferDto liveTransferDto)
+        {
+            return Clients.Group(liveTransferDto.BotHandle).InvokeAsync("RemoveTransferRequest", liveTransferDto);
+        }
+
         public Task Send(AgentGroupMessageDto agentGroupMessage)
         {
             return Clients.Group(agentGroupMessage.GroupName).InvokeAsync("Send", agentGroupMessage);

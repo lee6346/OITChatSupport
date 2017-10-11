@@ -11,6 +11,8 @@ namespace Web.Dtos
         public string AgentId { get; set; }
         [JsonProperty("text")]
         public string Text { get; set; }
+        [JsonProperty("groupName")]
+        public string GroupName { get; set; }
 
     }
 }

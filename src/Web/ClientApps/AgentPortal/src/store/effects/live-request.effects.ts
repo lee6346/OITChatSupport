@@ -8,7 +8,8 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 
 import * as liveRequestAction from '../action/live-request.action';
-import { LiveRequest } from '../../shared/model/live-request.model';
+import { GetConnectionThreadAction } from '../action/direct-line.action';
+import { LiveRequest } from '../../shared/model';
 import { LiveRequestService } from '../../shared/services/live-request.service';
 
 
@@ -24,8 +25,10 @@ export class LiveRequestEffects {
     acceptLiveRequest$: Observable<Action> = this.actions$.ofType(liveRequestAction.ACCEPT_LIVE_REQUEST)
         .switchMap((action: liveRequestAction.AcceptLiveRequestAction) => {
             this.liveRequestService.acceptRequest(action.liveRequest);
-            return Observable.of(new liveRequestAction.AcceptLiveRequestCompleteAction(action.liveRequest));
-        });
+            return Observable.of(new liveRequestAction.AcceptLiveRequestCompleteAction(action.liveRequest.conversationId));
+        }
+    );
+
 
     @Effect()
     getLiveRequests$: Observable<Action> = this.actions$.ofType(liveRequestAction.LOAD_PENDING_REQUESTS)
@@ -37,6 +40,8 @@ export class LiveRequestEffects {
                 .catch((err: any) => {
                     return of({ type: 'getLiveRequests$' });
                 })
-        );
+    );
+
+
 
 }

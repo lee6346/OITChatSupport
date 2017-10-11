@@ -1,20 +1,13 @@
 ﻿export class Agent {
-    agentId: string;
-    botHandle: string;
-    connected: boolean;
-    timeStamp?: string;
 
+    public agentId: string;
+    public botHandle: string;
+    public connected: boolean;
+    public timeStamp?: string;
    
     constructor() { }
 
-    connect(): void {
-        this.connected = true;
-        this.timeStamp = undefined;
+    sameAs(agent: Agent) {
+        return this.agentId === agent.agentId;
     }
-
-    disconnect(): void {
-        this.connected = false;
-        this.timeStamp = Date.now().toLocaleString();
-    }
-    
 }

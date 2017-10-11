@@ -1,12 +1,11 @@
 ﻿import { Action } from '@ngrx/store';
 import { Activity } from 'botframework-directlinejs';
 
-import { DirectLineConnection } from '../../shared/model/directline-connection.model';
+import { DirectLineConnection, DirectLineThread } from '../../shared/model';
 
-export const GET_CONNECTION_TOKEN = '[Token] GET_CONNECTION_TOKEN';
-export const GET_CONNECTION_TOKEN_COMPLETE = '[Token] GET_CONNECTION_TOKEN_COMPLETE';
+export const GET_CONNECTION_THREAD = '[Token] GET_CONNECTION_THREAD';
+export const GET_CONNECTION_THREAD_COMPLETE = '[Token] GET_CONNECTION_THREAD_COMPLETE';
 
-export const OPEN_CONNECTION_STREAM = '[Connection] OPEN_CONNECTION_STREAM';
 export const CLOSE_CONNECTION_STREAM = '[Connection] CLOSE_CONNECTION_STREAM';
 
 export const MESSAGE_ACTIVITY_RECEIVED = '[Activity] MESSAGE_ACTIVITY_RECEIVED';
@@ -18,22 +17,16 @@ export const CHANGE_DIRECT_LINE_SESSION = '[Session] CHANGE_DIRECT_LINE_SESSION'
 export const CHANGE_DIRECT_LINE_SESSION_COMPLETE = '[Session] CHANGE_DIRECT_LINE_SESSION_COMPLETE';
 
 
-export class GetConnectionTokenAction implements Action {
-    readonly type = GET_CONNECTION_TOKEN;
+export class GetConnectionThreadAction implements Action {
+    readonly type = GET_CONNECTION_THREAD;
 
     constructor(public conversationId: string) { }
 }
 
-export class GetConnectionTokenCompleteAction implements Action {
-    readonly type = GET_CONNECTION_TOKEN_COMPLETE;
+export class GetConnectionThreadCompleteAction implements Action {
+    readonly type = GET_CONNECTION_THREAD_COMPLETE;
 
-    constructor(public directLineConnection: DirectLineConnection) { }
-}
-
-export class OpenConnectionStreamAction implements Action {
-    readonly type = OPEN_CONNECTION_STREAM;
-
-    constructor(public directLineConnection: DirectLineConnection) { }
+    constructor(public directLineThread: DirectLineThread) { }
 }
 
 export class CloseConnectionStreamAction implements Action {
@@ -57,13 +50,15 @@ export class ClosedActivityReceivedAction implements Action {
 export class SendMessageActivityAction implements Action {
     readonly type = SEND_MESSAGE_ACTIVITY;
 
-    constructor(public activity: Activity) { }
+    constructor(
+        public activity: Activity,
+        public directLineThread: DirectLineThread) { }
 }
 
 export class SendMessageActivityCompleteAction implements Action {
     readonly type = SEND_MESSAGE_ACTIVITY_COMPLETE;
 
-    constructor(public activityId: string) { }
+    constructor(public activity: Activity) { }
 }
 
 
@@ -81,9 +76,8 @@ export class ChangeDirectLineSessionCompleteAction implements Action {
 
 
 export type Actions
-    = GetConnectionTokenAction
-    | GetConnectionTokenCompleteAction
-    | OpenConnectionStreamAction
+    = GetConnectionThreadAction
+    | GetConnectionThreadCompleteAction
     | CloseConnectionStreamAction
     | MessageActivityReceivedAction
     | ClosedActivityReceivedAction

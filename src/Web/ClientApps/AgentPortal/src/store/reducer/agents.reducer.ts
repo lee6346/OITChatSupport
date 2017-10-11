@@ -1,13 +1,10 @@
 ﻿import { Action } from '@ngrx/store';
-import { Agent } from '../../shared/model/agent.model';
-import { AgentsState } from '../state/agents.state';
+import { Agent } from '../../shared/model';
+import { AgentsState, initialAgentsState } from '../app-data.store';
 import * as agentsAction from '../action/agents.action';
 
-export const initalState: AgentsState = {
-    agents: []
-};
 
-export function agentsReducer(state = initalState, action: agentsAction.Actions): AgentsState {
+export function agentsReducer(state = initialAgentsState, action: agentsAction.Actions): AgentsState {
     switch (action.type) {
 
         case agentsAction.RECEIVED_GROUP_JOINED:

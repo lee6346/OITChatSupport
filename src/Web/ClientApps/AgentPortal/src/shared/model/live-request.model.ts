@@ -8,4 +8,8 @@ export class LiveRequest {
     public timeRequested?: string;
 
     constructor() { }
+
+    sameAs(liveRequest: LiveRequest) {
+        return this.conversationId === liveRequest.conversationId;
+    }
 }

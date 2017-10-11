@@ -8,7 +8,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 
 import * as agentAction from '../action/agents.action';
-import { Agent } from '../../shared/model/agent.model';
+import { Agent } from '../../shared/model';
 import { AgentGroupService } from '../../shared/services/agent-group.service';
 
 

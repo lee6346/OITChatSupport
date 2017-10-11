@@ -1,6 +1,6 @@
 ﻿import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 
-import { LiveRequest } from '../../models/live-request.model';
+import { LiveRequest } from '../../../shared/model/live-request.model';
 @Component({
     selector: 'pending-request',
     templateUrl: './pending-request.component.html',
@@ -9,5 +9,5 @@ import { LiveRequest } from '../../models/live-request.model';
 })
 export class PendingRequestComponent {
     @Input()
-    request: LiveRequest;
+    liveRequest: LiveRequest;
 }

@@ -1,33 +1,19 @@
 ﻿import { Injectable } from '@angular/core'
-import { RestfulGateway } from './restful.gateway';
-import { DirectLine, Conversation, Activity, ConnectionStatus } from 'botframework-directlinejs';
+import { DirectLine, Activity, ConnectionStatus } from 'botframework-directlinejs';
 import { Observable } from 'rxjs/Observable';
-
-import { DirectLineConnection } from '../model/directline-connection.model';
+import { HttpClient } from '@angular/common/http';
+import { DirectLineConnection } from '../model';
+import { RestfulGateway } from './restful.gateway';
 
 @Injectable()
 export class DirectLineGateway extends RestfulGateway{
 
-
-    private newThreadUrl: string = 'api/directline/getstreamurl'
+    private newThreadUrl: string = 'api/directline/getstreamurl/'
     private directLineBaseUrl: string = 'https://directline.botframework.com/';
     private directLineApiUrl: string = 'v3/directline/conversations';
 
-    getNewConnection$(conversationId: string): Observable<DirectLineConnection> {
-        return this.http.get<DirectLineConnection>(
-            this.baseUrl + this.newThreadUrl,
-            this.queryString('id', conversationId)
-        );
-    }
-
-    getDirectLineThread$(conversationId: string): Observable<Activity> {
-        return this.getNewConnection$(conversationId)
-            .mergeMap((directLineConn: DirectLineConnection) => new DirectLine({
-                token: directLineConn.token,
-                conversationId: directLineConn.conversationId,
-                webSocket: true,
-                streamUrl: directLineConn.streamUrl
-            }).activity$);
+    constructor(http: HttpClient) {
+        super(http);
     }
 
     getCachedMessages$(conversationId: string): Observable<Activity[]> {
@@ -38,18 +24,23 @@ export class DirectLineGateway extends RestfulGateway{
         );
     }
 
-
-    mergeNewThread$(conversationId: string, threadPool: Observable<Activity>): Observable<Activity> {
-        return threadPool.merge(this.getDirectLineThread$(conversationId));
+    getDirectLineSocket(directLineConnection: DirectLineConnection): DirectLine{
+        return new DirectLine({
+            conversationId: directLineConnection.conversationId,
+            token: directLineConnection.token,
+            streamUrl: directLineConnection.streamUrl
+        });
     }
 
+    getDirectLineThread$(directLineConnection: DirectLineConnection): Observable<Activity> {
+        return this.getDirectLineSocket(directLineConnection).activity$;
+    }
 
-    sendMessage(directLine: DirectLine, activity: Activity): Observable<string> {
-        return directLine.postActivity(activity);
-
+    getNewConnection$(conversationId: string): Observable<DirectLineConnection> {
+        return this.http.get<DirectLineConnection>(
+            this.baseUrl + this.newThreadUrl + conversationId
+        );
     }
     
-    getConnectionStatus$ = (directLine: DirectLine) => directLine.connectionStatus$; 
-
-
+    private getConnectionStatus$ = (directLine: DirectLine): Observable<ConnectionStatus> => directLine.connectionStatus$; 
 }

@@ -1,5 +1,5 @@
 ﻿import { Action } from '@ngrx/store';
-import { AgentMessage } from '../../shared/model/agent-message.model';
+import { AgentMessage } from '../../shared/model';
 
 export const SEND_MESSAGE = '[agentmessage] SEND_MESSAGE';
 export const SEND_MESSAGE_COMPLETE = '[agentmessage] SEND_MESSAGE_COMPLETE';

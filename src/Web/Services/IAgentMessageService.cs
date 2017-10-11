@@ -10,7 +10,7 @@ namespace Web.Services
     {
         Task MessageGroup(AgentGroupMessageDto agentGroupMessageDto);
         Task MessageAgent(string connectionId, AgentGroupMessageDto agentGroupMessageDto);
-        Task MessageGroup(LiveTransferRequestDto liveTransferDto);
+        Task MessageGroup(LiveTransferDto liveTransferDto);
         Task JoinAgentGroup(string agentGroup);
         Task LeaveAgentGroup(string agentGroup);
         Task CreateAgentGroup(string agentGroup);

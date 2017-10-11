@@ -4,7 +4,7 @@
         <div class="chat-list-header">
         </div>
         <div class="list-container">
-            <pending-list [displayList]="clickedPending" (liveRequestSelect)="createRequestDisplay($event)"></pending-list>
+            <live-request></live-request>
         </div>
     </div>
 
@@ -14,21 +14,17 @@
             <div class="window-container">
                 <div class="insert-window">
 
-                    <div insertWindow></div>
                 </div>
             </div>
             <div class="input-bar">
-                <input-bar [agentId]="myuid" [agentName]="userName"></input-bar>
             </div>
         </div>
 
         <div class="minimized-windows">
 
-            <minimized-window-container></minimized-window-container>
         </div>
     </div>
     <div class="agent-chat">
-        <agent-group-chat></agent-group-chat>
     </div>
 
 </div>

@@ -1,5 +1,4 @@
 ﻿import { Component, Input, OnInit, ChangeDetectionStrategy, ViewChild, ElementRef } from '@angular/core';
-import { AgentVm } from '../../models/agent.vm';
 
 @Component({
     selector: 'agent-list',
@@ -8,8 +7,8 @@ import { AgentVm } from '../../models/agent.vm';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AgentListComponent implements OnInit {
-    @Input()
-    agents: AgentVm[] = [];
+    //@Input()
+    //agents: AgentVm[] = [];
 
     @ViewChild('list')
     list: ElementRef;

@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Rewrite;
 using Microsoft.AspNetCore.Antiforgery;
 using Microsoft.AspNetCore.Http;
 using System.Net.WebSockets;
-using Web.Services.RealTime;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
 using Microsoft.AspNetCore.SignalR;
@@ -64,7 +63,7 @@ namespace OITChatSupport.Web
             */
 
             //Add Signal R
-            //services.AddSignalR();
+            
             //services.AddSingleton(typeof(DefaultAgentHubLifetimeManager<>), typeof(DefaultAgentHubLifetimeManager<>));
             //services.AddSingleton(typeof(HubLifetimeManager<>), typeof(DefaultAgentHubLifetimeManager<>));
             //services.AddSingleton(typeof(IAgentTracker<>), typeof(InMemoryAgentTracker<>));
@@ -94,6 +93,8 @@ namespace OITChatSupport.Web
             //Add services
             services.AddScoped<IDirectLineService, DirectLineService>();
 
+            services.AddSignalR();
+
             services.AddMvc();
         }
 
@@ -119,12 +120,12 @@ namespace OITChatSupport.Web
 
 
 
-            /*
+            
             app.UseSignalR(routes =>
             {
-                routes.MapHub<AgentHub>("Agent");
+                routes.MapHub<AgentHub>("agent");
             });
-            */
+            
             //app.UseSession();
             app.UseMvc(routes => {
                 routes.MapRoute(

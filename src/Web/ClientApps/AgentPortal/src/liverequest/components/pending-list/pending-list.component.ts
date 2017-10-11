@@ -1,5 +1,5 @@
-﻿import { Component, OnInit, Input, EventEmitter, Output, ChangeDetectionStrategy } from '@angular/core';
-import { LiveRequest } from '../../models/live-request.model';
+﻿import { Component, Input, EventEmitter, Output, ChangeDetectionStrategy, OnInit } from '@angular/core';
+import { LiveRequest } from '../../../shared/model';
 
 @Component({
     selector: 'pending-list',
@@ -7,7 +7,7 @@ import { LiveRequest } from '../../models/live-request.model';
     styleUrls: ['./pending-list.component.css'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PendingListComponent implements OnInit {
+export class PendingListComponent implements OnInit{
 
 
     @Input()
@@ -21,7 +21,7 @@ export class PendingListComponent implements OnInit {
 
     ngOnInit() { }
 
-    selectLiveRequest(liveRequest: LiveRequest) {
+    onLiveRequestClick(liveRequest: LiveRequest) {
         this.acceptRequest.emit(liveRequest);
     }
 }

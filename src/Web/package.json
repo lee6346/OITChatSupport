@@ -38,6 +38,7 @@
     "immutable": "^3.8.2",
     "isomorphic-fetch": "2.2.1",
     "jquery": "3.2.1",
+    "ngrx-store-freeze": "^0.2.0",
     "preboot": "4.5.2",
     "primeng": "^4.2.1",
     "reflect-metadata": "0.1.10",

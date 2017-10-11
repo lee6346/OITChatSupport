@@ -2,7 +2,7 @@ import {
     Directive, ViewContainerRef, ComponentRef,
     ComponentFactoryResolver, ReflectiveInjector, Type, Component
 } from '@angular/core';
-
+/*
 
 @Directive({ selector: '[insertWindow]' })
 export class InsertWindowDirective {
@@ -35,4 +35,4 @@ export class InsertWindowDirective {
     }
 
 
-}
+}*/

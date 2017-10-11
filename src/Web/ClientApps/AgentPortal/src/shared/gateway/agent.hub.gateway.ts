@@ -1,13 +1,11 @@
 ﻿import { Injectable } from '@angular/core';
-import { Store, Action } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { HubConnection } from '@aspnet/signalr-client';
-import { Agent } from '../model/agent.model';
-import { AgentMessage } from '../model/agent-message.model';
-import { LiveRequest } from '../model/live-request.model';
+import { LiveRequest, Agent, AgentMessage } from '../model';
 
 import {ReceiveMessageAction} from '../../store/action/group-chat.action';
 import {ReceivedGroupJoinedAction, ReceivedGroupLeftAction } from '../../store/action/agents.action';
-import {ReceiveAcceptRequestAction, ReceiveLiveRequestAction } from '../../store/action/live-request.action';
+import {ReceiveRemoveRequestAction, ReceiveLiveRequestAction } from '../../store/action/live-request.action';
 
 @Injectable()
 export class AgentHubGateway{
@@ -32,7 +30,7 @@ export class AgentHubGateway{
     }
 
     acceptLiveRequest(liveRequest: LiveRequest): LiveRequest {
-        this._hubConnection.invoke('LiveTransfer', liveRequest);
+        this._hubConnection.invoke('RemoveTransferRequest', liveRequest);
         return liveRequest;
     }
 
@@ -54,7 +52,11 @@ export class AgentHubGateway{
 
         this._hubConnection.on('LiveTransfer', (liveRequest: LiveRequest) => {
             this.store.dispatch(new ReceiveLiveRequestAction(liveRequest));
-        })
+        });
+
+        this._hubConnection.on('RemoveTransferRequest', (liveRequest: LiveRequest) => {
+            this.store.dispatch(new ReceiveRemoveRequestAction(liveRequest));
+        });
 
         this._hubConnection.start()
             .then(() => {

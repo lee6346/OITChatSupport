@@ -1,30 +1,28 @@
 ﻿import { Action, ActionReducer } from "@ngrx/store";
-import * as directLineState from "../state/directline.state";
-import { DirectLineConnection } from "../../shared/model/directline-connection.model";
+import {
+    DirectLineSessionsState,
+    DirectLineSessionState,
+    initialDirectLineSessionsState,
+    initialDirectLineSessionState
+} from '../app-data.store';
+
+import { DirectLineConnection } from "../../shared/model";
 import * as directLineAction from '../action/direct-line.action';
 
+export function currentSessionReducer(state = initialDirectLineSessionState, action: directLineAction.Actions): DirectLineSessionState {
+    switch (action.type) {
+        case directLineAction.CHANGE_DIRECT_LINE_SESSION_COMPLETE:
+            return state;
+        default:
+            return state;
+    }
+}
 
-
-export const initialSessionState: directLineState.DirectLineSessionState = {
-    conversationId: '',
-    activityIds: [],
-    agentId: '',
-    current: false
-};
-
-export const initialSessionsState: directLineState.DirectLineSessionsState = {
-    connections: []
-};
-
-export const initialActivitiesState: directLineState.DirectLineActivitiesState = {
-    conversationId: '',
-    activities: [],
-    unreadCount: 0
-};
-
-export function directLineSessionsReducer(
-    state = initialSessionsState,
-    action: directLineAction.Actions): directLineState.DirectLineSessionsState {
-
-    case directLineAction.
+export function directLineSessionsReducer(state = initialDirectLineSessionsState, action: directLineAction.Actions): DirectLineSessionsState {
+    switch (action.type) {
+        case directLineAction.SEND_MESSAGE_ACTIVITY_COMPLETE:
+            return state;
+        default:
+            return state;
+    }
 }

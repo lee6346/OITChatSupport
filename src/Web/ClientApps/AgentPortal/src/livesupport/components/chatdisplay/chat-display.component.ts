@@ -1,7 +1,4 @@
-﻿import { Component, OnInit, OnDestroy, EventEmitter, Injector, Input } from '@angular/core';
-import { NgClass, NgStyle } from '@angular/common';
-import * as Rx from 'rxjs/Rx';
-import { DirectLine, Conversation, Activity } from 'botframework-directlinejs';
+﻿import { Component, Input } from '@angular/core';
 
 @Component({
     selector: 'chat-display',

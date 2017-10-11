@@ -72,7 +72,17 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApps\AgentPortal\src\shared\core.module.ts" />
+    <None Remove="ClientApps\AgentPortal\src\store\action\index.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="ClientApps\AgentPortal\src\livesupport\components\chat-message\" />
     <Folder Include="ClientApps\AgentPortal\src\livesupport\model\" />
+    <Folder Include="wwwroot\agentdist\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApps\AgentPortal\src\shared\core.module.ts" />
   </ItemGroup>
 </Project>

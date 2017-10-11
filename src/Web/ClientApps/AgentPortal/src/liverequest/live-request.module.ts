@@ -1,8 +1,9 @@
 ﻿import { NgModule } from '@angular/core';
-import { SharedModule } from '../shared';
+import { SharedModule } from '../shared/shared.module';
 
 import { LiveRequestComponent } from './live-request.component';
-import { PendingListComponent } from './pendinglist/pending-list.component';
+import { PendingListComponent } from './components/pending-list/pending-list.component';
+import { PendingRequestComponent } from './components/pending-request/pending-request.component';
 
 @NgModule({
     imports: [
@@ -10,11 +11,13 @@ import { PendingListComponent } from './pendinglist/pending-list.component';
     ],
     declarations: [
         LiveRequestComponent,
-        PendingListComponent
+        PendingListComponent,
+        PendingRequestComponent
     ],
     exports: [
         LiveRequestComponent,
-        PendingListComponent
+        PendingListComponent,
+        PendingRequestComponent
     ],
 
 })

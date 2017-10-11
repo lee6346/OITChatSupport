@@ -1,43 +1,71 @@
 ﻿import {
     Agent,
     AgentMessage,
-    DirectLineConnection,
+    DirectLineThread,
     LiveRequest
 } from '../shared/model';
 
-export interface AppDataStore {
-    agents: { [key: number]: Agent };
-    agentMessages: { [key: number]: AgentMessage };
-    directLineThreads: { [key: number]: DirectLineConnection };
-    liveRequests: { [key: number]: LiveRequest };
+import { Activity } from 'botframework-directlinejs';
+
+
+export interface DirectLineSessionsState {
+
+    directLineSessions: DirectLineSessionState[];
 }
 
-export const initialAppDataStore: AppDataStore = {
-    agents: {},
-    agentMessages: {},
-    directLineThreads: {},
-    liveRequests: {}
+export const initialDirectLineSessionsState: DirectLineSessionsState = {
+    directLineSessions: []
 };
 
-export interface UserInterfaceState {
-    agentId: string;
-    currentChatSessionId: string;
-
+export interface DirectLineSessionState {
+    directLineThread: DirectLineThread;
+    activityMessages: Activity[]; 
 }
 
-export const initialUIState: UserInterfaceState = {
-    agentId: '',
-    currentChatSessionId: ''
+export const initialDirectLineSessionState: DirectLineSessionState = {
+    directLineThread: new DirectLineThread(),
+    activityMessages: []
 };
 
-export interface ApplicationState {
-    appDataStore: AppDataStore;
-    userDataState: UserInterfaceState;
+export interface LiveRequestsState {
+    liveRequests: LiveRequest[];
+}
+
+export const initialLiveRequestState: LiveRequestsState = {
+    liveRequests: []
+};
+
+export interface AgentsState {
+    agents: Agent[];
+}
+
+export const initialAgentsState: AgentsState = {
+    agents: []
+};
+
+export interface GroupChatState {
+    groupMessages: AgentMessage[];
+}
+
+export const initialGroupChatState: GroupChatState = {
+    groupMessages: []
+};
+
+export interface ApplicationState{
+    directLineSessions: DirectLineSessionsState;
+    currentSession: DirectLineSessionState;
+    liveRequests: LiveRequestsState;
+    agents: AgentsState;
+    groupChat: GroupChatState;
 }
 
 export const initialApplicationState: ApplicationState = {
-    appDataStore: initialAppDataStore,
-    userDataState: initialUIState
+    directLineSessions: initialDirectLineSessionsState,
+    currentSession: initialDirectLineSessionState,
+    liveRequests: initialLiveRequestState,
+    agents: initialAgentsState,
+    groupChat: initialGroupChatState
 };
+
 
 

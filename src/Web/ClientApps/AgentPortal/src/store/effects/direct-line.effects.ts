@@ -7,38 +7,47 @@ import { Action } from '@ngrx/store';
 import * as directLineActions from '../action/direct-line.action';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
-import { DirectLineGateway } from '../../shared/gateway/direct-line.gateway';
-import { DirectLineConnection } from '../../shared/model/directline-connection.model';
+import { DirectLineService } from '../../shared/services/direct-line.service';
+import { DirectLineConnection, DirectLineThread } from '../../shared/model';
 import { Activity, DirectLine } from 'botframework-directlinejs';
+
 @Injectable()
 export class DirectLineEffects{
 
     constructor(
         private actions$: Actions,
-        private directLineGateway: DirectLineGateway
+        private directLineService: DirectLineService
 
     ) { }
 
 
     @Effect()
-    getConnectionToken$: Observable<Action> = this.actions$.ofType(directLineActions.GET_CONNECTION_TOKEN)
-        .switchMap((action: directLineActions.GetConnectionTokenAction) =>
-            this.directLineGateway.getNewConnection$(action.conversationId)
+    getConnectionToken$: Observable<Action> = this.actions$.ofType(directLineActions.GET_CONNECTION_THREAD)
+        .switchMap((action: directLineActions.GetConnectionThreadAction) =>
+            this.directLineService.getThreadToken$(action.conversationId)
                 .map((data: DirectLineConnection) => {
-                    return new directLineActions.GetConnectionTokenCompleteAction(data);
+                    return new directLineActions
+                        .GetConnectionThreadCompleteAction(this.directLineService.createThread(data));
                 })
                 .catch((err: any) => {
                     return of({ type: 'getConnectionToken$' });
                 })
     );
 
+
+
     @Effect()
-    openConnectionStream$: Observable<Action> = this.actions$.ofType(directLineActions.GET_CONNECTION_TOKEN_COMPLETE)
-        .mergeMap((action: directLineActions.GetConnectionTokenCompleteAction) =>
-            new DirectLine({
-                conversationId: action.directLineConnection.conversationId,
-                token: action.directLineConnection.token,
-                streamUrl: action.directLineConnection.streamUrl
-            }).activity$
-        );
+    sendMessageActivity$: Observable<Action> = this.actions$.ofType(directLineActions.SEND_MESSAGE_ACTIVITY)
+        .switchMap((action: directLineActions.SendMessageActivityAction) => {
+            this.directLineService.sendMessage$(action.directLineThread.directLineSocket, action.activity);
+            return Observable.of(new directLineActions.SendMessageActivityCompleteAction(action.activity));
+        })
+        .catch((err: any) => {
+            return of({ type: 'sendMessageActivity$' });
+
+        });
+    
+
+    
+
 }

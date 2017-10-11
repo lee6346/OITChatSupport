@@ -1,5 +1,5 @@
 ﻿import { Action } from '@ngrx/store';
-import { Agent } from '../../shared/model/agent.model';
+import { Agent } from '../../shared/model';
 
 export const JOIN_GROUP = '[agent] JOIN_GROUP';
 export const LEAVE_GROUP = '[agent] LEAVE_GROUP';

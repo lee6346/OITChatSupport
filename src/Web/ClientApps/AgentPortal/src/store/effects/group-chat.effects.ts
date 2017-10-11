@@ -6,7 +6,7 @@ import { of } from 'rxjs/observable/of';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 import * as groupChatAction from '../action/group-chat.action';
-import { AgentMessage } from '../../shared/model/agent-message.model';
+import { AgentMessage } from '../../shared/model';
 import { GroupChatService } from '../../shared/services/group-chat.service';
 
 

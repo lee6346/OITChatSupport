@@ -1,7 +1,7 @@
 ﻿import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
-import { Agent } from '../model/agent.model';
+import { Agent } from '../model';
 import { AgentGroupGateway } from '../gateway/agent-group.gateway';
 import { AgentHubGateway } from '../gateway/agent.hub.gateway';
 
@@ -24,4 +24,6 @@ export class AgentGroupService {
     leave(agent: Agent): void {
         this.agentHubGateway.joinGroup(agent);
     }
+
+    
 }

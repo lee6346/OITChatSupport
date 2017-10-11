@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AgentPortalComponent } from './agent-portal.component';
 import { HomeComponent } from './home/home.component';
 
 
 export const routes: Routes = [
-    { path: 'agent/home', component: HomeComponent },
-    { path: '', redirectTo: '/agent/home', pathMatch: 'full' },
+    { path: 'agent', component: HomeComponent },
+    { path: '', redirectTo: '/agent', pathMatch: 'full' },
 
     { path: '**', component: HomeComponent }
 ];
