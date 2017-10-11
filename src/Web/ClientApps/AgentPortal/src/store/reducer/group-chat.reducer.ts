@@ -1,8 +1,14 @@
 ﻿import { Action } from '@ngrx/store';
-import { GroupChatState, initialGroupChatState } from '../app-data.store';
 import * as groupChatAction from '../action/group-chat.action';
-
 import { AgentMessage } from '../../shared/model';
+
+export interface GroupChatState {
+    groupMessages: AgentMessage[];
+}
+
+export const initialGroupChatState: GroupChatState = {
+    groupMessages: []
+};
 
 
 export function groupChatReducer(state: GroupChatState = initialGroupChatState, action: groupChatAction.Actions): GroupChatState {

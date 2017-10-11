@@ -2,7 +2,8 @@
 import { DirectLine, Activity, Message, Conversation } from 'botframework-directlinejs';
 import { NgClass } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { DirectLineService, LiveRequestService } from '../../core';
+import { LiveRequestService } from '../../core/live-request.service';
+import { DirectLineService } from '../../core/direct-line.service';
 //import { CHAT_MESSAGE_CONFIG, ChatMsgConfig } from '../../chatbot-config.module';
 
 import * as Rx from 'rxjs/Rx';
@@ -38,7 +39,7 @@ export class ChatComponent implements OnInit, OnDestroy {
     constructor(
         //@Inject(CHAT_MESSAGE_CONFIG) private chatMsgConfig: ChatMsgConfig,
         private directLineService: DirectLineService,
-        //private liveRequestService: LiveRequestService
+        private liveRequestService: LiveRequestService
     ) { }
 
     ngOnInit() {
@@ -95,7 +96,16 @@ export class ChatComponent implements OnInit, OnDestroy {
             );
     }
 
-    public makeLiveRequest() { }
+    public makeLiveRequest() {
+        this.liveRequestService.sendLiveRequest$(this.conversation.conversationId, 'student', 'AskRowdy')
+            .subscribe(
+            next => console.log('sent'),
+            error => console.log('error'),
+            () => console.log('complete')
+
+        );
+
+    }
 
     public msgAlignment(id: string) {
         if (id === this.user) {

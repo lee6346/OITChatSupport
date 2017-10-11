@@ -9,7 +9,7 @@ using Web.Services.Hubs;
 
 namespace Web.Controllers
 {
-    [Route("api/v1/[controller]")]
+    [Route("api/[controller]")]
     public class LiveSupportController: BaseController
     {
 

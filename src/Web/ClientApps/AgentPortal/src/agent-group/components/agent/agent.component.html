@@ -1,5 +1,4 @@
-﻿<div class="agent-frame" *ngIf="agent">
-    <div class="agent-icon" (click)="seeDetails()">
-        {{agent['id']}}: {{agent['connected']?'connected':'disconnected'}}
-    </div>
-</div>
+﻿
+    <span class="agent-icon">
+        {{agent['agentId']}}: {{agent['connected']?'connected':'disconnected'}}
+    </span>

@@ -8,8 +8,8 @@ import * as Rx from 'rxjs/Rx';
 @Injectable()
 export class LiveRequestService {
 
-    private oitLiveTransferUri: string = 'http://localhost:5000/api/AgentTransfer/MakeRequest';
-    private oitCancelTransferUri: string = 'http://localhost:5000/api/AgentTransfer/CancelRequest';
+    private oitLiveTransferUri: string = 'http://localhost:5000/api/LiveSupport/MakeRequest';
+    private oitCancelTransferUri: string = 'http://localhost:5000/api/LiveSupport/CancelRequest';
 
     constructor(
         //@Inject(API_CONFIG) private apiConfig: ApiConfig,
@@ -19,7 +19,7 @@ export class LiveRequestService {
     public sendLiveRequest$(conversationId: string, user: string, botHandle: string): Rx.Observable<Response> {
         return this.http.post(
             this.oitLiveTransferUri,
-            { conversationId: conversationId, user: user, action: 'request', botHandle: botHandle } as LiveRequest,
+            { conversationId: conversationId, user: user, botHandle: botHandle } as LiveRequest,
             this.getRequestOptions())
             .map(res => res.json())
             .catch(this.liveRequestError);

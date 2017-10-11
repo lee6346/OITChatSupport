@@ -1,8 +1,14 @@
 ﻿import { Action } from '@ngrx/store';
 import { Agent } from '../../shared/model';
-import { AgentsState, initialAgentsState } from '../app-data.store';
 import * as agentsAction from '../action/agents.action';
 
+export interface AgentsState {
+    agents: Agent[];
+}
+
+export const initialAgentsState: AgentsState = {
+    agents: []
+};
 
 export function agentsReducer(state = initialAgentsState, action: agentsAction.Actions): AgentsState {
     switch (action.type) {
@@ -32,7 +38,7 @@ export function agentsReducer(state = initialAgentsState, action: agentsAction.A
 
         case agentsAction.RETRIEVE_GROUP_AGENTS_COMPLETE:
             return Object.assign({}, state, {
-                agents: state.agents
+                agents: action.agents
             });
 
         default:

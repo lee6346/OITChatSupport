@@ -74,6 +74,7 @@
   <ItemGroup>
     <None Remove="ClientApps\AgentPortal\src\shared\core.module.ts" />
     <None Remove="ClientApps\AgentPortal\src\store\action\index.ts" />
+    <None Remove="ClientApps\AgentPortal\src\store\reducer\index.ts" />
   </ItemGroup>
 
   <ItemGroup>
@@ -84,5 +85,6 @@
 
   <ItemGroup>
     <TypeScriptCompile Include="ClientApps\AgentPortal\src\shared\core.module.ts" />
+    <TypeScriptCompile Include="ClientApps\AgentPortal\src\store\reducer\index.ts" />
   </ItemGroup>
 </Project>

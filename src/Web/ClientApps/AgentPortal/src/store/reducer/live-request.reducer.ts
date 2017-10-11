@@ -1,8 +1,14 @@
 ﻿import { Action, ActionReducer } from "@ngrx/store";
 import { LiveRequest } from "../../shared/model";
-import { LiveRequestsState, initialLiveRequestState } from '../app-data.store';
 import * as liveRequestAction from '../action/live-request.action';
 
+export interface LiveRequestsState {
+    liveRequests: LiveRequest[];
+}
+
+export const initialLiveRequestState: LiveRequestsState = {
+    liveRequests: []
+};
 
 export function liveRequestsReducer(state = initialLiveRequestState, action: liveRequestAction.Actions): LiveRequestsState {
 
@@ -44,3 +50,5 @@ export function liveRequestsReducer(state = initialLiveRequestState, action: liv
             return state;
     }
 }
+
+export const getLiveRequests = (state: LiveRequestsState) => state.liveRequests;

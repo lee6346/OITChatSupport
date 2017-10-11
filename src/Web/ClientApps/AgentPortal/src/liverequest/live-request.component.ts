@@ -1,7 +1,7 @@
 ﻿import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 import { Store } from '@ngrx/store';
-import { LiveRequestsState } from '../store/app-data.store';
+import { LiveRequestsState } from '../store/reducer';
 import { AcceptLiveRequestAction, LoadPendingRequestsAction } from '../store/action/live-request.action';
 import { LiveRequest } from '../shared/model';
 

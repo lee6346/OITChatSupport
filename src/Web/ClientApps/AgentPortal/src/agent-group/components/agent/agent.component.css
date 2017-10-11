@@ -1,7 +1,4 @@
-﻿.agent-frame{
-
-}
-
-.agent-icon{
-
+﻿.agent-icon {
+    position: relative;
+    display: block;
 }

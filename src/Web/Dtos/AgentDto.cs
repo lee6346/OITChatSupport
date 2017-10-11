@@ -1,4 +1,5 @@
 using Newtonsoft.Json;
+using System;
 
 namespace Web.Dtos
 {
@@ -10,5 +11,7 @@ namespace Web.Dtos
         public string BotHandle { get; set; }
         [JsonProperty("connected")]
         public bool? Connected { get; set; }
+        [JsonProperty("timeStamp")]
+        public DateTime? TimeStamp { get; set; }
     }
 }

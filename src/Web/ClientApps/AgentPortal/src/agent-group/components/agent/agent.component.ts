@@ -1,5 +1,7 @@
 ﻿import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 
+import { Agent } from '../../../shared/model';
+
 @Component({
     selector: 'agent',
     templateUrl: './agent.component.html',
@@ -7,8 +9,9 @@
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AgentComponent {
-    //@Input()
-    //agent: AgentVm;
+
+    @Input()
+    agent: Agent
 
     constructor() { }
 

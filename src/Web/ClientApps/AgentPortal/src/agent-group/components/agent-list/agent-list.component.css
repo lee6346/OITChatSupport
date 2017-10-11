@@ -1,4 +1,4 @@
-﻿.agents > li {
+﻿.agent-list > li {
     position: relative;
     height: 50px;
     display: block;
@@ -14,6 +14,6 @@
     padding-bottom: 2px;
 }
 
-    .agents > li:hover {
+    .agent-list > li:hover {
         background: white;
     }

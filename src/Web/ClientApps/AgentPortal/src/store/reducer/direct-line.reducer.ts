@@ -1,13 +1,28 @@
 ﻿import { Action, ActionReducer } from "@ngrx/store";
-import {
-    DirectLineSessionsState,
-    DirectLineSessionState,
-    initialDirectLineSessionsState,
-    initialDirectLineSessionState
-} from '../app-data.store';
-
-import { DirectLineConnection } from "../../shared/model";
+import { Activity } from 'botframework-directlinejs';
+import { DirectLineConnection, DirectLineThread } from "../../shared/model";
 import * as directLineAction from '../action/direct-line.action';
+
+export interface DirectLineSessionsState {
+
+    directLineSessions: DirectLineSessionState[];
+}
+
+export const initialDirectLineSessionsState: DirectLineSessionsState = {
+    directLineSessions: []
+};
+
+export interface DirectLineSessionState {
+    directLineThread: DirectLineThread;
+    activityMessages: Activity[];
+}
+
+export const initialDirectLineSessionState: DirectLineSessionState = {
+    directLineThread: new DirectLineThread(),
+    activityMessages: []
+};
+
+
 
 export function currentSessionReducer(state = initialDirectLineSessionState, action: directLineAction.Actions): DirectLineSessionState {
     switch (action.type) {
@@ -26,3 +41,7 @@ export function directLineSessionsReducer(state = initialDirectLineSessionsState
             return state;
     }
 }
+
+export const getDirectLineSessions = (state: DirectLineSessionsState) => state.directLineSessions;
+export const getDirectLineThread = (state: DirectLineSessionState) => state.directLineThread;
+export const getDirectLineMessages = (state: DirectLineSessionState) => state.activityMessages;

@@ -1,5 +1,8 @@
-﻿<!--<div class="agent-group-frame">
-    <agent-list [agents]="agents$ | async">
-
-    </agent-list>
-</div> -->
+﻿<div class="agents-frame">
+    <div class="agents-header">
+        <h4 class="agents-title">Agents</h4>
+    </div>
+    <div class="agents-body">
+        <agent-list [agents]="agents$ | async"></agent-list>
+    </div>
+</div>
