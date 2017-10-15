@@ -9,10 +9,7 @@ export interface GroupChatState {
 export const initialGroupChatState: GroupChatState = {
     groupMessages: []
 };
-
-
 export function groupChatReducer(state: GroupChatState = initialGroupChatState, action: groupChatAction.Actions): GroupChatState {
-
     switch (action.type) {
         case groupChatAction.RECEIVE_MESSAGE:
             return Object.assign({}, state, {

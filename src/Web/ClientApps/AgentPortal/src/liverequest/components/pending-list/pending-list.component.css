@@ -4,7 +4,6 @@ ul {
     padding: 0;
     margin: 0;
 }
-
 .pending > li {
     position: relative;
     height: 50px;
@@ -20,7 +19,6 @@ ul {
     background-color: #dddfd4;
     padding-bottom: 2px;
 }
-
-    .pending > li:hover {
-        background: white;
-    }
+.pending > li:hover {
+    background: white;
+}

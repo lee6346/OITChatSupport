@@ -1,0 +1,12 @@
+﻿.msg-count {
+    float: right;
+    height: 14px;
+    width: 18px;
+    color: #0c2340;
+    text-align: right;
+}
+.thread-id {
+    position: absolute;
+    bottom: 0;
+    border-bottom: 0.01px ridge #808080;
+}

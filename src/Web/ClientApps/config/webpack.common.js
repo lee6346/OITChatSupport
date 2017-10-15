@@ -4,9 +4,6 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var helpers = require('../helpers');
 
 module.exports = {
-/*    entry: {
-        'polyfills': helpers.root('ClientApps', 'polyfills.js'),
-    },*/
     resolve: {
         modules: [helpers.root('node_modules')],
         extensions: ['.ts', '.js']
@@ -36,7 +33,6 @@ module.exports = {
                 test: /\.(png|jpeg|jpg|gif|svg)$/,
                 loader: 'url-loader?limit=25000'
             }
-
         ]
     },
     plugins: [

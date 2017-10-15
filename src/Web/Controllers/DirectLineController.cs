@@ -11,10 +11,7 @@ namespace Web.Controllers
     [Route("api/[controller]")]
     public class DirectLineController : BaseController
     {
-
         private readonly IDirectLineService _directLineService;
-
-
         /// <summary>
         /// Injects the service that makes Http client calls to the direct line api to receive requested data
         /// </summary>
@@ -23,8 +20,6 @@ namespace Web.Controllers
         {
             _directLineService = directLineService;
         }
-
-
         /// <summary>
         /// Receive a new token and a conversation Id to chat with the bot
         /// </summary>
@@ -35,7 +30,6 @@ namespace Web.Controllers
             DirectLineTokenDto conversation = await _directLineService.RequestDirectLineTokenAsync();
             return Json(conversation);
         }
-
         /// <summary>
         /// Receive a new token and a web socket stream url to connect to an existing conversation
         /// </summary>
@@ -44,12 +38,9 @@ namespace Web.Controllers
         [HttpGet("[action]/{id}")]
         public async Task<IActionResult> GetStreamUrl(string id)
         {
-
             DirectLineConnectionDto connection = await _directLineService.RequestDirectLineSocketAsync(id);
             return Json(connection);
         }
-
-
         /// <summary>
         /// Store new connection in db
         /// </summary>
@@ -60,7 +51,6 @@ namespace Web.Controllers
         {
             return Json(Ok());
         }
-
         /// <summary>
         /// End current direct line connection and notify agents
         /// </summary>
@@ -72,7 +62,5 @@ namespace Web.Controllers
         {
             return Json(connection);
         }
-
-
     }
 }

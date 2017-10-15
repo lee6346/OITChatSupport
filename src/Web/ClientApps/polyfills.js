@@ -6,7 +6,6 @@ module.exports = () => {
         stats: { modules: false },
         resolve: { extensions: ['.js'] },
         entry: {
-
             polyfills: [
                 'core-js/es6',
                 'core-js/es7/reflect',
@@ -27,7 +26,6 @@ module.exports = () => {
             new webpack.ContextReplacementPlugin(/angular(\\|\/)core(\\|\/)@angular/, helper.root('ClientApps')), // Workaround for https://github.com/angular/angular/issues/14898
             new webpack.IgnorePlugin(/^vertx$/) // Workaround for https://github.com/stefanpenner/es6-promise/issues/100
         ]
-
     };
     return polyfillConfig;
 };

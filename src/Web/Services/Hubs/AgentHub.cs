@@ -5,20 +5,16 @@ using Microsoft.AspNetCore.SignalR;
 
 namespace Web.Services.Hubs
 {
-
     public class AgentHub: Hub
     {
         public AgentHub()
         {
         }
-
-
         public async Task JoinGroup(AgentDto agent)
         {
             await Groups.AddAsync(Context.ConnectionId, agent.BotHandle);
             await Clients.Group(agent.BotHandle).InvokeAsync("JoinGroup", agent);
         }
-
         public async Task LeaveGroup(AgentDto agent)
         {
             await Groups.RemoveAsync(Context.ConnectionId, agent.BotHandle);

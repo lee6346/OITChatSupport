@@ -5,10 +5,10 @@ import { Observable } from 'rxjs/Rx';
 import { of } from 'rxjs/observable/of';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
+
 import * as groupChatAction from '../action/group-chat.action';
 import { AgentMessage } from '../../shared/model';
 import { GroupChatService } from '../../shared/services/group-chat.service';
-
 
 @Injectable()
 export class GroupChatEffects{
@@ -23,6 +23,10 @@ export class GroupChatEffects{
         .switchMap((action: groupChatAction.SendMessageAction) => {
             this.groupChatService.sendGroupMessage(action.agentMessage);
             return Observable.of(new groupChatAction.SendMessageCompleteAction(action.agentMessage));
+        })
+        .catch((err: any) => {
+            console.log('error sending a group message');
+            return of({ type: 'sendGroupMessages$' });
         });
 
     @Effect()
@@ -33,6 +37,7 @@ export class GroupChatEffects{
                     return new groupChatAction.RetrieveCurrentMessagesCompleteAction(data);
                 })
                 .catch((err: any) => {
+                    console.log('error getting group messages for the agent');
                     return of({ type: 'getGroupMessages$' });
                 })
         );

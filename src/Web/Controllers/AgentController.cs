@@ -16,21 +16,16 @@ namespace Web.Controllers
         {
             _agentsContext = agentsContext;
         }
-
-
         [HttpPost("[action]")]
         public virtual async Task<IActionResult> Connect(AgentDto agentDto)
-        {
-            
+        {  
             return Json(Ok());
         }
-
         [HttpPost("[action]")]
         public virtual async Task<IActionResult> Disconnect(AgentDto agentDto)
         {
             return Json(Ok());
         }
-
         [HttpGet("[action]/{id}")]
         public virtual async Task<IActionResult> GetGroup(string id)
         {
@@ -42,7 +37,5 @@ namespace Web.Controllers
             };
             return Json(agents);
         }
-
-
     }
 }

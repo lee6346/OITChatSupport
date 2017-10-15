@@ -1,13 +1,8 @@
-﻿import { DirectLine } from 'botframework-directlinejs';
+﻿import { IBotConnection } from 'botframework-directlinejs';
 
-export class DirectLineThread {
+export interface DirectLineThread {
 
     conversationId: string;
-    directLineSocket: DirectLine;
+    directLineConnection: IBotConnection;
 
-    constructor(){}
-
-    sameAs(directLineThread: DirectLineThread): boolean {
-        return this.conversationId === directLineThread.conversationId;
-    }
 }

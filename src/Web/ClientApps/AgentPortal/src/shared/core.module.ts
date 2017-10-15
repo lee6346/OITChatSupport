@@ -1,7 +1,6 @@
 ﻿import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-
 import { AgentGroupGateway } from './gateway/agent-group.gateway';
 import { GroupChatGateway } from './gateway/group-chat.gateway';
 import { DirectLineGateway } from './gateway/direct-line.gateway';

@@ -1,1 +1,9 @@
-﻿
+﻿<ul>
+    <li *ngFor="let cachedMessage of cachedMessages"
+        class="msg-row">
+        <span class="bubble">
+            <span class="username">{{cachedMessage.from.id}} </span>
+            {{cachedMessage.text}}
+        </span>
+    </li>
+</ul>

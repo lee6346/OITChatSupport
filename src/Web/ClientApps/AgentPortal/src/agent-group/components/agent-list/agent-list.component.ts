@@ -11,9 +11,8 @@ export class AgentListComponent implements OnInit {
 
     @Input()
     agents: Agent[];
-
     constructor() { }
-
-    ngOnInit() { }
-
+    ngOnInit() {
+        console.log('we received the agents ' + this.agents!);
+    }
 }

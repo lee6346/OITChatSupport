@@ -1,14 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
-
 namespace Web.Controllers
 {
-
     /// <summary>
     /// Controller for serving angular applications 
     /// </summary>
     public class HomeController : BaseController
     {
-
         /// <summary>
         /// Serve angular app for user
         /// </summary>
@@ -17,7 +14,6 @@ namespace Web.Controllers
         {
             return View();
         }
-
         /// <summary>
         /// Serve angular app for agents
         /// </summary>
@@ -26,6 +22,5 @@ namespace Web.Controllers
         {
             return View();
         }
-
     }
 }

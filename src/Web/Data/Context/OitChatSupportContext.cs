@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Web.Models;
-
 namespace Web.Data.Context
 {
     public class OitChatSupportContext : DbContext

@@ -9,35 +9,24 @@ export const RETRIEVE_CURRENT_MESSAGES_COMPLETE = '[agentmessage] RETRIEVE_CURRE
 
 export class SendMessageAction implements Action{
     readonly type = SEND_MESSAGE;
-
     constructor(public agentMessage: AgentMessage) { }
 }
-
 export class SendMessageCompleteAction implements Action {
     readonly type = SEND_MESSAGE_COMPLETE;
-
     constructor(public agentMessage: AgentMessage) { }
 }
-
 export class ReceiveMessageAction implements Action {
     readonly type = RECEIVE_MESSAGE;
-
     constructor(public agentMessage: AgentMessage) { }
 }
-
 export class RetrieveCurrentMessagesAction implements Action {
     readonly type = RETRIEVE_CURRENT_MESSAGES;
-
     constructor(public agentId: string) { }
-
 }
-
 export class RetrieveCurrentMessagesCompleteAction implements Action {
     readonly type = RETRIEVE_CURRENT_MESSAGES_COMPLETE;
-
     constructor(public agentMessages: AgentMessage[]) { }
 }
-
 export type Actions
     = SendMessageAction
     | SendMessageCompleteAction

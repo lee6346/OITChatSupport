@@ -1,6 +1,5 @@
 ﻿using System.Threading.Tasks;
 using Web.Models;
-
 namespace Web.Data.Dapper
 {
     public class SampleRepo

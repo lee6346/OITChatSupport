@@ -4,9 +4,7 @@ var merge = require('webpack-merge');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var helpers = require('../helpers');
 
-
 module.exports = merge(common, {
-
     devtool: 'inline-source-map',
     entry: {
         'chatbotapp': '../Chatbot/boot.client.ts',

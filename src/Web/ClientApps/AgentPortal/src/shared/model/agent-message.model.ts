@@ -1,10 +1,5 @@
-export class AgentMessage {
-
-    public agentId: string;
-    public text: string;
-    public timestamp?: string;
-
-    constructor() { }
-
-    
+export interface AgentMessage {
+    agentId: string;
+    text: string;
+    timestamp?: string;
 }

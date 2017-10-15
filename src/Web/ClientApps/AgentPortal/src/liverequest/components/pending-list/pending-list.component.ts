@@ -9,18 +9,15 @@ import { LiveRequest } from '../../../shared/model';
 })
 export class PendingListComponent implements OnInit{
 
-
     @Input()
     liveRequests: LiveRequest[];
-
     @Output()
     acceptRequest: EventEmitter<LiveRequest> = new EventEmitter<LiveRequest>();
 
-
     constructor() { }
-
-    ngOnInit() { }
-
+    ngOnInit() {
+        console.log('the pending reuqests ' + this.liveRequests);
+    }
     onLiveRequestClick(liveRequest: LiveRequest) {
         this.acceptRequest.emit(liveRequest);
     }

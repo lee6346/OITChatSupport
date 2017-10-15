@@ -1,9 +1,6 @@
-﻿
-
-* {
+﻿* {
     box-sizing: border-box;
 }
-
 .main-content {
     margin-top: 10px;
     width: 100%;
@@ -17,7 +14,6 @@
     -moz-box-orient: horizontal;
     flex-direction: row;
 }
-
 .main-stage {
     display: -ms-flexbox;
     display: -webkit-box;
@@ -33,7 +29,6 @@
     flex: 4.5;
     padding: 15px;
 }
-
 .minimized-windows {
     position: relative;
     display: -ms-flexbox;
@@ -50,7 +45,6 @@
     flex: 1;
     margin-left: 4px;
 }
-
 .agent-chat {
     position: relative;
     display: -ms-flexbox;
@@ -66,7 +60,6 @@
     -moz-box-flex: 1.5;
     flex: 1.5;
 }
-
 .student-chat-list {
     display: -ms-flexbox;
     display: -webkit-box;
@@ -87,7 +80,6 @@
     margin-bottom: 2px;
     margin-left: 4px;
 }
-
 .chat-list-header {
     display: -ms-flexbox;
     display: -webkit-box;
@@ -103,7 +95,6 @@
     -moz-box-flex: 1;
     flex: 1;
 }
-
 .list-container {
     margin-top: 10px;
     position: relative;
@@ -112,7 +103,6 @@
     -moz-box-flex: 16;
     flex: 16;
 }
-
 .pending-list {
     margin: 0 5px 0 5px;
     -ms-flex: 1;
@@ -128,16 +118,13 @@
     cursor: pointer;
     text-decoration: none;
 }
+.pending-list:hover {
+    background: #dddfd4;
+}
 
-    .pending-list:hover {
-        background: #dddfd4;
-    }
-
-    .pending-list::after {
-        background-color: #dddfd4;
-    }
-
-
+.pending-list::after {
+    background-color: #dddfd4;
+}
 .channel-list {
     margin: 0 5px 0 5px;
     -ms-flex: 1;
@@ -153,15 +140,13 @@
     cursor: pointer;
     text-decoration: none;
 }
+.channel-list:hover {
+    background: #dddfd4;
+}
 
-    .channel-list:hover {
-        background: #dddfd4;
-    }
-
-    .channel-list:active {
-        background-color: #dddfd4;
-    }
-
+.channel-list:active {
+    background-color: #dddfd4;
+}
 .main-display {
     display: -ms-flexbox;
     display: -webkit-box;
@@ -176,7 +161,6 @@
     -moz-box-flex: 3.5;
     flex: 3.5;
 }
-
 .window-container {
     display: -ms-flexbox;
     display: -webkit-box;
@@ -190,12 +174,8 @@
     -webkit-box-flex: 5;
     -moz-box-flex: 5;
     flex: 5;
-    /*
-    border-left: 1px solid #3b3a36;
-    border-right: 1px solid #3b3a36;*/
     border-style: outset;
 }
-
 .insert-window {
     position: relative;
     display: -ms-flexbox;
@@ -211,7 +191,6 @@
     -moz-box-flex: 5;
     flex: 5;
 }
-
 .input-bar {
     display: -ms-flexbox;
     display: -webkit-box;

@@ -1,0 +1,37 @@
+﻿ul {
+    list-style-type: none;
+    height: 0vh;
+    padding: 0;
+    margin: 0;
+}
+.thread-items > li {
+    height: 50px;
+    position: relative;
+    display: block;
+    padding: 5px 5px 5px 5px;
+    margin: 1px 3px 0 3px;
+    font-size: 12px;
+    color: #3b3a36;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: left;
+    background-color: #e4e1ef;
+    margin: 0 10px 4px 10px;
+}
+.thread-items > li:hover {
+    background: white;
+}
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius: 6px;
+    background-color: #F5F5F5;
+}
+::-webkit-scrollbar {
+    width: 8px;
+    background-color: #F5F5F5;
+}
+::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #bebebe;
+}

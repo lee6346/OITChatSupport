@@ -8,11 +8,11 @@ export interface AgentsState {
 
 export const initialAgentsState: AgentsState = {
     agents: []
+    
 };
 
 export function agentsReducer(state = initialAgentsState, action: agentsAction.Actions): AgentsState {
     switch (action.type) {
-
         case agentsAction.RECEIVED_GROUP_JOINED:
             return Object.assign({}, state, {
                 agents: () => {

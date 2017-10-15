@@ -1,21 +1,15 @@
 ﻿
-/**
- * Indicate the level of severity in the error
- */
-export const enum ErrorLevel {
+export enum ErrorLevel {
     WARNING = 1,
     ERROR = 2,
     CRITICAL = 3
 }
-/**
- * Error message to send to server to log
- */
-export class ErrorMessage {
+export interface ErrorMessage {
 
-    public message: string;
-    public stackTrace: string;
-    public level: ErrorLevel;
+    message: string;
+    stackTrace: string;
+    level: ErrorLevel;
 
-    constructor() { }
+
 
 }

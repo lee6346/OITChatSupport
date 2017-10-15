@@ -1,9 +1,5 @@
 ﻿using Novell.Directory.Ldap;
-using Web.Dtos;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Web.Services.ConfigBuilder;
 
 namespace Web.Services.Authentication
@@ -46,7 +42,6 @@ namespace Web.Services.Authentication
             try
             {
                 string searchFilter = $"(sAMAccountName={authenticatedUser.UtsaId})";
-                //string searchFilter = $"(&(sAMAccountName={authenticatedUser.UtsaId})(password={authenticatedUser.Password}))";
                 _ldapConnection.Bind(null, null);
                 LdapSearchResults user = _ldapConnection.Search(_ldapConnectionOptions.SearchBase, LdapConnection.SCOPE_BASE, searchFilter, new string[] { "samaccountname" }, false);
                 if(user.Count == 0)

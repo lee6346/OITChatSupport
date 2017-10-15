@@ -1,6 +1,5 @@
 ﻿import { Component, Output, EventEmitter } from '@angular/core';
 
-
 @Component({
     selector: 'input-bar',
     templateUrl: './input-bar.component.html',
@@ -9,13 +8,10 @@
 export class InputBarComponent{
 
     @Output()
-    private messageSubmit: EventEmitter<string> = new EventEmitter<string>();
-    
+    private messageSubmit: EventEmitter<string> = new EventEmitter<string>(); 
     private defaultInput: string | null = null;
-
     constructor(
-    ) { }
-
+    ) { console.log('i currerntly have no state, so no need');}
 
     public submitMessage(message: string): void {
         this.defaultInput = '';
@@ -23,5 +19,4 @@ export class InputBarComponent{
             this.messageSubmit.emit(message);
         }
     }
-
 }

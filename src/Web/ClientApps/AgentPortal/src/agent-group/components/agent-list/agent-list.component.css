@@ -13,7 +13,6 @@
     background-color: #dddfd4;
     padding-bottom: 2px;
 }
-
-    .agent-list > li:hover {
-        background: white;
-    }
+.agent-list > li:hover {
+    background: white;
+}

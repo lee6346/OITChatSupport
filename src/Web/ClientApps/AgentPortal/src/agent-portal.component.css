@@ -4,19 +4,16 @@
     background-color: black;
     margin: 0 auto;
 }
-
 .main-component {
     width: 100%;
     min-height: 100%;
     margin: 0 auto;
 }
-
 .route-content {
     width: 100%;
     min-height: 100%;
     margin: 0 auto;
 }
-
 .std-link {
     float: left;
     text-align: center;
@@ -29,7 +26,6 @@
     font-size-adjust: inherit;
     text-decoration: none;
 }
-
 .auth-link {
     float: right;
     text-align: center;

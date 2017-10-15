@@ -1,7 +1,8 @@
 ﻿import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
-import { getAgents } from '../store/reducer';
+import { AgentsState } from '../store/reducer/agents.reducer';
+import { RetrieveGroupAgentsAction } from '../store/action/agents.action';
 import { Agent } from '../shared/model/agent.model';
 
 @Component({
@@ -12,11 +13,13 @@ import { Agent } from '../shared/model/agent.model';
 export class AgentGroupComponent implements OnInit {
 
     agents$: Observable<Agent[]>;
-    constructor(
-        private store: Store<any>
-    ) {
-      
-    }
+    constructor(    
+        private store: Store<AgentsState>
+    ) { console.log('hooking up the agent logins'); }
 
-    ngOnInit() { }
+    ngOnInit() {
+        this.agents$ = this.store.select(state => state.agents);
+        console.log('retrieving agents');
+        this.store.dispatch(new RetrieveGroupAgentsAction('jvr632'));
+    }
 }

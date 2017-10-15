@@ -14,10 +14,8 @@ export class HomeComponent implements OnInit{
     private group: string = 'AskRowdy';
     constructor(
         private agentGroupService: AgentGroupService
-    ) {
-
+    ) {}
+    ngOnInit() {
+        console.log('logged in as jvr632');
     }
-
-    ngOnInit() { }
-
 }
