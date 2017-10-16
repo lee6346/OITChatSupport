@@ -1,5 +1,6 @@
 ﻿using Novell.Directory.Ldap;
 using System;
+using Web.Dtos;
 using Web.Services.ConfigBuilder;
 
 namespace Web.Services.Authentication
@@ -27,7 +28,7 @@ namespace Web.Services.Authentication
             _isDisposed = true;
         }
 
-        public bool AuthenticateUser(AuthenticatedUser authenticatedUser)
+        public bool AuthenticateUser(AccountDto accountDto)
         {
             if (_isDisposed)
             {
@@ -41,7 +42,7 @@ namespace Web.Services.Authentication
             _ldapConnection.Connect(_ldapConnectionOptions.Hostname, _ldapConnectionOptions.Port);
             try
             {
-                string searchFilter = $"(sAMAccountName={authenticatedUser.UtsaId})";
+                string searchFilter = $"(sAMAccountName={accountDto.UtsaId})";
                 _ldapConnection.Bind(null, null);
                 LdapSearchResults user = _ldapConnection.Search(_ldapConnectionOptions.SearchBase, LdapConnection.SCOPE_BASE, searchFilter, new string[] { "samaccountname" }, false);
                 if(user.Count == 0)

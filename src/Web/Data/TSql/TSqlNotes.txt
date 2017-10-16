@@ -1,0 +1,68 @@
+﻿nvarchar vs varchar
+	- nvarchar is Unicode to support multi-lingual, varchar is ASCII restricted to 8-bit codepages
+	- use nvarchar for compatibility, since all modern OS now use Unicode
+
+Big int => long, int => int, small int => short, tiny int => byte[]
+	- unless data can exceed ~ 2,100,000 entries, use int, not Big int
+
+nchar vs nvarchar (both map to string | char[])
+	- nchar(n): fixed length => nchar(10) can only go up to 10 characters in length, n max = 4000, storage size = 2 * n
+	- nvarchar(n|max): variable length => can be from 1 to 4000, or use 'max' to specify as 2^31-1 bytes (2 GB!!)
+	- use nchar(n) for data you know will be pretty consistent in size (fixed student IDs, etc)
+	- use nvarchar(n) for data you know can vary (chat messages)
+
+bit => boolean
+	- 
+
+rowversion => byte[]
+
+
+smallmoney, money, numeric, decimal => decimal
+real => float
+float => double
+
+uniqueidentifier => Guid()
+
+date, smalldatetime, datetime, datetime2 => DateTime()
+
+sql_variant => object
+
+varbinary, binary, binary(1) => byte[]
+varbinary(1) => byte
+
+time => TimeSpan()
+
+datetimeoffset => DateTimeOffset
+
+
+
+Identifiers and indices:
+	IDENTITY(n, m): makes the column an identity that starts at number n and increments by m for each new entry
+		- EX: [Id] INT IDENTITY(1, 1): start at 1, increment by one
+		- NOTE: IDENTITY doesn't guarantee uniqueness, this must be be enforced by explicitly calling PRIMARY KEY or  UNIQUE
+
+Constraints:
+	Used to specify identifiers, uniqueness, indices, clustering, primary|alternate keys, PK to FK mappings
+	Ex: 
+		CONSTRAINT [AK_DEPARTMENT] UNIQUE (DepartmentId)
+		CONSTRAINT [PK_DEPARTMENT] PRIMARY KEY CLUSTERED ([Id] ASC) 
+	Primary Keys:
+		- automatically UNIQUE enforced
+		- can only have one PK per table
+		- PK composites cannot exceed 16 columns or total length of 900 bytes
+		- by default uses CLUSTERED index
+		- must be NOT NULL
+		- updating primary keys require any relations to existing to be first deleted
+
+	Foreign Keys:
+		- At max, can reference 253 other tables/columns as foreign keys
+		- unlike PK, FK doesn't auto-create a corresponding index
+		- must manually create indices that map to other related tables for join  queries
+		- maintains referential integrity (deleting the PK table entry cannot occur unless all the FK table entries mapped to it are first deleted), will throw errros
+		- cannot map to tables that are transient/temporary
+
+		- can use PK or an alternate key defined with UNIQUE for mappings
+
+	Clusterings:
+		- Cluster constraint can only be placed on PK or columns with UNIQUE constraint
+		- PK by default is clustered, UNIQUE AK is non-clustered

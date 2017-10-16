@@ -5,7 +5,8 @@ namespace Web.Models.Common
     public abstract class Entity
     {
 
-        public virtual long Id { get; protected set; }
+        public virtual int Id { get; protected set; }
+        public byte[] RowVersion { get; protected set; }
 
         public override bool Equals(object obj)
         {

@@ -4,93 +4,142 @@ using System.Threading.Tasks;
 using Web.Models;
 using Microsoft.EntityFrameworkCore;
 using Web.Data.Context;
+using Web.Dtos;
 
 namespace Web.Repositories
 {
     public class AgentRepository: IAgentRepository
     {
         private readonly OitChatSupportContext _context;
+
         public AgentRepository(OitChatSupportContext context)
         {
             _context = context;
         }
 
-        public async Task<Agent> GetByIdAsync(string utsaId)
+        public async Task<AgentDto> GetByIdAsync(string utsaId)
         {
-            return await _context.Agents.FirstOrDefaultAsync(a => a.UtsaId == utsaId);
+            return await _context
+                .Agents
+                .Where(a => a.UtsaId == utsaId)
+                .Select(agent => new AgentDto
+                {
+                    AgentId = agent.UtsaId,
+                    Connected = agent.Connected,
+                    UtsaDepartment = agent.UtsaDepartment
+                })
+                .FirstOrDefaultAsync();
         }
 
-        public async Task AddAsync(Agent agent)
+        public async Task AddAsync(AgentDto agent)
         {
+            var newAgent = new Agent
+            {
+                UtsaId = agent.AgentId,
+                Connected = false,
+                UtsaDepartment = agent.UtsaDepartment
+            };
+
             try
             {
-                _context.Agents.Add(agent);
+                _context.Agents.Add(newAgent);
                 await _context.SaveChangesAsync();
             }
-            catch(DbUpdateException e)
+            catch(DbUpdateException addException)
             {
-                throw e;
+                throw addException;
             }
         }
 
-        public async Task UpdateAsync(Agent agent)
+        public async Task UpdateAsync(AgentDto agent)
         {
-            var ag = await _context.Agents.FirstOrDefaultAsync(a => a.UtsaId == agent.UtsaId);
-            if(ag != null)
+            var selectedAgent = await _context
+                .Agents
+                .FirstOrDefaultAsync(ag => ag.UtsaId == ag.UtsaId);
+
+            if(selectedAgent != null)
             {
-                ag.UtsaDepartment = agent.UtsaDepartment;
-                ag.Connected = agent.Connected;
+                selectedAgent.UtsaId = agent.AgentId;
+                selectedAgent.UtsaDepartment = agent.UtsaDepartment;
+                if (!selectedAgent.Connected)
+                    selectedAgent.Connected = true;
+                else
+                    selectedAgent.Connected = false;
+
                 try
                 {
-                    _context.Agents.Update(ag);
+                    _context.Agents.Update(selectedAgent);
                     await _context.SaveChangesAsync();
                 }
-                catch(DbUpdateException e)
+                catch(DbUpdateConcurrencyException concurrencyException)
                 {
-                    throw e;
+                    throw concurrencyException;
+                }
+                catch(DbUpdateException updateException)
+                {
+                    throw updateException;
                 }
             }
         }
 
-        public async Task RemoveAsync(Agent agent)
+        public async Task RemoveAsync(AgentDto agent)
         {
-            var ag = await _context.Agents.FirstOrDefaultAsync(a => a.UtsaId == agent.UtsaId);
-            if(ag != null)
+            var selectedAgent = await _context
+                .Agents
+                .FirstOrDefaultAsync(ag => ag.UtsaId == agent.AgentId);
+
+            if(selectedAgent != null)
             {
                 try
                 {
-                    _context.Agents.Remove(ag);
+                    _context.Agents.Remove(selectedAgent);
                     await _context.SaveChangesAsync();
                 }
-                catch(DbUpdateException e)
+                catch(DbUpdateException removeException)
                 {
-                    throw e;
+                    throw removeException;
                 }
             }
         }
-        public async Task<IList<Agent>> GetAllAsync()
-        {
-            return await GetAllAsync(false);
-        }
-        public async Task<IList<Agent>> GetAllAsync(bool connected)
+
+        public async Task<IList<AgentDto>> GetByDepartmentAsync(string utsaDepartment, bool connected)
         {
             if (connected)
             {
-                return await _context.Agents.Where(a => a.Connected).ToListAsync();
+                return await _context
+                    .Agents
+                    .Where(a => a.UtsaDepartment == utsaDepartment && a.Connected)
+                    .Select(agent => new AgentDto
+                    {
+                        AgentId = agent.UtsaId,
+                        Connected = true,
+                        UtsaDepartment = agent.UtsaDepartment
+                    })
+                    .ToListAsync();
             }
-            return await _context.Agents.ToListAsync();
+
+            return await _context
+                .Agents
+                .Where(a => a.UtsaDepartment == utsaDepartment)
+                .Select(agent => new AgentDto
+                {
+                    AgentId = agent.UtsaId,
+                    Connected = agent.Connected,
+                    UtsaDepartment = agent.UtsaDepartment
+                })
+                .ToListAsync();
         }
-        public async Task<IList<Agent>> GetByDepartmentAsync(string utsaDepartment)
+
+        public async Task<bool> AnyConnected(string utsaDepartment)
         {
-            return await GetByDepartmentAsync(utsaDepartment, false);
-        }
-        public async Task<IList<Agent>> GetByDepartmentAsync(string utsaDepartment, bool connected)
-        {
-            if (connected)
-            {
-                return await _context.Agents.Where(a => a.UtsaDepartment == utsaDepartment && a.Connected).ToListAsync();
-            }
-            return await _context.Agents.Where(a => a.UtsaDepartment == utsaDepartment).ToListAsync();
+            var count = await _context
+                .Agents
+                .Where(a => a.UtsaDepartment == utsaDepartment && a.Connected)
+                .CountAsync();
+
+            if (count == 0)
+                return false;
+            return true;
         }
     }
 }

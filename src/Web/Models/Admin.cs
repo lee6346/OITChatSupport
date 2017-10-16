@@ -5,12 +5,12 @@ namespace Web.Models
 {
     public class Admin : Faculty
     {
-
+        
         public bool Connected { get; set; }
 
         public override string ToString()
         {
-            return string.Format("Admin: {0}, Connection status: {1}", UtsaId, Connected);
+            return string.Format("Admin: {0}", Name);
         }
     }
 }

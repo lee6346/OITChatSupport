@@ -24,10 +24,10 @@ namespace Web.Controllers
         /// Receive a new token and a conversation Id to chat with the bot
         /// </summary>
         /// <returns>conversation id, new token</returns>
-        [HttpGet("[action]")]
-        public async Task<IActionResult> GetToken()
+        [HttpGet("[action]/{id}")]
+        public async Task<IActionResult> GetToken(string id)
         {
-            DirectLineTokenDto conversation = await _directLineService.RequestDirectLineTokenAsync();
+            DirectLineThreadDto conversation = await _directLineService.CreateThreadAsync();
             return Json(conversation);
         }
         /// <summary>
@@ -38,29 +38,9 @@ namespace Web.Controllers
         [HttpGet("[action]/{id}")]
         public async Task<IActionResult> GetStreamUrl(string id)
         {
-            DirectLineConnectionDto connection = await _directLineService.RequestDirectLineSocketAsync(id);
+            DirectLineConnectionDto connection = await _directLineService.GetThreadConnectionAsync(id);
             return Json(connection);
         }
-        /// <summary>
-        /// Store new connection in db
-        /// </summary>
-        /// <param name="agentDto">Object: conversation id, user, time</param>
-        /// <returns>Ok, throw error on failure</returns>
-        [HttpPost("[action]")]
-        public async Task<IActionResult> StartConnection([FromBody] DirectLineThreadDto connection)
-        {
-            return Json(Ok());
-        }
-        /// <summary>
-        /// End current direct line connection and notify agents
-        /// </summary>
-        /// <param name="connection"></param>
-        /// <returns></returns>
-        [HttpPost("[action]")]
-        [IgnoreAntiforgeryToken]
-        public async Task<IActionResult> EndConnection([FromBody] DirectLineThreadDto connection)
-        {
-            return Json(connection);
-        }
+
     }
 }

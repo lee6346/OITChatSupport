@@ -1,18 +1,19 @@
 using Newtonsoft.Json;
+using System;
 
 namespace Web.Dtos
 {
-    /// <summary>
-    /// An Inbound Agent group message to store in the DB
-    /// </summary>
+
     public class AgentGroupMessageDto
     {
-        [JsonProperty("agentId")]
+        [JsonProperty("sender")]
         public string AgentId { get; set; }
         [JsonProperty("text")]
         public string Text { get; set; }
-        [JsonProperty("groupName")]
-        public string GroupName { get; set; }
+        [JsonProperty("group")]
+        public string Group { get; set; }
+        [JsonProperty("timeStamp")]
+        public DateTime? TimeStamp { get; set; }
 
     }
 }

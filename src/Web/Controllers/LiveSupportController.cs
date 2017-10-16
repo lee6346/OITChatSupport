@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Web.Dtos;
+using Web.Services;
 using Web.Services.Hubs;
 
 namespace Web.Controllers
@@ -11,13 +12,16 @@ namespace Web.Controllers
     [Route("api/[controller]")]
     public class LiveSupportController: BaseController
     {
-        private readonly IHubContext<AgentHub> _agentsHubContext;
-        public LiveSupportController(IHubContext<AgentHub> agentsHubContext) {
-            _agentsHubContext = agentsHubContext;
+        private readonly ILiveTransferService _liveTransferService;
+        public LiveSupportController(ILiveTransferService liveTransferService) {
+            _liveTransferService = liveTransferService;
         }
         [HttpGet("[action]/{id}")]
         public async Task<IActionResult> GetRequests(string id)
         {
+            var requests = await _liveTransferService.GetPendingRequestsAsync(agent);
+            return Json(requests);
+            /*
             List<LiveTransferDto> transfers = new List<LiveTransferDto>
             {
                 new LiveTransferDto{ConversationId = "abc123", User = "student", BotHandle = "AskRowdy", TimeRequested = DateTime.Now},
@@ -25,24 +29,23 @@ namespace Web.Controllers
                 new LiveTransferDto{ConversationId = "tky123", User = "student", BotHandle = "AskRowdy", TimeRequested = DateTime.Now},
             };
             return Json(transfers);
+            */
         }
         [HttpPost("[action]")]
-        public async Task<IActionResult> MakeRequest(LiveTransferDto liveTransfer)
+        public async Task<IActionResult> MakeRequest([FromBody] LiveTransferDto liveTransfer)
         {
-            await _agentsHubContext.Clients.Group(liveTransfer.BotHandle).InvokeAsync("LiveTransfer", liveTransfer);
+            await _liveTransferService.RequestLiveAgentAsync(liveTransfer);
             return Json(Ok());
+            //await _agentsHubContext.Clients.Group(liveTransfer.BotHandle).InvokeAsync("LiveTransfer", liveTransfer);
+
         }
         [HttpPost("[action]")]
-        public async Task<IActionResult> AcceptRequest(LiveTransferDto liveTransfer)
+        public async Task<IActionResult> AcceptRequest([FromBody] SupportTransferDto support)
         {
-            await _agentsHubContext.Clients.Group(liveTransfer.BotHandle).InvokeAsync("RemoveTransferRequest", liveTransfer);
+            await _liveTransferService.AcceptPendingRequestAsync(support);
+            //await _agentsHubContext.Clients.Group(liveTransfer.BotHandle).InvokeAsync("RemoveTransferRequest", liveTransfer);
             return Json(Ok());
         }
-        [HttpPost("[action]")]
-        public async Task<IActionResult> CancelRequest(LiveTransferDto liveTransfer)
-        {
-            await _agentsHubContext.Clients.Group(liveTransfer.BotHandle).InvokeAsync("RemoveTransferRequest", liveTransfer);
-            return Json(Ok());
-        }
+
     }
 }

@@ -16,7 +16,7 @@ namespace Web.Services
         /// Makes Api call to Direct Line Api to receive a new token and conversation id
         /// </summary>
         /// <returns></returns>
-        public async Task<DirectLineTokenDto> RequestDirectLineTokenAsync()
+        public async Task<DirectLineThreadDto> CreateThreadAsync()
         {
 
             using (var client = new HttpClient() { BaseAddress = new Uri("https://directline.botframework.com") })
@@ -34,7 +34,7 @@ namespace Web.Services
                 else
                 {
                     var msg = await res.Content.ReadAsStringAsync();
-                    return JsonConvert.DeserializeObject<DirectLineTokenDto>(msg);
+                    return JsonConvert.DeserializeObject<DirectLineThreadDto>(msg);
                 }
             }
         }
@@ -44,7 +44,7 @@ namespace Web.Services
         /// </summary>
         /// <param name="conversationId"></param>
         /// <returns></returns>
-        public async Task<DirectLineConnectionDto> RequestDirectLineSocketAsync(string conversationId)
+        public async Task<DirectLineConnectionDto> GetThreadConnectionAsync(string conversationId)
         {
 
             using (var client = new HttpClient() { BaseAddress = new Uri("https://directline.botframework.com") })

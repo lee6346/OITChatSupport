@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Options;
 using Novell.Directory.Ldap;
+using Web.Dtos;
 using Web.Services.ConfigBuilder;
 
 namespace Web.Services.Authentication
@@ -16,7 +17,7 @@ namespace Web.Services.Authentication
             _ldapConnection = new LdapConnection();
         }
         
-        public bool AuthenticateUser(AuthenticatedUser authenticatedUser)
+        public bool AuthenticateUser(AccountDto accountDto)
         {
             return true;
 

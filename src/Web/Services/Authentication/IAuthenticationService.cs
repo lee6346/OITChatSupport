@@ -1,7 +1,9 @@
-﻿namespace Web.Services.Authentication
+﻿using Web.Dtos;
+
+namespace Web.Services.Authentication
 {
     public interface IAuthenticationService
     {
-        bool AuthenticateUser(AuthenticatedUser authenticatedUser);
+        bool AuthenticateUser(AccountDto accountDto);
     }
 }

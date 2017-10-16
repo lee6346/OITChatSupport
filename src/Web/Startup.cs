@@ -9,6 +9,7 @@ using Web.Services.Hubs;
 using Web.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Web.Repositories;
+using AutoMapper;
 
 namespace OITChatSupport.Web
 {
@@ -18,7 +19,9 @@ namespace OITChatSupport.Web
         {
             Configuration = configuration;
         }
+
         public IConfiguration Configuration { get; }
+
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddOptions();
@@ -26,7 +29,11 @@ namespace OITChatSupport.Web
             services.Configure<DirectLineApi>(options => Configuration.Bind(options));
             services.Configure<DataConnectionOptions>(options => Configuration.Bind(options));
 
-            services.AddDbContext<OitChatSupportContext>(c => c.UseSqlServer(Configuration.Get<DataConnectionOptions>().LocalDbConnectionString));
+            services.AddDbContext<OitChatSupportContext>(
+                c => c.UseSqlServer(
+                    Configuration.Get<DataConnectionOptions>().LocalDbConnectionString)
+                );
+
             services.AddCors(options =>
             {
                 options.AddPolicy("AllowAllOrigins", builder =>
@@ -37,17 +44,27 @@ namespace OITChatSupport.Web
                         .AllowAnyMethod();
                 });
             });
-            services.AddScoped<IAdminRepository, AdminRepository>();
+
+            services.AddScoped<ILiveRequestRepository, LiveRequestRepository>();
             services.AddScoped<IAgentRepository, AgentRepository>();
-            services.AddScoped<IAgentGroupMessageRepository, AgentGroupMessageRepository>();
+            services.AddScoped<IGroupMessageRepository, GroupMessageRepository>();
             services.AddScoped<IDirectLineMessageRepository, DirectLineMessageRepository>();
-            services.AddScoped<IDirectLineSessionRepository, DirectLineSessionRepository>();
+            services.AddScoped<IDirectLineThreadRepository, DirectLineThreadRepository>();
             services.AddScoped<IEventLogRepository, EventLogRepository>();
+            services.AddScoped<IChatBotRepository, ChatBotRespository>();
+            services.AddScoped<IDepartmentRepository, DepartmentRepository>();
 
             services.AddScoped<IDirectLineService, DirectLineService>();
+            services.AddScoped<ILiveTransferService, LiveTransferService>();
+
             services.AddSignalR();
+
+            services.AddSingleton<IAgentHubTracker, AgentHubTracker>();
+
             services.AddMvc();
+
         }
+
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, IAntiforgery antiforgery)
         {
             if (env.IsDevelopment())
@@ -60,8 +77,10 @@ namespace OITChatSupport.Web
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+
             app.UseCors("AllowAllOrigins");
             app.UseStaticFiles();
+
             app.UseSignalR(routes =>
             {
                 routes.MapHub<AgentHub>("agent");
