@@ -5,7 +5,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Web.Services.Errors;
-
+using Microsoft.Bot.Connector.DirectLine;
 namespace Web.Services
 {
     public class DirectLineService : IDirectLineService
@@ -18,7 +18,6 @@ namespace Web.Services
         /// <returns></returns>
         public async Task<DirectLineThreadDto> CreateThreadAsync()
         {
-
             using (var client = new HttpClient() { BaseAddress = new Uri("https://directline.botframework.com") })
             {
                 client.DefaultRequestHeaders.Accept.Clear();

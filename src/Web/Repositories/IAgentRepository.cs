@@ -7,11 +7,10 @@ namespace Web.Repositories
     public interface IAgentRepository
     {
 
-        Task<IList<AgentDto>> GetByDepartmentAsync(string utsaDepartment, bool connected);
+        Task<IList<AgentDto>> GetByDepartmentAsync(string group, bool connected);
         Task<AgentDto> GetByIdAsync(string utsaId);
         Task AddAsync(AgentDto agent);
         Task UpdateAsync(AgentDto agent);
-        Task RemoveAsync(AgentDto agent);
 
     }
 }

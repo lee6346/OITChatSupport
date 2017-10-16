@@ -1,5 +1,4 @@
-﻿using System;
-
+﻿
 namespace Web.Models.Common
 {
     public abstract class Entity

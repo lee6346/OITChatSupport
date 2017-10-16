@@ -31,8 +31,8 @@ namespace Web.Services.Hubs
             var success = _agentTracker.TryAdd(connectionId, agent);
             if (success)
             {
-                await _context.Groups.AddAsync(connectionId, agent.UtsaDepartment);
-                await _context.Clients.Group(agent.UtsaDepartment).InvokeAsync("JoinGroup", agent);
+                await _context.Groups.AddAsync(connectionId, agent.BotHandle);
+                await _context.Clients.Group(agent.BotHandle).InvokeAsync("JoinGroup", agent);
             }
             return success;
         }
@@ -42,27 +42,29 @@ namespace Web.Services.Hubs
             var success = _agentTracker.TryRemove(connectionId, out AgentDto agent);
             if (success)
             {
-                await _context.Groups.RemoveAsync(connectionId, agent.UtsaDepartment);
-                await _context.Clients.Group(agent.UtsaDepartment).InvokeAsync("LeaveGroup", agent);
+                await _context.Groups.RemoveAsync(connectionId, agent.BotHandle);
+                await _context.Clients.Group(agent.BotHandle).InvokeAsync("LeaveGroup", agent);
             }
             return success;
 
         }
 
-        public async Task InvokeLiveSupport(string group, SupportTransferDto support)
+        public async Task<bool> RemoveAgent(AgentDto agent)
         {
-            await _context.Clients.Group(group).InvokeAsync("RemoveTransferRequest", support);
+            var connection = _agentTracker.FirstOrDefault(a => a.Value.AgentId == agent.AgentId).Key;
+            return await RemoveAgent(connection);
+
+        }
+
+        public async Task InvokeLiveSupport(LiveTransferDto liveSupport)
+        {
+            await _context.Clients.Group(liveSupport.BotHandle).InvokeAsync("RemoveTransferRequest", liveSupport);
             
         }
 
-        public async Task InvokeLiveRequest(string group, LiveTransferDto request)
+        public async Task InvokeLiveRequest(LiveTransferDto request)
         {
-            await _context.Clients.Group(group).InvokeAsync("LiveTransfer", request);
-        }
-
-        public async Task InvokeGroupMessage(string group, AgentGroupMessageDto groupMessage)
-        {
-            await _context.Clients.Group(group).InvokeAsync("Send", groupMessage);
+            await _context.Clients.Group(request.BotHandle).InvokeAsync("LiveTransfer", request);
         }
 
     }

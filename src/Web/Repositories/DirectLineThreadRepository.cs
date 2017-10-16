@@ -5,6 +5,8 @@ using Web.Data.Context;
 using Web.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using Web.Dtos;
+using Microsoft.Bot.Connector.DirectLine;
 
 namespace Web.Repositories
 {
@@ -17,18 +19,31 @@ namespace Web.Repositories
             _context = context;
         }
 
-        public async Task<IList<DirectLineThread>> GetByIdAsync(string conversationId)
+        public async Task<DirectLineSessionDto> GetByIdAsync(string conversationId)
         {
             return await _context.DirectLineThreads
-                .Where(thread => thread.ConversationId == conversationId)
-                .ToListAsync();
+                .Select(thread => new DirectLineSessionDto
+                {
+                    BotHandle = thread.BotHandle,
+                    ConversationId = thread.ConversationId,
+                    TimeCreated = thread.TimeCreated
+                })
+                .FirstOrDefaultAsync(thread => thread.ConversationId == conversationId);
+
         }
 
-        public async Task AddAsync(DirectLineThread directLineThread)
+        public async Task AddAsync(Conversation conversation, string botHandle)
         {
+            var newThread = new DirectLineThread
+            {
+                ConversationId = conversation.ConversationId,
+                TimeCreated = DateTime.UtcNow,
+                BotHandle = botHandle
+
+            };
             try
             {
-                _context.DirectLineThreads.Add(directLineThread);
+                _context.DirectLineThreads.Add(newThread);
                 await _context.SaveChangesAsync();
             }
             catch(DbUpdateException addException)
@@ -37,11 +52,17 @@ namespace Web.Repositories
             }
         }
 
-        public async Task<IList<DirectLineThread>> GetActive()
+        public async Task<IList<DirectLineSessionDto>> GetActive()
         {
             return await _context
                 .DirectLineThreads
                 .Where(thread => thread.TimeCreated == DateTime.Now.Date)
+                .Select(thread => new DirectLineSessionDto
+                {
+                    ConversationId = thread.ConversationId,
+                    BotHandle = thread.BotHandle,
+                    TimeCreated = thread.TimeCreated
+                })
                 .ToListAsync();
         }
     }

@@ -26,7 +26,7 @@ namespace Web.Repositories
                 {
                     AgentId = agent.UtsaId,
                     Connected = agent.Connected,
-                    UtsaDepartment = agent.UtsaDepartment
+                    BotHandle = agent.BotHandle
                 })
                 .FirstOrDefaultAsync();
         }
@@ -37,7 +37,7 @@ namespace Web.Repositories
             {
                 UtsaId = agent.AgentId,
                 Connected = false,
-                UtsaDepartment = agent.UtsaDepartment
+                BotHandle = agent.BotHandle
             };
 
             try
@@ -60,11 +60,7 @@ namespace Web.Repositories
             if(selectedAgent != null)
             {
                 selectedAgent.UtsaId = agent.AgentId;
-                selectedAgent.UtsaDepartment = agent.UtsaDepartment;
-                if (!selectedAgent.Connected)
-                    selectedAgent.Connected = true;
-                else
-                    selectedAgent.Connected = false;
+                selectedAgent.Connected = agent.Connected;
 
                 try
                 {
@@ -82,64 +78,33 @@ namespace Web.Repositories
             }
         }
 
-        public async Task RemoveAsync(AgentDto agent)
-        {
-            var selectedAgent = await _context
-                .Agents
-                .FirstOrDefaultAsync(ag => ag.UtsaId == agent.AgentId);
-
-            if(selectedAgent != null)
-            {
-                try
-                {
-                    _context.Agents.Remove(selectedAgent);
-                    await _context.SaveChangesAsync();
-                }
-                catch(DbUpdateException removeException)
-                {
-                    throw removeException;
-                }
-            }
-        }
-
-        public async Task<IList<AgentDto>> GetByDepartmentAsync(string utsaDepartment, bool connected)
+        public async Task<IList<AgentDto>> GetByDepartmentAsync(string group, bool connected)
         {
             if (connected)
             {
                 return await _context
                     .Agents
-                    .Where(a => a.UtsaDepartment == utsaDepartment && a.Connected)
+                    .Where(a => a.BotHandle == group && a.Connected)
                     .Select(agent => new AgentDto
                     {
                         AgentId = agent.UtsaId,
                         Connected = true,
-                        UtsaDepartment = agent.UtsaDepartment
+                        BotHandle = agent.BotHandle
                     })
                     .ToListAsync();
             }
 
             return await _context
                 .Agents
-                .Where(a => a.UtsaDepartment == utsaDepartment)
+                .Where(a => a.BotHandle == group)
                 .Select(agent => new AgentDto
                 {
                     AgentId = agent.UtsaId,
                     Connected = agent.Connected,
-                    UtsaDepartment = agent.UtsaDepartment
+                    BotHandle = agent.BotHandle
                 })
                 .ToListAsync();
         }
 
-        public async Task<bool> AnyConnected(string utsaDepartment)
-        {
-            var count = await _context
-                .Agents
-                .Where(a => a.UtsaDepartment == utsaDepartment && a.Connected)
-                .CountAsync();
-
-            if (count == 0)
-                return false;
-            return true;
-        }
     }
 }

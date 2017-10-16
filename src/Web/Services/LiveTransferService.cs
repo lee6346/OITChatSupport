@@ -1,11 +1,7 @@
-﻿using Microsoft.AspNetCore.SignalR;
-using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Web.Dtos;
-using Web.Models;
 using Web.Repositories;
 using Web.Services.Hubs;
 
@@ -29,22 +25,22 @@ namespace Web.Services
             var available = (_hubTracker.AgentsOnline(liveTransferDto.BotHandle).Result.Count() > 0);
             if(available)
             {
-                var group = await _liveRequestRepository.Create(liveTransferDto);
-                await _hubTracker.InvokeLiveRequest(group, liveTransferDto);
+                await _liveRequestRepository.Create(liveTransferDto);
+                await _hubTracker.InvokeLiveRequest(liveTransferDto);
             }
             
         }
 
-        public async Task AcceptPendingRequestAsync(SupportTransferDto support)
+        public async Task AcceptPendingRequestAsync(LiveTransferDto liveSupport)
         {
-            await _liveRequestRepository.Update(support);
-            await _hubTracker.InvokeLiveSupport(support.Department, support);
+            await _liveRequestRepository.Update(liveSupport);
+            await _hubTracker.InvokeLiveSupport(liveSupport);
         }
 
 
-        public async Task<IList<LiveTransferDto>> GetPendingRequestsAsync(AgentDto agent)
+        public async Task<IList<LiveTransferDto>> GetPendingRequestsAsync(string group)
         {
-            return await _liveRequestRepository.GetPending(agent.BotHandle);
+            return await _liveRequestRepository.GetPending(group);
         }
 
 

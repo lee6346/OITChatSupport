@@ -18,7 +18,7 @@ namespace Web.Repositories
             _oitChatSupportContext = oitChatSupportContext;
         }
 
-        public async Task<string> Create(LiveTransferDto liveRequest)
+        public async Task Create(LiveTransferDto liveRequest)
         {
             var request = new LiveRequest
             {
@@ -32,8 +32,6 @@ namespace Web.Repositories
                 _oitChatSupportContext.LiveRequests.Add(request);
                 await _oitChatSupportContext
                     .SaveChangesAsync();
-                 var selectedBot =  await _oitChatSupportContext.ChatBots.FirstOrDefaultAsync(bot => bot.BotHandle == liveRequest.BotHandle);
-                return selectedBot.BotHandle;
             }
             catch(DbUpdateException saveException)
             {
@@ -42,7 +40,7 @@ namespace Web.Repositories
 
         }
 
-        public async Task Update(SupportTransferDto liveSupport)
+        public async Task Update(LiveTransferDto liveSupport)
         {
             var selectedRequest = await _oitChatSupportContext
                 .LiveRequests
@@ -50,7 +48,7 @@ namespace Web.Repositories
 
             if (selectedRequest != null)
             {
-                selectedRequest.AgentId = liveSupport.AgentId;
+                selectedRequest.AgentId = liveSupport.User;
                 selectedRequest.AcceptTime = DateTime.UtcNow;
                 try
                 {
@@ -70,11 +68,11 @@ namespace Web.Repositories
 
         public async Task<IList<LiveTransferDto>> GetPending(string botHandle)
         {
-
+           
             var pending = await _oitChatSupportContext
                 .LiveRequests
                 .Where(request => request.RequestTime 
-                == DateTime.Now.Date && request.AgentId 
+                == DateTime.UtcNow.Date && request.AgentId 
                 == null && request.BotHandle == botHandle)
                 .Select(request => new LiveTransferDto
                 {

@@ -9,23 +9,18 @@ namespace Web.Data.Context
 
         public DbSet<Agent> Agents { get; set; }
         public DbSet<DirectLineThread> DirectLineThreads { get; set; }
-        public DbSet<DirectLineMessage> DirectLineMessages { get; set; }
         public DbSet<LiveRequest> LiveRequests { get; set; }
-        public DbSet<AgentGroupMessage> AgentGroupMessages { get; set; }
+        public DbSet<GroupMessage> AgentGroupMessages { get; set; }
         public DbSet<EventLog> EventLogs { get; set; }
-        public DbSet<ChatBot> ChatBots { get; set; }
-        public DbSet<Department> Departments { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             OnAgentCreating(modelBuilder);
             OnDirectLineConnectionCreating(modelBuilder);
-            OnDirectLineMessageCreating(modelBuilder);
             OnLiveRequestCreating(modelBuilder);
             OnAgentGroupMessageCreating(modelBuilder);
             OnEventLogCreating(modelBuilder);
-            OnDepartmentCreating(modelBuilder);
-            OnChatBotCreating(modelBuilder);
         }
 
         public void OnAgentCreating(ModelBuilder modelBuilder)
@@ -41,7 +36,7 @@ namespace Web.Data.Context
             modelBuilder.Entity<Agent>().Property(agent => agent.UtsaId)
                 .HasMaxLength(30);
 
-            modelBuilder.Entity<Agent>().Property(agent => agent.UtsaDepartment)
+            modelBuilder.Entity<Agent>().Property(agent => agent.BotHandle)
                 .HasMaxLength(30)
                 .IsRequired();
 
@@ -110,34 +105,6 @@ namespace Web.Data.Context
                 .IsConcurrencyToken();
         }
 
-        public void OnDirectLineMessageCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<DirectLineMessage>().ToTable("DirectLineMessage");
-
-            modelBuilder.Entity<DirectLineMessage>().HasKey(message => message.Id)
-                .ForSqlServerIsClustered();
-
-            modelBuilder.Entity<DirectLineMessage>().Property(message => message.ConversationId)
-                .HasMaxLength(30)
-                .IsRequired();
-
-            modelBuilder.Entity<DirectLineMessage>().Property(message => message.Sender)
-                .HasMaxLength(30)
-                .IsRequired();
-
-            modelBuilder.Entity<DirectLineMessage>().Property(message => message.Text)
-                .HasMaxLength(200)
-                .IsRequired();
-
-            modelBuilder.Entity<DirectLineMessage>().Property(message => message.TimeSent)
-                .HasColumnType("datetime2(7)")
-                .IsRequired();
-
-            modelBuilder.Entity<DirectLineMessage>().Property(message => message.RowVersion)
-                .ValueGeneratedOnAddOrUpdate()
-                .IsConcurrencyToken();
-        }
-
         public void OnLiveRequestCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<LiveRequest>().ToTable("LiveRequest");
@@ -173,84 +140,28 @@ namespace Web.Data.Context
 
         public void OnAgentGroupMessageCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<AgentGroupMessage>().ToTable("AgentGroupMessage");
+            modelBuilder.Entity<GroupMessage>().ToTable("AgentGroupMessage");
 
-            modelBuilder.Entity<AgentGroupMessage>().HasKey(message => message.Id)
+            modelBuilder.Entity<GroupMessage>().HasKey(message => message.Id)
                 .ForSqlServerIsClustered();
 
-            modelBuilder.Entity<AgentGroupMessage>().Property(message => message.Sender)
+            modelBuilder.Entity<GroupMessage>().Property(message => message.Sender)
                 .HasMaxLength(30)
                 .IsRequired();
 
-            modelBuilder.Entity<AgentGroupMessage>().Property(message => message.UtsaDepartment)
+            modelBuilder.Entity<GroupMessage>().Property(message => message.UtsaDepartment)
                 .HasMaxLength(30)
                 .IsRequired();
 
-            modelBuilder.Entity<AgentGroupMessage>().Property(message => message.Text)
+            modelBuilder.Entity<GroupMessage>().Property(message => message.Text)
                 .HasMaxLength(200)
                 .IsRequired();
 
-            modelBuilder.Entity<AgentGroupMessage>().Property(message => message.TimeSent)
+            modelBuilder.Entity<GroupMessage>().Property(message => message.TimeSent)
                 .HasColumnType("datetime2(7)")
                 .IsRequired();
 
-            modelBuilder.Entity<AgentGroupMessage>().Property(message => message.RowVersion)
-                .ValueGeneratedOnAddOrUpdate()
-                .IsConcurrencyToken();
-        }
-
-        public void OnDepartmentCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Department>().ToTable("Department");
-
-            modelBuilder.Entity<Department>().HasKey(department => department.Id)
-                .ForSqlServerIsClustered();
-
-            modelBuilder.Entity<Department>().HasAlternateKey(department => department.DepartmentId)
-                .ForSqlServerIsClustered(false);
-
-            modelBuilder.Entity<Department>().Property(department => department.DepartmentId)
-                .HasMaxLength(30);
-
-            modelBuilder.Entity<Department>().HasAlternateKey(department => department.BotHandle)
-                .ForSqlServerIsClustered(false);
-
-            modelBuilder.Entity<Department>().Property(department => department.BotHandle)
-                .HasMaxLength(30);
-
-            modelBuilder.Entity<Department>().Property(department => department.RowVersion)
-                .ValueGeneratedOnAddOrUpdate()
-                .IsConcurrencyToken();
-        }
-
-        public void OnChatBotCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<ChatBot>().ToTable("ChatBot");
-
-            modelBuilder.Entity<ChatBot>().HasKey(bot => bot.Id)
-                .ForSqlServerIsClustered();
-
-            modelBuilder.Entity<ChatBot>().HasAlternateKey(bot => bot.BotId)
-                .ForSqlServerIsClustered(false);
-
-            modelBuilder.Entity<ChatBot>().Property(bot => bot.BotId)
-                .HasMaxLength(50);
-
-            modelBuilder.Entity<ChatBot>().HasAlternateKey(bot => bot.BotHandle)
-                .ForSqlServerIsClustered(false);
-
-            modelBuilder.Entity<ChatBot>().Property(bot => bot.BotHandle)
-                .HasMaxLength(30);
-
-            modelBuilder.Entity<ChatBot>().Property(bot => bot.UtsaDepartment)
-                .HasMaxLength(30)
-                .IsRequired();
-
-            modelBuilder.Entity<ChatBot>().Property(bot => bot.Connected)
-                .HasDefaultValue(true)
-                .IsRequired();
-
-            modelBuilder.Entity<ChatBot>().Property(bot => bot.RowVersion)
+            modelBuilder.Entity<GroupMessage>().Property(message => message.RowVersion)
                 .ValueGeneratedOnAddOrUpdate()
                 .IsConcurrencyToken();
         }

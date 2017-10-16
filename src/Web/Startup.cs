@@ -47,15 +47,15 @@ namespace OITChatSupport.Web
 
             services.AddScoped<ILiveRequestRepository, LiveRequestRepository>();
             services.AddScoped<IAgentRepository, AgentRepository>();
-            services.AddScoped<IGroupMessageRepository, GroupMessageRepository>();
-            services.AddScoped<IDirectLineMessageRepository, DirectLineMessageRepository>();
+            services.AddScoped<IAgentChatRepository, AgentChatRepository>();
             services.AddScoped<IDirectLineThreadRepository, DirectLineThreadRepository>();
             services.AddScoped<IEventLogRepository, EventLogRepository>();
-            services.AddScoped<IChatBotRepository, ChatBotRespository>();
-            services.AddScoped<IDepartmentRepository, DepartmentRepository>();
 
             services.AddScoped<IDirectLineService, DirectLineService>();
             services.AddScoped<ILiveTransferService, LiveTransferService>();
+            services.AddScoped<IAccountService, AccountService>();
+            services.AddScoped<IBotConnectionService, BotConnectionService>();
+            services.AddScoped<IGroupChatService, GroupChatService>();
 
             services.AddSignalR();
 

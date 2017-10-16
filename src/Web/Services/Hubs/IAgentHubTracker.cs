@@ -14,10 +14,11 @@ namespace Web.Services.Hubs
 
         Task<bool> RemoveAgent(string connectionId);
 
-        Task InvokeLiveSupport(string group, SupportTransferDto support);
+        Task<bool> RemoveAgent(AgentDto agent);
 
-        Task InvokeLiveRequest(string group, LiveTransferDto request);
+        Task InvokeLiveSupport(LiveTransferDto liveSupport);
 
-        Task InvokeGroupMessage(string group, AgentGroupMessageDto groupMessage);
+        Task InvokeLiveRequest(LiveTransferDto request);
+
     }
 }

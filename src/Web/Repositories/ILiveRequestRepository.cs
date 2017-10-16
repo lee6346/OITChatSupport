@@ -6,9 +6,9 @@ namespace Web.Repositories
 {
     public interface ILiveRequestRepository
     {
-        Task<string> Create(LiveTransferDto liveRequest);
-        Task Update(SupportTransferDto liveSupport);
-        Task<IList<LiveTransferDto>> GetPending(string department);
+        Task Create(LiveTransferDto liveRequest);
+        Task Update(LiveTransferDto liveSupport);
+        Task<IList<LiveTransferDto>> GetPending(string botHandle);
 
     }
 }

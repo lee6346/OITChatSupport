@@ -4,7 +4,6 @@ namespace Web.Models
 {
     public class ChatBot: Entity
     {
-        public string BotId { get; set; }
         public string BotHandle { get; set; }
         public string UtsaDepartment { get; set; }
         public bool Connected { get; set; }

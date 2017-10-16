@@ -24,21 +24,17 @@ namespace Web.Services.Hubs
 
         public override Task OnDisconnectedAsync(Exception exception)
         {
-            
+
             return base.OnDisconnectedAsync(exception);
         }
 
         public async Task JoinGroupAsync(AgentDto agent)
         {
             await _agentHubTracker.AddAgent(Context.ConnectionId, agent);
-            //await Groups.AddAsync(Context.ConnectionId, agent.UtsaDepartment);
-            //await Clients.Group(agent.UtsaDepartment).InvokeAsync("JoinGroup", agent);
         }
-        public async Task LeaveGroupAsync(AgentDto agent)
+        public async Task LeaveGroupAsync()
         {
             await _agentHubTracker.RemoveAgent(Context.ConnectionId);
-            //await Groups.RemoveAsync(Context.ConnectionId, agent.UtsaDepartment);
-            //await Clients.Group(agent.UtsaDepartment).InvokeAsync("LeaveGroup", agent);
         }
 
         public async Task LiveTransferAsync(LiveTransferDto liveTransferDto)
@@ -51,11 +47,11 @@ namespace Web.Services.Hubs
             await Clients.Group(liveTransferDto.BotHandle).InvokeAsync("RemoveTransferRequest", liveTransferDto);
         }
 
-        public async Task Send(AgentGroupMessageDto agentGroupMessage)
+        public async Task Send(GroupMessageDto agentGroupMessage)
         {
             await Clients.Group(agentGroupMessage.Group).InvokeAsync("Send", agentGroupMessage);
         }
-
+        /*
         public IEnumerable<AgentDto> GetAgents(string group)
         {
             return _agentHubTracker.AgentsOnline(group).Result;
@@ -65,7 +61,7 @@ namespace Web.Services.Hubs
         {
             var success = (GetAgents(group).Count() > 0);
             return Task.FromResult(success);
-        }
+        } */
 
     }
 }

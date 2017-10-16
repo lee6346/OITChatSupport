@@ -4,7 +4,7 @@ using System;
 namespace Web.Dtos
 {
 
-    public class AgentGroupMessageDto
+    public class GroupMessageDto
     {
         [JsonProperty("sender")]
         public string AgentId { get; set; }
