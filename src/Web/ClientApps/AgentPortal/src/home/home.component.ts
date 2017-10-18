@@ -2,7 +2,7 @@
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 import { AgentGroupService } from '../shared/services/agent-group.service';
-
+import { Agent } from '../shared/model/agent.model';
 @Component({
     selector: 'agent-home',
     templateUrl: './home.component.html',
@@ -14,8 +14,17 @@ export class HomeComponent implements OnInit{
     private group: string = 'AskRowdy';
     constructor(
         private agentGroupService: AgentGroupService
-    ) {}
+    ) {
+        /*
+        let x = {} as Agent;
+        x.agentId = this.agentId;
+        x.botHandle = this.group;
+        x.connected = true;
+        this.agentGroupService.join(x); */
+    }
     ngOnInit() {
         console.log('logged in as jvr632');
     }
+
+
 }

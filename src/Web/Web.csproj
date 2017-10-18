@@ -11,8 +11,17 @@
   <PropertyGroup>
     <IsTransformWebConfigDisabled>true</IsTransformWebConfigDisabled>
   </PropertyGroup>
+  <ItemGroup>
+    <None Remove="ClientApps\AgentPortal\boot-aot.client.ts" />
+    <None Remove="ClientApps\AgentPortal\src\liverequest\actions\live-request.actions.ts" />
+    <None Remove="ClientApps\AgentPortal\src\liverequest\effects\live-request.effects.ts" />
+    <None Remove="ClientApps\AgentPortal\src\liverequest\models\live-request.model.ts" />
+    <None Remove="ClientApps\AgentPortal\src\liverequest\reducers\index.ts" />
+    <None Remove="ClientApps\AgentPortal\src\liverequest\reducers\live-request.reducers.ts" />
+    <None Remove="ClientApps\AgentPortal\src\store\index.ts" />
+  </ItemGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp2.0'">
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.0.0-alpha1-final" />
     <PackageReference Include="Microsoft.Bot.Connector.DirectLine" Version="3.0.2" />
@@ -21,9 +30,9 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.0" />
   </ItemGroup>
     
-  <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp2.0'">
-    <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.0" />
+  <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.0" />
+    <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.0" />
     <DotNetCliToolReference Include="Microsoft.Extensions.SecretManager.Tools" Version="2.0.0" />
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.0.0" />
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" />
@@ -49,6 +58,20 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="1.0.0" />
     <PackageReference Include="System.Reactive" Version="3.1.1" />
     <PackageReference Include="System.Interactive" Version="3.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApps\AgentPortal\boot-aot.client.ts" />
+    <TypeScriptCompile Include="ClientApps\AgentPortal\src\liverequest\actions\live-request.actions.ts" />
+    <TypeScriptCompile Include="ClientApps\AgentPortal\src\liverequest\effects\live-request.effects.ts" />
+    <TypeScriptCompile Include="ClientApps\AgentPortal\src\liverequest\models\live-request.model.ts" />
+    <TypeScriptCompile Include="ClientApps\AgentPortal\src\liverequest\reducers\index.ts" />
+    <TypeScriptCompile Include="ClientApps\AgentPortal\src\liverequest\reducers\live-request.reducers.ts" />
+    <TypeScriptCompile Include="ClientApps\AgentPortal\src\store\index.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ClientApps\AgentPortal\NewFolder\" />
   </ItemGroup>
 
 

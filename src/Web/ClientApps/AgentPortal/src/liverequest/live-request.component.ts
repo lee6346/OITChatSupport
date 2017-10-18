@@ -1,9 +1,9 @@
 ﻿import { Component, OnInit, Input } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 import { Store } from '@ngrx/store';
-import { LiveRequestsState } from '../store/reducer/live-request.reducer';
-import { AcceptLiveRequestAction, LoadPendingRequestsAction } from '../store/action/live-request.action';
-import { LiveRequest } from '../shared/model';
+import * as fromLiveRequests from './reducers/index';
+import * as liveRequests from './actions/live-request.actions';
+import { LiveRequest } from './models/live-request.model';
 
 @Component({
     selector: 'live-request',
@@ -14,18 +14,18 @@ export class LiveRequestComponent implements OnInit {
 
     liveRequests$: Observable<LiveRequest[]>;
     constructor(
-        private store: Store<LiveRequestsState>
+        private store: Store<fromLiveRequests.State>
     ) {
         console.log('live request component set');
-        this.liveRequests$ = this.store.select(state => state.liveRequests);
+        this.liveRequests$ = store.select(fromLiveRequests.getAllRequests);
         console.log('store live request observables assigned');
     }
     ngOnInit() {
         console.log('dispatches rquest to server to load pending requests');
-        this.store.dispatch(new LoadPendingRequestsAction('jvr632'));
+        this.store.dispatch(new liveRequests.LoadPendingRequestsAction('askrowdy'));
         console.log('dispatch good');
     }
     onRequestSelected(liveRequest: LiveRequest) {
-        this.store.dispatch(new AcceptLiveRequestAction(liveRequest));
+        this.store.dispatch(new liveRequests.AcceptLiveRequestAction(liveRequest));
     }
 }

@@ -9,7 +9,7 @@ namespace Web.Services.ConfigBuilder
     {
         public DataConnectionOptions()
         {
-            LocalDbConnectionString = "";
+            LocalDbConnectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=OitChatSupport;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
         }
 
         public string LocalDbConnectionString { get; set; }

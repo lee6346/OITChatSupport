@@ -129,7 +129,7 @@ namespace Web.Data.Context
                 .IsRequired(false);
 
             modelBuilder.Entity<LiveRequest>().Property(request => request.AcceptTime)
-                .HasColumnType("datetime(7)")
+                .HasColumnType("datetime2(7)")
                 .IsRequired(false);
 
             modelBuilder.Entity<LiveRequest>().Property(request => request.RowVersion)
@@ -140,7 +140,7 @@ namespace Web.Data.Context
 
         public void OnAgentGroupMessageCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<GroupMessage>().ToTable("AgentGroupMessage");
+            modelBuilder.Entity<GroupMessage>().ToTable("GroupMessage");
 
             modelBuilder.Entity<GroupMessage>().HasKey(message => message.Id)
                 .ForSqlServerIsClustered();
@@ -149,7 +149,7 @@ namespace Web.Data.Context
                 .HasMaxLength(30)
                 .IsRequired();
 
-            modelBuilder.Entity<GroupMessage>().Property(message => message.UtsaDepartment)
+            modelBuilder.Entity<GroupMessage>().Property(message => message.Group)
                 .HasMaxLength(30)
                 .IsRequired();
 

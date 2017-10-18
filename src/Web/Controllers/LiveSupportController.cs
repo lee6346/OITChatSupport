@@ -36,7 +36,7 @@ namespace Web.Controllers
         public async Task<IActionResult> AcceptRequest([FromBody] LiveTransferDto liveSupport)
         {
             await _liveTransferService.AcceptPendingRequestAsync(liveSupport);
-            var connection = _botConnectionService.GetConnectionStreamAsync(liveSupport.ConversationId);
+            var connection = await _botConnectionService.GetConnectionStreamAsync(liveSupport.ConversationId);
             return Json(connection);
         }
 

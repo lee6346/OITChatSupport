@@ -25,5 +25,7 @@ export class AgentGroupService {
         this.agentHubGateway.joinGroup(agent);
     }
 
+
+
     
 }

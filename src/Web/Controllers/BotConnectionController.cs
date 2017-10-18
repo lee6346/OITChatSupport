@@ -8,6 +8,7 @@ namespace Web.Controllers
     public class BotConnectionController: BaseController
     {
         private readonly IBotConnectionService _botConnectionService;
+
         public BotConnectionController(IBotConnectionService botConnectionService)
         {
             _botConnectionService = botConnectionService;

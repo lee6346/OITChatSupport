@@ -17,6 +17,7 @@ export class PendingListComponent implements OnInit{
     constructor() { }
     ngOnInit() {
         console.log('the pending reuqests ' + this.liveRequests);
+        console.log('first request: ' + this.liveRequests[0]);
     }
     onLiveRequestClick(liveRequest: LiveRequest) {
         this.acceptRequest.emit(liveRequest);

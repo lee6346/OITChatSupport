@@ -71,8 +71,8 @@ namespace Web.Repositories
            
             var pending = await _oitChatSupportContext
                 .LiveRequests
-                .Where(request => request.RequestTime 
-                == DateTime.UtcNow.Date && request.AgentId 
+                .Where(request =>/* request.RequestTime 
+                == DateTime.UtcNow.Date &&*/ request.AgentId 
                 == null && request.BotHandle == botHandle)
                 .Select(request => new LiveTransferDto
                 {

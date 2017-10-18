@@ -11,7 +11,7 @@ namespace Web.Services.Mappers
             CreateMap<LiveRequest, LiveTransferDto>()
                 .ConstructUsing(c => new LiveTransferDto { BotHandle = c.BotHandle, ConversationId = c.ConversationId, TimeRequested = c.RequestTime });
             CreateMap<Agent, AgentDto>()
-                .ConstructUsing(c => new AgentDto { AgentId = c.UtsaId, UtsaDepartment = c.UtsaDepartment, Connected = c.Connected });
+                .ConstructUsing(c => new AgentDto { AgentId = c.UtsaId, BotHandle = c.BotHandle, Connected = c.Connected });
         }
     }
 }

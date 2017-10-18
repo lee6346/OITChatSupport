@@ -22,6 +22,7 @@
     "@angular/router": "^4.2.5",
     "@aspnet/signalr-client": "^1.0.0-alpha1-final",
     "@ngrx/effects": "^4.0.5",
+    "@ngrx/entity": "github:ngrx/entity-builds",
     "@ngrx/router-store": "^4.0.4",
     "@ngrx/store": "^4.0.3",
     "@ngrx/store-devtools": "^4.0.0",

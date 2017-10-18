@@ -44,9 +44,11 @@ namespace Web.Repositories
             {
                 _context.Agents.Add(newAgent);
                 await _context.SaveChangesAsync();
+                
             }
             catch(DbUpdateException addException)
             {
+                
                 throw addException;
             }
         }

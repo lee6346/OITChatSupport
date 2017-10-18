@@ -6,7 +6,7 @@ namespace Web.Dtos
 
     public class GroupMessageDto
     {
-        [JsonProperty("sender")]
+        [JsonProperty("agentId")]
         public string AgentId { get; set; }
         [JsonProperty("text")]
         public string Text { get; set; }

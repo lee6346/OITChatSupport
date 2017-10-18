@@ -10,7 +10,7 @@ import * as Rx from 'rxjs/Rx';
 @Injectable()
 export class DirectLineService {
 
-    private directLineTokenUri: string = 'http://localhost:5000/api/DirectLine/GetToken';
+    private directLineTokenUri: string = 'http://localhost:5000/api/botconnection/token/askrowdy';//DirectLine/GetToken';
     private oitMessageUri: string = 'http://localhost:5000/api/ChatMessage/Store';
     private closeDirectLineConnectionUri: string = 'http://localhost:5000/api/DirectLine/EndConnection';
     

@@ -2,26 +2,28 @@
 import { Observable } from 'rxjs/Observable';
 import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { LiveRequest } from '../model';
+import { environment } from '../../../environments/environment';
+import { Conversation } from 'botframework-directlinejs';
 
 @Injectable()
 export class LiveRequestGateway{
 
-    private liveRequestsUrl: string = 'http://localhost:5000/api/LiveSupport/GetRequests/';
-    private acceptRequestUrl: string = 'http://localhost:5000/api/LiveSupport/AcceptRequest';
-    private errorUrl: string = 'http://localhost:5000/home/error';
-
     constructor(private http: HttpClient) {
     }
 
-    getLiveRequests$(agentId: string): Observable<LiveRequest[]>{
+    getLiveRequests$(group: string): Observable<LiveRequest[]>{
+        console.log('Gateway: making http call to retrieve requests');
         return this.http.get<LiveRequest[]>(
-            this.liveRequestsUrl + agentId
+            environment.baseWebUrl +
+            environment.liveRequests +
+            '/' + group
         );
     }
 
-    acceptLiveRequest$(liveRequest: LiveRequest): Observable<any> {
+    acceptLiveRequest$(liveRequest: LiveRequest): Observable<Conversation> {
         return this.http.post<any>(
-            this.acceptRequestUrl,
+            environment.baseWebUrl + 
+            environment.acceptRequest,
             liveRequest
         );
     }
@@ -31,12 +33,15 @@ export class LiveRequestGateway{
     }
 
     sendErrorReport(errorMessage: string): void {
-        this.http.post<Response>(this.errorUrl, errorMessage)
+        this.http.post<Response>(
+            environment.baseWebUrl +
+            environment.error,
+            errorMessage)
             .retry(1)
             .subscribe(
             res => console.log('successfully sent'),
             err => console.error('error posting the error report'),
             () => console.log('completed')
-            );
+        );
     }
 }

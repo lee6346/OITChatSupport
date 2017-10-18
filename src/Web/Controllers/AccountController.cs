@@ -5,6 +5,7 @@ using Web.Services;
 
 namespace Web.Controllers
 {
+    [Route("[controller]")]
     public class AccountController: BaseController
     {
         private readonly IAccountService _accountService;
@@ -14,13 +15,13 @@ namespace Web.Controllers
             _accountService = accountService;
         }
 
-        [HttpGet]
+        [HttpGet("[action]")]
         public IActionResult Login()
         {
             return View();
         }
 
-        [HttpPost]
+        [HttpPost("[action]")]
         public async Task<IActionResult> Login([FromBody] AccountDto account)
         {
             if(await _accountService.AuthorizeAgent(account))
@@ -36,6 +37,7 @@ namespace Web.Controllers
             return RedirectToAction("Login", "Account");
         }
 
+        [Route("api/[controller]")]
         [HttpGet("[action]/{id}")]
         public async Task<IActionResult> Group(string id)
         {

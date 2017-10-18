@@ -5,21 +5,18 @@ import { CoreModule } from './shared/core.module';
 import { SharedModule } from './shared/shared.module';
 
 import { StoreModule } from '@ngrx/store';
-import { reducers, initialApplicationState} from './store/reducer';
+import { reducers, metaReducers} from './store/index';
 import { EffectsModule } from '@ngrx/effects';
+/*
 import { AgentsEffects } from './store/effects/agents.effects';
 import { DirectLineEffects } from './store/effects/direct-line.effects';
 import { GroupChatEffects } from './store/effects/group-chat.effects';
 import { LiveRequestEffects } from './store/effects/live-request.effects';
-/*
-import { LiveRequestModule } from './liverequest/live-request.module';
-import { AgentGroupModule } from './agent-group/agent-group.module';
-import { DirectLineSessionsModule } from './directline-sessions/directline-sessions.module';
 */
 import { HomeModule } from './home/home.module';
 import { AgentPortalComponent } from './agent-portal.component';
 import { AgentPortalRoutingModule } from './agent-portal.routing.module';
-//import { LiveSupportModule } from './livesupport/live-support.module';
+
 @NgModule({
     bootstrap: [AgentPortalComponent],
     declarations: [AgentPortalComponent],
@@ -28,14 +25,10 @@ import { AgentPortalRoutingModule } from './agent-portal.routing.module';
         HttpClientModule,
         SharedModule,
         CoreModule,
-        StoreModule.forRoot(reducers, {initialState: initialApplicationState}),
-        EffectsModule.forRoot([ LiveRequestEffects, DirectLineEffects, AgentsEffects, GroupChatEffects]),
+        StoreModule.forRoot(reducers, { metaReducers }),
+        EffectsModule.forRoot([]),
         HomeModule,
-        /*
-        AgentGroupModule,
-        LiveRequestModule,
-        LiveSupportModule,
-        DirectLineSessionsModule,*/
+
         AgentPortalRoutingModule
     ],
     providers: [

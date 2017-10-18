@@ -26,7 +26,7 @@ namespace OITChatSupport.Web
         {
             services.AddOptions();
             services.Configure<LdapConnectionOptions>(options => Configuration.Bind(options));
-            services.Configure<DirectLineApi>(options => Configuration.Bind(options));
+            services.Configure<DirectLineOptions>(options => Configuration.Bind(options));
             services.Configure<DataConnectionOptions>(options => Configuration.Bind(options));
 
             services.AddDbContext<OitChatSupportContext>(
@@ -42,6 +42,16 @@ namespace OITChatSupport.Web
                         .AllowAnyOrigin()
                         .AllowAnyHeader()
                         .AllowAnyMethod();
+                });
+            });
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Swashbuckle.AspNetCore.Swagger.Info
+                {
+                    Version = "v1",
+                    Title = "UTSA OIT ChatBot Support",
+                    Description = "APIs and Angular SPAs for supporting student queries"
                 });
             });
 
@@ -79,17 +89,31 @@ namespace OITChatSupport.Web
             }
 
             app.UseCors("AllowAllOrigins");
+
             app.UseStaticFiles();
 
             app.UseSignalR(routes =>
             {
                 routes.MapHub<AgentHub>("agent");
             });
+
             app.UseMvc(routes => {
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            app.UseSwagger(c =>
+            {
+                c.PreSerializeFilters.Add((swagger, httpRequest) => swagger.Host = httpRequest.Host.Value);
+            });
+
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "V1 Docs");
+            });
+
+            
         }
     }
 }

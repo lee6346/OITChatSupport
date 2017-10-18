@@ -20,6 +20,7 @@ export class AgentHubGateway{
     }
     joinGroup(agent: Agent): void {
         this._hubConnection.invoke('JoinGroup', agent);
+        console.log('successfully joined group');
     }
     leaveGroup(agent: Agent): void {
         this._hubConnection.invoke('LeaveGroup', agent);
@@ -48,6 +49,11 @@ export class AgentHubGateway{
         });
         this._hubConnection.start()
             .then(() => {
+                let x = {} as Agent;
+                x.agentId = 'jvr632';
+                x.botHandle = 'AskRowdy';
+                x.connected = true;
+                this.joinGroup(x);
                 console.log('Hub connection started');
             })
             .catch(err => {

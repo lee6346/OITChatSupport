@@ -26,8 +26,9 @@ export function liveRequestsReducer(state = initialLiveRequestState, action: liv
                 }
             });
         case liveRequestAction.LOAD_PENDING_REQUESTS_COMPLETE:
+            console.log('received the requests in the reducer!');
             return Object.assign({}, state, {
-                liveRequests: [...state.liveRequests, ...action.liveRequest]//state.liveRequests.concat(action.liveRequest)
+                liveRequests: action.liveRequest/*[...state.liveRequests, ...action.liveRequest]*/ //state.liveRequests.concat(action.liveRequest)
             });
         case liveRequestAction.ACCEPT_LIVE_REQUEST_COMPLETE:
             return Object.assign({}, state, {

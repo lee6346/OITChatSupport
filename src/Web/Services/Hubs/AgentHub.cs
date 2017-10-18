@@ -28,16 +28,16 @@ namespace Web.Services.Hubs
             return base.OnDisconnectedAsync(exception);
         }
 
-        public async Task JoinGroupAsync(AgentDto agent)
+        public async Task JoinGroup(AgentDto agent)
         {
             await _agentHubTracker.AddAgent(Context.ConnectionId, agent);
         }
-        public async Task LeaveGroupAsync()
+        public async Task LeaveGroup()
         {
             await _agentHubTracker.RemoveAgent(Context.ConnectionId);
         }
 
-        public async Task LiveTransferAsync(LiveTransferDto liveTransferDto)
+        public async Task LiveTransfer(LiveTransferDto liveTransferDto)
         {
             await Clients.Group(liveTransferDto.BotHandle).InvokeAsync("LiveTransfer", liveTransferDto);
         }

@@ -1,6 +1,6 @@
 ﻿import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs/Rx';
-
+import { Conversation } from 'botframework-directlinejs';
 import { LiveRequest } from '../model';
 import { LiveRequestGateway } from '../gateway/live-request.gateway';
 import { AgentHubGateway } from '../gateway/agent.hub.gateway';
@@ -13,13 +13,15 @@ export class LiveRequestService{
         private agentHubGateway: AgentHubGateway
     ) { }
 
-    getRequests$(agentId: string): Observable<LiveRequest[]> {
+    getRequests$(group: string): Observable<LiveRequest[]> {
+        console.log('Service: requesting gateway to retrieve requests');
         return this.liveRequestGateway
-            .getLiveRequests$(agentId);
+            .getLiveRequests$(group);
     }
 
-    acceptRequest(liveRequest: LiveRequest) {
-        this.agentHubGateway.acceptLiveRequest(liveRequest);
+    acceptRequest$(liveRequest: LiveRequest): Observable<Conversation> {
+        return this.liveRequestGateway
+            .acceptLiveRequest$(liveRequest);
     }
 
 

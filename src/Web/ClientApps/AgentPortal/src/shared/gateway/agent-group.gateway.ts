@@ -2,18 +2,18 @@
 import { Observable } from 'rxjs/Observable';
 import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { Agent } from '../model';
+import { environment } from '../../../environments/environment';
 
 @Injectable()
 export class AgentGroupGateway{
 
-    private agentGroupUrl: string = 'http://localhost:5000/api/Agent/GetGroup/';
-    private errorUrl: string = 'http://localhost:5000/home/error';
     constructor(private http: HttpClient){
     }
 
-    getAgents$(agentId: string): Observable<Agent[]> {
+    getAgents$(group: string): Observable<Agent[]> {
         return this.http.get<Agent[]>(
-            this.agentGroupUrl + agentId
+            environment.baseWebUrl +
+            environment.agentGroup + '/' + group
         );
     }
     authorize(value: string): HttpHeaders {
@@ -21,12 +21,13 @@ export class AgentGroupGateway{
     }
 
     sendErrorReport(errorMessage: string): void {
-        this.http.post<Response>(this.errorUrl, errorMessage)
+        this.http.post<Response>(environment.baseWebUrl +
+            environment.error, errorMessage)
             .retry(1)
             .subscribe(
             res => console.log('successfully sent'),
             err => console.error('error posting the error report'),
             () => console.log('completed')
-            );
+        );
     }
 }
