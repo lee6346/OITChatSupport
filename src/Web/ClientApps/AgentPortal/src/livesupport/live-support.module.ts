@@ -1,28 +1,34 @@
 ﻿import { NgModule } from '@angular/core';
 import { SharedModule } from '../shared/shared.module';
-import { LiveSupportComponent } from './live-support.component';
-import { CachedMessagesComponent } from './components/cachedmessages/cached-messages.component';
-import { ChatDisplayComponent } from './components/chatdisplay/chat-display.component';
+
+
+import { LiveRequestComponent } from './containers/live-request.component';
+/*
+import { DirectLineThreadsComponent } from './containers/directline-threads.component';
+import { DirectLineSessionComponent } from './containers/directline-session.component';
+import { CachedMessagesComponent } from './components/cached-messages/cached-messages.component';
+import { ChatMessageListComponent } from './components/chat-message-list/chat-message-list.component';
 import { ChatMessageComponent } from './components/chat-message/chat-message.component';
-import { InputBarComponent } from './components/inputbar/input-bar.component';
+import { ChatThreadListComponent } from './components/chat-thread-list/chat-thread-list.component';
+import { ChatThreadComponent } from './components/chat-thread/chat-thread.component';
+*/
+import { PendingListComponent } from './components/pending-list/pending-list.component';
+import { PendingRequestComponent } from './components/pending-request/pending-request.component';
+//import { InputBarComponent } from './components/input-bar/input-bar.component';
 
 @NgModule({
     imports: [
         SharedModule
     ],
     declarations: [
-        LiveSupportComponent,
-        CachedMessagesComponent,
-        ChatDisplayComponent,
-        ChatMessageComponent,
-        InputBarComponent
+        LiveRequestComponent,
+        PendingListComponent,
+        PendingRequestComponent,
     ],
     exports: [
-        LiveSupportComponent,
-        CachedMessagesComponent,
-        ChatDisplayComponent,
-        ChatMessageComponent,
-        InputBarComponent
+        LiveRequestComponent,
+        PendingListComponent,
+        PendingRequestComponent,
     ],
 
 })

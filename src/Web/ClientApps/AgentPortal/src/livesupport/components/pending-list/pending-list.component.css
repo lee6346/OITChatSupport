@@ -1,0 +1,24 @@
+ul {
+    list-style-type: none;
+    height: 0vh;
+    padding: 0;
+    margin: 0;
+}
+.pending > li {
+    position: relative;
+    height: 50px;
+    display: block;
+    padding: 5px 5px 5px 5px;
+    margin: 5px 10px 5px 10px;
+    font-size: 12px;
+    font-family: sans-serif;
+    font-size-adjust: inherit;
+    color: black;
+    cursor: pointer;
+    text-align: left;
+    background-color: #dddfd4;
+    padding-bottom: 2px;
+}
+.pending > li:hover {
+    background: white;
+}

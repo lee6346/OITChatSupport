@@ -1,9 +1,0 @@
-﻿<div class="chat-thread-frame">
-    <div class="chat-threads">
-        <div class="chat-threads-header">
-            <h4 class="chat-threads-title">Chat Threads</h4>
-        </div>
-        <session-list class="chat-threads-body" [directLineSessions]="directLineConnections$ | async"
-                      (switchThread)="onSwitchThread($event)"></session-list>
-    </div>
-</div>

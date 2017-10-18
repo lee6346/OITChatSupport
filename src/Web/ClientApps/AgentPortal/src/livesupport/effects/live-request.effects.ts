@@ -26,7 +26,7 @@ export class LiveRequestEffects {
             this.liveRequestService.acceptRequest$(action.liveRequest).map((data: Conversation) => {
                 console.log('accept complete');
                 return new liveRequestAction.AcceptLiveRequestCompleteAction(data);
-        }))
+            }))
         .catch((err: any) => {
             console.log('error routing two actions after accepting live requests');
             return of({ type: 'acceptLiveRequest$' });
