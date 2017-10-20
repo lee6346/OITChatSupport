@@ -17,7 +17,7 @@ export class DirectLineSessionComponent implements OnInit {
 
 
     private sessionMessages$: Observable<DirectLineMessage[]>;
-    private cachedMessages$: Observable<DirectLineMessage[]>;
+    //private cachedMessages$: Observable<DirectLineMessage[]>;
     private currentThread: DirectLineThread;
 
     constructor(
@@ -26,7 +26,7 @@ export class DirectLineSessionComponent implements OnInit {
         
         
         this.sessionMessages$ = store.select(fromChatSupport.getCurrentMessages).map((item: List<DirectLineMessage>) => item.toArray());
-        this.cachedMessages$ = store.select(fromChatSupport.getCurrentThreadCachedMessages).map((item: List<DirectLineMessage>) => item.toArray());
+        //this.cachedMessages$ = store.select(fromChatSupport.getCurrentThreadCachedMessages).map((item: List<DirectLineMessage>) => item.toArray());
         store.select(fromChatSupport.getCurrentThread).subscribe(
             (next: DirectLineThread) => this.currentThread = next,
             (err: any) => console.log('error'),
