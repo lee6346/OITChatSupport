@@ -1,6 +1,6 @@
 ﻿import { createSelector, createFeatureSelector } from '@ngrx/store';
 import * as fromAgentGroup from './agent-group.reducers';
-import * as fromRoot from '../../store/index';
+import * as fromRoot from '../../shared/store/index';
 
 export interface AgentGroupState {
     agentGroup: fromAgentGroup.State;

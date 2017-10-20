@@ -1,6 +1,6 @@
 ﻿import { createSelector } from '@ngrx/store';
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
-
+import { UpdateStr } from "@ngrx/entity/src/models";
 import { Agent } from '../models/agent.model';
 import * as agentGroup from '../actions/agent-group.actions';
 
@@ -21,13 +21,13 @@ export function agentGroupReducer(state = initialState, action: agentGroup.Actio
     switch (action.type) {
         case agentGroup.RECEIVED_GROUP_JOINED: {
             return {
-                ...adapter.updateOne(action.agentUpdate, state),
+                ...adapter.updateOne(normalizeAgentPartial(action.agent), state),
                 selectedAgentId: state.selectedAgentId,
             };
         }
         case agentGroup.RECEIVED_GROUP_LEFT: {
             return {
-                ...adapter.updateOne(action.agentUpdate , state),
+                ...adapter.updateOne(normalizeAgentPartial(action.agent), state),
                 selectedAgentId: state.selectedAgentId,
             };
         }
@@ -43,3 +43,7 @@ export function agentGroupReducer(state = initialState, action: agentGroup.Actio
     }
 };
 export const getSelectedId = (state: State) => state.selectedAgentId;
+
+export function normalizeAgentPartial(agent: Agent): UpdateStr<Agent> {
+    return {id: agent.agentId, changes: agent } as UpdateStr<Agent>;
+}

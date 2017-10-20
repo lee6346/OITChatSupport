@@ -11,6 +11,9 @@
   <PropertyGroup>
     <IsTransformWebConfigDisabled>true</IsTransformWebConfigDisabled>
   </PropertyGroup>
+  <ItemGroup>
+    <None Remove="ClientApps\AgentPortal\src\livesupport\services\direct-line.service.ts" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
@@ -49,6 +52,11 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="1.0.0" />
     <PackageReference Include="System.Reactive" Version="3.1.1" />
     <PackageReference Include="System.Interactive" Version="3.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApps\AgentPortal\src\livesupport\containers\feature-containers.component.css" />
+    <TypeScriptCompile Include="ClientApps\AgentPortal\src\livesupport\services\direct-line.service.ts" />
   </ItemGroup>
   
 </Project>

@@ -1,4 +1,12 @@
-﻿import { Component, Input, EventEmitter, Output, ChangeDetectionStrategy, OnInit } from '@angular/core';
+﻿import { 
+    Component, 
+    Input, 
+    EventEmitter, 
+    Output, 
+    ChangeDetectionStrategy, 
+    OnInit 
+    } from '@angular/core';
+
 import { LiveRequest } from '../../models';
 
 @Component({
@@ -11,12 +19,16 @@ export class PendingListComponent implements OnInit{
 
     @Input()
     liveRequests: LiveRequest[];
+
     @Output()
     acceptRequest: EventEmitter<LiveRequest> = new EventEmitter<LiveRequest>();
 
-    constructor() { }
-    ngOnInit() {
-    }
+    constructor() 
+    { }
+
+    ngOnInit() 
+    { }
+
     onLiveRequestClick(liveRequest: LiveRequest) {
         this.acceptRequest.emit(liveRequest);
     }

@@ -1,13 +1,11 @@
 ﻿import { createSelector, createFeatureSelector } from '@ngrx/store';
 import * as fromSessions from './directline-session.reducers';
-import * as fromThreadStatus from './directline-thread-status.reducers';
 import * as fromLiveRequests from './live-request.reducers';
-import * as fromRoot from '../../store/index';
+import * as fromRoot from '../../shared/store/index';
 
 export interface LiveChatSupportState {
     liveRequests: fromLiveRequests.State;
     sessions: fromSessions.State;
-    threadStatus: fromThreadStatus.State;
 }
 
 export interface State extends fromRoot.State {
@@ -15,16 +13,14 @@ export interface State extends fromRoot.State {
 }
 
 export const reducers = {
-    liveRequests: fromSessions.reducer,
-    sessions: fromSessions.reducer,
-    threadStatus: fromThreadStatus.reducer,
+    liveRequests: fromLiveRequests.liveRequestsReducer,
+    sessions: fromSessions.reducer
 };
 
-
-export const getLiveRequestsState = createFeatureSelector<LiveChatSupportState>('liverequests');
+export const getLiveChatSupportState = createFeatureSelector<LiveChatSupportState>('livechatsupport');
 
 export const getLiveRequestEntitiesState = createSelector(
-    getLiveRequestsState,
+    getLiveChatSupportState,
     state => state.liveRequests
 );
 
@@ -48,57 +44,48 @@ export const getSelectedLiveRequest = createSelector(
     }
 );
 
-
-export const getSessionsState = createFeatureSelector<LiveChatSupportState>('sessions');
-
-export const getSessionEntitiesState = createSelector(
-    getSessionsState,
-    state => state.sessions
+export const getSessionsState = createSelector(
+    getLiveChatSupportState,
+    (state: LiveChatSupportState) => state.sessions
 );
 
 export const getSelectedSessionId = createSelector(
-    getSessionEntitiesState,
+    getSessionsState,
     fromSessions.getSelectedId
 );
 
-export const {
-    selectIds: getSessionIds,
-    selectEntities: getSessionEntities,
-    selectAll: getAllSessions,
-    selectTotal: getTotalSessions,
-} = fromSessions.adapter.getSelectors(getSessionEntitiesState);
+export const getSessionsThreads = createSelector(
+    getSessionsState,
+    fromSessions.getAllThreads
+);
 
-export const getSelectedSession = createSelector(
-    getSessionEntities,
-    getSelectedSessionId,
-    (entities, selectedId) => {
-        return selectedId && entities[selectedId];
-    }
+export const getSessionsMessages = createSelector(
+    getSessionsState,
+    fromSessions.getAllMessages
+);
+
+export const getCachedMessages = createSelector(
+    getSessionsState,
+    fromSessions.getAllCachedMessages
+);
+
+export const getCurrentMessages = createSelector(
+    getSessionsState,
+    fromSessions.getSelectedMessages
+);
+
+export const getCurrentThread = createSelector(
+    getSessionsState,
+    fromSessions.getSelectedThread
+);
+
+export const getCurrentThreadCachedMessages = createSelector(
+    getSessionsState,
+    fromSessions.getSelectedCachedMessages
 );
 
 
-export const getThreadStatusState = createFeatureSelector<LiveChatSupportState>('threadstatus');
-export const getThreadStatusEntitiesState = createSelector(
-    getThreadStatusState,
-    state => state.threadStatus
-);
 
-export const getSelectedThreadId = createSelector(
-    getThreadStatusEntitiesState,
-    fromThreadStatus.getSelectedId
-);
 
-export const {
-    selectIds: getThreadStatusIds,
-    selectEntities: getThreadStatusEntities,
-    selectAll: getAllThreadStatus,
-    selectTotal: getTotalThreads,
-} = fromThreadStatus.adapter.getSelectors(getThreadStatusEntitiesState);
 
-export const getSelectedThreadStatus = createSelector(
-    getThreadStatusEntities,
-    getSelectedSessionId,
-    (entities, selectedId) => {
-        return selectedId && entities[selectedId];
-    }
-);
+

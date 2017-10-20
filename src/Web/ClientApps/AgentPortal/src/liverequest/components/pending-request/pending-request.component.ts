@@ -1,5 +1,5 @@
 ﻿import { Component, ChangeDetectionStrategy, Input, OnInit} from '@angular/core';
-import { LiveRequest } from '../../../shared/model/live-request.model';
+import { LiveRequest } from '../../models/live-request.model';
 
 @Component({
     selector: 'pending-request',

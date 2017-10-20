@@ -1,4 +1,9 @@
-﻿import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+﻿import { 
+    Component, 
+    OnInit, 
+    Output, 
+    EventEmitter 
+    } from '@angular/core';
 
 @Component({
     selector: 'input-bar',
@@ -11,6 +16,7 @@ export class InputBarComponent implements OnInit{
     private messageSubmit: EventEmitter<string> = new EventEmitter<string>();
     
     private defaultInput: string | null = null;
+
     constructor(
     ) {}
 

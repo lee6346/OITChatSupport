@@ -19,6 +19,6 @@ ul {
     background-color: #dddfd4;
     padding-bottom: 2px;
 }
-.pending > li:hover {
-    background: white;
-}
+    .pending > li:hover {
+        background: white;
+    }

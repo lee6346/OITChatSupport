@@ -1,13 +1,22 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
-import * as fromAgentGroup from './reducers/index';
-import * as agentGroup from './actions/agent-group.actions';
-import { Agent } from '../shared/model/agent.model';
+import * as fromAgentGroup from '../reducers/index';
+import * as agentGroup from '../actions/agent-group.actions';
+import { Agent } from '../models/agent.model';
 
 @Component({
     selector: 'agent-group',
-    templateUrl: './agent-group.component.html',
+    template: `
+        <div class="agents-frame">
+        <div class="agents-header">
+            <h4 class="agents-title">Agents</h4>
+        </div>
+        <div class="agents-body">
+            <agent-list [agents]="agentGroup$ | async"></agent-list>
+        </div>
+    </div>
+    `,
     styleUrls: ['./agent-group.component.css']
 })
 export class AgentGroupComponent implements OnInit {

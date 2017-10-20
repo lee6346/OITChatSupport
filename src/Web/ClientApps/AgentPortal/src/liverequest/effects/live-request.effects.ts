@@ -8,7 +8,6 @@ import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/mergeMap';
 
 import * as liveRequestAction from '../actions/live-request.actions';
-import { GetConnectionThreadAction } from '../../store/action/direct-line.action';
 import { LiveRequest } from '../models/live-request.model';
 import { LiveRequestService } from '../../shared/services/live-request.service';
 import { Conversation } from 'botframework-directlinejs';
@@ -23,7 +22,7 @@ export class LiveRequestEffects {
     @Effect()
     acceptLiveRequest$: Observable<Action> = this.actions$
         .ofType(liveRequestAction.ACCEPT_LIVE_REQUEST).mergeMap((action: liveRequestAction.AcceptLiveRequestAction) =>
-            this.liveRequestService.acceptRequest$(action.liveRequest).map((data: Conversation) => {
+            this.liveRequestService.acceptLiveRequest$(action.liveRequest).map((data: Conversation) => {
                 console.log('accept complete');
                 return new liveRequestAction.AcceptLiveRequestCompleteAction(data);
         }))
@@ -35,7 +34,7 @@ export class LiveRequestEffects {
     @Effect()
     getLiveRequests$: Observable<Action> = this.actions$.ofType(liveRequestAction.LOAD_PENDING_REQUESTS)
         .switchMap((action: liveRequestAction.LoadPendingRequestsAction) =>
-            this.liveRequestService.getRequests$(action.group)
+            this.liveRequestService.getLiveRequests$(action.group)
                 .map((data: LiveRequest[]) => {
                     console.log('loading pending requests');
                     return new liveRequestAction.LoadPendingRequestsCompleteAction(data);

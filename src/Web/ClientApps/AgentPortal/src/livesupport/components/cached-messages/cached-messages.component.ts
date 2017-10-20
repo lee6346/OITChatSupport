@@ -1,5 +1,13 @@
-﻿import { Component, Input, Output, EventEmitter, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { Activity } from 'botframework-directlinejs';
+﻿import { 
+    Component, 
+    Input, 
+    Output, 
+    EventEmitter, 
+    OnInit, 
+    ChangeDetectionStrategy 
+    } from '@angular/core';
+
+import { DirectLineMessage } from '../../models';
 
 @Component({
     selector: 'cached-messages',
@@ -10,7 +18,7 @@ import { Activity } from 'botframework-directlinejs';
 export class CachedMessagesComponent implements OnInit{
 
     @Input()
-    cachedMessages: Activity[];
+    cachedMessages: DirectLineMessage[];
 
     @Output()
     hideCachedDisplay: EventEmitter<boolean> = new EventEmitter<boolean>();

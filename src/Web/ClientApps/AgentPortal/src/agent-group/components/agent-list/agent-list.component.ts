@@ -1,5 +1,5 @@
 ﻿import { Component, Input, OnInit, ChangeDetectionStrategy} from '@angular/core';
-import { Agent } from '../../../shared/model';
+import { Agent } from '../../models/agent.model';
 
 @Component({
     selector: 'agent-list',

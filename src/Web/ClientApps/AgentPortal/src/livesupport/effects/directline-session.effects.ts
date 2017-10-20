@@ -5,13 +5,10 @@ import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
-import { Activity, DirectLine } from 'botframework-directlinejs';
+import { Activity } from 'botframework-directlinejs';
 
 import * as directLineActions from '../actions/directline-session.actions';
-import * as liveRequestAction from '../actions/live-request.actions';
-
-import { DirectLineService } from '../../shared/services/direct-line.service';
-import { DirectLineThread, DirectLineMessageLoad } from '../../shared/model';
+import { DirectLineService } from '../services/direct-line.service';
 
 @Injectable()
 export class DirectLineEffects {
@@ -22,32 +19,40 @@ export class DirectLineEffects {
     ) { }
 
     @Effect()
-    getConnectionToken$: Observable<Action> = this.actions$.ofType(directLineActions.GET_CONNECTION_THREAD)
-        .switchMap((action: directLineActions.GetConnectionThreadAction) =>
-            this.directLineService.createDirectLineConnection(action.conversationId)
-                .map((data: DirectLineThread) => {
-                    return new directLineActions.GetConnectionThreadCompleteAction(data);
-                })
-                .catch((err: any) => {
-                    console.log('error getting the connection token...');
-                    return of({ type: 'getConnectionToken$' });
-                })
-        );
-
-    @Effect()
-    sendMessageActivity$: Observable<Action> = this.actions$.ofType(directLineActions.SEND_MESSAGE_ACTIVITY)
-        .switchMap((action: directLineActions.SendMessageActivityAction) => {
-            this.directLineService.sendMessage(action.directLineMessageLoad);
-            return Observable.of(
-                new directLineActions.SendMessageActivityCompleteAction(action.directLineMessageLoad.message));
+    sendMessageActivity$: Observable<Action> = this.actions$.ofType(directLineActions.SEND_SESSION_ACTIVITY)
+        .map((action: directLineActions.SendSessionActivityAction) => {
+            this.directLineService.sendMessage(action.chatLoad);
+            return new directLineActions.SendSessionActivityCompleteAction(action.chatLoad.activity);
         })
         .catch((err: any) => {
             console.log('error sending message activity to bot');
             return of({ type: 'sendMessageActivity$' });
-
         });
 
+    @Effect()
+    getCachedActivities$: Observable<Action> = this.actions$.ofType(directLineActions.GET_CACHED_ACTIVITY)
+        .switchMap((action: directLineActions.GetCachedActivityAction) => 
+            this.directLineService.getCachedActivities$(action.conversationId)
+            .map((activities: Activity[]) => {
+                return new directLineActions.GetCachedActivityCompleteAction(activities);
+            })
+            .catch((err: any) => {
+                console.log('error getting cached activities');
+                return of({type: 'getCahedActivies'});
+            })
+        );
 
-
-
+    @Effect()
+    removeSession$: Observable<Action> = this.actions$.ofType(directLineActions.REMOVE_SESSION)
+        .map((action: directLineActions.RemoveSessionAction) => {
+            this.directLineService.removeConnection(action.removeLoad.connection);
+            return new directLineActions.RemoveSessionComplete(action.removeLoad);
+        })
+        .catch((err: any) => {
+            console.log('error removing a connection with student who left');
+            return of({type: 'removesession$'});
+        });
 }
+
+
+

@@ -176,7 +176,7 @@
     flex: 5;
     border-style: outset;
 }
-.insert-window {
+.chat-session-window {
     position: relative;
     display: -ms-flexbox;
     display: -webkit-box;
@@ -191,22 +191,4 @@
     -moz-box-flex: 5;
     flex: 5;
 }
-.input-bar {
-    display: -ms-flexbox;
-    display: -webkit-box;
-    display: -moz-box;
-    display: flex;
-    -ms-flex-direction: column;
-    -webkit-box-orient: vertical;
-    -moz-box-orient: vertical;
-    flex-direction: column;
-    justify-content: center;
-    -ms-flex: 1;
-    -webkit-box-flex: 1;
-    -moz-box-flex: 1;
-    flex: 1;
-    border-radius: 2px;
-    padding-left: 10px;
-    padding-right: 10px;
-    background-color: #dddfd4;
-}
+

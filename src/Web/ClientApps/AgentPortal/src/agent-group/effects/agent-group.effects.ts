@@ -44,7 +44,7 @@ export class AgentGroupEffects {
     @Effect()
     getAgentGroup$: Observable<Action> = this.actions$.ofType(agentAction.RETRIEVE_GROUP_AGENTS)
         .switchMap((action: agentAction.RetrieveGroupAgentsAction) =>
-            this.agentGroupService.getAgentGroup$(action.agentId)
+            this.agentGroupService.getAgents$(action.agentId)
                 .map((data: Agent[]) => {
                     console.log('getting some of the agents');
                     return new agentAction.RetrieveGroupAgentsCompleteAction(data);

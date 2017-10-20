@@ -1,5 +1,11 @@
-﻿import { Component, Input, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import {  DirectLineThreadStatus } from '../../models';
+﻿import { 
+    Component, 
+    Input, 
+    OnInit, 
+    ChangeDetectionStrategy 
+    } from '@angular/core';
+
+import {  DirectLineThread } from '../../models';
 
 @Component({
     selector: 'chat-thread',
@@ -10,12 +16,11 @@ import {  DirectLineThreadStatus } from '../../models';
 export class ChatThreadComponent implements OnInit{
 
     @Input()
-    threadStatus: DirectLineThreadStatus;
+    thread: DirectLineThread;
 
     constructor() {
     }
 
     ngOnInit() {
-
     }
 }

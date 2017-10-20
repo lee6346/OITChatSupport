@@ -40,12 +40,6 @@ export function liveRequestsReducer(state = initialState, action: liveRequest.Ac
                 selectedConversationId: state.selectedConversationId,
             };
         }
-        /*case liveRequest.ACCEPT_LIVE_REQUEST_COMPLETE:/* { 
-            return {
-                ...adapter.removeOne(action.conversationId, state),
-                selectedConversationId: state.selectedConversationId,
-            };
-        } */
         default:
             return state;
     }

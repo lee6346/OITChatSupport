@@ -1,5 +1,11 @@
-﻿import { Component, Input, OnInit, ChangeDetectionStrategy} from '@angular/core';
-import { Activity } from 'botframework-directlinejs';
+﻿import { 
+    Component, 
+    Input, 
+    OnInit, 
+    ChangeDetectionStrategy
+    } from '@angular/core';
+
+import { DirectLineMessage } from '../../models';
 
 @Component({
     selector: 'chat-message',
@@ -10,10 +16,11 @@ import { Activity } from 'botframework-directlinejs';
 export class ChatMessageComponent implements OnInit{
 
     @Input()
-    chatMessage: Activity;
+    chatMessage: DirectLineMessage;
 
     constructor(
     ) { }
+
     ngOnInit() {
         console.log('messages: ' + this.chatMessage);
     }

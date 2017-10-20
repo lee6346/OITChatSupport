@@ -1,5 +1,5 @@
 ﻿<ul class="thread-items">
-    <li *ngFor="let session of directLineSessions" (click)="onClickThread(session.directLineThread.conversationId)">
-        <session [directLineSession]="session"></session>
+    <li *ngFor="let thread of thread" (click)="onClickThread(thread.conversationId)">
+        <session [thread]="thread"></session>
     </li>
 </ul>

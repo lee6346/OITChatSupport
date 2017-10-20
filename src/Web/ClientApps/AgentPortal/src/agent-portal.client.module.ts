@@ -5,14 +5,9 @@ import { CoreModule } from './shared/core.module';
 import { SharedModule } from './shared/shared.module';
 
 import { StoreModule } from '@ngrx/store';
-import { reducers, metaReducers} from './store/index';
+import { reducers, metaReducers} from './shared/store/index';
 import { EffectsModule } from '@ngrx/effects';
-/*
-import { AgentsEffects } from './store/effects/agents.effects';
-import { DirectLineEffects } from './store/effects/direct-line.effects';
-import { GroupChatEffects } from './store/effects/group-chat.effects';
-import { LiveRequestEffects } from './store/effects/live-request.effects';
-*/
+
 import { HomeModule } from './home/home.module';
 import { AgentPortalComponent } from './agent-portal.component';
 import { AgentPortalRoutingModule } from './agent-portal.routing.module';

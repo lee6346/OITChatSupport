@@ -3,8 +3,6 @@ import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 
 import { LiveRequest } from '../models/live-request.model';
 import * as liveRequest from '../actions/live-request.actions';
-import { Dictionary } from "@ngrx/entity/src/models";
-
 
 export interface State extends EntityState<LiveRequest> {
     selectedConversationId: string | null;

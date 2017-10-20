@@ -3,10 +3,13 @@ import { SharedModule } from '../shared/shared.module';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
-import { AgentGroupComponent } from './agent-group.component';
+import { GroupChatComponent } from './containers/group-chat.component';
+import { AgentGroupComponent } from './containers/agent-group.component';
 import { AgentListComponent } from './components/agent-list/agent-list.component';
 import { AgentComponent } from './components/agent/agent.component';
-
+import { AgentMessageComponent } from './components/agent-message/agent-message.component';
+import { MessageInputComponent } from './components/message-input/message-input.component';
+import { MessageListComponent } from './components/message-list/message-list.component';
 import { AgentGroupEffects } from './effects/agent-group.effects';
 import { reducers } from './reducers/index';
 
@@ -19,12 +22,20 @@ import { reducers } from './reducers/index';
     declarations: [
         AgentGroupComponent,
         AgentListComponent,
-        AgentComponent
+        AgentComponent,
+        GroupChatComponent,
+        AgentMessageComponent,
+        MessageListComponent,
+        MessageInputComponent
     ],
     exports: [
         AgentGroupComponent,
         AgentListComponent,
-        AgentComponent
+        AgentComponent,
+        GroupChatComponent,
+        AgentMessageComponent,
+        MessageListComponent,
+        MessageInputComponent
     ]
 })
 export class AgentGroupModule { }

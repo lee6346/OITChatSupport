@@ -1,5 +1,13 @@
-﻿import { Component, OnInit, Input, EventEmitter, Output, ChangeDetectionStrategy } from '@angular/core';
-import { DirectLineThreadStatus } from '../../models';
+﻿import { 
+    Component, 
+    OnInit, 
+    Input, 
+    EventEmitter, 
+    Output, 
+    ChangeDetectionStrategy 
+    } from '@angular/core';
+
+import { DirectLineThread } from '../../models';
 
 @Component({
   selector: 'chat-thread-list',
@@ -10,7 +18,7 @@ import { DirectLineThreadStatus } from '../../models';
 export class ChatThreadListComponent implements OnInit {
 
     @Input()
-    threadStatuses: DirectLineThreadStatus[];
+    threads: DirectLineThread[];
 
     @Output()
     switchThread: EventEmitter<string> = new EventEmitter<string>();
@@ -18,6 +26,7 @@ export class ChatThreadListComponent implements OnInit {
     constructor() { }
     ngOnInit() {
     }
+
     onClickThread(conversationId: string): void {
         this.switchThread.emit(conversationId);
     }

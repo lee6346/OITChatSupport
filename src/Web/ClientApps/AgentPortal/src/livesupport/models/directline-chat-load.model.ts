@@ -1,6 +1,6 @@
-﻿import { IBotConnection, Activity } from 'botframework-directlinejs';
+﻿import { DirectLine, Activity } from 'botframework-directlinejs';
 
 export interface DirectLineChatLoad{
     activity: Activity;
-    connection: IBotConnection;
+    connection: DirectLine;
 }

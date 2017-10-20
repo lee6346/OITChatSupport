@@ -1,11 +1,13 @@
 ﻿import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { HubConnection } from '@aspnet/signalr-client';
-import { LiveRequest, Agent, AgentMessage } from '../model';
+import { AgentMessage } from '../../agent-group/models/agent-message.model';
+import { Agent } from '../../agent-group/models/agent.model';
+import { LiveRequest } from '../../livesupport/models/live-request.model';
 
-import {ReceiveMessageAction} from '../../store/action/group-chat.action';
-import {ReceivedGroupJoinedAction, ReceivedGroupLeftAction } from '../../store/action/agents.action';
-import {ReceiveRemoveRequestAction, ReceiveLiveRequestAction } from '../../store/action/live-request.action';
+
+import {ReceivedGroupJoinedAction, ReceivedGroupLeftAction, ReceiveMessageAction } from '../../agent-group/actions/agent-group.actions';
+import {ReceiveRemoveRequestAction, ReceiveLiveRequestAction } from '../../liverequest/actions/live-request.actions';
 
 @Injectable()
 export class AgentHubGateway{
