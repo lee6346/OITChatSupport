@@ -24,6 +24,7 @@ export function reducer(state = initialState, action: directLineSession.Actions 
     switch (action.type) {
 
         case directLineSession.REMOVE_SESSION_COMPLETE:
+            console.log('direct line reducer: REMOVE_SESSION_COMPLETE');
             return Object.assign({}, state, {
                 selectedThreadId: state.selectedThreadId,
                 threads: state.threads.delete(action.removeLoad.threadId),
@@ -34,6 +35,7 @@ export function reducer(state = initialState, action: directLineSession.Actions 
             });
 
         case directLineSession.SEND_SESSION_ACTIVITY_COMPLETE:
+            console.log('direct line reducer: SEND_SESSION_ACTIVTY_COMPLETE');
             return Object.assign({}, state, {
                 selectedThreadId: state.selectedThreadId,
                 threads: state.threads,
@@ -42,6 +44,7 @@ export function reducer(state = initialState, action: directLineSession.Actions 
             });
 
         case directLineSession.RECEIVE_SESSION_ACTIVITY:
+            console.log('direct line reducer: RECEIVED_SESSION_ACTIVITY');
             return Object.assign({}, state, {
                 selectedThreadId: state.selectedThreadId,
                 threads: state.threads,
@@ -50,6 +53,7 @@ export function reducer(state = initialState, action: directLineSession.Actions 
             });
 
         case directLineSession.SWITCH_SESSION:
+            console.log('direct line reducer: SWITCHING_SESSION');
             return Object.assign({}, state, {
                 selectedThreadId: action.conversationId,
                 threads: state.threads,
@@ -58,6 +62,7 @@ export function reducer(state = initialState, action: directLineSession.Actions 
             });
 
         case directLineSession.GET_CACHED_ACTIVITY_COMPLETE:
+            console.log('direct line reducer: GETTING_CACHED ACTIV COMPLETE');
             return Object.assign({}, state, {
                 selectedThreadId: state.selectedThreadId,
                 threads: state.threads,
@@ -66,6 +71,7 @@ export function reducer(state = initialState, action: directLineSession.Actions 
             });
 
         case ACCEPT_LIVE_REQUEST_COMPLETE:
+            console.log('direct line reducer: ACCEPT REQUEST COMPLETED');
             return Object.assign({}, state, {
                 selectedThreadId: state.selectedThreadId,
                 threads: state.threads.set(action.directLineThread

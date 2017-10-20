@@ -61,7 +61,6 @@ namespace OITChatSupport.Web
             services.AddScoped<IDirectLineThreadRepository, DirectLineThreadRepository>();
             services.AddScoped<IEventLogRepository, EventLogRepository>();
 
-            services.AddScoped<IDirectLineService, DirectLineService>();
             services.AddScoped<ILiveTransferService, LiveTransferService>();
             services.AddScoped<IAccountService, AccountService>();
             services.AddScoped<IBotConnectionService, BotConnectionService>();

@@ -24,12 +24,15 @@ export class DirectLineSessionComponent implements OnInit {
         private store: Store<fromChatSupport.State>
     ) {
         
-        
+        console.log('direct line session container component initialized');
         this.sessionMessages$ = store.select(fromChatSupport.getCurrentMessages).map((item: List<DirectLineMessage>) => item.toArray());
         //this.cachedMessages$ = store.select(fromChatSupport.getCurrentThreadCachedMessages).map((item: List<DirectLineMessage>) => item.toArray());
-        store.select(fromChatSupport.getCurrentThread).subscribe(
-            (next: DirectLineThread) => this.currentThread = next,
-            (err: any) => console.log('error'),
+        store.select(fromChatSupport.getCurrentThread).filter(this.filterUndefinedConversationIds).subscribe(
+            (next: DirectLineThread) => {
+                if (typeof next !== 'undefined')
+                    this.currentThread = next;
+            },
+            (err: any) => console.log('direct line session container: error with store select for retriving the thread '),
             () => console.log('complete')
         );
     }
@@ -37,8 +40,21 @@ export class DirectLineSessionComponent implements OnInit {
     ngOnInit() {
     }
 
+    filterUndefinedConversationIds(thread: DirectLineThread): boolean {
+        if (typeof thread === 'undefined')
+            return false;
+        if (typeof thread === null)
+            return false;
+        if (thread === null)
+            return false;
+        return true;
+    }
+
     onMessageSubmitted(message: string) {
-        if(this.currentThread.conversationId){
+        if (typeof this.currentThread.conversationId === undefined) {
+            console.log('direct line session container: emitted message from input bar cannot be sent because the conversation id is undefined');
+        }
+        else {
             let payload: DirectLineChatLoad = {
                 activity: {
                     from: {
@@ -54,6 +70,7 @@ export class DirectLineSessionComponent implements OnInit {
             };
             this.store.dispatch(new chatSessions.SendSessionActivityAction(payload));
         }
+        
     }
 
 }

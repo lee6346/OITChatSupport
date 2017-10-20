@@ -13,6 +13,14 @@
   </PropertyGroup>
   <ItemGroup>
     <None Remove="ClientApps\AgentPortal\src\livesupport\services\direct-line.service.ts" />
+    <None Remove="ClientApps\Chatbot\environments\environment.ts" />
+    <None Remove="ClientApps\Chatbot\src\chat-bot\chat-bot.module.ts" />
+    <None Remove="ClientApps\Chatbot\src\model\directline-message.model.ts" />
+    <None Remove="ClientApps\Chatbot\src\shared\index.reducer.ts" />
+    <None Remove="ClientApps\Chatbot\src\store\chat-bot.actions.ts" />
+    <None Remove="ClientApps\Chatbot\src\store\chat-bot.effects.ts" />
+    <None Remove="ClientApps\Chatbot\src\store\chat-bot.reducer.ts" />
+    <None Remove="ClientApps\Chatbot\src\store\index.ts" />
   </ItemGroup>
 
   <ItemGroup>
@@ -57,6 +65,14 @@
   <ItemGroup>
     <TypeScriptCompile Include="ClientApps\AgentPortal\src\livesupport\containers\feature-containers.component.css" />
     <TypeScriptCompile Include="ClientApps\AgentPortal\src\livesupport\services\direct-line.service.ts" />
+    <TypeScriptCompile Include="ClientApps\Chatbot\environments\environment.ts" />
+    <TypeScriptCompile Include="ClientApps\Chatbot\src\chat-bot\chat-bot.module.ts" />
+    <TypeScriptCompile Include="ClientApps\Chatbot\src\model\directline-message.model.ts" />
+    <TypeScriptCompile Include="ClientApps\Chatbot\src\shared\index.reducer.ts" />
+    <TypeScriptCompile Include="ClientApps\Chatbot\src\store\chat-bot.actions.ts" />
+    <TypeScriptCompile Include="ClientApps\Chatbot\src\store\chat-bot.effects.ts" />
+    <TypeScriptCompile Include="ClientApps\Chatbot\src\store\chat-bot.reducer.ts" />
+    <TypeScriptCompile Include="ClientApps\Chatbot\src\store\index.ts" />
   </ItemGroup>
   
 </Project>

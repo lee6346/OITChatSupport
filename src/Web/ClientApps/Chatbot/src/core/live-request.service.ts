@@ -1,55 +1,36 @@
-﻿import { Injectable, Inject } from '@angular/core';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
-//import { API_CONFIG, ApiConfig } from '../chatbot-config.module';
-import { LiveRequest, ErrorMessage } from '../model';
+﻿import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs/Rx';
 
-import * as Rx from 'rxjs/Rx';
+import { LiveRequest } from '../model';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class LiveRequestService {
 
-    private oitLiveTransferUri: string = 'http://localhost:5000/api/LiveSupport/MakeRequest';
-    private oitCancelTransferUri: string = 'http://localhost:5000/api/LiveSupport/CancelRequest';
-
     constructor(
-        //@Inject(API_CONFIG) private apiConfig: ApiConfig,
-        private http: Http
+        private http: HttpClient
     ) { }
 
-    public sendLiveRequest$(conversationId: string, user: string, botHandle: string): Rx.Observable<Response> {
-        return this.http.post(
-            this.oitLiveTransferUri,
-            { conversationId: conversationId, user: user, botHandle: botHandle } as LiveRequest,
-            this.getRequestOptions())
-            .map(res => res.json())
-            .catch(this.liveRequestError);
+    public sendLiveRequest$(request: LiveRequest): void {
+        this.http.post<Response>(
+            environment.baseWebUrl +
+            environment.makeLiveRequest, request)
+            .subscribe(
+            next => console.log('sent request'),
+            (err: any) => console.log('error sending requets'),
+            () => console.log('completed')
+        );
     }
 
-    public cancelLiveRequest$(conversationId: string, user: string, botHandle: string): Rx.Observable<Response> {
-        return this.http.post(
-            this.oitCancelTransferUri,
-            { conversationId: conversationId, user: user, action: 'remove', botHandle: botHandle } as LiveRequest,
-            this.getRequestOptions())
-            .map(res => res.json())
-            .catch(this.liveRequestError);
-    }
-
-    public getRequestOptions(): RequestOptions {
-        let headers: Headers = new Headers({ 'Content-Type': 'application/json' });
-        return new RequestOptions({ headers: headers });
-    }
-
-    public liveRequestError(error: any): Rx.Observable<any> {
-        if (error instanceof Response) {
-            var errMessage;
-            try {
-                errMessage = error.json().error;
-            } catch (err) {
-                errMessage = error.statusText;
-            }
-            return Rx.Observable.throw(
-                { errorMessage: 'Http Server Error', errorStackTrack: errMessage, errorLevel: 2 } as ErrorMessage);
-        }
-        return Rx.Observable.throw(error);
+    public cancelLiveRequest$(request: LiveRequest): void {
+        this.http.post<Response>(
+            environment.baseWebUrl +
+            environment.cancelLiveRequest, request)
+            .subscribe(
+            next => console.log('cancel request'),
+            (err: any) => console.log('error cancelling requets'),
+            () => console.log('completed')
+        );
     }
 }

@@ -3,10 +3,10 @@ import { Agent } from '../models/agent.model';
 import { AgentMessage } from '../models/agent-message.model';
 
 
-export const JOIN_GROUP = '[agent] JOIN_GROUP';
-export const LEAVE_GROUP = '[agent] LEAVE_GROUP';
+//export const JOIN_GROUP = '[agent] JOIN_GROUP';
+//export const LEAVE_GROUP = '[agent] LEAVE_GROUP';
 export const JOIN_GROUP_COMPLETE = '[agent] JOIN_GROUP_COMPLETE';
-export const LEAVE_GROUP_COMPLETE = '[agent] LEAVE_GROUP_COMPLETE';
+//export const LEAVE_GROUP_COMPLETE = '[agent] LEAVE_GROUP_COMPLETE';
 export const RECEIVED_GROUP_JOINED = '[agent] RECEIVED_GROUP_JOINED';
 export const RECEIVED_GROUP_LEFT = '[agent] RECEIVED_GROUP_LEFT';
 export const RETRIEVE_GROUP_AGENTS = '[agent] RETRIEVE_GROUP_AGENTS';
@@ -17,7 +17,7 @@ export const RECEIVE_MESSAGE = '[agentmessage] RECEIVE_MESSAGE';
 export const RETRIEVE_CURRENT_MESSAGES = '[agentmessage] RETRIEVE_CURRENT_MESSAGES';
 export const RETRIEVE_CURRENT_MESSAGES_COMPLETE = '[agentmessage] RETRIEVE_CURRENT_MESSAGES_COMPLETE';
 
-
+/*
 export class JoinGroupAction implements Action {
     readonly type = JOIN_GROUP;
     constructor(public agent: Agent) { }
@@ -26,15 +26,16 @@ export class LeaveGroupAction implements Action {
     readonly type = LEAVE_GROUP;
     constructor(public agent: Agent) { }
 
-}
+}*/
 export class JoinGroupActionComplete implements Action {
     readonly type = JOIN_GROUP_COMPLETE;
     constructor(public agent: Agent) { }
 }
+/*
 export class LeaveGroupActionComplete implements Action {
     readonly type = LEAVE_GROUP_COMPLETE;
     constructor(public agent: Agent) { }
-}
+}*/
 export class ReceivedGroupJoinedAction implements Action {
     readonly type = RECEIVED_GROUP_JOINED;
     constructor(public agent: Agent) { }

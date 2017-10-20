@@ -23,6 +23,7 @@ export class DirectLineService {
     ) {}
 
     createDirectLineConnection$(conversationId: string): Observable<DirectLineThread> {
+        console.log('direct line service: retrieving a directline thread from the web API');
         return this.http.get<Conversation>(
             environment.baseWebUrl +
             environment.chatStreamUrl + '/' +
@@ -43,6 +44,7 @@ export class DirectLineService {
             cachedMessageIds: [],
             unseenMessages: 0
         };
+        console.log('direct line service: instantiated a direct line');
         session.connection.activity$
             .filter(this.filterStudentMessage).subscribe((activity: Activity) => 
                 this.store.dispatch(new ReceiveSessionActivityAction(activity)),
@@ -53,6 +55,7 @@ export class DirectLineService {
     }
 
     getCachedActivities$(conversationId: string): Observable<Activity[]>{
+        console.log('direct line service: making api call to retrieve cached watermark activities');
         return this.http.get<Activity[]>(
             environment.directLineUrl +
             environment.activities(conversationId) +
@@ -63,6 +66,7 @@ export class DirectLineService {
     sendMessage(directLinePayload: DirectLineChatLoad) {
         directLinePayload.connection.postActivity(directLinePayload.activity).subscribe(
             (id: string) => {
+                console.log('direct line service: posted activity to direct line, now dispatching the payload to state');
                 directLinePayload.activity.id = id;
                 this.store.dispatch(new SendSessionActivityCompleteAction(directLinePayload.activity));
             },

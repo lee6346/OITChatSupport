@@ -7,7 +7,7 @@ import { LiveRequest } from '../../livesupport/models/live-request.model';
 
 
 import {ReceivedGroupJoinedAction, ReceivedGroupLeftAction, ReceiveMessageAction } from '../../agent-group/actions/agent-group.actions';
-import {ReceiveRemoveRequestAction, ReceiveLiveRequestAction } from '../../liverequest/actions/live-request.actions';
+import {ReceiveRemoveRequestAction, ReceiveLiveRequestAction } from '../../livesupport/actions/live-request.actions';
 
 @Injectable()
 export class AgentHubGateway{

@@ -6,11 +6,11 @@
         <div class="main-display">
             <div class="chat-options">
                 <div class="chat-button">
-                    <img class="button-image" src="../../../../wwwroot/images/chatbot_icon.png" (click)="showChatWindow()" />
+                    <img class="button-image" (click)="showChatWindow()" />
                 </div>
             </div>
             <div class="chat-window">
-                <chat *ngIf="chatDisplayed" (removeWindow)="removeChatWindow($event)"></chat>
+                <chat-bot *ngIf="chatDisplayed" (removeWindow)="removeChatWindow()"></chat-bot>
             </div>
             <div class="feedback-center">
 

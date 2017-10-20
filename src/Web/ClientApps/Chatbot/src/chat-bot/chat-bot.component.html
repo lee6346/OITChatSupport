@@ -1,0 +1,34 @@
+﻿<div class="chat-window">
+    <div class="window-header">
+        <button type="button" class="close-button" (click)="closeWindow()"><span aria-hidden="true">&times;</span></button>
+
+        <h4 class="window-title">OIT ChatBot</h4>
+    </div>
+    <div class="window-body">
+        <div class="message-display">
+
+            <div *ngIf="notConnected" class="loader">
+
+            </div>
+            
+            <ul *ngIf="activityMessages">
+                <li *ngFor="let msg of directLineMessages"
+                    class="msg-row" [ngClass]="msgAlignment(msg.senderId)">
+                    <span class="bubble" [ngClass]="bubbleProperties(msg.senderId)">
+                        <span class="message-sender">{{msg.senderId}}</span>
+                        {{msg.text}}
+                    </span>
+                </li>
+            </ul>
+                
+        </div>
+        <div class="partition"></div>
+        <div class="input-area">
+            <input #msgref type="text" [(ngModel)]="defaultTrigger" class="text-input" (keyup.enter)="submitMessage(msgref.value)" [disabled]="notConnected" />
+        </div>
+        <div class="button-container">
+            <button type="button" class="req-button" (click)="makeLiveRequest()">Live Request</button>
+        </div>
+    </div>
+
+</div>

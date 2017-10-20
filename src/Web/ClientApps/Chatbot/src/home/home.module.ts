@@ -1,21 +1,19 @@
 ﻿import { NgModule } from '@angular/core';
-//import { SharedModule } from '../shared/shared.module';
-import { SharedModule } from '../shared';
+import { SharedModule } from '../shared/shared.module';
+import { ChatBotModule } from '../chat-bot/chat-bot.module';
 import { HomeComponent } from './home.component';
-import { ChatComponent } from './chatcomponent/chat.component';
 
 
 @NgModule({
     imports: [
-        SharedModule
+        SharedModule,
+        ChatBotModule
     ],
     declarations: [
         HomeComponent,
-        ChatComponent,
     ],
     exports: [
         HomeComponent,
-        ChatComponent
     ]
 })
 export class HomeModule { }

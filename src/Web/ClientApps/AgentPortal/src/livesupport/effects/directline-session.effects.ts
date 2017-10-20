@@ -21,6 +21,7 @@ export class DirectLineEffects {
     @Effect()
     sendMessageActivity$: Observable<Action> = this.actions$.ofType(directLineActions.SEND_SESSION_ACTIVITY)
         .map((action: directLineActions.SendSessionActivityAction) => {
+            console.log('effect: new message is coming...');
             this.directLineService.sendMessage(action.chatLoad);
             return new directLineActions.SendSessionActivityCompleteAction(action.chatLoad.activity);
         })
@@ -33,7 +34,8 @@ export class DirectLineEffects {
     getCachedActivities$: Observable<Action> = this.actions$.ofType(directLineActions.GET_CACHED_ACTIVITY)
         .switchMap((action: directLineActions.GetCachedActivityAction) => 
             this.directLineService.getCachedActivities$(action.conversationId)
-            .map((activities: Activity[]) => {
+                .map((activities: Activity[]) => {
+                console.log('effect: retrieving the cached activities via watermark...')
                 return new directLineActions.GetCachedActivityCompleteAction(activities);
             })
             .catch((err: any) => {
@@ -45,6 +47,7 @@ export class DirectLineEffects {
     @Effect()
     removeSession$: Observable<Action> = this.actions$.ofType(directLineActions.REMOVE_SESSION)
         .map((action: directLineActions.RemoveSessionAction) => {
+            console.log('effect: about to end a direct line connection');
             this.directLineService.removeConnection(action.removeLoad.connection);
             return new directLineActions.RemoveSessionComplete(action.removeLoad);
         })
