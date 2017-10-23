@@ -1,12 +1,12 @@
 ﻿import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Store } from '@ngrx/store';
-import * as fromChatBot from '../store/chat-bot.actions';
-import * as chatBotReduc from '../store/chat-bot.reducer';
+import * as fromChatBot from '../chat-bot/store/chat-bot.actions';
+import * as chatBotReduc from '../chat-bot/store/chat-bot.reducer';
 import { DirectLine, Conversation, Activity } from 'botframework-directlinejs';
-import { Observable } from 'rxjs/Rx';
+import { Observable, Subject } from 'rxjs/Rx';
 
-import { SimpleMessage } from '../model';
+import { SimpleMessage } from '../chat-bot/models';
 import { environment } from '../../environments/environment';
 
 @Injectable()
@@ -14,6 +14,7 @@ export class DirectLineService {
 
     private directLineSocket: DirectLine;
     private connected: boolean = false;
+    private directLineUnsubscribe: Subject<void> = new Subject<void>();
 
     constructor(
         private http: HttpClient,
@@ -28,14 +29,20 @@ export class DirectLineService {
     }
 
     startDirectLineSession(conversation: Conversation): string {
+        console.log('conversation id: ' + conversation.conversationId + ', token: ' + conversation.token + ', streamURL: ' + conversation.streamUrl);
         if (this.connected === false) {
-            this.directLineSocket = new DirectLine(conversation);
-            this.directLineSocket.activity$
+            this.connected = true;
+            this.directLineSocket = new DirectLine({
+                token: conversation.token,
+                webSocket: true,
+            });
+            this.directLineSocket.activity$.filter((activity: Activity) => activity.from.id !== 'student').takeUntil(this.directLineUnsubscribe)
                 .subscribe(
                 (activity: Activity) => {
                     this.connected = true;
+                    console.log('conversation id: ' + conversation.conversationId + ', token: ' + conversation.token + ', streamURL: ' + conversation.streamUrl);
                     this.store.dispatch(new fromChatBot
-                        .DirectLineActivityReceivedAction(activity));
+                        .MessageActivityReceivedAction(activity));
                 },
                 (err: any) => console.log('error'),
                 () => console.log('complete')
@@ -56,6 +63,8 @@ export class DirectLineService {
     }
 
     endConnection(): void{
+        this.connected = false;
+        this.directLineUnsubscribe.next();
         this.directLineSocket.end();
     }
 

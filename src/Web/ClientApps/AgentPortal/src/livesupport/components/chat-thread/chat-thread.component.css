@@ -6,7 +6,6 @@
     text-align: right;
 }
 .thread-id {
-    position: absolute;
-    bottom: 0;
-    border-bottom: 0.01px ridge #808080;
+    position: relative;
+    display: block;
 }

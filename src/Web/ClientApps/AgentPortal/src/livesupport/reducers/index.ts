@@ -1,11 +1,17 @@
 ﻿import { createSelector, createFeatureSelector } from '@ngrx/store';
-import * as fromSessions from './directline-session.reducers';
+
+import * as fromThreads from './directline-thread.reducers';
 import * as fromLiveRequests from './live-request.reducers';
-import * as fromRoot from '../../shared/store/index';
+import * as fromMessages from './directline-message.reducers';
+import * as fromRoot from '../../shared/index';
+import { List } from 'immutable';
+import { DirectLineMessage, DirectLineThread } from '../models';
+import { DirectLineThreadVm } from '../viewmodels';
 
 export interface LiveChatSupportState {
     liveRequests: fromLiveRequests.State;
-    sessions: fromSessions.State;
+    threads: fromThreads.State;
+    messages: fromMessages.State;
 }
 
 export interface State extends fromRoot.State {
@@ -13,79 +19,66 @@ export interface State extends fromRoot.State {
 }
 
 export const reducers = {
-    liveRequests: fromLiveRequests.liveRequestsReducer,
-    sessions: fromSessions.reducer
+    liveRequests: fromLiveRequests.reducer,
+    threads: fromThreads.reducer,
+    messages: fromMessages.reducer
 };
 
 export const getLiveChatSupportState = createFeatureSelector<LiveChatSupportState>('livechatsupport');
 
+// selector for each table
 export const getLiveRequestEntitiesState = createSelector(
     getLiveChatSupportState,
     state => state.liveRequests
 );
 
-export const getSelectedConversationId = createSelector(
-    getLiveRequestEntitiesState,
-    fromLiveRequests.getSelectedId
-);
-
-export const {
-    selectIds: getConversationIds,
-    selectEntities: getLiveRequestEntities,
-    selectAll: getAllRequests,
-    selectTotal: getTotalPending,
-} = fromLiveRequests.adapter.getSelectors(getLiveRequestEntitiesState);
-
-export const getSelectedLiveRequest = createSelector(
-    getLiveRequestEntities,
-    getSelectedConversationId,
-    (entities, selectedId) => {
-        return selectedId && entities[selectedId];
-    }
-);
-
-export const getSessionsState = createSelector(
+export const getThreadEntitiesState = createSelector(
     getLiveChatSupportState,
-    (state: LiveChatSupportState) => state.sessions
+    state => state.threads
 );
 
-export const getSelectedSessionId = createSelector(
-    getSessionsState,
-    fromSessions.getSelectedId
+export const getMessageEntitiesState = createSelector(
+    getLiveChatSupportState,
+    state => state.messages
 );
 
-export const getSessionsThreads = createSelector(
-    getSessionsState,
-    fromSessions.getAllThreads
+// selector for list of live requests
+export const getLiveRequestList = createSelector(
+    getLiveRequestEntitiesState,
+    fromLiveRequests.getPendingRequests
 );
 
-export const getSessionsMessages = createSelector(
-    getSessionsState,
-    fromSessions.getAllMessages
+export const getAllThreads = createSelector(
+    getThreadEntitiesState,
+    state => state.threads.toList()
 );
 
-export const getCachedMessages = createSelector(
-    getSessionsState,
-    fromSessions.getAllCachedMessages
+// selector for thread ID
+export const getSelectedThreadId = createSelector(
+    getThreadEntitiesState,
+    fromThreads.getSelectedThreadId
 );
 
-export const getCurrentMessages = createSelector(
-    getSessionsState,
-    fromSessions.getSelectedMessages
+// selector to current thread
+export const getSelectedThread = createSelector(
+    getThreadEntitiesState,
+    fromThreads.getSelectedThread,
 );
 
-export const getCurrentThread = createSelector(
-    getSessionsState,
-    fromSessions.getSelectedThread
+export const getSelectedThreadMessages = createSelector(
+    getMessageEntitiesState,
+    getSelectedThreadId,
+    (messages, threadId) => messages.messages.filter((message: DirectLineMessage) => message.conversationId === threadId).toList(),
 );
 
-export const getCurrentThreadCachedMessages = createSelector(
-    getSessionsState,
-    fromSessions.getSelectedCachedMessages
+export const getSelectedThreadCachedMessages = createSelector(
+    getMessageEntitiesState,
+    getSelectedThreadId,
+    (messages, threadId) => threadId ? messages.cachedMessages.get(threadId) : [] 
 );
 
-
-
-
-
-
+export const getSelectedThreadMessages2 = createSelector(
+    getMessageEntitiesState,
+    fromThreads.getSelectedThreadMessageIds,
+    (messages, messageIds) => messageIds.map(id => messages.messages.get(id))  
+);

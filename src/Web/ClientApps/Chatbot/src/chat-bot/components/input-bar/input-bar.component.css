@@ -1,0 +1,16 @@
+﻿.input-bar-container {
+    display: block;
+    height: 7%;
+    background: none;
+    width: 100%;
+}
+
+.text-bar {
+    display: inline;
+    resize: none;
+    overflow-y: auto;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}

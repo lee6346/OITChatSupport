@@ -5,6 +5,12 @@ export interface DirectLineThread{
     messageIds: string[];
     cachedMessageIds: string[];
     active: boolean;
-    unseenMessages:number;
     connection: DirectLine;
+}
+
+
+export interface ChatSessionThread {
+    threadId: string;
+    unseenMessageIds: string[];
+    active: boolean;
 }

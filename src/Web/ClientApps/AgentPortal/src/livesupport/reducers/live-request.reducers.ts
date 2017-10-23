@@ -1,45 +1,34 @@
-﻿import { createSelector } from '@ngrx/store';
-import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
-
-import { LiveRequest } from '../models/live-request.model';
+﻿import { LiveRequest } from '../models/live-request.model';
 import * as liveRequest from '../actions/live-request.actions';
+import { List } from 'immutable';
 
-export interface State extends EntityState<LiveRequest> {
-    selectedConversationId: string | null;
+export interface State {
+    liveRequests: List<LiveRequest>;
 }
 
-export const adapter: EntityAdapter<LiveRequest> = createEntityAdapter<LiveRequest>({
-    selectId: (liveRequest: LiveRequest) => liveRequest.conversationId,
-    sortComparer: false,
-});
+export const initialState: State = {
+    liveRequests: List<LiveRequest>(),
+};
 
-export const initialState: State = adapter.getInitialState({
-    selectedConversationId: null,
-});
-
-export function liveRequestsReducer(state = initialState, action: liveRequest.Actions): State {
+export function reducer(state = initialState, action: liveRequest.Actions): State {
     switch (action.type) {
-        case liveRequest.RECEIVE_LIVE_REQUEST: {
-            return {
-                ...adapter.addOne(action.liveRequest, state),
-                selectedConversationId: state.selectedConversationId,
-            };
-        }
-        case liveRequest.RECEIVE_REMOVE_REQUEST: {
-            return {
-                ...adapter.removeOne(action.liveRequest.conversationId, state),
-                selectedConversationId: state.selectedConversationId,
-            };
-        }
-        case liveRequest.LOAD_PENDING_REQUESTS_COMPLETE: {
-            console.log('received the requests in the reducer!');
-            return {
-                ...adapter.addMany(action.liveRequest, state),
-                selectedConversationId: state.selectedConversationId,
-            };
-        }
+        case liveRequest.LIVE_REQUEST_RECEIVED:
+            return Object.assign({}, state, {
+                liveRequests: state.liveRequests.push(action.liveRequest),
+            });
+        case liveRequest.LIVE_REQUEST_REMOVED:
+            return Object.assign({}, state, {
+                liveRequests: state.liveRequests.filter((request: LiveRequest) =>
+                    request.conversationId !== action.liveRequest.conversationId),
+            });
+        case liveRequest.LIVE_REQUESTS_LOADED:
+            return Object.assign({}, state, {
+                liveRequests: state.liveRequests.concat(action.liveRequest)
+            });
         default:
             return state;
     }
 }
-export const getSelectedId = (state: State) => state.selectedConversationId;
+
+export const getTotalRequests = (state: State) => state.liveRequests.count;
+export const getPendingRequests = (state: State) => state.liveRequests;

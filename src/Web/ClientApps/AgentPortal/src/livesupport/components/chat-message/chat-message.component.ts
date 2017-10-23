@@ -22,6 +22,6 @@ export class ChatMessageComponent implements OnInit{
     ) { }
 
     ngOnInit() {
-        console.log('messages: ' + this.chatMessage);
+        console.log('new message: ' + this.chatMessage);
     }
 }

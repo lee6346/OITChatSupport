@@ -1,4 +1,78 @@
-﻿
+﻿.row.main-display{
+    height: 90%;
+}
+.row.input-container{
+    height: 10%;
+}
+.row.chat-display-header{
+    height: 10%;
+    border-style: outset;
+}
+.row.chat-display-body{
+    height: 90%;
+    padding: 10px 10px 10px 10px;
+}
+
+.chat-display-message-container{
+    height: 100%;
+    border-radius: 2%;
+    overflow-y: auto;
+    background-color: white;
+}
+
+.cached-display-message-container{
+    height: 100%;
+    border-radius: 2%;
+    overflow-y: auto;
+    background-color: white;
+}
+
+.row.cached-display-header{
+    height: 10%;
+    border-style: outset;
+}
+.row.cached-display-body {
+    height: 90%;
+    padding: 10px 10px 10px 10px;
+}
+
+.cached-display{
+    height: 100%;
+}
+
+.chat-display{
+    height: 100%;
+}
+
+.row.request-header {
+    height: 8%;
+    border-style: outset;
+}
+
+.row.thread-header {
+    height: 8%;
+    border-style: outset;
+}
+.row.request-body{
+    height: 92%;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+.row.thread-body{
+    height: 92%;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+@media screen and (max-width: 767px) {
+    .row.main-display{
+        height: auto;
+    } 
+    .row.input-container {
+        height: auto;
+    }
+}
+/*
 .pending-container {
     position: relative;
     display: block;
@@ -90,4 +164,4 @@
     height: 90%;
     width: 63%;
     border-radius: 10px;
-}
+} */

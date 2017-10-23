@@ -1,2 +1,2 @@
 ﻿
-<span class="user">{{liveRequest['conversationId']}} </span>
+<span class="user">Agent Request: {{liveRequest.timeRequested ? (liveRequest.timeRequested | date: 'shortTime') : ''}} </span>

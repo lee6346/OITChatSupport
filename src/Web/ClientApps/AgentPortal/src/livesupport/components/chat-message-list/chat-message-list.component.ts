@@ -18,8 +18,12 @@ export class ChatMessageListComponent implements OnInit{
     @Input()
     chatMessages: DirectLineMessage[];
 
-    constructor() { }
+    constructor() {
+        
+    }
 
     ngOnInit() {
     }
+
+
 }

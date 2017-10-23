@@ -1,6 +1,14 @@
-﻿<div class="pending-container">
+﻿<div class="row request-header">
+    <h4>Live Requests</h4>
+    </div>
+    <div class="row request-body">
+        <pending-list [liveRequests]="liveRequests$ | async"
+                      (acceptRequest)="onRequestSelected($event)"></pending-list>
+    </div>
+<!--
+<div class="pending-container">
     <div class="pending-requests">
         <pending-list [liveRequests]="liveRequests$ | async"
                       (acceptRequest)="onRequestSelected($event)"></pending-list>
     </div>
-</div>`
+</div>-->

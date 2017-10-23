@@ -1,1 +1,7 @@
-﻿
+﻿<div class="row thread-header">
+    <h4>Thread List</h4>
+</div>
+<div class="row thread-body">
+    <chat-thread-list [threads]="directLineThreads$ | async"
+                      (switchThread)="onSwitchThread($event)"></chat-thread-list>
+</div>

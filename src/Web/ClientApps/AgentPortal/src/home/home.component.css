@@ -1,4 +1,30 @@
-﻿* {
+﻿
+.row.content {
+    height: 650px;
+    background-color: #f1f1f1;
+}
+.sidenav{
+    height: 100%;
+}
+.main-panel{
+    height: 100%;
+}
+
+@media screen and (max-width: 767px){
+    .sidenav{
+        height: auto;
+        
+    }
+    .main-panel{
+        height: 100%;
+    }
+    .row.content{
+        height: auto;
+    }
+}
+
+
+/** {
     box-sizing: border-box;
 }
 .main-content {
@@ -192,3 +218,4 @@
     flex: 5;
 }
 
+    */

@@ -1,6 +1,5 @@
 ﻿import { NgModule } from '@angular/core';
 import { SharedModule} from '../shared/shared.module';
-//import { LiveRequestModule } from '../liverequest/live-request.module';
 import { LiveSupportModule } from '../livesupport/live-support.module';
 import { HomeComponent } from './home.component';
 
@@ -8,7 +7,6 @@ import { HomeComponent } from './home.component';
     imports: [
         SharedModule,
         LiveSupportModule
-        //LiveRequestModule,
     ],
     declarations: [
         HomeComponent

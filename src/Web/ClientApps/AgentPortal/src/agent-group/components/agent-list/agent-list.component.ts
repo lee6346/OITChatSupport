@@ -1,4 +1,4 @@
-﻿import { Component, Input, OnInit, ChangeDetectionStrategy} from '@angular/core';
+﻿import { Component, Input, ChangeDetectionStrategy} from '@angular/core';
 import { Agent } from '../../models/agent.model';
 
 @Component({
@@ -7,12 +7,10 @@ import { Agent } from '../../models/agent.model';
     styleUrls: ['./agent-list.component.css'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AgentListComponent implements OnInit {
+export class AgentListComponent {
 
     @Input()
     agents: Agent[];
+
     constructor() { }
-    ngOnInit() {
-        console.log('we received the agents ' + this.agents!);
-    }
 }

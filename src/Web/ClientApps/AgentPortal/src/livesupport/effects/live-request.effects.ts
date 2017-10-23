@@ -8,41 +8,35 @@ import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/mergeMap';
 
 import * as liveRequestAction from '../actions/live-request.actions';
-import { LiveRequest, DirectLineThread } from '../models';
-import { LiveRequestService } from '../../shared/services/live-request.service';
-import { DirectLineService } from '../services/direct-line.service';
+import { LiveRequest } from '../models';
+import { LiveRequestService } from '../../shared/live-request.service';
 import { Conversation } from 'botframework-directlinejs';
 
 @Injectable()
 export class LiveRequestEffects {
     constructor(
         private actions$: Actions,
-        private liveRequestService: LiveRequestService,
-        private directLineService: DirectLineService
+        private liveRequestService: LiveRequestService
     ) { }
 
     @Effect()
     acceptLiveRequest$: Observable<Action> = this.actions$
         .ofType(liveRequestAction.ACCEPT_LIVE_REQUEST).mergeMap((action: liveRequestAction.AcceptLiveRequestAction) =>
             this.liveRequestService.acceptLiveRequest$(action.liveRequest).map((data: Conversation) => {
-                let thread: DirectLineThread = this.directLineService.createDirectLineThread(data);
-                return new liveRequestAction.AcceptLiveRequestCompleteAction(thread);
+                return new liveRequestAction.LiveRequestAcceptedAction(data);
             }))
         .catch((err: any) => {
-            console.log('error with accept live request action (1st effect)');
-            return of({ type: 'acceptLiveRequest$' });
+            return of({ type: 'effect error: acceptLiveRequest$' });
         });
 
     @Effect()
-    getLiveRequests$: Observable<Action> = this.actions$.ofType(liveRequestAction.LOAD_PENDING_REQUESTS)
-        .switchMap((action: liveRequestAction.LoadPendingRequestsAction) =>
+    getLiveRequests$: Observable<Action> = this.actions$.ofType(liveRequestAction.LOAD_LIVE_REQUESTS)
+        .switchMap((action: liveRequestAction.LoadLiveRequestsAction) =>
             this.liveRequestService.getLiveRequests$(action.group)
             .map((data: LiveRequest[]) => {
-                console.log('loading pending requests');
-                return new liveRequestAction.LoadPendingRequestsCompleteAction(data);
+                return new liveRequestAction.LiveRequestsLoadedAction(data);
             })
             .catch((err: any) => {
-                console.log('error retrieving live pending requests (2nd effect)');
-                return of({ type: 'getLiveRequests$' });
+                return of({ type: 'effect error: getLiveRequests$' });
             }));
 }

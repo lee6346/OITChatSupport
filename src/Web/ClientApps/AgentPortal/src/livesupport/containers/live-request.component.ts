@@ -13,16 +13,16 @@ import { LiveRequest } from '../models';
 export class LiveRequestComponent implements OnInit {
 
     liveRequests$: Observable<LiveRequest[]>;
-    constructor(
-        private store: Store<fromLiveRequests.State>
-    ) {
-        this.liveRequests$ = store.select(fromLiveRequests.getAllRequests);
+
+    constructor( private store: Store<fromLiveRequests.State> ) {
+        this.liveRequests$ = store.select(fromLiveRequests.getLiveRequestList).map(val => val.toArray());
     }
+
     ngOnInit() {
-        console.log('aaaaaaaa');
-        this.store.dispatch(new liveRequests.LoadPendingRequestsAction('askrowdy'));
+        this.store.dispatch(new liveRequests.LoadLiveRequestsAction('askrowdy'));
     }
+
     onRequestSelected(liveRequest: LiveRequest) {
-        this.store.dispatch(new liveRequests.AcceptLiveRequestAction(liveRequest));
+        this.store.dispatch(new liveRequests.AcceptLiveRequestAction({botHandle: liveRequest.botHandle, conversationId: liveRequest.conversationId, timeRequested: liveRequest.timeRequested, user: 'jvr632'} as LiveRequest));
     }
 }

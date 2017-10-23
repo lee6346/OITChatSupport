@@ -1,9 +1,4 @@
-﻿import { 
-    Component, 
-    Input, 
-    OnInit, 
-    ChangeDetectionStrategy 
-    } from '@angular/core';
+﻿import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 
 import {  DirectLineThread } from '../../models';
 
@@ -13,14 +8,10 @@ import {  DirectLineThread } from '../../models';
     styleUrls: ['./chat-thread.component.css'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ChatThreadComponent implements OnInit{
+export class ChatThreadComponent {
 
     @Input()
     thread: DirectLineThread;
 
-    constructor() {
-    }
-
-    ngOnInit() {
-    }
+    constructor() { }
 }

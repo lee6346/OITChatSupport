@@ -7,15 +7,15 @@ import { Component } from '@angular/core';
 })
 export class HomeComponent {
 
-    chatDisplayed: boolean = false;
+    chatConnected: boolean = false;
 
     constructor() { }
 
     showChatWindow() {
-        this.chatDisplayed = true;
+        this.chatConnected = true;
     }
 
-    removeChatWindow() {
-        this.chatDisplayed = false;
+    onDisconnectSession(disconnect: boolean) {
+        this.chatConnected = false;
     }
 }

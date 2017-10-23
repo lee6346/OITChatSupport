@@ -8,10 +8,9 @@ import 'rxjs/add/operator/map';
 import { State } from '../reducers/index';
 import { DirectLineThread, DirectLineChatLoad, DirectLineMessage } from '../models';
 import { 
-    ReceiveSessionActivityAction, 
-    ReceiveSessionDisconnectAction, 
-    SendSessionActivityCompleteAction 
-} from '../actions/directline-session.actions';
+    MessageActivityReceivedAction,
+    MessageActivitySentAction
+} from '../actions/directline-message.actions';
 import { environment } from '../../../environments/environment';
 
 @Injectable()
@@ -23,7 +22,6 @@ export class DirectLineService {
     ) {}
 
     createDirectLineConnection$(conversationId: string): Observable<DirectLineThread> {
-        console.log('direct line service: retrieving a directline thread from the web API');
         return this.http.get<Conversation>(
             environment.baseWebUrl +
             environment.chatStreamUrl + '/' +
@@ -41,46 +39,43 @@ export class DirectLineService {
             }),
             active: true,
             messageIds: [],
-            cachedMessageIds: [],
-            unseenMessages: 0
+            cachedMessageIds: []
         };
-        console.log('direct line service: instantiated a direct line');
         session.connection.activity$
-            .filter(this.filterStudentMessage).subscribe((activity: Activity) => 
-                this.store.dispatch(new ReceiveSessionActivityAction(activity)),
-                (err: any) => console.log('error'),
-                () => console.log('complete'),
-            );
+            .filter(this.filterStudentMessage).subscribe(
+            (activity: Activity) =>  this.store.dispatch(new MessageActivityReceivedAction(activity)),
+            (err: any) => console.log('direct line service error: failed to received activities via connector'),
+        );
         return session;
     }
 
-    getCachedActivities$(conversationId: string): Observable<Activity[]>{
-        console.log('direct line service: making api call to retrieve cached watermark activities');
+    getCachedActivities$(conversation: Conversation): Observable<Activity[]>{
         return this.http.get<Activity[]>(
             environment.directLineUrl +
-            environment.activities(conversationId) +
-            '/activities'
+            environment.postMessage + conversation.conversationId +
+            '/activities', { headers: this.authorize(conversation.token) }
         );
     }
 
-    sendMessage(directLinePayload: DirectLineChatLoad) {
+    sendMessage$(directLinePayload: DirectLineChatLoad): Observable<Activity> {
+        return directLinePayload.connection.postActivity(directLinePayload.activity)
+            .map((id: string) => { directLinePayload.activity.id = id; return directLinePayload.activity });
+        /*
         directLinePayload.connection.postActivity(directLinePayload.activity).subscribe(
             (id: string) => {
-                console.log('direct line service: posted activity to direct line, now dispatching the payload to state');
                 directLinePayload.activity.id = id;
-                this.store.dispatch(new SendSessionActivityCompleteAction(directLinePayload.activity));
+                this.store.dispatch(new MessageActivitySentAction(directLinePayload.activity));
             },
-            (err: any) => console.log('error sending message'),
-            ()=> console.log('complete')
-        );
+            (err: any) => console.log('direct line service error: failed to send activity via connector')
+        );*/
     }
 
     removeConnection(directLine: DirectLine): void {
         directLine.end();
     }
 
-    authorize(value: string): HttpHeaders {
-        return new HttpHeaders().set('Authorization', value);
+    authorize(token: string): HttpHeaders {
+        return new HttpHeaders({'Content-Type': 'application/json'}).set('Authorization', 'Bearer ' + token);
     }
 
     sendErrorReport(errorMessage: string): void {
@@ -90,8 +85,7 @@ export class DirectLineService {
             .retry(1)
             .subscribe(
             res => console.log('successfully sent'),
-            err => console.error('error posting the error report'),
-            () => console.log('completed')
+            err => console.error('error posting the error report')
         );
     }
     filterStudentMessage = (activity: Activity) => activity.from.id === 'student';

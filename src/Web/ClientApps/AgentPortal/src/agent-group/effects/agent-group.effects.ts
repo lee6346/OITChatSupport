@@ -7,55 +7,59 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 
 import * as agentAction from '../actions/agent-group.actions';
-import { Agent } from '../models/agent.model';
-import { AgentGroupService } from '../../shared/services/agent-group.service';
+import { Agent, AgentMessage } from '../models';
+import { AgentGroupService } from '../services/agent-group.service';
 
 
 @Injectable()
 export class AgentGroupEffects {
     constructor(
         private actions$: Actions,
-        private agentGroupService: AgentGroupService
+        private agentGroupService: AgentGroupService,
     ) { }
 
     @Effect()
     joinGroup$: Observable<Action> = this.actions$.ofType(agentAction.JOIN_GROUP)
-        .switchMap((action: agentAction.JoinGroupAction) => {
+        .map((action: agentAction.JoinGroupAction) => {
             this.agentGroupService.join(action.agent);
-            return Observable.of(new agentAction.JoinGroupActionComplete(action.agent));
+            return new agentAction.JoinGroupCompleteAction(action.agent);
         })
         .catch((error: any) => {
             console.log('error in joining group for agent effects');
             return of({ type: 'joinGroup$' });
         });
 
-
     @Effect()
-    leaveGroup$: Observable<Action> = this.actions$.ofType(agentAction.LEAVE_GROUP)
-        .switchMap((action: agentAction.LeaveGroupAction) => {
-            this.agentGroupService.leave(action.agent);
-            return Observable.of(new agentAction.LeaveGroupActionComplete(action.agent));
-        })
+    loadGroup$: Observable<Action> = this.actions$.ofType(agentAction.LOAD_AGENTS)
+        .switchMap((action: agentAction.LoadAgentsAction) =>
+            this.agentGroupService.getAgents$(action.group).map((agents: Agent[]) => {
+            return new agentAction.LoadAgentsCompleteAction(agents);
+        }))
         .catch((error: any) => {
             console.log('error in agent effects for leaving the group');
-            return of({ type: 'leaveAgentGroup$' })
+            return of({ type: 'leaveGroup$' })
         });
 
     @Effect()
-    getAgentGroup$: Observable<Action> = this.actions$.ofType(agentAction.RETRIEVE_GROUP_AGENTS)
-        .switchMap((action: agentAction.RetrieveGroupAgentsAction) =>
-            this.agentGroupService.getAgents$(action.agentId)
-                .map((data: Agent[]) => {
-                    console.log('getting some of the agents');
-                    return new agentAction.RetrieveGroupAgentsCompleteAction(data);
-                })
-                .catch((error: any) => {
-                    console.log('error in agent effects for get agent group');
-                    return of({ type: 'getAgentGroups$' })
-                })
-        );
+    sendGroupMessage$: Observable<Action> = this.actions$.ofType(agentAction.SEND_GROUP_MESSAGE)
+        .map((action: agentAction.SendGroupMessageAction) => {
+            this.agentGroupService.sendGroupMessage(action.agentMessage);
+            return new agentAction.SendMessageCompleteAction(action.agentMessage);
+        })
+        .catch((error: any) => {
+            console.log('error in agent effects for get agent group');
+            return of({ type: 'getAgentGroups$' })
+        });
 
-
-
-
+    @Effect()
+    getGroupMessages$: Observable<Action> = this.actions$.ofType(agentAction.LOAD_GROUP_MESSAGES)
+        .switchMap((action: agentAction.LoadGroupMessagesAction) =>
+        this.agentGroupService.getMessages$(action.group)
+        .map((messages: AgentMessage[]) => {
+            return new agentAction.LoadMessagesCompleteAction(messages)
+        }))
+        .catch((error: any) => {
+            console.log('error loading messages');
+            return of({ type: 'getGroupMessages$' })
+        });
 }

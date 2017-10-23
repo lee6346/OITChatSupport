@@ -1,4 +1,4 @@
-﻿import { Component, Input, OnInit, ChangeDetectionStrategy } from '@angular/core';
+﻿import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { Agent } from '../../models/agent.model';
 
 @Component({
@@ -7,12 +7,10 @@ import { Agent } from '../../models/agent.model';
     styleUrls: ['./agent.component.css'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AgentComponent implements OnInit{
+export class AgentComponent{
 
     @Input()
     agent: Agent
+
     constructor() { }
-    ngOnInit() {
-        console.log(this.agent);
-    }
 }

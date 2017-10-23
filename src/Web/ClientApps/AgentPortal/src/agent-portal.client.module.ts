@@ -5,7 +5,7 @@ import { CoreModule } from './shared/core.module';
 import { SharedModule } from './shared/shared.module';
 
 import { StoreModule } from '@ngrx/store';
-import { reducers, metaReducers} from './shared/store/index';
+import { reducers, metaReducers} from './shared/index';
 import { EffectsModule } from '@ngrx/effects';
 
 import { HomeModule } from './home/home.module';

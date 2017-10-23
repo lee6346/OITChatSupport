@@ -1,9 +1,9 @@
 ﻿import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AgentHubGateway } from './services/agent.hub.gateway';
-import { AgentGroupService } from './services/agent-group.service';
-import { GroupChatService } from './services/group-chat.service';
-import {  LiveRequestService  } from './services/live-request.service';
+import { AgentHubGateway } from './agent.hub.gateway';
+import { AgentGroupService } from './agent-group.service';
+import { GroupChatService } from './group-chat.service';
+import {  LiveRequestService  } from './live-request.service';
 
 @NgModule({
     imports: [CommonModule],

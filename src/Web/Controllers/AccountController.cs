@@ -38,10 +38,10 @@ namespace Web.Controllers
         }
 
         [Route("api/[controller]")]
-        [HttpGet("[action]/{id}")]
-        public async Task<IActionResult> Group(string id)
+        [HttpGet("[action]/{group}")]
+        public async Task<IActionResult> Group(string group)
         {
-            var agents = await _accountService.RetrieveGroupAgents(id);
+            var agents = await _accountService.RetrieveGroupAgents(group);
             return Json(agents);
         }
     }

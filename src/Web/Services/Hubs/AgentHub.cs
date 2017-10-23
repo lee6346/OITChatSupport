@@ -19,13 +19,14 @@ namespace Web.Services.Hubs
 
         public override Task OnConnectedAsync()
         {
+            
             return base.OnConnectedAsync();
         }
 
-        public override Task OnDisconnectedAsync(Exception exception)
+        public async override Task OnDisconnectedAsync(Exception exception)
         {
-
-            return base.OnDisconnectedAsync(exception);
+            await _agentHubTracker.RemoveAgent(Context.ConnectionId);
+            await base.OnDisconnectedAsync(exception);
         }
 
         public async Task JoinGroup(AgentDto agent)
@@ -51,17 +52,6 @@ namespace Web.Services.Hubs
         {
             await Clients.Group(agentGroupMessage.Group).InvokeAsync("Send", agentGroupMessage);
         }
-        /*
-        public IEnumerable<AgentDto> GetAgents(string group)
-        {
-            return _agentHubTracker.AgentsOnline(group).Result;
-        }
-
-        public Task<bool> AgentsAvailable(string group)
-        {
-            var success = (GetAgents(group).Count() > 0);
-            return Task.FromResult(success);
-        } */
 
     }
 }

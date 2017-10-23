@@ -1,5 +1,12 @@
-<ul class="pending">
-    <li class="pending-item" *ngFor="let request of liveRequests" (click)="onLiveRequestClick(request)">
+<ul class="list-group">
+    <li class="list-group-item" *ngFor="let request of liveRequests" (click)="onLiveRequestClick(request)">
         <pending-request [liveRequest]="request"></pending-request>
     </li>
 </ul>
+
+
+<!--<ul class="pending">
+    <li class="pending-item" *ngFor="let request of liveRequests" (click)="onLiveRequestClick(request)">
+        <pending-request [liveRequest]="request"></pending-request>
+    </li>
+</ul> -->

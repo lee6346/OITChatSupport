@@ -22,10 +22,10 @@ namespace Web.Controllers
             return Json(Ok());
         }
 
-        [HttpGet("[action]/{id}")]
-        public async Task<IActionResult> Messages(string id)
+        [HttpGet("[action]/{group}")]
+        public async Task<IActionResult> Messages(string group)
         {
-            var messages = await _groupChatService.GetCurrentChatLog(id);
+            var messages = await _groupChatService.GetCurrentChatLog(group);
             return Json(messages);
         }
     }

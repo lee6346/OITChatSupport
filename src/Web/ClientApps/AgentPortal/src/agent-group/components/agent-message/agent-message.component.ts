@@ -1,4 +1,4 @@
-﻿import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
+﻿import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
     selector: 'agent-message',
@@ -6,12 +6,11 @@
     styleUrls: ['./agent-message.component.css'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AgentMessageComponent implements OnInit {
+export class AgentMessageComponent {
 
     @Input()
     groupMessage: string;
 
     constructor() { }
 
-    ngOnInit() { }
 }

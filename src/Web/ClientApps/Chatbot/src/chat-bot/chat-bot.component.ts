@@ -1,12 +1,9 @@
-﻿import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
+﻿import { Component, OnInit, OnDestroy, EventEmitter, Output } from '@angular/core';
 import { Store } from '@ngrx/store';
-import * as chatBot from '../store/index';
-import * as chatBotActions from '../store/chat-bot.actions';
-import { NgClass } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import * as fromChatBot from './store/index';
+import * as chatBotActions from './store/chat-bot.actions';
 import { Observable } from 'rxjs/Rx';
-import { DirectLineMessage, LiveRequest, SimpleMessage } from '../model';
-import { List } from 'immutable';
+import { DirectLineMessage, LiveRequest, SimpleMessage } from './models';
 
 @Component({
     selector: 'chat-bot',
@@ -18,86 +15,55 @@ export class ChatBotComponent implements OnInit, OnDestroy {
     private user: string = 'student';
 
     @Output()
-    closeWindowSignal: EventEmitter<void> = new EventEmitter<void>();
+    disconnectSession: EventEmitter<void> = new EventEmitter<void>();
 
-    private activityMessages$: Observable<DirectLineMessage[]>;
-    private targetMessageFilter$: Observable<string>;
-
-    private directLineMessages: DirectLineMessage[];
-    private targetListener: string;
-    private currentThreadId: string;
+    private chatMessages$: Observable<DirectLineMessage[]>;
+    private currentThreadId: string = '';
+    private notConnected: boolean = true;
 
     constructor(
-        private store: Store<chatBot.State>
+        private store: Store<fromChatBot.State>
     ) {
-        store.select(chatBot.getMessageLog).map((item: List<DirectLineMessage>) => item.toArray()).subscribe((messages: DirectLineMessage[]) => this.directLineMessages = messages);
-        store.select(chatBot.getTargetListener).map((targetId: string) => targetId).subscribe((targetId: string) => this.targetListener = targetId);
-        store.select(chatBot.getCurrentBotThread).map((threadId: string) => threadId).subscribe((threadId: string) => this.currentThreadId = threadId);
+        this.chatMessages$ = store.select(fromChatBot.getMessageLog).map(item => item.toArray());
+        store.select(fromChatBot.getCurrentBotThread).subscribe(item => {
+            if (item !== '') {
+                this.notConnected = false;
+                this.currentThreadId = item;
+            }
+        });
     }
 
     ngOnInit() {
-        this.store.dispatch(new chatBotActions.GetBotTokenAction('AskRowdy'));
+        this.store.dispatch(new chatBotActions.RetrieveBotTokenAction('AskRowdy'));
     }
 
     ngOnDestroy() {
-        this.store.dispatch(
-            new chatBotActions
-                .DirectLineDisconnectAction(
-                this.currentThreadId));
     }
 
     
-    submitMessage(message: string): void {
-        this.store.dispatch(
-            new chatBotActions.PostDirectLineActivityAction(
-                { text: message, conversationId: this.currentThreadId } as SimpleMessage
+    onMessageSubmitted(message: string): void {
+        if (message !== '' && this.currentThreadId !== '') {
+            this.store.dispatch(new chatBotActions.SendMessageActivityAction(
+                {
+                    text: message,
+                    conversationId: this.currentThreadId
+                } as SimpleMessage
             ));
+        }
     }
 
-    public closeWindow(): void {
-        this.closeWindowSignal.emit();
+    onExitRequested(): void {
+        this.store.dispatch(new chatBotActions.EndChatSessionAction(this.currentThreadId));
+        this.disconnectSession.emit();
     }
 
-    public makeLiveRequest() {
-        this.store
-            .dispatch(new chatBotActions
-                .RequestLiveSupportAction(
+    onTransferRequested(): void {
+        this.store.dispatch(new chatBotActions.RequestLiveSupportAction(
             {
                 botHandle: 'AskRowdy',
                 conversationId: this.currentThreadId,
-                user: 'student'
+                user: this.user
             } as LiveRequest));
     }
-
-    public msgAlignment(id: string) {
-        if (id === this.user) {
-            return {
-                'align-window-right': true,
-            };
-        }
-        else return {
-            'align-window-left': true,
-        };
-    }
-    public bubbleProperties(id: string) {
-        if (id === this.user) {
-            return {
-                'align-window-right': true,
-                'host-bubble': true,
-            };
-        }
-        else if (id === 'closeConnection') {
-            return {
-                'align-window-right': true,
-                'default-bubble': true,
-            }
-        }
-        else return {
-            'align-window-left': true,
-            'remote-bubble': true,
-        };
-    }
-
-    public minimizeWindow(){}
 
 }

@@ -1,6 +1,6 @@
 ﻿import { createSelector, createFeatureSelector } from '@ngrx/store';
 import * as fromAgentGroup from './agent-group.reducers';
-import * as fromRoot from '../../shared/store/index';
+import * as fromRoot from '../../shared/index';
 
 export interface AgentGroupState {
     agentGroup: fromAgentGroup.State;
@@ -26,17 +26,18 @@ export const getSelectedAgentId = createSelector(
     fromAgentGroup.getSelectedId
 );
 
-export const {
-    selectIds: getAgentIds,
-    selectEntities: getAgentGroupEntities,
-    selectAll: getAllGroupAgents,
-    selectTotal: getTotalAgents,
-} = fromAgentGroup.adapter.getSelectors(getAgentGroupEntitiesState);
-
-export const getSelectedAgent = createSelector(
-    getAgentGroupEntities,
-    getSelectedAgentId,
-    (entities, selectedId) => {
-        return selectedId && entities[selectedId];
-    }
+export const getGroupMembers = createSelector(
+    getAgentGroupEntitiesState,
+    fromAgentGroup.getAgents
 );
+
+export const getLoggedMembers = createSelector(
+    getAgentGroupEntitiesState,
+    fromAgentGroup.getLoggedAgents
+);
+
+export const getGroupMessages = createSelector(
+    getAgentGroupEntitiesState,
+    fromAgentGroup.getGroupMessages
+);
+

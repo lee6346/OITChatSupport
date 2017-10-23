@@ -1,43 +1,44 @@
 ﻿import { Action } from '@ngrx/store';
-import { LiveRequest, DirectLineThread } from '../models';
+import { LiveRequest } from '../models';
+import { Conversation } from 'botframework-directlinejs';
 
-export const ACCEPT_LIVE_REQUEST = '[liverequest] ACCEPT_LIVE_REQUEST';
-export const ACCEPT_LIVE_REQUEST_COMPLETE = '[liverequest] ACCEPT_LIVE_REQUEST_COMPLETE';
-export const RECEIVE_REMOVE_REQUEST = '[liverequest] RECEIVE_REMOVE_REQUEST';
-export const RECEIVE_LIVE_REQUEST = '[liverequest] RECEIVE_LIVE_REQUEST';
-export const LOAD_PENDING_REQUESTS = '[LiveRequest] LOAD_PENDING_REQUESTS';
-export const LOAD_PENDING_REQUESTS_COMPLETE = '[LiveRequest] LOAD_PENDING_REQUESTS_COMPLETE';
+export const ACCEPT_LIVE_REQUEST = '[Request] ACCEPT_LIVE_REQUEST';
+export const LIVE_REQUEST_ACCEPTED = '[Request] LIVE_REQUEST_ACCEPTED';
+export const LIVE_REQUEST_REMOVED = '[Request] LIVE_REQUEST_REMOVED';
+export const LIVE_REQUEST_RECEIVED = '[Request] LIVE_REQUEST_RECEIVED';
+export const LOAD_LIVE_REQUESTS = '[Request] LOAD_LIVE_REQUESTS';
+export const LIVE_REQUESTS_LOADED = '[Request] LIVE_REQUESTS_LOADED';
 
 export class AcceptLiveRequestAction implements Action {
     readonly type = ACCEPT_LIVE_REQUEST;
     constructor(public liveRequest: LiveRequest) { }
 }
-export class AcceptLiveRequestCompleteAction implements Action {
-    readonly type = ACCEPT_LIVE_REQUEST_COMPLETE;
-    constructor(public directLineThread: DirectLineThread) { }
+export class LiveRequestAcceptedAction implements Action {
+    readonly type = LIVE_REQUEST_ACCEPTED;
+    constructor(public conversation: Conversation){}
 }
-export class ReceiveRemoveRequestAction implements Action {
-    readonly type = RECEIVE_REMOVE_REQUEST;
-    constructor(public liveRequest: LiveRequest) { }
-}
-export class ReceiveLiveRequestAction implements Action {
-    readonly type = RECEIVE_LIVE_REQUEST;
-    constructor(public liveRequest: LiveRequest) { }
-}
-export class LoadPendingRequestsAction implements Action {
-    readonly type = LOAD_PENDING_REQUESTS;
-    constructor(public group: string) { }
 
+export class LiveRequestRemovedAction implements Action {
+    readonly type = LIVE_REQUEST_REMOVED;
+    constructor(public liveRequest: LiveRequest) { }
 }
-export class LoadPendingRequestsCompleteAction implements Action {
-    readonly type = LOAD_PENDING_REQUESTS_COMPLETE;
+export class LiveRequestReceivedAction implements Action {
+    readonly type = LIVE_REQUEST_RECEIVED;
+    constructor(public liveRequest: LiveRequest) { }
+}
+export class LoadLiveRequestsAction implements Action {
+    readonly type = LOAD_LIVE_REQUESTS;
+    constructor(public group: string) { }
+}
+export class LiveRequestsLoadedAction implements Action {
+    readonly type = LIVE_REQUESTS_LOADED;
     constructor(public liveRequest: LiveRequest[]) { }
 
 }
 export type Actions
     = AcceptLiveRequestAction
-    | AcceptLiveRequestCompleteAction
-    | ReceiveRemoveRequestAction
-    | ReceiveLiveRequestAction
-    | LoadPendingRequestsAction
-    | LoadPendingRequestsCompleteAction;
+    | LiveRequestAcceptedAction
+    | LiveRequestRemovedAction
+    | LiveRequestReceivedAction
+    | LoadLiveRequestsAction
+    | LiveRequestsLoadedAction;

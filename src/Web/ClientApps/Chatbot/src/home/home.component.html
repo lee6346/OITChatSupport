@@ -10,7 +10,7 @@
                 </div>
             </div>
             <div class="chat-window">
-                <chat-bot *ngIf="chatDisplayed" (removeWindow)="removeChatWindow()"></chat-bot>
+                <chat-bot *ngIf="chatConnected" (disconnectSession)="onDisconnectSession()"></chat-bot>
             </div>
             <div class="feedback-center">
 
@@ -26,4 +26,4 @@
         <div class="bot-info"></div>
 
     </div>
-</div>
+</div> 
