@@ -37,6 +37,7 @@ namespace PrintSpotBot
                 ConnectorClient connector = new ConnectorClient(new Uri(activity.ServiceUrl));
 
                 Activity reply = activity.CreateReply("ti worked!");
+                
                 await connector.Conversations.ReplyToActivityAsync(reply);
                 //await Conversation.SendAsync(activity, () => new Dialogs.RootDialog());
             }
@@ -57,7 +58,11 @@ namespace PrintSpotBot
             }
             else if (message.Type == ActivityTypes.ConversationUpdate)
             {
-                var x = message.MembersAdded.Count > 0 ? $"{message.From.Id} as joined\n" : $"{message.From.Id} has left";
+
+                var x = message.MembersAdded.Count > 0 ? $"{message.From.Id} has joined\n" : $"{message.From.Id} has left";
+
+                
+               
                 // Handle conversation state changes, like members being added and removed
                 // Use Activity.MembersAdded and Activity.MembersRemoved and Activity.Action for info
                 // Not available in all channels

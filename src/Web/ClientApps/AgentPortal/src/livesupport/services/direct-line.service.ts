@@ -53,7 +53,7 @@ export class DirectLineService {
         return this.http.get<Activity[]>(
             environment.directLineUrl +
             environment.postMessage + conversation.conversationId +
-            '/activities', { headers: this.authorize(conversation.token) }
+            '/activities', { headers: new HttpHeaders().set('Authorization', 'Bearer ' + conversation.token) }
         );
     }
 

@@ -1,5 +1,5 @@
 ﻿export interface DirectLineThreadVm {
     threadId: string;
-    unseenMessageIds: string[];
+    unseenMessageCount: number;
     active: boolean;
 }

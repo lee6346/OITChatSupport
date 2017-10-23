@@ -1,6 +1,6 @@
 ﻿import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 
-import {  DirectLineThread } from '../../models';
+import {  DirectLineThreadVm } from '../../viewmodels';
 
 @Component({
     selector: 'chat-thread',
@@ -11,7 +11,7 @@ import {  DirectLineThread } from '../../models';
 export class ChatThreadComponent {
 
     @Input()
-    thread: DirectLineThread;
+    thread: DirectLineThreadVm;
 
     constructor() { }
 }

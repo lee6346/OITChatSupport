@@ -1,1 +1,58 @@
-﻿
+﻿ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    -ms-flex-direction: column-reverse;
+    -webkit-box-orient: vertical;
+    -moz-box-orient: vertical;
+    flex-direction: column-reverse;
+}
+
+.msg-row {
+    width: 100%;
+}
+
+.align-window-right {
+    float: left;
+}
+
+.align-window-left {
+    float: left;
+}
+
+.host-messenger {
+    float: left;
+    margin: 5px 45px 5px 20px;
+}
+
+    .host-messenger::before {
+        box-shadow: -2px 2px 2px 0 rgba( 178, 178, 178, .4 );
+        left: -9px;
+    }
+
+.remote-messenger {
+    float: right;
+    margin: 5px 20px 5px 45px;
+}
+
+    .remote-messenger::before {
+        box-shadow: 2px -2px 2px 0 rgba( 178, 178, 178, .4 );
+        right: -9px;
+    }
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius: 6px;
+    background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #bebebe;
+}

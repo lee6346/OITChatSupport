@@ -6,8 +6,8 @@ import { LiveRequestComponent } from './containers/live-request.component';
 
 import { DirectLineThreadsComponent } from './containers/directline-threads.component';
 import { DirectLineSessionComponent } from './containers/directline-session.component';
-
-import { CachedMessagesComponent } from './components/cached-messages/cached-messages.component';
+import { CachedMessageComponent } from './components/cached-message/cached-message.component';
+import { CachedMessageListComponent } from './components/cached-message-list/cached-message-list.component';
 import { ChatMessageListComponent } from './components/chat-message-list/chat-message-list.component';
 import { ChatMessageComponent } from './components/chat-message/chat-message.component';
 import { ChatThreadListComponent } from './components/chat-thread-list/chat-thread-list.component';
@@ -38,7 +38,8 @@ import { reducers } from './reducers/index';
         ChatMessageComponent,
         ChatThreadListComponent,
         ChatThreadComponent,
-        CachedMessagesComponent,
+        CachedMessageListComponent,
+        CachedMessageComponent,
         InputBarComponent,
     ],
     exports: [
@@ -51,7 +52,8 @@ import { reducers } from './reducers/index';
         ChatMessageComponent,
         ChatThreadListComponent,
         ChatThreadComponent,
-        CachedMessagesComponent,
+        CachedMessageListComponent,
+        CachedMessageComponent,
         InputBarComponent,
     ],
     providers: [

@@ -2,16 +2,16 @@
 import { DirectLineMessage } from '../models';
 import * as directLineMessage from '../actions/directline-message.actions';
 import { THREAD_REMOVED, ThreadRemovedAction } from '../actions/directline-thread.actions';
-import { Map } from 'immutable';
+import { Map, List } from 'immutable';
 
 export interface State {
     messages: Map<string, DirectLineMessage>;
-    cachedMessages: Map<string, DirectLineMessage[]>;
+    cachedMessages: Activity[];
 }
 
 export const initialState: State = {
     messages: Map<string, DirectLineMessage>(),
-    cachedMessages: Map<string, DirectLineMessage[]>()
+    cachedMessages: []
 };
 
 export function reducer(state = initialState, action: directLineMessage.Actions | ThreadRemovedAction ): State {
@@ -20,7 +20,7 @@ export function reducer(state = initialState, action: directLineMessage.Actions 
         case directLineMessage.CACHED_MESSAGES_LOADED:
             return Object.assign({}, state, {
                 messages: state.messages,
-                cachedMessages: state.cachedMessages.set(action.cachedLoad.threadId, normalizeMessageSet(action.cachedLoad.cachedMessageSet)),
+                cachedMessages: state.cachedMessages.concat(action.cachedLoad.cachedMessageSet)//.set(action.cachedLoad.threadId, action.cachedLoad.cachedMessageSet),
             });
 
         case directLineMessage.MESSAGE_ACTIVITY_RECEIVED:
@@ -41,7 +41,7 @@ export function reducer(state = initialState, action: directLineMessage.Actions 
         case THREAD_REMOVED:
             return Object.assign({}, state, {
                 messages: state.messages.filter((message: DirectLineMessage) => message.conversationId !== action.threadId),
-                cachedMessages: state.cachedMessages.remove(action.threadId)
+                cachedMessages: state.cachedMessages.filter((activity: Activity) => typeof activity.conversation !== 'undefined' && activity.conversation.id !== action.threadId)//.remove(action.threadId)
             });
 
         default:

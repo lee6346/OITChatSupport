@@ -25,8 +25,7 @@ export class AgentGroupEffects {
             return new agentAction.JoinGroupCompleteAction(action.agent);
         })
         .catch((error: any) => {
-            console.log('error in joining group for agent effects');
-            return of({ type: 'joinGroup$' });
+            return of({ type: 'effect error: joinGroup$' });
         });
 
     @Effect()
@@ -36,8 +35,7 @@ export class AgentGroupEffects {
             return new agentAction.LoadAgentsCompleteAction(agents);
         }))
         .catch((error: any) => {
-            console.log('error in agent effects for leaving the group');
-            return of({ type: 'leaveGroup$' })
+            return of({ type: 'effect error: loadGroup$' })
         });
 
     @Effect()
@@ -47,8 +45,7 @@ export class AgentGroupEffects {
             return new agentAction.SendMessageCompleteAction(action.agentMessage);
         })
         .catch((error: any) => {
-            console.log('error in agent effects for get agent group');
-            return of({ type: 'getAgentGroups$' })
+            return of({ type: 'effect error: sendGroupsMessage$' })
         });
 
     @Effect()
@@ -59,7 +56,6 @@ export class AgentGroupEffects {
             return new agentAction.LoadMessagesCompleteAction(messages)
         }))
         .catch((error: any) => {
-            console.log('error loading messages');
-            return of({ type: 'getGroupMessages$' })
+            return of({ type: 'effect error: getGroupMessages$' })
         });
 }

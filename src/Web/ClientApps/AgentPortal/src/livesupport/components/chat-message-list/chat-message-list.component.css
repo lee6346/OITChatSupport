@@ -2,6 +2,9 @@
     margin: 0;
     padding: 0;
     list-style-type: none;
+    -ms-flex-direction: column-reverse;
+    -webkit-box-orient: vertical;
+    -moz-box-orient: vertical;
     flex-direction: column-reverse;
 }
 .msg-row {

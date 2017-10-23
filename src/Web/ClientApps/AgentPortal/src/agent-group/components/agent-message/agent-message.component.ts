@@ -1,5 +1,5 @@
 ﻿import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
-
+import { AgentMessage } from '../../models';
 @Component({
     selector: 'agent-message',
     templateUrl: './agent-message.component.html',
@@ -9,7 +9,7 @@
 export class AgentMessageComponent {
 
     @Input()
-    groupMessage: string;
+    groupMessage: AgentMessage;
 
     constructor() { }
 

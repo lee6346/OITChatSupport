@@ -1,5 +1,5 @@
 ﻿<ul class="list-group">
-    <li class="list-group-item" *ngFor="let thread of threads" (click)="onClickThread(thread.conversationId)">
+    <li class="list-group-item" *ngFor="let thread of threads" (click)="onClickThread(thread.threadId)">
         <chat-thread [thread]="thread"></chat-thread>
     </li>
 </ul>

@@ -14,6 +14,8 @@ export class DirectLineService {
 
     private directLineSocket: DirectLine;
     private connected: boolean = false;
+    private filterPredicate: string = 'AskRowdy';
+
     private directLineUnsubscribe: Subject<void> = new Subject<void>();
 
     constructor(

@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import * as fromLiveSupport from '../reducers/index';
 import * as chatThreads from '../actions/directline-thread.actions';
 import { DirectLineThread } from '../models';
+import { DirectLineThreadVm } from '../viewmodels';
 import { Map } from 'immutable';
 
 @Component({
@@ -14,16 +15,16 @@ import { Map } from 'immutable';
 })
 export class DirectLineThreadsComponent implements OnInit {
 
-    private directLineThreads$: Observable<DirectLineThread[]>;
+    private directLineThreads$: Observable<DirectLineThreadVm[]>;
 
     constructor( private store: Store<fromLiveSupport.State> ) {
-        this.directLineThreads$ = store.select(fromLiveSupport.getAllThreads).map(val => val.toArray());
+        this.directLineThreads$ = store.select(fromLiveSupport.getUiThreadList).map(val => val.toArray());
             //.map((item: Map<string, DirectLineThread>) => item.toArray());
     }
 
     ngOnInit() { }
 
-    onSwitchThread(conversationId: string): void {
-        this.store.dispatch(new chatThreads.SwitchThreadAction(conversationId));
+    onSwitchThread(threadId: string): void {
+        this.store.dispatch(new chatThreads.SwitchThreadAction(threadId));
     }
 }

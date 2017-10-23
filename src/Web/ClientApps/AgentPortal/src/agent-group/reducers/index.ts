@@ -21,10 +21,6 @@ export const getAgentGroupEntitiesState = createSelector(
     state => state.agentGroup
 );
 
-export const getSelectedAgentId = createSelector(
-    getAgentGroupEntitiesState,
-    fromAgentGroup.getSelectedId
-);
 
 export const getGroupMembers = createSelector(
     getAgentGroupEntitiesState,

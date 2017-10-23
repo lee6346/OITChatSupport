@@ -15,17 +15,18 @@ import { List } from 'immutable';
 export class DirectLineSessionComponent implements OnInit {
 
     private sessionMessages$: Observable<DirectLineMessage[]>;
-    private cachedMessages$: Observable<DirectLineMessage[]>;
+    private cachedMessages$: Observable<Activity[]>;
     private currentThread: DirectLineThread;
 
     constructor( private store: Store<fromLiveSupport.State> )
     {
         this.sessionMessages$ = store.select(fromLiveSupport.getSelectedThreadMessages).map(val => val.toArray()); 
-        this.cachedMessages$ = store.select(fromLiveSupport.getSelectedThreadCachedMessages);
+        this.cachedMessages$ = store.select(fromLiveSupport.getSelectedThreadCachedMessages);//.map(val => val.toArray());
     }
 
     ngOnInit() {
         this.subscribeToCurrentThread();
+
     }
 
     subscribeToCurrentThread() {
