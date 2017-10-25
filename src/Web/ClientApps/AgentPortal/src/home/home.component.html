@@ -1,30 +1,24 @@
 ﻿<div class="row content">
-    <div class="col-sm-2 test">
+    <div class="col-sm-2 thread-panel">
         <div class="side-threads-header">
-            Chat Threads
+            Threads
         </div>
-        <div class="row threads-list">
+        <div class="row waiting-threads">
             <live-request></live-request>
         </div>
-        <div class="row threads-list">
+        <div class="row current-threads">
             <directline-threads></directline-threads>
         </div>
+            
         
     </div>
-    <div class="col-sm-6 chat-panel">Col 2</div>
-    <div class="col-sm-4">Col 3</div>
-</div>
-<!--
-<div class="container-fluid">
-    <div class="col-sm-3 sidenav hidden-xs">
-
+    <div class="col-sm-4 chat-panel">
+        <div class="chat-panel-header">
+            Message
+        </div>
+        <directline-session></directline-session>
     </div>
-    <div class="col-sm-6 main-panel">
-
-    </div>
-
-    <div class="col-sm-3 group-chat">
+    <div class="col-sm-6 agent-panel">
+        <agent-group></agent-group>
     </div>
 </div>
-
-    -->

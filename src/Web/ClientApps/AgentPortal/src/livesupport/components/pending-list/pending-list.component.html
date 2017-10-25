@@ -1,11 +1,7 @@
-<div class="col-sm-12">
-    
-    <ul id="demo-list" class="request-items collapse in">
+<div class="col-sm-12 waiting-threads-list">
+    <ul id="request-toggle-list" class="collapse in">
         <li *ngFor="let request of liveRequests">
-
             <pending-request [liveRequest]="request" (acceptRequest)="onRequestAccepted($event)"></pending-request>
         </li>
     </ul>
-
-
 </div>

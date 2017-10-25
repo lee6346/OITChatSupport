@@ -25,3 +25,33 @@
     height: 90%;
     overflow-y: auto;
 }
+.agent-navbar {
+    height: 100%;
+    background: linear-gradient(180deg,#1b81d7,#f4faff);
+    border-radius: 4px 0 4px 0;
+    border-left: 1px solid #dff3fe;
+    float: right;
+    width: 7%;
+}
+
+.row.agent-panel{
+    height: 100%;
+}
+
+.nav-glyphs {
+    color: #e3e3e3;
+    text-align: center;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    font-size: x-large;
+
+    width: 100%;
+}
+.logout{
+    margin-top: 100px;
+    
+
+}
+.logout.nav-glyphs {
+    color:#2e6da4; 
+}

@@ -1,16 +1,16 @@
 ﻿
 
-<div class="thread-container" [@threadInOut]>
-    <h4 class="thread-header">
-        <a class="thread-title" (click)="toggleContent()">
-            <span class="label label-primary">M</span>
-            <span class="badge bg-danger message-count">{{thread.unseenMessageCount}}</span>
-        </a>
-    </h4>
+<div class="thread-item" [@threadInOut]>
+    <a class="thread-header" (click)="toggleContent()">
+        <span class="label current-thread-label">M</span>
+        <span class="badge message-count">{{thread.unseenMessageCount}}</span>
+    </a>
     <div *ngIf="opened" class="thread-content" [@toggleAnimation]>
-        <span>
-            Requested:
-            <button type="button" class="btn btn-info btn-xs" (click)="onThreadClicked()"><span class="glyphicon glyphicon-arrow-right"></span></button>
+        <ul class="recent-messages">
+            <!--<li *ngFor="let message of chatMessages"></li>-->
+        </ul>
+        <span class="label label-switch" (click)="onThreadClicked()">
+            Switch
         </span>
 
     </div>

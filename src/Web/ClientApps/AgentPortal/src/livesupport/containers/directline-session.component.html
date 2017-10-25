@@ -1,44 +1,11 @@
 ﻿
     <div class="row main-display">
-        <div class="col-sm-8 chat-display">
-            <div class="row chat-display-header">
-                <h4>Chat</h4>
-            </div>
-            <div class="row chat-display-body">
-                <div class="chat-display-message-container well">
-                    <chat-message-list [chatMessages]=" sessionMessages$ | async "></chat-message-list>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-4 cached-display">
-            <div class="row cached-display-header">
-                <h4>Bot Messages</h4>
-            </div>
-            <div class="row cached-display-body">
-                <div class="cached-display-message-container well">
-                    <cached-message-list [cachedMessages]=" cachedMessages$ | async "></cached-message-list>
-                </div>
-            </div>
+        <div class="col-sm-12 chat-window">
+            <chat-message-list [chatMessages]=" sessionMessages$ | async "></chat-message-list>
         </div>
     </div>
     <div class="row input-container">
-        <input-bar class="input-bar" (messageSubmit)="onMessageSubmitted($event)"></input-bar>
-    </div>
-
-
-
-
-            <!--<div class="chat-session-panel">
-            <div class="display-frame">
-                <div class="main-screen">
-                <chat-message-list [chatMessages]=" sessionMessages$ | async "></chat-message-list>
-                </div>
-                <div class="cached-message-screen">
-                <cached-messages [cachedMessages]=" cachedMessages$ | async "></cached-messages>
-                </div>
-            </div>
-            <div class="input-bar">
-                <input-bar (messageSubmit)="onMessageSubmitted($event)"></input-bar>
-            </div>
+        <div class="col-sm-12">
+            <input-bar (messageSubmit)="onMessageSubmitted($event)"></input-bar>
         </div>
-            -->
+    </div>

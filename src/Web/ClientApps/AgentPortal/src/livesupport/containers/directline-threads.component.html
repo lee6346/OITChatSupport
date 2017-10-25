@@ -1,7 +1,8 @@
-﻿<div class="col-sm-12">
-    <button class="btn btn-primary btn-block btn-xs glyphicon {{currentDirection}}" data-target="#demo-current-threads" data-toggle="collapse" (click)="changeArrow()"></button>
-    <chat-thread-list [threads]="directLineThreads$ | async"
-                      (switchThread)="onSwitchThread($event)"></chat-thread-list>
+﻿<div class="col-sm-12 current-threads-container">
+    <button class="btn threads-btn btn-block btn-sm"  data-target="#current-toggle-list" data-toggle="collapse" (click)="changeArrow()">
+        <span class="glyphicon {{currentDirection}}"></span>
+    </button>
+    <chat-thread-list [threads]="directLineThreads$ | async" (switchThread)="onSwitchThread($event)"></chat-thread-list>
 </div>
     
 

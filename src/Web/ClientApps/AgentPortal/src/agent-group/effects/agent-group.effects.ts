@@ -8,7 +8,7 @@ import 'rxjs/add/operator/switchMap';
 
 import * as agentAction from '../actions/agent-group.actions';
 import { Agent, AgentMessage } from '../models';
-import { AgentGroupService } from '../services/agent-group.service';
+import { AgentGroupService } from '../../shared/agent-group.service';
 
 
 @Injectable()

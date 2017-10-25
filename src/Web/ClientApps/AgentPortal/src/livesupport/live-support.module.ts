@@ -6,8 +6,6 @@ import { LiveRequestComponent } from './containers/live-request.component';
 import { AccordionModule, ButtonModule, SharedModule } from 'primeng/primeng';
 import { DirectLineThreadsComponent } from './containers/directline-threads.component';
 import { DirectLineSessionComponent } from './containers/directline-session.component';
-import { CachedMessageComponent } from './components/cached-message/cached-message.component';
-import { CachedMessageListComponent } from './components/cached-message-list/cached-message-list.component';
 import { ChatMessageListComponent } from './components/chat-message-list/chat-message-list.component';
 import { ChatMessageComponent } from './components/chat-message/chat-message.component';
 import { ChatThreadListComponent } from './components/chat-thread-list/chat-thread-list.component';
@@ -40,13 +38,12 @@ import { reducers } from './reducers/index';
         ChatThreadListComponent,
         ChatThreadComponent,
 
-        /*
+        
         DirectLineSessionComponent,
         ChatMessageListComponent,
         ChatMessageComponent,
-        CachedMessageListComponent,
-        CachedMessageComponent,
-        InputBarComponent,*/
+        InputBarComponent,
+
     ],
     exports: [
         LiveRequestComponent,
@@ -56,14 +53,12 @@ import { reducers } from './reducers/index';
         DirectLineThreadsComponent,
         ChatThreadListComponent,
         ChatThreadComponent,
-        /*
+        
         DirectLineSessionComponent,
         ChatMessageListComponent,
         ChatMessageComponent,
-        
-        CachedMessageListComponent,
-        CachedMessageComponent,
-        InputBarComponent,*/
+        InputBarComponent,
+
     ],
     providers: [
         DirectLineService

@@ -1,16 +1,16 @@
-﻿
-
-<div request-container (mouseenter)="toggleContent()" (mouseleave)="toggleContent()" [@liveRequestInOut]>
-    <h4 class="request-header">
-        <a class="request-title" (click)="toggleContent()">
-            <span class="label label-info">AR</span>{{liveRequest.botHandle}}
-        </a>
-    </h4>
+﻿<div class="request-item" [@liveRequestInOut]>
+    <a class="request-header" (click)="toggleContent()">
+        <span class="label request-label ">AR</span>
+    </a>
     <div *ngIf="opened" class="request-content" [@toggleAnimation]>
         <span>
-            Requested: {{liveRequest.timeRequested ? (liveRequest.timeRequested | date: 'shortTime') : ''}}
-            <button type="button" class="btn btn-info btn-xs" (click)="onAcceptClicked()"><span class="glyphicon glyphicon-ok"></span></button>
+            Bot: {{liveRequest.botHandle}}
         </span>
-
+        <span>
+            Requested: {{liveRequest.timeRequested ? (liveRequest.timeRequested | date: 'shortTime') : ''}}
+        </span>
+        <span class="label label-accept" (click)="onAcceptClicked()">
+            Accept
+        </span>
     </div>
 </div>

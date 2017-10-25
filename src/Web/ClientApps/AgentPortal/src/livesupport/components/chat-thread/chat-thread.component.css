@@ -2,30 +2,33 @@
     float: right;
 }
 
-.thread-container {
-    padding-top: 10px;
-    padding-bottom: 10px;
+.thread-item {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 15px;
+    padding-right: 15px;
+    background-color: #f4faff;
 }
-h4 {
-    font-size: 14px;
+.current-thread-label {
+    background-color: #2bc0ec;
+    font-size: medium;
+    border-radius: 35%;
+    margin-right: 10px;
 }
 
 .thread-header {
     cursor: pointer;
-}
-
-.thread-title {
     text-decoration: none;
 }
 
-.thread-title > .label {
-    margin-right: 10px;
-}
-
-.thread-content > span {
-    display: block;
+.label-switch {
+    background-color: #2bc0ec;
+    float: right;
+    font-size: medium;
+    cursor: pointer;
 }
 
 .thread-content {
     padding-top: 10px;
+    padding-bottom: 10px;
 }

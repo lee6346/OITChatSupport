@@ -8,16 +8,7 @@ import { List } from 'immutable';
 
 @Component({
     selector: 'agent-group',
-    template: `
-        <div class="agents-frame">
-        <div class="agents-header">
-            <h4 class="agents-title">Agents</h4>
-        </div>
-        <div class="agents-body">
-            <agent-list [agents]="agentGroup$ | async"></agent-list>
-        </div>
-    </div>
-    `,
+    templateUrl: './agent-group.component.html',
     styleUrls: ['./agent-group.component.css']
 })
 export class AgentGroupComponent implements OnInit {

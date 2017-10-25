@@ -1,26 +1,33 @@
 ﻿
-.request-container{
-    padding-top: 10px;
-    padding-bottom: 10px;
+.request-item {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 15px;
+    padding-right: 15px;
+    background-color: #f4faff;
 }
-h4{
-    font-size: 14px;
+.request-label {
+    background-color: #2bc0ec;
+    font-size: medium;
+    border-radius: 35%;
+    margin-right: 10px;
 }
 .request-content > span{
     display: block;
 }
 .request-content{
     padding-top: 10px;
+    padding-bottom: 10px;
 }
-span > button{
+
+.label-accept {
+    background-color: #2bc0ec;
     float: right;
-}
-.request-header{
+    font-size: medium;
     cursor: pointer;
 }
-.request-title{
+
+.request-header {
     text-decoration: none;
-}
-.request-title > span{
-    margin-right: 10px;
+    cursor: pointer;
 }
