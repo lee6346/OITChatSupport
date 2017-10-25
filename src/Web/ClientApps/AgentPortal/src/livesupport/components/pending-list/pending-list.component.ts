@@ -1,21 +1,15 @@
-﻿import { 
-    Component, 
-    Input, 
-    EventEmitter, 
-    Output, 
-    ChangeDetectionStrategy, 
-    OnInit 
-    } from '@angular/core';
-
+﻿import { Component, Input, EventEmitter, Output, ChangeDetectionStrategy } from '@angular/core';
+import { transition, trigger, state, animate, style } from '@angular/animations';
 import { LiveRequest } from '../../models';
 
 @Component({
     selector: 'pending-list',
     templateUrl: './pending-list.component.html',
     styleUrls: ['./pending-list.component.css'],
+    
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PendingListComponent implements OnInit{
+export class PendingListComponent {
 
     @Input()
     liveRequests: LiveRequest[];
@@ -23,13 +17,16 @@ export class PendingListComponent implements OnInit{
     @Output()
     acceptRequest: EventEmitter<LiveRequest> = new EventEmitter<LiveRequest>();
 
-    constructor() 
-    { }
 
-    ngOnInit() 
-    { }
+    
 
-    onLiveRequestClick(liveRequest: LiveRequest) {
+    constructor() {
+        
+    }
+
+    onRequestAccepted(liveRequest: LiveRequest) {
         this.acceptRequest.emit(liveRequest);
     }
+
+    
 }

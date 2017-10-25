@@ -1,12 +1,11 @@
-<ul class="list-group">
-    <li class="list-group-item" *ngFor="let request of liveRequests" (click)="onLiveRequestClick(request)">
-        <pending-request [liveRequest]="request"></pending-request>
-    </li>
-</ul>
+<div class="col-sm-12">
+    
+    <ul id="demo-list" class="request-items collapse in">
+        <li *ngFor="let request of liveRequests">
+
+            <pending-request [liveRequest]="request" (acceptRequest)="onRequestAccepted($event)"></pending-request>
+        </li>
+    </ul>
 
 
-<!--<ul class="pending">
-    <li class="pending-item" *ngFor="let request of liveRequests" (click)="onLiveRequestClick(request)">
-        <pending-request [liveRequest]="request"></pending-request>
-    </li>
-</ul> -->
+</div>

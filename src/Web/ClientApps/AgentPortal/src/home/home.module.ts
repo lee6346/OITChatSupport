@@ -6,7 +6,7 @@ import { HomeComponent } from './home.component';
 @NgModule({
     imports: [
         SharedModule,
-        LiveSupportModule
+        LiveSupportModule,
     ],
     declarations: [
         HomeComponent

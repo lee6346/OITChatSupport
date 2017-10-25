@@ -1,10 +1,12 @@
-﻿<div class="row request-header">
-    <h4>Live Requests</h4>
-    </div>
-    <div class="row request-body">
-        <pending-list [liveRequests]="liveRequests$ | async"
-                      (acceptRequest)="onRequestSelected($event)"></pending-list>
-    </div>
+﻿
+    
+<div class="col-sm-12">
+    <button class="btn btn-info btn-block btn-xs glyphicon {{currentDirection}}" data-target="#demo-list" data-toggle="collapse" (click)="changeArrow()"></button>
+    <pending-list [liveRequests]="liveRequests$ | async"
+                  (acceptRequest)="onRequestSelected($event)"></pending-list>
+</div>
+    
+
 <!--
 <div class="pending-container">
     <div class="pending-requests">

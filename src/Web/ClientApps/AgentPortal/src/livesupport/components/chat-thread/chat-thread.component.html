@@ -1,1 +1,17 @@
-﻿<a>New Messages:<span class="badge">{{thread.unseenMessageCount}}</span></a>
+﻿
+
+<div class="thread-container" [@threadInOut]>
+    <h4 class="thread-header">
+        <a class="thread-title" (click)="toggleContent()">
+            <span class="label label-primary">M</span>
+            <span class="badge bg-danger message-count">{{thread.unseenMessageCount}}</span>
+        </a>
+    </h4>
+    <div *ngIf="opened" class="thread-content" [@toggleAnimation]>
+        <span>
+            Requested:
+            <button type="button" class="btn btn-info btn-xs" (click)="onThreadClicked()"><span class="glyphicon glyphicon-arrow-right"></span></button>
+        </span>
+
+    </div>
+</div> 

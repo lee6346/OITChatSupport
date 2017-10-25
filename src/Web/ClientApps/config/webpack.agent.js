@@ -7,7 +7,7 @@ var helpers = require('../helpers');
 module.exports = merge(common, {
     devtool: 'inline-source-map',
     entry: {
-        'agentapp': '../AgentPortal/boot.client.ts',
+        'agentapp': '../AgentPortal/main.ts',
     },
     output: {
         path: helpers.root('wwwroot', 'agentdist'),

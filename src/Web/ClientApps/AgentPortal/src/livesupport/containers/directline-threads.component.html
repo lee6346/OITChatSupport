@@ -1,7 +1,8 @@
-﻿<div class="row thread-header">
-    <h4>Thread List</h4>
-</div>
-<div class="row thread-body">
+﻿<div class="col-sm-12">
+    <button class="btn btn-primary btn-block btn-xs glyphicon {{currentDirection}}" data-target="#demo-current-threads" data-toggle="collapse" (click)="changeArrow()"></button>
     <chat-thread-list [threads]="directLineThreads$ | async"
                       (switchThread)="onSwitchThread($event)"></chat-thread-list>
 </div>
+    
+
+

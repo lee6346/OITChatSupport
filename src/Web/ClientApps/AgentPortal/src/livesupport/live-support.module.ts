@@ -1,9 +1,9 @@
 ﻿import { NgModule } from '@angular/core';
-import { SharedModule } from '../shared/shared.module';
+import { SharedModule as Shared } from '../shared/shared.module';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { LiveRequestComponent } from './containers/live-request.component';
-
+import { AccordionModule, ButtonModule, SharedModule } from 'primeng/primeng';
 import { DirectLineThreadsComponent } from './containers/directline-threads.component';
 import { DirectLineSessionComponent } from './containers/directline-session.component';
 import { CachedMessageComponent } from './components/cached-message/cached-message.component';
@@ -24,37 +24,46 @@ import { reducers } from './reducers/index';
 
 @NgModule({
     imports: [
+        Shared,
+        AccordionModule,
+        ButtonModule,
         SharedModule,
         StoreModule.forFeature('livechatsupport', reducers),
         EffectsModule.forFeature([LiveRequestEffects, DirectLineThreadEffects, DirectLineMessageEffects])
     ],
     declarations: [
-        DirectLineThreadsComponent,
-        DirectLineSessionComponent,
         LiveRequestComponent,
         PendingListComponent,
         PendingRequestComponent,
-        ChatMessageListComponent,
-        ChatMessageComponent,
+        
+        DirectLineThreadsComponent,
         ChatThreadListComponent,
         ChatThreadComponent,
+
+        /*
+        DirectLineSessionComponent,
+        ChatMessageListComponent,
+        ChatMessageComponent,
         CachedMessageListComponent,
         CachedMessageComponent,
-        InputBarComponent,
+        InputBarComponent,*/
     ],
     exports: [
-        DirectLineThreadsComponent,
-        DirectLineSessionComponent,
         LiveRequestComponent,
         PendingListComponent,
         PendingRequestComponent,
-        ChatMessageListComponent,
-        ChatMessageComponent,
+        
+        DirectLineThreadsComponent,
         ChatThreadListComponent,
         ChatThreadComponent,
+        /*
+        DirectLineSessionComponent,
+        ChatMessageListComponent,
+        ChatMessageComponent,
+        
         CachedMessageListComponent,
         CachedMessageComponent,
-        InputBarComponent,
+        InputBarComponent,*/
     ],
     providers: [
         DirectLineService

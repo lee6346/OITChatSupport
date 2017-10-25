@@ -16,10 +16,17 @@ export class ChatThreadListComponent {
     @Output()
     switchThread: EventEmitter<string> = new EventEmitter<string>();
 
-    constructor() { }
+
+    
+
+    constructor() {
+        
+    }
 
 
-    onClickThread(threadId: string): void {
+    onThreadSwitched(threadId: string): void {
         this.switchThread.emit(threadId);
     }
+
+    
 }

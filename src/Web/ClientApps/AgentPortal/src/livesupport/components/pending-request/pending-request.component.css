@@ -1,4 +1,26 @@
-﻿.user {
-    position: relative;
+﻿
+.request-container{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+h4{
+    font-size: 14px;
+}
+.request-content > span{
     display: block;
+}
+.request-content{
+    padding-top: 10px;
+}
+span > button{
+    float: right;
+}
+.request-header{
+    cursor: pointer;
+}
+.request-title{
+    text-decoration: none;
+}
+.request-title > span{
+    margin-right: 10px;
 }

@@ -17,14 +17,23 @@ export class DirectLineThreadsComponent implements OnInit {
 
     private directLineThreads$: Observable<DirectLineThreadVm[]>;
 
+    currentDirection: string;
+
     constructor( private store: Store<fromLiveSupport.State> ) {
         this.directLineThreads$ = store.select(fromLiveSupport.getUiThreadList).map(val => val.toArray());
             //.map((item: Map<string, DirectLineThread>) => item.toArray());
+        this.currentDirection = 'glyphicon-triangle-top';
     }
 
     ngOnInit() { }
 
     onSwitchThread(threadId: string): void {
         this.store.dispatch(new chatThreads.SwitchThreadAction(threadId));
+    }
+    changeArrow() {
+        if (this.currentDirection === 'glyphicon-triangle-top')
+            this.currentDirection = 'glyphicon-triangle-bottom';
+        else if (this.currentDirection === 'glyphicon-triangle-bottom')
+            this.currentDirection = 'glyphicon-triangle-top';
     }
 }

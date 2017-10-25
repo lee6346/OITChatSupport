@@ -7,7 +7,7 @@ var helpers = require('../helpers');
 module.exports = merge(common, {
     devtool: 'inline-source-map',
     entry: {
-        'chatbotapp': '../Chatbot/boot.client.ts',
+        'chatbotapp': '../Chatbot/main.ts',
     },
     output: {
         path: helpers.root('wwwroot', 'chatbotdist'),

@@ -1,5 +1,8 @@
-﻿<ul class="list-group">
-    <li class="list-group-item" *ngFor="let thread of threads" (click)="onClickThread(thread.threadId)">
-        <chat-thread [thread]="thread"></chat-thread>
-    </li>
-</ul>
+﻿<div class="col-sm-12">
+    
+    <ul id="demo-current-threads" class="my-threads collapse in">
+        <li *ngFor="let thread of threads">
+            <chat-thread [thread]="thread" (switchThread)="onThreadSwitched($event)"></chat-thread>
+        </li>
+    </ul>
+</div>
