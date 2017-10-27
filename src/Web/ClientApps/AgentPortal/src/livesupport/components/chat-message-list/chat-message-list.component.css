@@ -2,22 +2,39 @@
     margin: 0;
     padding: 0;
     list-style-type: none;
-    -ms-flex-direction: column-reverse;
-    -webkit-box-orient: vertical;
-    -moz-box-orient: vertical;
-    flex-direction: column-reverse;
-}
+    display: table-cell;
+    vertical-align: bottom;
 
-.message-list {
+}
+.row.message-list-wrapper {
     height: 100%;
     overflow-y: auto;
-    -ms-flex-direction: column-reverse;
-    -webkit-box-orient: vertical;
-    -moz-box-orient: vertical;
-    flex-direction: column-reverse;
+    margin: 0;
+    width: 100%;
+    box-shadow: 1px 1px 2px #888888;
+    padding: 20px 20px 20px 20px;
+}
+.row.message-list {
+    height: 100%;
+    width: 100%;
+    display: table;
+    /*
+    height: 100%;
+    overflow-y: auto;
+    display: table;
+    margin: 0;
+    width: 100%;
+    box-shadow: 1px 1px 2px #888888;
+    padding: 20px 20px 20px 20px
+    */
+
 }
 .msg-row {
     width: 100%;
+    padding: 5px 5px 5px 5px;
+    margin: 5px 0 5px 0;
+    border-radius: 3px;
+
 }
 
 ::-webkit-scrollbar-track {

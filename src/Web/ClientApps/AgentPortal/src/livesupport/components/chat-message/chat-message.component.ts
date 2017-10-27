@@ -1,11 +1,7 @@
-﻿import { 
-    Component, 
-    Input, 
-    OnInit, 
-    ChangeDetectionStrategy
-    } from '@angular/core';
+﻿import { Component, Input, OnInit, EventEmitter, Output, ChangeDetectionStrategy } from '@angular/core';
+import { NgClass } from '@angular/common';
 
-import { DirectLineMessage } from '../../models';
+import { Activity } from 'botframework-directlinejs';
 
 @Component({
     selector: 'chat-message',
@@ -16,12 +12,26 @@ import { DirectLineMessage } from '../../models';
 export class ChatMessageComponent implements OnInit{
 
     @Input()
-    chatMessage: DirectLineMessage;
+    chatMessage: Activity;
 
-    constructor(
-    ) { }
+    @Input()
+    messageContinuation: boolean;
+
+    @Output()
+    newMessageReceived: EventEmitter<void> = new EventEmitter<void>();
+
+    constructor() { }
 
     ngOnInit() {
-        console.log('new message: ' + this.chatMessage);
+        this.newMessageReceived.emit();
+    }
+
+    labelColorSelector(sender: string): any {
+        if (sender === 'student')
+            return { 'label-student': true };
+        else if (sender === 'AskRowdy')
+            return { 'label-bot': true };
+        else
+            return { 'label-self': true };
     }
 }

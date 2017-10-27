@@ -1,0 +1,12 @@
+.row.chat-display {
+    height: 70%;
+}
+
+.chat-window {
+    height: 100%;
+    padding: 10px 20px 10px 20px;
+}
+
+.row.chat-input {
+    height: 30%;
+}

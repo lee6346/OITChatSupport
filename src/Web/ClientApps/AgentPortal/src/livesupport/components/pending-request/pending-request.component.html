@@ -1,14 +1,16 @@
 ﻿<div class="request-item" [@liveRequestInOut]>
     <a class="request-header" (click)="toggleContent()">
-        <span class="label request-label ">AR</span>
+        <span class="label request-label ">R</span>
     </a>
-    <div *ngIf="opened" class="request-content" [@toggleAnimation]>
-        <span>
-            Bot: {{liveRequest.botHandle}}
-        </span>
-        <span>
-            Requested: {{liveRequest.timeRequested ? (liveRequest.timeRequested | date: 'shortTime') : ''}}
-        </span>
+    <div *ngIf="itemToggle" class="request-content" [@toggleAnimation]>
+        <div>
+            <span class="request-details-label">Bot:</span>
+            <span class="request-details-text">{{liveRequest.botHandle}}</span>
+        </div>
+        <div>
+            <span class="request-details-label">Time:</span>
+            <span class="request-details-text">{{liveRequest.timeRequested ? (liveRequest.timeRequested | date: 'shortTime') : ''}}</span>
+        </div>
         <span class="label label-accept" (click)="onAcceptClicked()">
             Accept
         </span>

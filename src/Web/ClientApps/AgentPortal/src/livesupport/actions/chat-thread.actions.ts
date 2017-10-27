@@ -1,5 +1,5 @@
 ﻿import { Action } from '@ngrx/store';
-import { DirectLineThread, DirectLineRemoveLoad } from '../models';
+import { ChatThread } from '../models';
 
 export const THREAD_CREATED = '[Thread] THREAD_CREATED';
 export const REMOVE_THREAD = '[Thread] REMOVE_THREAD';
@@ -9,7 +9,7 @@ export const SWITCH_THREAD = '[Thread] SWITCH_THREAD';
 
 export class ThreadCreatedAction implements Action {
     readonly type = THREAD_CREATED;
-    constructor(public thread: DirectLineThread) { }
+    constructor(public thread: ChatThread) { }
 }
 
 export class ThreadDisconnectedAction implements Action {
@@ -19,7 +19,7 @@ export class ThreadDisconnectedAction implements Action {
 
 export class RemoveThreadAction implements Action {
     readonly type = REMOVE_THREAD;
-    constructor(public removeLoad: DirectLineRemoveLoad) { }
+    constructor(public threadId: string) { }
 }
 
 export class ThreadRemovedAction implements Action {

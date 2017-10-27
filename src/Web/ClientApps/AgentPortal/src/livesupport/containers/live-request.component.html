@@ -1,7 +1,0 @@
-﻿<div class="col-sm-12 waiting-threads-container">
-    <button class="btn request-btn btn-block btn-sm" data-target="#request-toggle-list" data-toggle="collapse" (click)="changeArrow()">
-        <span class="glyphicon {{currentDirection}}"></span>
-    </button>
-    <pending-list [liveRequests]="liveRequests$ | async" (acceptRequest)="onRequestSelected($event)"></pending-list>
-</div>
-    

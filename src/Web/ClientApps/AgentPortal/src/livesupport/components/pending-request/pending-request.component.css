@@ -1,30 +1,34 @@
 ﻿
 .request-item {
-    padding-top: 20px;
-    padding-bottom: 20px;
+    padding-top: 7px;
+    padding-bottom: 7px;
     padding-left: 15px;
     padding-right: 15px;
     background-color: #f4faff;
 }
 .request-label {
-    background-color: #2bc0ec;
-    font-size: medium;
+    background-color: #1b81d7;
+    font-size: smaller;
     border-radius: 35%;
     margin-right: 10px;
 }
-.request-content > span{
-    display: block;
-}
-.request-content{
-    padding-top: 10px;
-    padding-bottom: 10px;
-}
 
-.label-accept {
-    background-color: #2bc0ec;
+.request-content{
+    padding-top: 5px;
+    padding-bottom: 25px;
+}
+.request-details-label{
+    font-weight: bold;
+}
+.request-details-text{
     float: right;
-    font-size: medium;
+}
+.label-accept {
+    background-color: #1b81d7;
+    float: right;
+    font-size: smaller;
     cursor: pointer;
+    margin-top: 5px;
 }
 
 .request-header {

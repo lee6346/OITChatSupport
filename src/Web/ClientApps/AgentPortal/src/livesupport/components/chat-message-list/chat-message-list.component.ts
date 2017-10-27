@@ -1,28 +1,37 @@
-﻿import { 
-    Component, 
-    Input, 
-    OnInit, 
-    ChangeDetectionStrategy 
-    } from '@angular/core';
+﻿import { Component, Input, OnInit, ChangeDetectionStrategy, ViewChild, ElementRef} from '@angular/core';
 
-import { DirectLineMessage } from '../../models';
-
+import { Activity } from 'botframework-directlinejs';
 @Component({
     selector: 'chat-message-list',
     templateUrl: './chat-message-list.component.html',
     styleUrls: ['./chat-message-list.component.css'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ChatMessageListComponent implements OnInit{
+export class ChatMessageListComponent implements OnInit {
 
     @Input()
-    chatMessages: DirectLineMessage[];
+    chatMessages: Activity[];
 
-    constructor() {
-        
-    }
+    @ViewChild('scrollContainer')
+    chatScrollContainer: ElementRef;
+
+    constructor() { }
 
     ngOnInit() {
+        this.scrollToBottom();
+    }
+
+    onNewMessageReceived() {
+        this.scrollToBottom();
+    }
+
+    scrollToBottom(): void {
+        this.chatScrollContainer.nativeElement.scrollTop =
+            this.chatScrollContainer.nativeElement.scrollHeight;
+    }
+
+    scrollToTop(): void {
+        this.chatScrollContainer.nativeElement.scrollTop = 0;
     }
 
 

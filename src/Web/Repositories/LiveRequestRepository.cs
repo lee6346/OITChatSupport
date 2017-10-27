@@ -18,8 +18,12 @@ namespace Web.Repositories
             _oitChatSupportContext = oitChatSupportContext;
         }
 
-        public async Task Create(LiveTransferDto liveRequest)
+        public async Task<bool> Create(LiveTransferDto liveRequest)
         {
+            var duplicate = await _oitChatSupportContext.LiveRequests
+                .FirstOrDefaultAsync(req => req.ConversationId == liveRequest.ConversationId);
+            if (duplicate != null)
+                return false;
             var request = new LiveRequest
             {
                 ConversationId = liveRequest.ConversationId,
@@ -32,6 +36,8 @@ namespace Web.Repositories
                 _oitChatSupportContext.LiveRequests.Add(request);
                 await _oitChatSupportContext
                     .SaveChangesAsync();
+                liveRequest.TimeRequested = request.RequestTime;
+                return true;
             }
             catch(DbUpdateException saveException)
             {

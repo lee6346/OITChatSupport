@@ -1,0 +1,40 @@
+.waiting-threads-container {
+    height: 100%;
+}
+
+.request-btn {
+    color: #fff;
+    margin-top: 1px;
+}
+
+.request-list-title {
+    color: #000000;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 0 0 10px 0;
+    margin: 0;
+}
+
+.btn-default {
+    background-color: #e3e3e3;
+    font-weight: bold;
+    color: black;
+}
+
+.page-header {
+    margin: 0;
+    background: #f5f5f5;
+    border-radius: 3px;
+    border: 1px solid #e3e3e3;
+    height: 17%;
+    padding: 5px;
+}
+
+.request-list-toggle-buttons {
+    float: right;
+}
+
+.request-list-body {
+    height: 83%;
+    margin-right: 0;
+}

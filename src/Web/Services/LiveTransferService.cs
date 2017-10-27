@@ -25,8 +25,8 @@ namespace Web.Services
             var available = (_hubTracker.AgentsOnline(liveTransferDto.BotHandle).Result.Count() > 0);
             if(available)
             {
-                await _liveRequestRepository.Create(liveTransferDto);
-                await _hubTracker.InvokeLiveRequest(liveTransferDto);
+                if(await _liveRequestRepository.Create(liveTransferDto))
+                    await _hubTracker.InvokeLiveRequest(liveTransferDto);
             }
             
         }

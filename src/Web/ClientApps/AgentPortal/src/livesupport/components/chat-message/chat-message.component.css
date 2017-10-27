@@ -1,6 +1,48 @@
-﻿.username {
-    font-size: 14px;
-    color: black;
+﻿
+.msg-row {
+    width: 100%;
+    padding: 5px 5px 5px 5px;
+    margin: 5px 0 5px 0;
+    border-radius: 3px;
+    background: #f4faff;
+}
+.message-sender{
+    float: left;
+    font-weight: bold;
+    font-size: 12px;
     text-transform: capitalize;
+    padding-left: 10px;
+
+
+}
+.message-time{
+    float: right;
+    font-size: 11px;
 }
 
+.label-sender {
+    font-size:14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    float: left;
+
+}
+
+.label-bot{
+    background-color: #38978D;
+}
+.label-student {
+    background-color: #CFB095;
+}
+
+.label-self {
+    background-color: #2bc0ec;
+}
+
+.message-data{
+    padding-left: 10px;
+}
+
+.message-context{
+    padding-top: 10px;
+}

@@ -1,6 +1,6 @@
 ﻿import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { transition, trigger, state, animate, style } from '@angular/animations';
-import {  DirectLineThreadVm } from '../../viewmodels';
+import {  ChatThread } from '../../models';
 
 @Component({
     selector: 'chat-thread',
@@ -19,28 +19,24 @@ import {  DirectLineThreadVm } from '../../viewmodels';
                 ])
             ]
         ),
-        trigger(
-            'threadInOut', [
-                transition(':enter', [
-                    style({ transform: 'translateX(100%)', opacity: 0 }),
-                    animate('250ms', style({ transform: 'translateX(0)', opacity: 1 }))
-                ]),
-                transition(':leave', [
-                    style({ transform: 'translateX(0)', opacity: 1 }),
-                    animate('250ms', style({ transform: 'translateX(100%)', opacity: 0 }))
-                ])
-            ]
-        ),
     ],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ChatThreadComponent {
 
     @Input()
-    thread: DirectLineThreadVm;
+    thread: ChatThread;
+
+    @Input()
+    set itemToggle(listToggle: boolean) {
+        this.opened = listToggle;
+    }
 
     @Output()
     switchThread: EventEmitter<string> = new EventEmitter<string>();
+
+    @Output()
+    removeThread: EventEmitter<string> = new EventEmitter<string>();
 
     opened: boolean = false;
 
@@ -52,5 +48,9 @@ export class ChatThreadComponent {
 
     onThreadClicked() {
         this.switchThread.emit(this.thread.threadId);
+    }
+
+    onRemoveClicked() {
+        this.removeThread.emit(this.thread.threadId);
     }
 }

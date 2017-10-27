@@ -1,6 +1,6 @@
 ﻿import { Component, Input, EventEmitter, Output, ChangeDetectionStrategy } from '@angular/core';
 
-import { DirectLineThreadVm } from '../../viewmodels';
+import { ChatThread } from '../../models';
 
 @Component({
   selector: 'chat-thread-list',
@@ -11,12 +11,16 @@ import { DirectLineThreadVm } from '../../viewmodels';
 export class ChatThreadListComponent {
 
     @Input()
-    threads: DirectLineThreadVm[];
+    threads: ChatThread[];
+
+    @Input()
+    listToggle: boolean;
 
     @Output()
     switchThread: EventEmitter<string> = new EventEmitter<string>();
 
-
+    @Output()
+    removeThread: EventEmitter<string> = new EventEmitter<string>();
     
 
     constructor() {
@@ -26,6 +30,10 @@ export class ChatThreadListComponent {
 
     onThreadSwitched(threadId: string): void {
         this.switchThread.emit(threadId);
+    }
+
+    onThreadRemoved(threadId: string): void {
+        this.removeThread.emit(threadId);
     }
 
     

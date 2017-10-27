@@ -58,7 +58,7 @@ export class ChatBotEffects {
     @Effect({ dispatch: false })
     endConnection$: Observable<Action> = this.actions$.ofType(chatBotActions.END_CHAT_SESSION)
         .map((action: chatBotActions.EndChatSessionAction) => {
-            this.directLineService.endConnection();
+            this.directLineService.endConnection(action.conversationId);
             return new chatBotActions.ChatSessionEndedAction(action.conversationId);
         })
         .catch((err: any) => {

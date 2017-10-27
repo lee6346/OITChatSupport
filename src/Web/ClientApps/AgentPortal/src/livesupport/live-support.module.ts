@@ -1,68 +1,61 @@
 ﻿import { NgModule } from '@angular/core';
-import { SharedModule as Shared } from '../shared/shared.module';
+import { SharedModule } from '../shared/shared.module';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { LiveRequestComponent } from './containers/live-request.component';
-import { AccordionModule, ButtonModule, SharedModule } from 'primeng/primeng';
-import { DirectLineThreadsComponent } from './containers/directline-threads.component';
-import { DirectLineSessionComponent } from './containers/directline-session.component';
-import { ChatMessageListComponent } from './components/chat-message-list/chat-message-list.component';
-import { ChatMessageComponent } from './components/chat-message/chat-message.component';
-import { ChatThreadListComponent } from './components/chat-thread-list/chat-thread-list.component';
-import { ChatThreadComponent } from './components/chat-thread/chat-thread.component';
 
+import { DirectLineService } from './services/directline.service';
+import { LiveRequestService } from './services/live-request.service';
+import { LiveRequestEffects } from './effects/live-request.effects';
+import { ChatMessageEffects } from './effects/chat-message.effects';
+import { ChatThreadEffects } from './effects/chat-thread.effects';
+
+import { ChatMessagesContainer } from './containers/chat-messages/chat-messages.container';
+import { ChatThreadsContainer } from './containers/chat-threads/chat-threads.container';
+import { LiveRequestsContainer } from './containers/live-requests/live-requests.container';
+
+import { ChatMessageComponent } from './components/chat-message/chat-message.component';
+import { ChatMessageListComponent } from './components/chat-message-list/chat-message-list.component';
+import { ChatThreadComponent } from './components/chat-thread/chat-thread.component';
+import { ChatThreadListComponent } from './components/chat-thread-list/chat-thread-list.component';
+import { InputBarComponent } from './components/input-bar/input-bar.component';
 import { PendingListComponent } from './components/pending-list/pending-list.component';
 import { PendingRequestComponent } from './components/pending-request/pending-request.component';
-import { InputBarComponent } from './components/input-bar/input-bar.component';
-import { DirectLineService } from './services/direct-line.service';
-import { LiveRequestEffects } from './effects/live-request.effects';
-import { DirectLineThreadEffects } from './effects/directline-thread.effects';
-import { DirectLineMessageEffects } from './effects/directline-message.effects';
+
 import { reducers } from './reducers/index';
 
 @NgModule({
     imports: [
-        Shared,
-        AccordionModule,
-        ButtonModule,
         SharedModule,
         StoreModule.forFeature('livechatsupport', reducers),
-        EffectsModule.forFeature([LiveRequestEffects, DirectLineThreadEffects, DirectLineMessageEffects])
+        EffectsModule.forFeature([LiveRequestEffects, ChatMessageEffects, ChatThreadEffects])
     ],
     declarations: [
-        LiveRequestComponent,
+        LiveRequestsContainer,
         PendingListComponent,
         PendingRequestComponent,
-        
-        DirectLineThreadsComponent,
+        ChatThreadsContainer,
         ChatThreadListComponent,
         ChatThreadComponent,
-
-        
-        DirectLineSessionComponent,
+        ChatMessagesContainer,
         ChatMessageListComponent,
         ChatMessageComponent,
         InputBarComponent,
-
     ],
     exports: [
-        LiveRequestComponent,
+        LiveRequestsContainer,
         PendingListComponent,
         PendingRequestComponent,
-        
-        DirectLineThreadsComponent,
+        ChatThreadsContainer,
         ChatThreadListComponent,
         ChatThreadComponent,
-        
-        DirectLineSessionComponent,
+        ChatMessagesContainer,
         ChatMessageListComponent,
         ChatMessageComponent,
         InputBarComponent,
-
     ],
     providers: [
-        DirectLineService
+        DirectLineService,
+        LiveRequestService
     ]
-
 })
 export class LiveSupportModule { }

@@ -1,9 +1,12 @@
-﻿<div class="message-list">
-    <ul>
-        <li *ngFor="let chatMessage of chatMessages" class="msg-row">
-            <chat-message [chatMessage]="chatMessage"></chat-message>
-        </li>
-    </ul>
+﻿<div #scrollContainer class="row message-list-wrapper">
+    <div class="row message-list">
+        <ul>
+            <li *ngFor="let chatMessage of chatMessages; let i=index;" class="row msg-row">
+                <chat-message [chatMessage]="chatMessage" 
+                              [messageContinuation]="i > 0 && chatMessages[i].from.id === chatMessages[i-1].from.id" 
+                              (newMessageReceived)="onNewMessageReceived()"></chat-message>
+            </li>
+        </ul>
+    </div>
 </div>
-
 

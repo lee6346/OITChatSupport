@@ -1,19 +1,18 @@
 ﻿.message-count {
     float: right;
+    background-color: #1b81d7;
 }
 
 .thread-item {
-    padding-top: 20px;
-    padding-bottom: 20px;
-    padding-left: 15px;
-    padding-right: 15px;
+    padding: 5px 5px 20px 5px; 
     background-color: #f4faff;
 }
-.current-thread-label {
-    background-color: #2bc0ec;
-    font-size: medium;
-    border-radius: 35%;
-    margin-right: 10px;
+.current-thread-details {
+    background-color: #1b81d7;
+    font-size: smaller;
+    padding: 5px;
+    border-radius: 50%;
+    color: white;
 }
 
 .thread-header {
@@ -21,11 +20,22 @@
     text-decoration: none;
 }
 
-.label-switch {
-    background-color: #2bc0ec;
+.label-select {
+    background-color: #d4d4d4;
+    border: 0.5px solid #333;
     float: right;
-    font-size: medium;
+    font-size: smaller;
     cursor: pointer;
+    color: #333;
+    font-weight: bold;
+    margin-right:5px;
+}
+
+.label-danger{
+    font-size: smaller;
+    cursor: pointer;
+    font-weight: bold;
+    float: right;
 }
 
 .thread-content {

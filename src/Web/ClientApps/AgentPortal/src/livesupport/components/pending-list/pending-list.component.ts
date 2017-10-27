@@ -1,5 +1,4 @@
 ﻿import { Component, Input, EventEmitter, Output, ChangeDetectionStrategy } from '@angular/core';
-import { transition, trigger, state, animate, style } from '@angular/animations';
 import { LiveRequest } from '../../models';
 
 @Component({
@@ -14,19 +13,15 @@ export class PendingListComponent {
     @Input()
     liveRequests: LiveRequest[];
 
+    @Input()
+    listToggle: boolean = false;
+
     @Output()
     acceptRequest: EventEmitter<LiveRequest> = new EventEmitter<LiveRequest>();
 
-
-    
-
-    constructor() {
-        
-    }
+    constructor() { }
 
     onRequestAccepted(liveRequest: LiveRequest) {
         this.acceptRequest.emit(liveRequest);
-    }
-
-    
+    }  
 }

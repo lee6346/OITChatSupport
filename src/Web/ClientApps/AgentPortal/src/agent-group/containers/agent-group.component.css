@@ -27,19 +27,18 @@
 }
 .agent-navbar {
     height: 100%;
-    background: linear-gradient(180deg,#1b81d7,#f4faff);
+    background: #1b81d7; 
     border-radius: 4px 0 4px 0;
     border-left: 1px solid #dff3fe;
     float: right;
     width: 7%;
 }
-
-.row.agent-panel{
+.row.agent-panel {
     height: 100%;
 }
 
 .nav-glyphs {
-    color: #e3e3e3;
+    color: white;
     text-align: center;
     padding-top: 30px;
     padding-bottom: 30px;

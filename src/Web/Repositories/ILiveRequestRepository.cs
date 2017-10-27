@@ -6,7 +6,7 @@ namespace Web.Repositories
 {
     public interface ILiveRequestRepository
     {
-        Task Create(LiveTransferDto liveRequest);
+        Task<bool> Create(LiveTransferDto liveRequest);
         Task Update(LiveTransferDto liveSupport);
         Task<IList<LiveTransferDto>> GetPending(string botHandle);
 

@@ -64,7 +64,14 @@ export class DirectLineService {
         return activity;
     }
 
-    endConnection(): void{
+    endConnection(conversationId: string): void{
+        this.directLineSocket.postActivity({
+            conversation: { id: conversationId },
+            from: { id: 'student' },
+            type: 'message',
+            inputHint: 'disconnect',
+            text: 'student has disconnected'
+        }).subscribe(next => console.log('disconnect activity sent: ' + next));
         this.connected = false;
         this.directLineUnsubscribe.next();
         this.directLineSocket.end();

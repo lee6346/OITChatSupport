@@ -1,6 +1,5 @@
-﻿export { DirectLineChatLoad } from './directline-chat-load.model';
-export { DirectLineRemoveLoad } from './directline-remove-load.model';
-export { CachedMessageLoad } from './cached-message-load.model';
-export { DirectLineMessage } from './directline-message.model';
-export { DirectLineThread } from './directline-thread.model';
+﻿export { CachedMessageLoad } from './cached-message-load.model';
+export { ActivityGroup } from './activity-group.model';
 export { LiveRequest } from './live-request.model';
+export { ChatPayload } from './chat-payload.model';
+export { ChatThread } from './chat-thread.model';

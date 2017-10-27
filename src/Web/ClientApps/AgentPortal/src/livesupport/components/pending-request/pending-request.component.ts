@@ -39,25 +39,19 @@ export class PendingRequestComponent {
     @Input()
     liveRequest: LiveRequest;
 
+    @Input()
+    itemToggle: boolean = false;
 
     @Output()
     acceptRequest: EventEmitter<LiveRequest> = new EventEmitter<LiveRequest>();
 
-    opened: boolean = false;
-
-    
-
-    constructor() 
-    { }
-
-    
+    constructor() { }    
 
     toggleContent() {
-        this.opened ? this.opened = false : this.opened = true;
+        this.itemToggle ? this.itemToggle = false : this.itemToggle = true;
     }
 
     onAcceptClicked() {
         this.acceptRequest.emit(this.liveRequest);
     }
-   
 }

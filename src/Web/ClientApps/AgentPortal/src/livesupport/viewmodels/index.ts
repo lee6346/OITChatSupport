@@ -1,1 +1,0 @@
-﻿export { DirectLineThreadVm } from './directline-thread.viewmodel';

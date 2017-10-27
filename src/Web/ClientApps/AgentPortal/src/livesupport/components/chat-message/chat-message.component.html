@@ -1,4 +1,6 @@
-﻿<span>
-    <span class="username">{{chatMessage.senderId}} </span>
-    {{chatMessage.text}}
-</span>
+﻿    <div class="message-data"> {{chatMessage.text}} </div>
+    <div class="message-context">
+        <span class="label label-sender" [ngClass]="labelColorSelector(chatMessage.from.id)">{{chatMessage.from.id[0]}}</span>
+        <span class="message-sender">{{chatMessage.from.id}}</span>
+        <span class="message-time">{{chatMessage.timestamp | date: 'yMdjm'}}</span>
+    </div>
