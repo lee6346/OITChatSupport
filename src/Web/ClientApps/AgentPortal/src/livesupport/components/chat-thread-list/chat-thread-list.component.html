@@ -2,7 +2,8 @@
     <ul id="current-toggle-list" class="collapse in">
         <li *ngFor="let thread of threads">
             <chat-thread [thread]="thread"
-                         [itemToggle]="listToggle" 
+                         [opened]="listToggle"
+                         [isSelectedId]="selectedThreadId === thread.threadId"
                          (switchThread)="onThreadSwitched($event)"
                          (removeThread)="onThreadRemoved($event)"></chat-thread>
         </li>

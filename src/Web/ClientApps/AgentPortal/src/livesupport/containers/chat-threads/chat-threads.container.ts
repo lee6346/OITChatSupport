@@ -13,11 +13,12 @@ import { ChatThread } from '../../models';
 export class ChatThreadsContainer implements OnInit {
 
     private directLineThreads$: Observable<ChatThread[]>;
-
+    private selectedThreadId$: Observable<string>;
     groupExpandToggles: boolean = false;
 
     constructor(private store: Store<fromLiveSupport.State>) {
         this.directLineThreads$ = store.select(fromLiveSupport.getThreadList).map(threadList => threadList.toArray());
+        this.selectedThreadId$ = store.select(fromLiveSupport.getSelectedThreadId);
     }
 
     ngOnInit() { }

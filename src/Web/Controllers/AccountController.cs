@@ -8,6 +8,7 @@ namespace Web.Controllers
     [Route("[controller]")]
     public class AccountController: BaseController
     {
+
         private readonly IAccountService _accountService;
 
         public AccountController(IAccountService accountService)

@@ -45,7 +45,8 @@ export function reducer(state = initialState, action: chatThread.Actions | Messa
                 threads: conversationId !== '' && conversationId !== state.selectedThreadId ?
                     state.threads.update(conversationId, (thread: ChatThread) => {
                         return Object.assign({}, thread, {
-                            threadId: thread.threadId, active: thread.active, unseenMessages: action.activity.type === 'message' ?
+                            threadId: thread.threadId, active: thread.active, lastSentTime: new Date(Date.now()).toUTCString(),
+                            unseenMessages: action.activity.type === 'message' ?
                                 [...thread.unseenMessages, action.activity.text] : state.threads
                         });
                     }) : state.threads

@@ -1,6 +1,6 @@
 <div class="col-sm-12 current-threads-container">
     <div class="row page-header">
-        <div class="current-list-title">Current Threads</div>
+        <div class="current-list-title">Threads</div>
         <div class="btn-group btn-group-xs current-list-toggle-buttons" role="group">
             <button type="button" class="btn btn-default" (click)="expandAll()">Expand All</button>
             <button type="button" class="btn btn-default" (click)="collapseAll()">Collapse All</button>
@@ -8,6 +8,7 @@
     </div>
     <div class="row current-list-body">
         <chat-thread-list [threads]="directLineThreads$ | async"
+                          [selectedThreadId]="selectedThreadId$ | async"
                           [listToggle]="groupExpandToggles"
                           (switchThread)="onSwitchThread($event)"
                           (removeThread)="onRemoveThread($event)"></chat-thread-list>

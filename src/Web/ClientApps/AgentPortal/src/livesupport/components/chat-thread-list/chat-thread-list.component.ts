@@ -14,6 +14,9 @@ export class ChatThreadListComponent {
     threads: ChatThread[];
 
     @Input()
+    selectedThreadId: string;
+
+    @Input()
     listToggle: boolean;
 
     @Output()

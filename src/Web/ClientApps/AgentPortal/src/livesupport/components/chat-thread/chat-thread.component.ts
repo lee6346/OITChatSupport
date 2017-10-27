@@ -1,4 +1,5 @@
 ﻿import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+import { NgClass } from '@angular/common';
 import { transition, trigger, state, animate, style } from '@angular/animations';
 import {  ChatThread } from '../../models';
 
@@ -28,17 +29,16 @@ export class ChatThreadComponent {
     thread: ChatThread;
 
     @Input()
-    set itemToggle(listToggle: boolean) {
-        this.opened = listToggle;
-    }
+    opened: boolean = false;
+    
+    @Input()
+    isSelectedId: boolean;
 
     @Output()
     switchThread: EventEmitter<string> = new EventEmitter<string>();
 
     @Output()
     removeThread: EventEmitter<string> = new EventEmitter<string>();
-
-    opened: boolean = false;
 
     constructor() { }
 
@@ -52,5 +52,29 @@ export class ChatThreadComponent {
 
     onRemoveClicked() {
         this.removeThread.emit(this.thread.threadId);
+    }
+
+    threadStatusSelector(): any {
+        if (!this.thread.active) 
+            return { 'disconnected-thread': true };
+        else if (this.thread.unseenMessages.length > 0) 
+            return { 'active-thread': true };
+        else
+            return { 'inactive-thread': true };
+    }
+
+    currentSelect(): any {
+        if (this.isSelectedId) 
+            return { 'selected-thread': true };
+    }
+
+    currentSelectContainer(): any {
+        if (this.isSelectedId)
+            return { 'selected-thread-container': true };
+    }
+
+    currentSelectLink(): any {
+        if (this.isSelectedId) 
+            return { 'selected-thread-link': true };
     }
 }

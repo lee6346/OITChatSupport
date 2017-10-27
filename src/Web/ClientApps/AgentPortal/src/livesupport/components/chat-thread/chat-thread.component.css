@@ -1,23 +1,76 @@
-﻿.message-count {
+﻿.thread-status {
     float: right;
-    background-color: #1b81d7;
+    color: grey;
+}
+.thread-menu{
+    display:inline;
+    float: right;
+    margin-right: 10px;
+}
+.selected-thread{
+    pointer-events: none;
+    cursor: default;
+    color: grey;
+}
+.selected-thread-container {
+    box-shadow: none;
+}
+
+.selected-thread-link {
+    pointer-events: none;
+    cursor: none;
+}
+
+ul {
+    margin: 0;
+    padding: 10px;
+    list-style-type: none;
+    cursor: pointer;
+}
+.inactive-thread{
+    background-color:transparent;
+}
+.active-thread{
+    background-color: green;
+}
+.disconnected-thread{
+    background-color: red;
+}
+.dropdown-menu-container{
+    width:100%;
 }
 
 .thread-item {
-    padding: 5px 5px 20px 5px; 
-    background-color: #f4faff;
+    padding: 5px 5px 20px 5px;
+    background-color: #dbefdc;
+    box-shadow: 1px 1px 2px #888888;
+    -moz-box-shadow: 1px 1px 2px #888888;
+    -webkit-box-shadow: 1px 1px 2px #888888;
 }
 .current-thread-details {
     background-color: #1b81d7;
-    font-size: smaller;
-    padding: 5px;
-    border-radius: 50%;
+    font-size: small;
+    padding: 0;
     color: white;
 }
-
+.thread-label {
+    font-weight: bold;
+    color: black;
+}
+.thread-text{
+    padding-left: 10px;
+    color: black;
+}
 .thread-header {
     cursor: pointer;
     text-decoration: none;
+    display: inline-block;
+    width: 80%;
+
+}
+
+.thread-last-message{
+    margin-top: 5px;
 }
 
 .label-select {

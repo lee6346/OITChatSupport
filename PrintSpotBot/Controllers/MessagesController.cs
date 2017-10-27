@@ -32,9 +32,10 @@ namespace PrintSpotBot
         [BotAuthentication(CredentialProviderType =typeof(MultibotCredentialProvider))]  //is this needed when we have above?
         public async Task<HttpResponseMessage> Post([FromBody]Activity activity)
         {
+            ConnectorClient connector = new ConnectorClient(new Uri(activity.ServiceUrl));
+
             if (activity.Type == ActivityTypes.Message)
             {
-                ConnectorClient connector = new ConnectorClient(new Uri(activity.ServiceUrl));
 
                 Activity reply = activity.CreateReply("ti worked!");
                 
@@ -43,13 +44,13 @@ namespace PrintSpotBot
             }
             else
             {
-                HandleSystemMessage(activity);
+                HandleSystemMessage(activity, connector);
             }
             var response = Request.CreateResponse(HttpStatusCode.OK);
             return response;
         }
 
-        private Activity HandleSystemMessage(Activity message)
+        private Activity HandleSystemMessage(Activity message, IConnectorClient client)
         {
             if (message.Type == ActivityTypes.DeleteUserData)
             {
@@ -59,9 +60,19 @@ namespace PrintSpotBot
             else if (message.Type == ActivityTypes.ConversationUpdate)
             {
 
-                var x = message.MembersAdded.Count > 0 ? $"{message.From.Id} has joined\n" : $"{message.From.Id} has left";
-
-                
+                //var x = message.MembersAdded.Count > 0 ? $"{message.From.Id} has joined\n" : $"{message.From.Id} has left";
+                if(message.MembersAdded.Count > 0)
+                {
+                    client.Conversations.ReplyToActivity(
+                        new Activity(type: "event", name: "connected", 
+                        conversation: message.Conversation, from: message.From));
+                }
+                else
+                {
+                    client.Conversations.ReplyToActivity(
+                        new Activity(type: "event", name: "disconnect", 
+                        conversation: message.Conversation, from: message.From));
+                }
                
                 // Handle conversation state changes, like members being added and removed
                 // Use Activity.MembersAdded and Activity.MembersRemoved and Activity.Action for info

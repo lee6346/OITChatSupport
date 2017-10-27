@@ -2,4 +2,5 @@
     threadId: string;
     active: boolean;
     unseenMessages: string[];
+    lastSentTime?: string;
 }
