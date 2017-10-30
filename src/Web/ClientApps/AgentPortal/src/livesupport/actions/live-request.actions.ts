@@ -9,6 +9,9 @@ export const LIVE_REQUEST_RECEIVED = '[Request] LIVE_REQUEST_RECEIVED';
 export const LOAD_LIVE_REQUESTS = '[Request] LOAD_LIVE_REQUESTS';
 export const LIVE_REQUESTS_LOADED = '[Request] LIVE_REQUESTS_LOADED';
 
+//UI actions
+export const EXPAND_REQUEST_VIEW = '[Request] EXPAND_REQUEST_VIEW';
+
 export class AcceptLiveRequestAction implements Action {
     readonly type = ACCEPT_LIVE_REQUEST;
     constructor(public liveRequest: LiveRequest) { }
@@ -35,10 +38,17 @@ export class LiveRequestsLoadedAction implements Action {
     constructor(public liveRequest: LiveRequest[]) { }
 
 }
+
+export class ExpandRequestViewAction implements Action {
+    readonly type = EXPAND_REQUEST_VIEW;
+    constructor(public expand: boolean) { }
+}
+
 export type Actions
     = AcceptLiveRequestAction
     | LiveRequestAcceptedAction
     | LiveRequestRemovedAction
     | LiveRequestReceivedAction
     | LoadLiveRequestsAction
-    | LiveRequestsLoadedAction;
+    | LiveRequestsLoadedAction
+    | ExpandRequestViewAction;

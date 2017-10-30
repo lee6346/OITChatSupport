@@ -4,12 +4,12 @@ import * as appTimer from '../actions/app-timer.actions';
 
 export interface State {
     currentSeconds: number;
-    timeInterval: number;
+    active: boolean;
 }
 
 export const initialState: State = {
     currentSeconds: 0,
-    timeInterval: 0,
+    active: true,
 };
 
 
@@ -18,12 +18,12 @@ export function reducer(state = initialState, action: appTimer.Actions): State {
         case appTimer.EMIT_SECOND_INTERVAL:
             return Object.assign({}, state, {
                 currentSeconds: action.interval,
-                timeInterval: state.timeInterval
+                timeInterval: state.active
             });
-        case appTimer.SECOND_INTERVAL_CHANGED:
+        case appTimer.ENABLE_TIMER:
             return Object.assign({}, state, {
                 currentSeconds: state.currentSeconds,
-                timerInterval: action.interval
+                timerInterval: action.enable
             });
         default:
             return state;

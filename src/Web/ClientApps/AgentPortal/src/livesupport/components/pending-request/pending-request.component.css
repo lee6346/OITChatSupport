@@ -13,6 +13,10 @@
     margin-right: 10px;
 }
 
+.wait-time{
+    float: right;
+}
+
 .request-content{
     padding-top: 5px;
     padding-bottom: 25px;

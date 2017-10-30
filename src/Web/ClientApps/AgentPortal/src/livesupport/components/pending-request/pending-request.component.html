@@ -1,15 +1,16 @@
 ﻿<div class="request-item" [@liveRequestInOut]>
     <a class="request-header" (click)="toggleContent()">
         <span class="label request-label ">R</span>
+        <span class="wait-time">Wait time: {{_waitTime | date:'mm:ss'}}</span>
     </a>
-    <div *ngIf="itemToggle" class="request-content" [@toggleAnimation]>
+    <div *ngIf="groupToggle" class="request-content" [@toggleAnimation]>
         <div>
             <span class="request-details-label">Bot:</span>
-            <span class="request-details-text">{{liveRequest.botHandle}}</span>
+            <span class="request-details-text">{{_liveRequest.botHandle}}</span>
         </div>
         <div>
             <span class="request-details-label">Time:</span>
-            <span class="request-details-text">{{liveRequest.timeRequested ? (liveRequest.timeRequested | date: 'shortTime') : ''}}</span>
+            <span class="request-details-text">{{ _liveRequest.timeRequested ? (_liveRequest.timeRequested | date: 'shortTime') : '' }}</span>
         </div>
         <span class="label label-accept" (click)="onAcceptClicked()">
             Accept

@@ -7,6 +7,7 @@ import * as fromRoot from '../../shared/index';
 
 export interface LiveChatSupportState {
     liveRequests: fromLiveRequests.State;
+    liveRequestsUi: fromLiveRequests.UiState;
     threads: fromThreads.State;
     messages: fromMessages.State;
     timer: fromTimer.State;
@@ -18,6 +19,7 @@ export interface State extends fromRoot.State {
 
 export const reducers = {
     liveRequests: fromLiveRequests.reducer,
+    liveRequestsUi: fromLiveRequests.uiReducer,
     threads: fromThreads.reducer,
     messages: fromMessages.reducer,
     timer: fromTimer.reducer
@@ -28,6 +30,11 @@ export const getLiveChatSupportState = createFeatureSelector<LiveChatSupportStat
 export const getLiveRequestEntitiesState = createSelector(
     getLiveChatSupportState,
     state => state.liveRequests
+);
+
+export const getLiveRequestUiState = createSelector(
+    getLiveChatSupportState,
+    state => state.liveRequestsUi
 );
 
 export const getThreadEntitiesState = createSelector(
@@ -48,6 +55,16 @@ export const getTimerEntityState = createSelector(
 export const getLiveRequestList = createSelector(
     getLiveRequestEntitiesState,
     entities => entities.liveRequests
+);
+
+export const getLiveRequestCount = createSelector(
+    getLiveRequestEntitiesState,
+    fromLiveRequests.getTotalRequests
+);
+
+export const getLiveRequestExpanded = createSelector(
+    getLiveRequestUiState,
+    fromLiveRequests.getExpandState
 );
 
 export const getThreadList = createSelector(
@@ -76,7 +93,7 @@ export const getCurrentTime = createSelector(
     state => state.currentSeconds
 );
 
-export const getCurrentInterval = createSelector(
+export const getTimerActiveStatus = createSelector(
     getTimerEntityState,
-    state => state.timeInterval
+    state => state.active
 );

@@ -2,7 +2,7 @@
 import { CanActivate } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
-
+/*
 @Injectable()
 export class AuthGuard implements CanActivate {
 
@@ -10,4 +10,4 @@ export class AuthGuard implements CanActivate {
     canActivate(): Observable<boolean> {
 
     }
-}
+}*/

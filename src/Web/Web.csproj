@@ -24,8 +24,9 @@
     <None Remove="ClientApps\AgentPortal\src\auth\models\index.ts" />
     <None Remove="ClientApps\AgentPortal\src\livesupport\actions\app-timer.actions.ts" />
     <None Remove="ClientApps\AgentPortal\src\livesupport\components\pending-header\pending-header.component.ts" />
-    <None Remove="ClientApps\AgentPortal\src\livesupport\effects\app-timer.effects.ts" />
+    <None Remove="ClientApps\AgentPortal\src\livesupport\models\accept-request.model.ts" />
     <None Remove="ClientApps\AgentPortal\src\livesupport\models\directline-schema.model.ts" />
+    <None Remove="ClientApps\AgentPortal\src\livesupport\models\guid-mock.model.ts" />
     <None Remove="ClientApps\AgentPortal\src\livesupport\reducers\app-timer.reducers.ts" />
     <None Remove="ClientApps\AgentPortal\src\livesupport\services\app-timer.service.ts" />
   </ItemGroup>
@@ -85,8 +86,9 @@
     <TypeScriptCompile Include="ClientApps\AgentPortal\src\auth\models\auth.model.ts" />
     <TypeScriptCompile Include="ClientApps\AgentPortal\src\livesupport\actions\app-timer.actions.ts" />
     <TypeScriptCompile Include="ClientApps\AgentPortal\src\livesupport\components\pending-header\pending-header.component.ts" />
-    <TypeScriptCompile Include="ClientApps\AgentPortal\src\livesupport\effects\app-timer.effects.ts" />
+    <TypeScriptCompile Include="ClientApps\AgentPortal\src\livesupport\models\accept-request.model.ts" />
     <TypeScriptCompile Include="ClientApps\AgentPortal\src\livesupport\models\directline-schema.model.ts" />
+    <TypeScriptCompile Include="ClientApps\AgentPortal\src\livesupport\models\guid-mock.model.ts" />
     <TypeScriptCompile Include="ClientApps\AgentPortal\src\livesupport\reducers\app-timer.reducers.ts" />
     <TypeScriptCompile Include="ClientApps\AgentPortal\src\livesupport\services\app-timer.service.ts" />
   </ItemGroup>

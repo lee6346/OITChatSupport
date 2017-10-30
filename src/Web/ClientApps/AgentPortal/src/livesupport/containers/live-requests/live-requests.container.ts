@@ -1,8 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Observable } from 'rxjs/Rx';
+import { Observable, Subject } from 'rxjs/Rx';
 import { Store } from '@ngrx/store';
 import * as fromLiveRequests from '../../reducers/index';
 import * as liveRequests from '../../actions/live-request.actions';
+import { EnableTimerAction, InitializeTimerAction } from '../../actions/app-timer.actions';
 import { LiveRequest } from '../../models';
 
 @Component({
@@ -14,17 +15,21 @@ export class LiveRequestsContainer implements OnInit {
 
     liveRequests$: Observable<LiveRequest[]>;
     timer$: Observable<number>;
-    currentInterval$: Observable<number>;
-
-    groupExpandToggles: boolean = false;
+    timerActive$: Observable<boolean>;
+    requestCount$: Observable<number>;
+    groupToggle$: Observable<boolean>;
 
     constructor(private store: Store<fromLiveRequests.State>) {
+        this.store.dispatch(new InitializeTimerAction(1000));
         this.liveRequests$ = store.select(fromLiveRequests.getLiveRequestList).map(requestList => requestList.toArray());
+        this.requestCount$ = this.liveRequests$.map(x => x.length);
+        this.timer$ = this.store.select(fromLiveRequests.getCurrentTime);
+        this.timerActive$ = this.store.select(fromLiveRequests.getTimerActiveStatus);
+        this.groupToggle$ = this.store.select(fromLiveRequests.getLiveRequestExpanded);
     }
 
     ngOnInit() {
         this.store.dispatch(new liveRequests.LoadLiveRequestsAction('askrowdy'));
-        this.subscribeToTimer();
     }
 
     onRequestSelected(liveRequest: LiveRequest): void {
@@ -36,17 +41,12 @@ export class LiveRequestsContainer implements OnInit {
         } as LiveRequest));
     }
 
-    subscribeToTimer() {
-        this.timer$ = this.store.select(fromLiveRequests.getCurrentTime);
-        this.currentInterval$ = this.store.select(fromLiveRequests.getCurrentInterval);
-        this.timer$.subscribe(next => console.log('interval: ' + next));
+    enableTimer(enable: boolean) {
+        this.store.dispatch(new EnableTimerAction(enable));
     }
 
-    expandAllRequests(): void {
-        this.groupExpandToggles = true;
+    onToggleRequests(expand: boolean) {
+        this.store.dispatch(new liveRequests.ExpandRequestViewAction(expand));
     }
 
-    collapseAllRequests(): void {
-        this.groupExpandToggles = false;
-    }
 }

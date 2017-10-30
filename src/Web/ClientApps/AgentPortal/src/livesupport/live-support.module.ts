@@ -5,6 +5,9 @@ import { EffectsModule } from '@ngrx/effects';
 
 import { DirectLineService } from './services/directline.service';
 import { LiveRequestService } from './services/live-request.service';
+import { AppTimerService } from './services/app-timer.service';
+
+import { AppTimerEffects } from './effects/app-timer.effects';
 import { LiveRequestEffects } from './effects/live-request.effects';
 import { ChatMessageEffects } from './effects/chat-message.effects';
 import { ChatThreadEffects } from './effects/chat-thread.effects';
@@ -18,6 +21,7 @@ import { ChatMessageListComponent } from './components/chat-message-list/chat-me
 import { ChatThreadComponent } from './components/chat-thread/chat-thread.component';
 import { ChatThreadListComponent } from './components/chat-thread-list/chat-thread-list.component';
 import { InputBarComponent } from './components/input-bar/input-bar.component';
+import { PendingHeaderComponent } from './components/pending-header/pending-header.component';
 import { PendingListComponent } from './components/pending-list/pending-list.component';
 import { PendingRequestComponent } from './components/pending-request/pending-request.component';
 
@@ -27,10 +31,11 @@ import { reducers } from './reducers/index';
     imports: [
         SharedModule,
         StoreModule.forFeature('livechatsupport', reducers),
-        EffectsModule.forFeature([LiveRequestEffects, ChatMessageEffects, ChatThreadEffects])
+        EffectsModule.forFeature([LiveRequestEffects, ChatMessageEffects, ChatThreadEffects, AppTimerEffects])
     ],
     declarations: [
         LiveRequestsContainer,
+        PendingHeaderComponent,
         PendingListComponent,
         PendingRequestComponent,
         ChatThreadsContainer,
@@ -55,7 +60,8 @@ import { reducers } from './reducers/index';
     ],
     providers: [
         DirectLineService,
-        LiveRequestService
+        LiveRequestService,
+        AppTimerService,
     ]
 })
 export class LiveSupportModule { }

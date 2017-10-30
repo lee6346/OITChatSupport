@@ -36,22 +36,35 @@ import { LiveRequest } from '../../models';
 })
 export class PendingRequestComponent {
 
-    @Input()
-    liveRequest: LiveRequest;
+    private _liveRequest: LiveRequest;
+    private _waitTime: number = 0;
 
     @Input()
-    itemToggle: boolean = false;
+    set liveRequest(liveRequest: LiveRequest) {
+        this._liveRequest = liveRequest;
+        this._waitTime = Math.abs(Date.parse(liveRequest.timeRequested) - Date.now());
+    }
+
+    @Input()
+    groupToggle: boolean;
+
 
     @Output()
     acceptRequest: EventEmitter<LiveRequest> = new EventEmitter<LiveRequest>();
 
+    @Input()
+    set waitTime(waitTime: number) {
+        if(this._waitTime != 0)
+            this._waitTime = this._waitTime + 1000;
+    }
+
     constructor() { }    
 
     toggleContent() {
-        this.itemToggle ? this.itemToggle = false : this.itemToggle = true;
+        this.groupToggle ? this.groupToggle = false : this.groupToggle = true;
     }
 
     onAcceptClicked() {
-        this.acceptRequest.emit(this.liveRequest);
+        this.acceptRequest.emit(this._liveRequest);
     }
 }

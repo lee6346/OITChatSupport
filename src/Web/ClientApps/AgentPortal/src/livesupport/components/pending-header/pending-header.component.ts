@@ -8,22 +8,19 @@
 export class PendingHeaderComponent {
 
     @Input()
-    totalRequests: number;
+    requestCount: number;
 
     @Output()
-    changeInterval: EventEmitter<number> = new EventEmitter<number>();
-
-    @Output()
-    expandRequests: EventEmitter<boolean> = new EventEmitter<boolean>();
+    toggleRequests: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     constructor() { }
 
 
-    onExpandClicked() {
-        this.expandRequests.emit(true);
+    expandRequests() {
+        this.toggleRequests.emit(true);
     }
 
-    onCollapseClicked() {
-        this.expandRequests.emit(false);
+    collapseRequests() {
+        this.toggleRequests.emit(false);
     }
 }

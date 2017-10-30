@@ -2,7 +2,7 @@
     conversationId: string;
     user: string;
     botHandle: string;
-    timeRequested?: string;
+    timeRequested: string;
 
 }
 

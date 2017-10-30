@@ -49,6 +49,7 @@ export class DirectLineService {
                 (err: any) => console.log('error'),
                 () => console.log('complete')
             );
+            this.directLineSocket.activity$.subscribe(next => console.log(next));
         }
         return conversation.conversationId;
     }

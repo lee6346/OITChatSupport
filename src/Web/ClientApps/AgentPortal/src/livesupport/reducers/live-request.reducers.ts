@@ -6,8 +6,16 @@ export interface State {
     liveRequests: List<LiveRequest>;
 }
 
+export interface UiState {
+    expandView: boolean;
+}
+
 export const initialState: State = {
     liveRequests: List<LiveRequest>(),
+};
+
+export const initialUiState: UiState = {
+    expandView: false
 };
 
 export function reducer(state = initialState, action: liveRequest.Actions): State {
@@ -32,3 +40,16 @@ export function reducer(state = initialState, action: liveRequest.Actions): Stat
 
 export const getTotalRequests = (state: State) => state.liveRequests.count;
 export const getPendingRequests = (state: State) => state.liveRequests;
+
+export function uiReducer(state = initialUiState, action: liveRequest.Actions): UiState {
+    switch (action.type) {
+        case liveRequest.EXPAND_REQUEST_VIEW:
+            return Object.assign({}, state, {
+                expandView: action.expand
+            });
+        default:
+            return state;
+    }
+}
+
+export const getExpandState = (state: UiState) => state.expandView;

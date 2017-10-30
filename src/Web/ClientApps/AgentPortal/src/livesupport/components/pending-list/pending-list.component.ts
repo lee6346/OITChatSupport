@@ -17,7 +17,7 @@ export class PendingListComponent {
     timer: number;
 
     @Input()
-    listToggle: boolean = false;
+    groupToggle: boolean;
 
     @Output()
     acceptRequest: EventEmitter<LiveRequest> = new EventEmitter<LiveRequest>();
@@ -26,5 +26,6 @@ export class PendingListComponent {
 
     onRequestAccepted(liveRequest: LiveRequest) {
         this.acceptRequest.emit(liveRequest);
-    }  
+    } 
+
 }

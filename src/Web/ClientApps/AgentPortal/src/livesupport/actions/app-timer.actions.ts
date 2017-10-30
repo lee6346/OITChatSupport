@@ -1,26 +1,26 @@
 ﻿import { Action } from '@ngrx/store';
 
-export const CHANGE_SECOND_INTERVAL = '[Timer] CHANGE_SECOND_INTERVAL';
-export const SECOND_INTERVAL_CHANGED = '[Timer] SECOND_INTERVAL_CHANGED';
+export const INITIALIZE_TIMER = '[Timer] INITIALIZE_TIMER';
 export const EMIT_SECOND_INTERVAL = '[Timer] EMIT_SECOND_INTERVAL';
+export const ENABLE_TIMER = '[Timer] ENABLE_TIMER';
 
-
-export class ChangeSecondIntervalAction implements Action {
-    readonly type = CHANGE_SECOND_INTERVAL;
-    constructor(public interval: number) { }
-}
 
 export class EmitSecondIntervalAction implements Action {
     readonly type = EMIT_SECOND_INTERVAL;
     constructor(public interval: number) { }
 }
 
-export class SecondIntervalChangedAction implements Action {
-    readonly type = SECOND_INTERVAL_CHANGED;
+export class EnableTimerAction implements Action {
+    readonly type = ENABLE_TIMER;
+    constructor(public enable: boolean) { }
+}
+
+export class InitializeTimerAction implements Action {
+    readonly type = INITIALIZE_TIMER;
     constructor(public interval: number) { }
 }
 
 export type Actions
-    = ChangeSecondIntervalAction
-    | SecondIntervalChangedAction
-    | EmitSecondIntervalAction;
+    = EmitSecondIntervalAction
+    | InitializeTimerAction
+    | EnableTimerAction;
