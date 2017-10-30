@@ -14,6 +14,9 @@ export class PendingListComponent {
     liveRequests: LiveRequest[];
 
     @Input()
+    timer: number;
+
+    @Input()
     listToggle: boolean = false;
 
     @Output()

@@ -1,0 +1,109 @@
+﻿
+
+error code:
+	502 Bad Gateway: 
+		- bot error, most common type, comes with a JSON object representing the code and message that can be used
+			error: { code: BotRejectedActivity, message: failed to send activity ....}
+
+	401 : bad auth => forbidden
+
+	403: unauthorized, expired token, etc
+
+Token operations
+	Create: 
+		POST /v3/directline/tokens/generate
+		body: n/a
+		auth: required
+		return: conversation object
+
+	Refresh: 
+		POST /v3/directline/tokens/refresh 
+		body: n/a
+		auth: required, current token to refresh
+		return conversation object with refreshed timer/token
+
+
+Conversation operations: (unlike token, this will immediately start the conversation rather than letting user decide when to)
+	Start: returns conversation objects
+		POST /v3/directline/conversations
+		body: n/a
+		auth: required
+		return: Conversation object
+
+	Get conversation Info:  used to connect to existing conversation by returning a new Stream Url with the object
+		GET /v3/directline/conversations/{conversationId}?watermark={watermark_value}
+		body: n/a
+		auth: required
+		return: Conversation object with stream URL
+		watermark?: to let channel know most recent activity seen
+
+	Get Activities: to get cached activities
+		GET /v3/directline/conversations/{conversationId}/activities?watermark={watermark_value}
+		body: n/a
+		auth: required
+		return: ActivitySet => {Activity[], watermark: string}
+
+	Send Activity: 
+		POST /v3/directline/conversations/{conversationId}/activities
+		body: Activity
+		return: ResourceResponse (containg the id of the activity)
+
+	Send single attachment as an object uploaded:
+		POST /v3/directline/conversations/{conversationId}/upload
+		Authorization: required
+		Content-Type: image/jpeg | text/plain | ...
+		Content-Disposition: name='file'; filename='myfirstfile.jpg' 
+		[other headers]
+		[JPEG content]
+
+		response: 200 OK + activity id
+
+	Send multiple attachments by upload (can also include an activity object with it)
+		POST /v3/directline/conversations/{conversationId}/upload
+		Authorization: required
+		Content-Type: multipart/form-data; boundary=----DD4E5147-E865-4652-B662-F223701A8A89
+		[other headers]
+
+		----DD4E5147-E865-4652-B662-F223701A8A89
+		Content-Type: image/jpeg
+		Content-Disposition: form-data; name='file'; filename='badjoke1.jpg'
+		[other headers]
+		[JPEG content]
+
+		----DD4E5147-E865-4652-B662-F223701A8A89
+		.....
+
+		----DD4E5147-E865-4652-B662-F223701A8A89
+		Content-Type: application/vnd.microsoft.activity
+		[other headers]
+		{....} as Activity
+
+		----DD4E5147-E865-4652-B662-F223701A8A89
+
+
+	Send attachment as URL
+		- same as regular send activity, but include the attachment url in the Activity's Attachment[] property
+
+	End conversation: need to send an activity of type endOfConversation
+		POST /v3/directline/conversations/{conversationId}/activities
+		body: EndConversationActivity
+		auth: required
+		return: ResourceResponse
+
+	Connecting via stream Url to existing conversation
+		GET /v3/directline/conversations/{conversationId}/stream?{stream_Url}
+		Upgrade: websocket
+		Connection: upgrade
+		[other headers]
+		return: Http 101 (switching protocols)
+
+	Receiving activities:
+		- activities are returned in sets of 2+ depending on how many people in the conversation
+		- each set also comes with the updated watermark
+
+	If using POLL
+		- service to service apps have 5-10 second poll interfal
+		- client facing apps use 1 second poll interval, and issue an additional request roughly 300ms after every message that 
+			client sends 
+
+

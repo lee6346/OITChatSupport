@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using System.Web;
 
 namespace PrintSpotBot.Modules
-{
+{/*
     public class GlobalMessageHandlerModule: Module
     {
         protected override void Load(ContainerBuilder builder)
@@ -32,7 +32,7 @@ namespace PrintSpotBot.Modules
 
         protected override async Task PostAsync(IActivity item, string state, CancellationToken token)
         {
-            this.
+
         }
-    }
+    }*/
 }

@@ -9,13 +9,12 @@ using System.Web;
 
 namespace PrintSpotBot.Services
 {
-    public class CustomLogger: IActivityLogger
+    public class DevLogger: IActivityLogger
     {
         public async Task LogAsync(IActivity activity)
         {
-            Debug.WriteLine($"From:{activity.From.Id} - To:{activity.Recipient.Id} - Message:{activity.AsMessageActivity().Text}");
+            Debug.WriteLine($"Conversation:{activity.Conversation.Id}\tFrom:{activity.From.Id}\tTo:{activity.Recipient.Id}\tMessage:{activity.AsMessageActivity()?.Text}");
+
         }
-        
-         // register in autofac: builder.RegisterType<CustomLogger>().AsImplementedInterfaces().InstancePerDependency()
     }
 }

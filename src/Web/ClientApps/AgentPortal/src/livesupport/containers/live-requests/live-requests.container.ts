@@ -13,6 +13,8 @@ import { LiveRequest } from '../../models';
 export class LiveRequestsContainer implements OnInit {
 
     liveRequests$: Observable<LiveRequest[]>;
+    timer$: Observable<number>;
+    currentInterval$: Observable<number>;
 
     groupExpandToggles: boolean = false;
 
@@ -22,6 +24,7 @@ export class LiveRequestsContainer implements OnInit {
 
     ngOnInit() {
         this.store.dispatch(new liveRequests.LoadLiveRequestsAction('askrowdy'));
+        this.subscribeToTimer();
     }
 
     onRequestSelected(liveRequest: LiveRequest): void {
@@ -31,6 +34,12 @@ export class LiveRequestsContainer implements OnInit {
             timeRequested: liveRequest.timeRequested,
             user: 'jvr632'
         } as LiveRequest));
+    }
+
+    subscribeToTimer() {
+        this.timer$ = this.store.select(fromLiveRequests.getCurrentTime);
+        this.currentInterval$ = this.store.select(fromLiveRequests.getCurrentInterval);
+        this.timer$.subscribe(next => console.log('interval: ' + next));
     }
 
     expandAllRequests(): void {

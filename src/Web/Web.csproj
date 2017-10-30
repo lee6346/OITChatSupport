@@ -12,12 +12,26 @@
     <IsTransformWebConfigDisabled>true</IsTransformWebConfigDisabled>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="ClientApps\AgentPortal\src\auth\actions\auth.actions.ts" />
+    <None Remove="ClientApps\AgentPortal\src\auth\auth.module.ts" />
+    <None Remove="ClientApps\AgentPortal\src\auth\components\auth-form.component.ts" />
+    <None Remove="ClientApps\AgentPortal\src\auth\containers\auth.container.ts" />
+    <None Remove="ClientApps\AgentPortal\src\auth\effects\auth.effects.ts" />
+    <None Remove="ClientApps\AgentPortal\src\auth\reducers\auth.reducers.ts" />
+    <None Remove="ClientApps\AgentPortal\src\auth\reducers\index.ts" />
+    <None Remove="ClientApps\AgentPortal\src\auth\services\auth.service.ts" />
+    <None Remove="ClientApps\AgentPortal\src\auth\models\auth.model.ts" />
+    <None Remove="ClientApps\AgentPortal\src\auth\models\index.ts" />
     <None Remove="ClientApps\AgentPortal\src\livesupport\actions\app-timer.actions.ts" />
+    <None Remove="ClientApps\AgentPortal\src\livesupport\components\pending-header\pending-header.component.ts" />
+    <None Remove="ClientApps\AgentPortal\src\livesupport\effects\app-timer.effects.ts" />
+    <None Remove="ClientApps\AgentPortal\src\livesupport\models\directline-schema.model.ts" />
     <None Remove="ClientApps\AgentPortal\src\livesupport\reducers\app-timer.reducers.ts" />
     <None Remove="ClientApps\AgentPortal\src\livesupport\services\app-timer.service.ts" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="4.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.0.0-alpha1-final" />
     <PackageReference Include="Microsoft.Bot.Connector.DirectLine" Version="3.0.2" />
@@ -35,9 +49,9 @@
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp2.0'">
-    <PackageReference Include="Autofac" Version="4.6.1" />
+    <PackageReference Include="Autofac" Version="4.6.2" />
     <PackageReference Include="AutoMapper" Version="6.1.1" />
-    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="3.0.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="3.1.0" />
     <PackageReference Include="Dapper" Version="1.50.2" />
     <PackageReference Include="Dapper.Contrib" Version="1.50.0" />
     <PackageReference Include="Dapper.FluentMap" Version="1.6.0" />
@@ -57,7 +71,22 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApps\AgentPortal\src\auth\actions\auth.actions.ts" />
+    <TypeScriptCompile Include="ClientApps\AgentPortal\src\auth\auth.module.ts" />
+    <TypeScriptCompile Include="ClientApps\AgentPortal\src\auth\components\auth-form.component.ts" />
+    <TypeScriptCompile Include="ClientApps\AgentPortal\src\auth\containers\auth.container.ts" />
+    <TypeScriptCompile Include="ClientApps\AgentPortal\src\auth\effects\auth.effects.ts" />
+    <TypeScriptCompile Include="ClientApps\AgentPortal\src\auth\reducers\auth.reducers.ts" />
+    <TypeScriptCompile Include="ClientApps\AgentPortal\src\auth\reducers\index.ts" />
+    <TypeScriptCompile Include="ClientApps\AgentPortal\src\auth\services\auth.service.ts" />
+    <TypeScriptCompile Include="ClientApps\AgentPortal\src\auth\services\auth.guard.ts" />
+    <TypeScriptCompile Include="ClientApps\AgentPortal\src\auth\models\index.ts" />
+    <TypeScriptCompile Include="ClientApps\AgentPortal\src\auth\models\user.model.ts" />
+    <TypeScriptCompile Include="ClientApps\AgentPortal\src\auth\models\auth.model.ts" />
     <TypeScriptCompile Include="ClientApps\AgentPortal\src\livesupport\actions\app-timer.actions.ts" />
+    <TypeScriptCompile Include="ClientApps\AgentPortal\src\livesupport\components\pending-header\pending-header.component.ts" />
+    <TypeScriptCompile Include="ClientApps\AgentPortal\src\livesupport\effects\app-timer.effects.ts" />
+    <TypeScriptCompile Include="ClientApps\AgentPortal\src\livesupport\models\directline-schema.model.ts" />
     <TypeScriptCompile Include="ClientApps\AgentPortal\src\livesupport\reducers\app-timer.reducers.ts" />
     <TypeScriptCompile Include="ClientApps\AgentPortal\src\livesupport\services\app-timer.service.ts" />
   </ItemGroup>

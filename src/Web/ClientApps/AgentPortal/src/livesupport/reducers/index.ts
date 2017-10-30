@@ -75,3 +75,8 @@ export const getCurrentTime = createSelector(
     getTimerEntityState,
     state => state.currentSeconds
 );
+
+export const getCurrentInterval = createSelector(
+    getTimerEntityState,
+    state => state.timeInterval
+);

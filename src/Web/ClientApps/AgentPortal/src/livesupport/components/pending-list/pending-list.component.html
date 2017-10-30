@@ -3,7 +3,7 @@
         <li *ngFor="let request of liveRequests">
             <pending-request [liveRequest]="request" 
                              [itemToggle]="listToggle" 
-                             (acceptRequest)="onRequestAccepted($event)"></pending-request>
+                             (acceptRequest)="onRequestAccepted($event)"></pending-request>{{timer}}
         </li>
     </ul>
 </div>
