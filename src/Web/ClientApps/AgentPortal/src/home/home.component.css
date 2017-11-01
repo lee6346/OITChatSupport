@@ -4,11 +4,10 @@
 
 .agent-panel, .thread-panel, .chat-panel {
     height: 100%;
-    padding-left: 5px;
 }
 
 .waiting-threads, .current-threads{
-    height: 50%;
+    height: 50vh;
 }
 
 @media screen and (max-width: 767px){

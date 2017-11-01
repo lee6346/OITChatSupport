@@ -3,7 +3,7 @@
     <div class="window-body">
         <div class="message-display">
             <div *ngIf="notConnected" class="loader"></div>
-            <message-list [chatMessages]=" chatMessages$ | async "></message-list>
+            <message-list [messageActivities]=" messageActivities$ | async "></message-list>
         </div>
         <div class="partition"></div>
         <input-bar (messageSubmit)="onMessageSubmitted($event)"></input-bar>

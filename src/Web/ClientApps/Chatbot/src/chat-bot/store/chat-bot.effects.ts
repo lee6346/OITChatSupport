@@ -27,8 +27,7 @@ export class ChatBotEffects {
             return new chatBotActions.LiveSupportRequestedAction(action.request);
         })
         .catch((err: any) => {
-            console.log('error with live request');
-            return of({ type: 'makeLiveRequest$' });
+            return of({ type: 'effects error: makeLiveRequest$' });
         });
 
     @Effect()
@@ -39,20 +38,17 @@ export class ChatBotEffects {
                     return new chatBotActions.BotTokenRetrievedAction(this.directLineService.startDirectLineSession(conversation));
                 }))
         .catch((err: any) => {
-            console.log('error starting a new session');
-            return of({ type: 'getToken$' });
+            return of({ type: 'effects error: getToken$' });
         });
 
     @Effect()
     postActivity$: Observable<Action> = this.actions$.ofType(chatBotActions.SEND_MESSAGE_ACTIVITY)
         .map((action: chatBotActions.SendMessageActivityAction) => {
-            console.log('effect: new message is coming...');
             let activity = this.directLineService.postMessage(action.message);
             return new chatBotActions.MessageActivitySentAction(activity);
         })
         .catch((err: any) => {
-            console.log('error sending message activity to bot');
-            return of({ type: 'sendMessageActivity$' });
+            return of({ type: 'effects error: sendMessageActivity$' });
         });
 
     @Effect({ dispatch: false })
@@ -62,8 +58,7 @@ export class ChatBotEffects {
             return new chatBotActions.ChatSessionEndedAction(action.conversationId);
         })
         .catch((err: any) => {
-            console.log('error sending message activity to bot');
-            return of({ type: 'endConnection$' });
+            return of({ type: 'effects error: endConnection$' });
         });
 }
 

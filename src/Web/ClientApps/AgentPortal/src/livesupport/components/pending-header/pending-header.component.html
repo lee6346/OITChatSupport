@@ -1,8 +1,7 @@
-﻿<div class="row page-header">
+﻿<div class="page-header">
     <div class="request-list-title"> Requests: {{requestCount}}</div>
-
-    <div class="btn-group btn-group-xs request-list-toggle-buttons" role="group">
-        <button type="button" class="btn btn-default" (click)="expandRequests()">Expand</button>
-        <button type="button" class="btn btn-default" (click)="collapseRequests()">Collapse</button>
+    <div class="list-toggle-buttons">
+        <span class="label" (click)="expandRequests()">Expand</span>
+        <span class="label" (click)="collapseRequests()">Collapse</span>
     </div> 
 </div>

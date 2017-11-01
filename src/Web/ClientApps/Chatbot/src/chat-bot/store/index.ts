@@ -26,3 +26,8 @@ export const getMessageLog = createSelector(
     getChatBotState,
     state => state.chatBot.messages
 );
+
+export const getLastMessageSet = createSelector(
+    getMessageLog,
+    log => log.takeLast(4)
+);

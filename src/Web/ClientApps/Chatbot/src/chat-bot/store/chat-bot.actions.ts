@@ -1,6 +1,6 @@
 ﻿import { Action } from '@ngrx/store';
 import { LiveRequest, SimpleMessage } from '../models';
-import { Activity } from 'botframework-directlinejs';
+import { Activity, Message } from 'botframework-directlinejs';
 
 
 export const RETRIEVE_BOT_TOKEN = '[Token] RETRIEVE_BOT_TOKEN';
@@ -29,7 +29,7 @@ export class BotTokenRetrievedAction implements Action {
 
 export class MessageActivityReceivedAction implements Action {
     readonly type = MESSAGE_ACTIVITY_RECEIVED;
-    constructor(public activity: Activity) { }
+    constructor(public activity: Message) { }
 }
 
 export class DisconnectActivityReceived implements Action {
@@ -44,7 +44,7 @@ export class SendMessageActivityAction implements Action {
 
 export class MessageActivitySentAction implements Action {
     readonly type = MESSAGE_ACTIVITY_SENT;
-    constructor(public activity: Activity) { }
+    constructor(public activity: Message) { }
 }
 
 export class EndChatSessionAction implements Action {

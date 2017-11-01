@@ -1,8 +1,8 @@
 ﻿import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { NgClass } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Message } from 'botframework-directlinejs';
 
-import { DirectLineMessage } from '../../models';
 
 
 @Component({
@@ -13,7 +13,7 @@ import { DirectLineMessage } from '../../models';
 })
 export class MessageComponent {
     @Input()
-    chatMessage: DirectLineMessage;
+    messageActivity: Message;
 
     constructor() { }
 

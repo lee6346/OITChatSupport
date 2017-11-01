@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Store } from '@ngrx/store';
 import * as fromChatBot from '../chat-bot/store/chat-bot.actions';
 import * as chatBotReduc from '../chat-bot/store/chat-bot.reducer';
-import { DirectLine, Conversation, Activity } from 'botframework-directlinejs';
+import { DirectLine, Conversation, Activity, Message } from 'botframework-directlinejs';
 import { Observable, Subject } from 'rxjs/Rx';
 
 import { SimpleMessage } from '../chat-bot/models';
@@ -31,7 +31,6 @@ export class DirectLineService {
     }
 
     startDirectLineSession(conversation: Conversation): string {
-        console.log('conversation id: ' + conversation.conversationId + ', token: ' + conversation.token + ', streamURL: ' + conversation.streamUrl);
         if (this.connected === false) {
             this.connected = true;
             this.directLineSocket = new DirectLine({
@@ -42,9 +41,8 @@ export class DirectLineService {
                 .subscribe(
                 (activity: Activity) => {
                     this.connected = true;
-                    console.log('conversation id: ' + conversation.conversationId + ', token: ' + conversation.token + ', streamURL: ' + conversation.streamUrl);
-                    this.store.dispatch(new fromChatBot
-                        .MessageActivityReceivedAction(activity));
+                    if(activity.type === 'message')
+                        this.store.dispatch(new fromChatBot.MessageActivityReceivedAction(activity));
                 },
                 (err: any) => console.log('error'),
                 () => console.log('complete')
@@ -54,15 +52,14 @@ export class DirectLineService {
         return conversation.conversationId;
     }
 
-    postMessage(message: SimpleMessage): Activity {
-        let activity = this.normalizeToActivityMessage(message);
+    postMessage(message: SimpleMessage): Message {
+        let messageActivity = this.normalizeToActivityMessage(message);
         this.directLineSocket
-            .postActivity(activity).subscribe(
+            .postActivity(messageActivity).subscribe(
             next => console.log('success'),
-            (err: any) => console.log('error'),
-            () => console.log('completed')
+            (err: any) => console.log('error')
         );
-        return activity;
+        return messageActivity;
     }
 
     endConnection(conversationId: string): void{
@@ -78,14 +75,14 @@ export class DirectLineService {
         this.directLineSocket.end();
     }
 
-    normalizeToActivityMessage(message: SimpleMessage): Activity {
+    normalizeToActivityMessage(message: SimpleMessage): Message {
         return {
             conversation: {
                 id: message.conversationId
             }, from: { id: 'student' },
             type: 'message',
             text: message.text
-        } as Activity;
+        } as Message;
     }
 
 }

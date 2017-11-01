@@ -1,4 +1,4 @@
-<div class="col-sm-12 waiting-threads-container">
+<div class="waiting-threads-container">
     <pending-header (toggleRequests)="onToggleRequests($event)" 
                     [requestCount]="(requestCount$ | async)"></pending-header>
     <pending-list [liveRequests]="liveRequests$ | async"

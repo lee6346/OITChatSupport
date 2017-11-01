@@ -8,9 +8,13 @@
 }
 .request-label {
     background-color: #1b81d7;
+    border: 0.5px solid #1b81d7;
     font-size: smaller;
-    border-radius: 35%;
     margin-right: 10px;
+    cursor: pointer;
+}
+.request-label>:hover{
+    background-color: white;
 }
 
 .wait-time{
@@ -27,7 +31,9 @@
 .request-details-text{
     float: right;
 }
+
 .label-accept {
+    background-color: #1b81d7;
     background-color: #1b81d7;
     float: right;
     font-size: smaller;

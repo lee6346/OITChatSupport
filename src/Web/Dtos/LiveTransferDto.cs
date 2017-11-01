@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.Bot.Connector.DirectLine;
+using Newtonsoft.Json;
 using System;
 
 namespace Web.Dtos
@@ -16,5 +17,7 @@ namespace Web.Dtos
         public string BotHandle { get; set; }
         [JsonProperty("timeRequested")]
         public DateTime? TimeRequested { get; set; }
+        [JsonProperty("messageActivities")]
+        public IMessageActivity[] MessageActivities { get; set; }
     }
 }

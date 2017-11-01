@@ -1,18 +1,17 @@
-﻿import { Activity } from 'botframework-directlinejs';
-import { DirectLineMessage } from '../models';
+﻿import { Activity, Message } from 'botframework-directlinejs';
 import * as chatBotSession from './chat-bot.actions';
 import { List } from 'immutable';
 
 export interface State {
     conversationId: string;
     subscriber: string;
-    messages: List<DirectLineMessage>;
+    messages: List<Message>;
 }
 
 export const initialState: State = {
     conversationId: '',
     subscriber: '',
-    messages: List<DirectLineMessage>()
+    messages: List<Message>()
 };
 
 export function reducer(state = initialState, action: chatBotSession.Actions): State {
@@ -27,14 +26,14 @@ export function reducer(state = initialState, action: chatBotSession.Actions): S
             return Object.assign({}, state, {
                 conversationId: state.conversationId,
                 subscriber: state.subscriber,
-                messages: state.messages.push(directLineMessageNormalizer(action.activity))
+                messages: state.messages.push(action.activity)
             });
 
         case chatBotSession.MESSAGE_ACTIVITY_SENT:
             return Object.assign({}, state, {
                 conversationId: state.conversationId,
                 subscriber: state.subscriber,
-                messages: state.messages.push(directLineMessageNormalizer(action.activity))
+                messages: state.messages.push(action.activity)
             });
         case chatBotSession.CHANGE_CHAT_SUBSCRIBER:
             return Object.assign({}, state, {
@@ -43,16 +42,12 @@ export function reducer(state = initialState, action: chatBotSession.Actions): S
                 messages: state.messages
             });
         case chatBotSession.CHAT_SESSION_ENDED:
-            return Object.assign({}, state, {
-                conversationId: '',
-                subscriber: '',
-                messages: List<DirectLineMessage>()
-            });
+            return initialState;
         default:
             return state;
     }
 }
-
+/*
 export function directLineMessageNormalizer(activity: Activity): DirectLineMessage {
     return {
         conversationId: activity.conversation ? activity.conversation.id : '',
@@ -63,7 +58,6 @@ export function directLineMessageNormalizer(activity: Activity): DirectLineMessa
         object: []
     } as DirectLineMessage;
 }
-
+*/
 export const currentThread = (state: State) => state.conversationId;
 export const currentMessages = (state: State) => state.messages;
-export const filterBySender = (state: State, id: string) => state.messages.filter((message: DirectLineMessage) => message.conversationId === id);
