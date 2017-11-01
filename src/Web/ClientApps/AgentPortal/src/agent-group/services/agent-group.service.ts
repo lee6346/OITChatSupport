@@ -2,7 +2,7 @@
 import { Observable } from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http';
 import { Agent, AgentMessage } from '../models';
-import { AgentHubGateway } from '../../shared/agent.hub.gateway';
+import { AgentHubGateway } from '../../core/agent.hub.gateway';
 import { environment } from '../../../environments/environment';
 
 @Injectable()

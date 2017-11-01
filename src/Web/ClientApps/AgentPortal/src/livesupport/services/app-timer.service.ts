@@ -7,12 +7,19 @@ import { EmitSecondIntervalAction } from '../actions/app-timer.actions';
 @Injectable()
 export class AppTimerService {
 
+    private timerInterval: number;
+
     constructor(
         private store: Store<State>
     ) { }
 
     initializeTimer(interval: number) {
-        Observable.timer(0, interval)
+        this.timerInterval = interval;
+        Observable.timer(0, this.timerInterval)
             .subscribe(next => this.store.dispatch(new EmitSecondIntervalAction(next)) );
+    }
+
+    changeTimerInterval(interval: number) {
+        this.timerInterval = interval;
     }
 }

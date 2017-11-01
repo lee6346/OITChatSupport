@@ -1,7 +1,7 @@
 ﻿<div class="request-item" [@liveRequestInOut]>
     <a class="request-header" (click)="toggleContent()">
         <span class="label request-label ">R</span>
-        <span class="wait-time">Wait time: {{_waitTime | date:'mm:ss'}}</span>
+        <span class="wait-time">Wait time: {{_liveRequest.timeRequested ? (_liveRequest.timeRequested | timeSpan | date:'mm:ss') : ''}}</span>
     </a>
     <div *ngIf="groupToggle" class="request-content" [@toggleAnimation]>
         <div>

@@ -1,9 +1,12 @@
 ﻿import { Component, Input, Output, EventEmitter } from '@angular/core';
 
+
+
 @Component({
     selector: 'pending-header',
     templateUrl: './pending-header.component.html',
-    styleUrls: ['./pending-header.component.css']
+    styleUrls: ['./pending-header.component.css'],
+
 })
 export class PendingHeaderComponent {
 

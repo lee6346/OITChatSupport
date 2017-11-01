@@ -1,18 +1,13 @@
 <div class="col-sm-12 current-threads-container">
-    <div class="row page-header">
-        <div class="current-list-title">Threads</div>
-        <div class="btn-group btn-group-xs current-list-toggle-buttons" role="group">
-            <button type="button" class="btn btn-default" (click)="expandAll()">Expand</button>
-            <button type="button" class="btn btn-default" (click)="collapseAll()">Collapse</button>
-        </div>
-    </div>
-    <div class="row current-list-body">
+    <chat-list-header (toggleCurrentThreads)="onToggleCurrentThreads($event)" [currentThreadCount]="(currentThreadCount$ | async)"></chat-list-header>
+
+    
         <chat-thread-list [threads]="directLineThreads$ | async"
                           [selectedThreadId]="selectedThreadId$ | async"
                           [listToggle]="groupExpandToggles"
                           (switchThread)="onSwitchThread($event)"
                           (removeThread)="onRemoveThread($event)"></chat-thread-list>
-    </div>
+    
 </div>
 
 

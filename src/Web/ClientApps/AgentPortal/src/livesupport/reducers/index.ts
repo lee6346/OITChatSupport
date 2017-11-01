@@ -3,6 +3,7 @@ import * as fromThreads from './chat-thread.reducers';
 import * as fromLiveRequests from './live-request.reducers';
 import * as fromMessages from './chat-message.reducers';
 import * as fromTimer from './app-timer.reducers';
+import * as fromVolume from './app-volume.reducers';
 import * as fromRoot from '../../shared/index';
 
 export interface LiveChatSupportState {
@@ -11,6 +12,7 @@ export interface LiveChatSupportState {
     threads: fromThreads.State;
     messages: fromMessages.State;
     timer: fromTimer.State;
+    volume: fromVolume.State;
 }
 
 export interface State extends fromRoot.State {
@@ -22,7 +24,8 @@ export const reducers = {
     liveRequestsUi: fromLiveRequests.uiReducer,
     threads: fromThreads.reducer,
     messages: fromMessages.reducer,
-    timer: fromTimer.reducer
+    timer: fromTimer.reducer,
+    volume: fromVolume.reducer
 };
 
 export const getLiveChatSupportState = createFeatureSelector<LiveChatSupportState>('livechatsupport');
@@ -51,6 +54,12 @@ export const getTimerEntityState = createSelector(
     getLiveChatSupportState,
     state => state.timer
 );
+
+export const getVolumeEntityState = createSelector(
+    getLiveChatSupportState,
+    state => state.volume
+);
+
 
 export const getLiveRequestList = createSelector(
     getLiveRequestEntitiesState,
@@ -96,4 +105,14 @@ export const getCurrentTime = createSelector(
 export const getTimerActiveStatus = createSelector(
     getTimerEntityState,
     state => state.active
+);
+
+export const getCurrentVolume = createSelector(
+    getVolumeEntityState,
+    fromVolume.getCurrentVolume
+);
+
+export const getVolumeEnabled = createSelector(
+    getVolumeEntityState,
+    fromVolume.getVolumeEnabled
 );

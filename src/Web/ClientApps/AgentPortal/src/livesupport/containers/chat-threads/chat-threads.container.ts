@@ -14,11 +14,13 @@ export class ChatThreadsContainer implements OnInit {
 
     private directLineThreads$: Observable<ChatThread[]>;
     private selectedThreadId$: Observable<string>;
+    private currentThreadCount$: Observable<number>;
     groupExpandToggles: boolean = false;
 
     constructor(private store: Store<fromLiveSupport.State>) {
         this.directLineThreads$ = store.select(fromLiveSupport.getThreadList).map(threadList => threadList.toArray());
         this.selectedThreadId$ = store.select(fromLiveSupport.getSelectedThreadId);
+        this.currentThreadCount$ = this.directLineThreads$.map(x => x.length);
     }
 
     ngOnInit() { }
@@ -32,11 +34,7 @@ export class ChatThreadsContainer implements OnInit {
         this.store.dispatch(new RemoveThreadAction(threadId));
     }
 
-    expandAll() {
-        this.groupExpandToggles = true;
-    }
-
-    collapseAll() {
-        this.groupExpandToggles = false;
+    onToggleCurrentThreads(expand: boolean) {
+        this.groupExpandToggles = expand;
     }
 }

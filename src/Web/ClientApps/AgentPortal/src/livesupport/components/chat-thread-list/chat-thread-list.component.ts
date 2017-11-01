@@ -1,6 +1,7 @@
-﻿import { Component, Input, EventEmitter, Output, ChangeDetectionStrategy } from '@angular/core';
-
+﻿import { Component, Input, EventEmitter, Output, ChangeDetectionStrategy, ViewChild } from '@angular/core';
+import { ChatThreadComponent } from '../chat-thread/chat-thread.component';
 import { ChatThread } from '../../models';
+
 
 @Component({
   selector: 'chat-thread-list',
@@ -9,6 +10,10 @@ import { ChatThread } from '../../models';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ChatThreadListComponent {
+
+    @ViewChild(ChatThreadComponent)
+    private threadComponent: ChatThreadComponent;
+    
 
     @Input()
     threads: ChatThread[];

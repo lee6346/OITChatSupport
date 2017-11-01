@@ -2,7 +2,7 @@
 
 <div class="thread-item" [ngClass]="currentSelectContainer()">
     <div>
-        <a class="thread-header" [ngClass]="currentSelectLink()" (click)="toggleContent()">
+        <a class="thread-header" [ngClass]="currentSelectLink()" (click)="onToggleContent()">
             <div>
                 <span class="thread-label">Last Sent:</span>
                 <span class="thread-text">{{thread.lastSentTime ? ( thread.lastSentTime | date: 'shortTime' ) : ''}}</span>

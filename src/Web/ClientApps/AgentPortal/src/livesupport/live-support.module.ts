@@ -18,6 +18,7 @@ import { LiveRequestsContainer } from './containers/live-requests/live-requests.
 
 import { ChatMessageComponent } from './components/chat-message/chat-message.component';
 import { ChatMessageListComponent } from './components/chat-message-list/chat-message-list.component';
+import { ChatListHeaderComponent } from './components/chat-list-header/chat-list-header.component';
 import { ChatThreadComponent } from './components/chat-thread/chat-thread.component';
 import { ChatThreadListComponent } from './components/chat-thread-list/chat-thread-list.component';
 import { InputBarComponent } from './components/input-bar/input-bar.component';
@@ -38,6 +39,7 @@ import { reducers } from './reducers/index';
         PendingHeaderComponent,
         PendingListComponent,
         PendingRequestComponent,
+        ChatListHeaderComponent,
         ChatThreadsContainer,
         ChatThreadListComponent,
         ChatThreadComponent,
@@ -51,6 +53,7 @@ import { reducers } from './reducers/index';
         PendingListComponent,
         PendingRequestComponent,
         ChatThreadsContainer,
+        ChatListHeaderComponent,
         ChatThreadListComponent,
         ChatThreadComponent,
         ChatMessagesContainer,

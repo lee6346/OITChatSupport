@@ -1,11 +1,13 @@
-﻿<div class="col-sm-12 current-threads-list">  
-    <ul id="current-toggle-list" class="collapse in">
-        <li *ngFor="let thread of threads">
-            <chat-thread [thread]="thread"
-                         [opened]="listToggle"
-                         [isSelectedId]="selectedThreadId === thread.threadId"
-                         (switchThread)="onThreadSwitched($event)"
-                         (removeThread)="onThreadRemoved($event)"></chat-thread>
-        </li>
-    </ul>
+﻿<div class="row current-list-body">
+    <div class="col-sm-12 current-threads-list">
+        <ul id="current-toggle-list" class="collapse in">
+            <li *ngFor="let thread of threads">
+                <chat-thread [thread]="thread"
+                             [opened]="listToggle"
+                             [isSelectedId]="selectedThreadId === thread.threadId"
+                             (switchThread)="onThreadSwitched($event)"
+                             (removeThread)="onThreadRemoved($event)"></chat-thread>
+            </li>
+        </ul>
+    </div>
 </div>

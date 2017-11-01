@@ -10,7 +10,10 @@ li {
     padding-bottom: 3px;
     border-color: lightblue;
 }
-
+.current-list-body {
+    height: 83%;
+    margin-right: 0;
+}
 .current-threads-list {
     height: 100%;
     overflow-y: auto;
