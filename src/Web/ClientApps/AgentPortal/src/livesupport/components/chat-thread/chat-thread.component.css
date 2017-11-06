@@ -5,42 +5,54 @@
     -moz-box-shadow: 1px 1px 2px #888888;
     -webkit-box-shadow: 1px 1px 2px #888888;
     cursor: pointer;
+    border-radius: 4px;
 }
-
-
+.chat-duration, .chat-topic{
+    float: right;
+}
+.label-panel{
+    margin-bottom: 5px;
+}
 .label-student {
-    font-size: smaller;
-    background-color: #CFB095;
+    font-size: small;
+    background-color: #1b81d7;
 }
 
 li{
     margin: 5px 0px 5px 0px;
 }
-
+.message-text{
+    background-color: white;
+}
 .badge{
     float:right;
 }
 .thread-messages {
     padding-top: 5px;
-    padding-bottom: 25px;
+    padding-bottom: 20px;
 }
 .switch-thread{
     background-color: #1b81d7;
-    border: 0.5px solid #1b81d7;
+
 }
 
 .remove-thread {
     background-color: #DC4C46;
-    border: 0.5px solid #DC4C46;
+
 }
 .switch-thread, .remove-thread {
     float: right;
-    width: 25%;
+    width: 20%;
     cursor: pointer;
     margin-right: 2px;
 }
 
-
+    .remove-thread > :hover {
+        background-color: #680000;
+    }
+    .switch-thread > :hover {
+        background-color: #000099;
+    }
 .selected-thread-container {
     box-shadow: none;
 }
@@ -59,13 +71,6 @@ ul {
 }
 .disconnected-thread {
     background-color: #DC4C46;
-}
-
-
-
-
-.thread-item :hover{
-    background-color: white;
 }
 
 .message-time {

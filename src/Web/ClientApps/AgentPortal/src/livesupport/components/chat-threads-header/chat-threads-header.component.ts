@@ -4,7 +4,7 @@ import { transition, trigger, state, animate, style, query } from '@angular/anim
 @Component({
     selector: 'chat-threads-header',
     templateUrl: './chat-threads-header.component.html',
-    styleUrls: ['./chat-threads-header.component.css']
+    styleUrls: ['./chat-threads-header.component.css'],
 })
 export class ChatThreadsHeaderComponent {
 

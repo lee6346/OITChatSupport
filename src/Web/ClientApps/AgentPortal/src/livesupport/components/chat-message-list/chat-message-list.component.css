@@ -23,11 +23,19 @@
 
 }
 .msg-row {
-    width: 100%;
+    width: 80%;
     padding: 5px 5px 5px 5px;
     margin: 5px 0 5px 0;
     border-radius: 3px;
 
+}
+
+.align-window-left{
+    float: left;
+}
+
+.align-window-right{
+    float: right;
 }
 
 ::-webkit-scrollbar-track {

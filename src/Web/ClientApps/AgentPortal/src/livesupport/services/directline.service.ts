@@ -22,15 +22,15 @@ export class DirectLineService {
         this.directLineConnectionCount = 0;
     }
 
-    createDirectLineConnection$(conversationId: string): Observable<ChatThread> {
+    createDirectLineConnection$(conversationId: string, bot: string): Observable<ChatThread> {
         return this.http.get<Conversation>(
             environment.baseWebUrl +
             environment.chatStreamUrl + '/' +
             conversationId
-        ).map((conversation: Conversation) => this.createDirectLineConnection(conversation));
+        ).map((conversation: Conversation) => this.createDirectLineConnection(conversation, bot));
     }
 
-    createDirectLineConnection(conversation: Conversation): ChatThread {
+    createDirectLineConnection(conversation: Conversation, bot: string): ChatThread {
         let connection: DirectLine = new DirectLine({
             conversationId: conversation.conversationId,
             token: conversation.token,
@@ -39,7 +39,7 @@ export class DirectLineService {
         this.subscribeToConnection(connection);
         this.directLineSet.set(conversation.conversationId, connection);
         this.directLineConnectionCount++;
-        return this.createChatThread(conversation.conversationId);
+        return this.createChatThread(conversation.conversationId, bot);
 
     }
     subscribeToConnection(directLine: DirectLine): void {
@@ -58,10 +58,11 @@ export class DirectLineService {
         
     }
 
-    createChatThread(threadId: string): ChatThread{
+    createChatThread(threadId: string, bot: string): ChatThread{
         let thread: ChatThread = {
             threadId: threadId,
             active: true,
+            topic: this.botToTopicMap(bot),
             unseenMessages: []
         };
         return thread;
@@ -106,4 +107,13 @@ export class DirectLineService {
     }
 
     filterStudentMessage = (activity: Activity) => activity.from.id === 'student';
+
+    botToTopicMap = (bot: string): string => {
+        if (bot.toLowerCase() === 'askrowdy')
+            return 'Print Spot';
+        else if (bot.toLowerCase() == 'library')
+            return 'Utsa Library';
+        else
+            return 'General Questions';
+    }
 }

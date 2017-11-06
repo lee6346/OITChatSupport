@@ -55,9 +55,9 @@ export class PendingRequestComponent {
 
     @Input()
     set waitTime(waitTime: number) {
-        if (this._waitTime != 0) {
+        if (this._waitTime != 0 && waitTime % 30 == 0) {
             console.log('received: ' + waitTime);
-            this._waitTime = this._waitTime + 1000;
+            this._waitTime = this._waitTime + 30000;
         }
             
     }

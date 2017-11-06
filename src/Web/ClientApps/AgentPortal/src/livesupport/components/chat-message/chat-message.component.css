@@ -2,25 +2,29 @@
 .msg-row {
     width: 100%;
     padding: 5px 5px 5px 5px;
-    margin: 5px 0 5px 0;
+    margin: 5px 0 20px 0;
     border-radius: 3px;
     background: #f4faff;
 }
 .message-sender{
     float: left;
     font-weight: bold;
-    font-size: 12px;
+    font-size: 14px;
     text-transform: capitalize;
-    padding-left: 10px;
+    padding-right: 6px;
 
 
 }
-
+.align-text-left{
+    float: left;
+}
+.align-text-right{
+    float: right;
+}
 .highlight{
     background-color: yellow;
 }
 .message-time{
-    float: right;
     font-size: 11px;
 }
 
@@ -28,21 +32,28 @@
     font-size:14px;
     font-weight: bold;
     text-transform: uppercase;
-    float: left;
 
 }
 
 .label-bot{
     background-color: #38978D;
+    float: right;
 }
 .label-student {
     background-color: #CFB095;
+    float: left;
 }
 
 .label-self {
     background-color: #2bc0ec;
+    float: right;
 }
 
 .message-context{
-    padding-top: 10px;
+    padding-top: 2px;
+}
+
+.message-text{
+    width: 92%;
+    float: right;
 }

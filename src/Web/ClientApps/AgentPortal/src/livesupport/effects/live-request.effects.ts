@@ -23,7 +23,7 @@ export class LiveRequestEffects {
     acceptLiveRequest$: Observable<Action> = this.actions$
         .ofType(ACCEPT_LIVE_REQUEST).mergeMap((action: AcceptLiveRequestAction) =>
             this.liveRequestService.acceptLiveRequest$(action.liveRequest).map((data: Conversation) => {
-                return new LiveRequestAcceptedAction(data);
+                return new LiveRequestAcceptedAction(data, action.liveRequest.botHandle);
             }))
         .catch((err: any) => {
             return of({ type: 'effect error: acceptLiveRequest$' });

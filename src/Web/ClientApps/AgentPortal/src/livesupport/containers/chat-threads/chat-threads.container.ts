@@ -16,12 +16,14 @@ export class ChatThreadsContainer implements OnInit {
     private selectedThreadId$: Observable<string>;
     private currentThreadCount$: Observable<number>;
     private threadsToggle$: Observable<boolean>;
+    private timer$: Observable<number>;
 
     constructor(private store: Store<fromLiveSupport.State>) {
         this.directLineThreads$ = store.select(fromLiveSupport.getThreadList).map(threadList => threadList.toArray());
         this.selectedThreadId$ = store.select(fromLiveSupport.getSelectedThreadId);
         this.currentThreadCount$ = this.directLineThreads$.map(x => x.length);
         this.threadsToggle$ = store.select(fromLiveSupport.getThreadsExpanded);
+        this.timer$ = store.select(fromLiveSupport.getCurrentTime);
     }
 
     ngOnInit() { }

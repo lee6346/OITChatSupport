@@ -6,6 +6,7 @@
         <chat-thread-list [threads]="directLineThreads$ | async"
                           [selectedThreadId]="selectedThreadId$ | async"
                           [listToggle]="threadsToggle$ | async"
+                          [timer]="timer$ | async"
                           (switchThread)="onSwitchThread($event)"
                           (removeThread)="onRemoveThread($event)"></chat-thread-list>
     

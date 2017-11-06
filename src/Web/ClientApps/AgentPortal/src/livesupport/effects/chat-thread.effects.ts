@@ -32,12 +32,19 @@ export class ChatThreadEffects {
 
     @Effect()
     createThread$: Observable<Action> = this.actions$.ofType(LIVE_REQUEST_ACCEPTED)
+        .mergeMap((action: LiveRequestAcceptedAction) => {
+            return [
+                new LoadCachedMessagesAction(action.conversation),
+                new ThreadCreatedAction(this.directLineService.createDirectLineConnection(action.conversation, action.bot))
+            ];
+        })
+        /*
         .map((action: LiveRequestAcceptedAction) => action.conversation).mergeMap((conversation: Conversation) => {
             return [
                 new LoadCachedMessagesAction(conversation),
                 new ThreadCreatedAction(this.directLineService.createDirectLineConnection(conversation))
             ];
-        })
+        })*/
         .catch((err: any) => {
             return of({ type: 'effect error: createThread$' });
         });

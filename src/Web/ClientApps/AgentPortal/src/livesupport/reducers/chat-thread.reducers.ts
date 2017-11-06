@@ -44,7 +44,7 @@ export function reducer(state = initialState, action: chatThread.Actions | Messa
         case chatThread.THREAD_CREATED:
             return Object.assign({}, state, {
                 selectedThreadId: action.thread.threadId,
-                threads: state.threads.set(action.thread.threadId, { threadId: action.thread.threadId, active: true, unseenMessages: [] } as ChatThread),
+                threads: state.threads.set(action.thread.threadId, action.thread),//{ threadId: action.thread.threadId, active: true, unseenMessages: [] } as ChatThread),
             });
         case MESSAGE_ACTIVITY_RECEIVED:
             let conversationId: string = action.activity.conversation ? action.activity.conversation.id : '';
@@ -79,6 +79,7 @@ export const getSelectedThread = (state: State) => state.threads.get(state.selec
 export const activeThreads = (state: State) => state.threads.filter((thread: ChatThread) => thread.active);
 export const getThreadIds = (state: State) => state.threads.keys;
 export const getSelectedThreadUnseenMessages = (state: State) => getSelectedThread(state).unseenMessages;
+
 
 
 export function uiReducer(state = initialUiState, action: chatThread.Actions): UiState {

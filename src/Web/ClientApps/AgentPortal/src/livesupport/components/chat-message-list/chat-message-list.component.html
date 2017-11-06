@@ -1,7 +1,7 @@
 ﻿<div #scrollContainer class="message-list-wrapper">
     <div class="message-list">
         <ul>
-            <li *ngFor="let chatMessage of chatMessages; let i=index;" class="row msg-row">
+            <li *ngFor="let chatMessage of chatMessages; let i=index;" class="row msg-row" [ngClass]="textAligner(chatMessage.from.id)">
                 <chat-message [chatMessage]="chatMessage" 
                               [messageContinuation]="i > 0 && chatMessages[i].from.id === chatMessages[i-1].from.id"
                               [textFilter]="textFilter"

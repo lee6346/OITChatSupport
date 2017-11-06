@@ -1,4 +1,4 @@
 <div class="input-container">
-    <textarea rows="5" #msg class="text-bar" [(ngModel)]="defaultInput" (keyup.enter)="submitMessage(msg.value)"></textarea>
+    <textarea rows="5" #msg class="text-bar" [(ngModel)]="defaultInput" (keydown.shift.enter)="submitMessage(msg.value)"></textarea>
     <button type="button" class="btn btn-sm submit-btn" (click)="submitMessage(msg.value)"><span class="glyphicon glyphicon-arrow-up"></span></button>
 </div>

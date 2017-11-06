@@ -5,6 +5,7 @@
                 <chat-thread [thread]="thread"
                              [opened]="listToggle"
                              [isSelectedId]="selectedThreadId === thread.threadId"
+                             [chatDuration]="timer"
                              (switchThread)="onThreadSwitched($event)"
                              (removeThread)="onThreadRemoved($event)"></chat-thread>
             </li>

@@ -37,5 +37,14 @@ export class ChatMessageListComponent implements OnInit {
         this.chatScrollContainer.nativeElement.scrollTop = 0;
     }
 
-
+    textAligner(sender: string): any {
+        if (sender.toLowerCase() === 'student') {
+            return {
+                'align-window-left': true,
+            };
+        }
+        else return {
+            'align-window-right': true,
+        };
+    }
 }

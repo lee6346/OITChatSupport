@@ -24,6 +24,9 @@ export class ChatThreadListComponent {
     @Input()
     listToggle: boolean;
 
+    @Input()
+    timer: number;
+
     @Output()
     switchThread: EventEmitter<string> = new EventEmitter<string>();
 

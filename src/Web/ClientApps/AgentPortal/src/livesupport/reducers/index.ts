@@ -92,7 +92,7 @@ export const getLiveRequestExpanded = createSelector(
 
 export const getThreadList = createSelector(
     getThreadEntitiesState,
-    state => state.threads.toList()
+    (state) => state.threads.toList()
 );
 
 export const getThreadsExpanded = createSelector(

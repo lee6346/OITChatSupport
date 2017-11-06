@@ -37,4 +37,12 @@ export class ChatMessageComponent implements OnInit{
         else
             return { 'label-self': true };
     }
+
+    textSenderAlignment(sender: string): any {
+        if (sender.toLowerCase() === 'student')
+            return { 'align-text-left': true };
+        else
+            return { 'align-text-right': true };
+    }
+    
 }

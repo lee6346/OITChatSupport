@@ -1,6 +1,12 @@
-﻿    <div> {{chatMessage.text | queryHighlight : textFilter}} </div>
+﻿    <div *ngIf="chatMessage.from.id.toLowerCase() === 'student'" class="message-time" [ngClass]="textSenderAlignment(chatMessage.from.id)">{{chatMessage.timestamp | date: 'yMdjm'}}</div>
     <div class="message-context">
-        <span class="label label-sender" [ngClass]="labelColorSelector(chatMessage.from.id)">{{chatMessage.from.id[0]}}</span>
-        <span class="message-sender">{{chatMessage.from.id}}</span>
-        <span class="message-time">{{chatMessage.timestamp | date: 'yMdjm'}}</span>
+        
+        <div class="label label-sender" [ngClass]="labelColorSelector(chatMessage.from.id)">{{chatMessage.from.id[0]}}</div>
+        <div class="message-text" [ngClass]="textSenderAlignment(chatMessage.from.id)">
+            <span class="message-sender" [ngClass]="textSenderAlignment(chatMessage.from.id)">{{chatMessage.from.id}}</span>
+            <div> {{chatMessage.text | queryHighlight : textFilter}} </div>
+        </div>
+        
     </div>
+    <div *ngIf="chatMessage.from.id.toLowerCase() !== 'student'" class="message-time" [ngClass]="textSenderAlignment(chatMessage.from.id)">{{chatMessage.timestamp | date: 'yMdjm'}}</div>
+    

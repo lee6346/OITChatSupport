@@ -1,19 +1,26 @@
 ﻿
 
 <div class="thread-item" [ngClass]="currentSelectContainer()" (click)="onToggleContent()">
-    <span class="label label-student">S</span>
-    <span *ngIf="thread.unseenMessages.length > 0" class="badge" [ngClass]="threadStatusSelector()">{{thread.unseenMessages.length}}</span>
-
+    <div class="label-panel">
+        <span class="label label-student">S</span>
+        <span *ngIf="thread.unseenMessages.length > 0" class="badge" [ngClass]="threadStatusSelector()">{{thread.unseenMessages.length}}</span>
+    </div>
+    <div>
+        Chat Duration: <span class="chat-duration">{{_chatDuration | date: 'mm:ss'}}</span>
+    </div>
+    <div>
+        Topic: <span class="chat-topic">{{thread.topic}}</span>
+    </div>
 
     <div *ngIf="opened" class="thread-messages">
-        <div>
-            <ul>
-                <li *ngFor="let message of thread.unseenMessages">
+
+            <ul *ngIf="thread.unseenMessages.length > 0">
+                <li class="message-text" *ngFor="let message of thread.unseenMessages">
                     <div><span class="message-time">{{message.timestamp | date: 'shortTime'}}</span></div>
                     <div class="message-text">{{message.text}}</div>
                 </li>
             </ul>
-        </div>
+
         <div>
 
 

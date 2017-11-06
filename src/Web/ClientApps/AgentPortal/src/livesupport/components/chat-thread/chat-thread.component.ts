@@ -37,6 +37,8 @@ import {  ChatThread } from '../../models';
 })
 export class ChatThreadComponent {
 
+
+    //private _isSelectedId: boolean;
     @Input()
     thread: ChatThread;
 
@@ -45,6 +47,20 @@ export class ChatThreadComponent {
     
     @Input()
     isSelectedId: boolean;
+    /*
+    set isSelectedId(isSelectedId: boolean) {
+        this._isSelectedId = isSelectedId;
+        isSelectedId ? this.state = 'active' : 'inactive';
+    }
+    */
+    private _chatDuration: number = 0;
+    private incrementor: number = 0;
+
+    @Input()
+    set chatDuration(chatDuration: number) {
+        if (++this.incrementor % 30 == 0)
+            this._chatDuration += 30000;
+    }
 
     @Output()
     switchThread: EventEmitter<string> = new EventEmitter<string>();
@@ -52,7 +68,8 @@ export class ChatThreadComponent {
     @Output()
     removeThread: EventEmitter<string> = new EventEmitter<string>();
 
-    constructor() { }
+    constructor() {
+    }
 
     onToggleContent() {
         this.opened ? this.opened = false : this.opened = true;
@@ -65,6 +82,8 @@ export class ChatThreadComponent {
     onRemoveClicked() {
         this.removeThread.emit(this.thread.threadId);
     }
+
+
 
     threadStatusSelector(): any {
         if (!this.thread.active) 

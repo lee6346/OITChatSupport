@@ -18,7 +18,7 @@ export class AcceptLiveRequestAction implements Action {
 }
 export class LiveRequestAcceptedAction implements Action {
     readonly type = LIVE_REQUEST_ACCEPTED;
-    constructor(public conversation: Conversation){}
+    constructor(public conversation: Conversation, public bot: string){}
 }
 
 export class LiveRequestRemovedAction implements Action {
