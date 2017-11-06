@@ -1,8 +1,4 @@
-﻿using PrintSpotBot.Models.Common;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System;
 
 namespace PrintSpotBot.Models
 {
@@ -11,7 +7,8 @@ namespace PrintSpotBot.Models
         public int Id { get; set; }
         public string ConversationId { get; set; }
         public string User { get; set; }
-        public ConnectionEventType ConnectionEventType { get; set; }
+        public string EventType { get; set; }
+        public DateTime Timestamp { get; set; }
 
     }
 }

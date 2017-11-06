@@ -10,7 +10,9 @@ export interface LiveChatSupportState {
     liveRequests: fromLiveRequests.State;
     liveRequestsUi: fromLiveRequests.UiState;
     threads: fromThreads.State;
+    threadsUi: fromThreads.UiState;
     messages: fromMessages.State;
+    messagesUi: fromMessages.UiState;
     timer: fromTimer.State;
     volume: fromVolume.State;
 }
@@ -23,7 +25,9 @@ export const reducers = {
     liveRequests: fromLiveRequests.reducer,
     liveRequestsUi: fromLiveRequests.uiReducer,
     threads: fromThreads.reducer,
+    threadsUi: fromThreads.uiReducer,
     messages: fromMessages.reducer,
+    messagesUi: fromMessages.uiReducer,
     timer: fromTimer.reducer,
     volume: fromVolume.reducer
 };
@@ -45,9 +49,19 @@ export const getThreadEntitiesState = createSelector(
     state => state.threads
 );
 
+export const getThreadUiState = createSelector(
+    getLiveChatSupportState,
+    state => state.threadsUi
+);
+
 export const getMessageEntitiesState = createSelector(
     getLiveChatSupportState,
     state => state.messages
+);
+
+export const getMessageUiState = createSelector(
+    getLiveChatSupportState,
+    state => state.messagesUi
 );
 
 export const getTimerEntityState = createSelector(
@@ -81,6 +95,11 @@ export const getThreadList = createSelector(
     state => state.threads.toList()
 );
 
+export const getThreadsExpanded = createSelector(
+    getThreadUiState,
+    fromThreads.getExpandState
+);
+
 export const getSelectedThreadId = createSelector(
     getThreadEntitiesState,
     entities => entities.selectedThreadId
@@ -96,6 +115,30 @@ export const getMessageListBySelectedThread = createSelector(
     getSelectedThreadId,
     (messageSets, id) => messageSets.messages.get(id, [])
 );
+
+export const getMessageFilterSender = createSelector(
+    getMessageUiState,
+    fromMessages.getMessageFilterSender
+);
+
+export const getMessageFilterText = createSelector(
+    getMessageUiState,
+    fromMessages.getMessageFilterText
+);
+/*
+export const getMessagesBySender = createSelector(
+    getMessageListBySelectedThread,
+    fromMessages.getMessageFilterSender,
+    (messages, sender) => messages.filter()
+);
+*/
+export const getMessagesByTextQuery = createSelector(
+    getMessageListBySelectedThread,
+    fromMessages.getMessageFilterText,
+    (messages, text) => messages.filter(message => message.type === 'message' && message.text !== undefined && message.text.includes(text))
+);
+
+
 
 export const getCurrentTime = createSelector(
     getTimerEntityState,

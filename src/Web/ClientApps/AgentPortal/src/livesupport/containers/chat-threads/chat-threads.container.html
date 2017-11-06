@@ -1,10 +1,11 @@
-<div class="col-sm-12 current-threads-container">
-    <chat-list-header (toggleCurrentThreads)="onToggleCurrentThreads($event)" [currentThreadCount]="(currentThreadCount$ | async)"></chat-list-header>
+<div class="current-threads-container">
+    <chat-threads-header (toggleCurrentThreads)="onToggleCurrentThreads($event)" 
+                      [currentThreadCount]="(currentThreadCount$ | async)"></chat-threads-header>
 
     
         <chat-thread-list [threads]="directLineThreads$ | async"
                           [selectedThreadId]="selectedThreadId$ | async"
-                          [listToggle]="groupExpandToggles"
+                          [listToggle]="threadsToggle$ | async"
                           (switchThread)="onSwitchThread($event)"
                           (removeThread)="onRemoveThread($event)"></chat-thread-list>
     

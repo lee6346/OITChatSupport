@@ -147,6 +147,12 @@
     <Reference Include="StackExchange.Redis, Version=1.2.6.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\StackExchange.Redis.1.2.6\lib\net46\StackExchange.Redis.dll</HintPath>
     </Reference>
+    <Reference Include="StackExchange.Redis.Extensions.Core, Version=2.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\StackExchange.Redis.Extensions.Core.2.4.0\lib\net45\StackExchange.Redis.Extensions.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="StackExchange.Redis.Extensions.Newtonsoft, Version=2.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\StackExchange.Redis.Extensions.Newtonsoft.2.3.0\lib\net45\StackExchange.Redis.Extensions.Newtonsoft.dll</HintPath>
+    </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.IdentityModel.Tokens.Jwt, Version=4.0.40306.1554, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -256,55 +262,52 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Data\Repositories\dappernotes.txt" />
-    <Content Include="Data\Sql\CreateSqlTables.sql" />
+    <Content Include="Data\SqlCommands.sql" />
     <Content Include="default.htm" />
     <Content Include="Global.asax" />
     <Content Include="Notes\ActivityNotes.txt" />
     <Content Include="Notes\ConnectionNotes.txt" />
+    <Content Include="Notes\dappernotes.txt" />
+    <Content Include="Notes\nodatime.txt" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AppSettings.cs" />
-    <Compile Include="App_Start\AutoMapperConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\MessagesController.cs" />
-    <Compile Include="Data\Common\DbTransactionException.cs" />
+    <Compile Include="Data\Cache\IBotCache.cs" />
     <Compile Include="Data\ISqlConnectionFactory.cs" />
-    <Compile Include="Data\IUnitOfWork.cs" />
-    <Compile Include="Data\Mappings\ActivityMap.cs" />
-    <Compile Include="Data\Mappings\AgentMap.cs" />
-    <Compile Include="Data\Mappings\MapInitializer.cs" />
-    <Compile Include="Data\NeoConnector.cs" />
-    <Compile Include="Data\Repositories\AgentRepository.cs" />
+    <Compile Include="Data\Logger\ActivityStore.cs" />
+    <Compile Include="Data\RedisConnector.cs" />
     <Compile Include="Data\Repositories\BaseRepository.cs" />
-    <Compile Include="Data\Repositories\IAgentRepository.cs" />
     <Compile Include="Data\Repositories\IBaseRepository.cs" />
+    <Compile Include="Data\SqlBotDataEntity.cs" />
+    <Compile Include="Data\SqlBotDataStore.cs" />
     <Compile Include="Data\SqlConnectionFactory.cs" />
+    <Compile Include="Dialogs\ConversationUpdateDialog.cs" />
+    <Compile Include="Dialogs\DialogFactory.cs" />
     <Compile Include="Dialogs\ErrorMessageDialog.cs" />
-    <Compile Include="Dialogs\Location\LocationRootDialog.cs" />
+    <Compile Include="Dialogs\IDialogFactory.cs" />
+    <Compile Include="Dialogs\PrinterLocation\CampusDialog.cs" />
+    <Compile Include="Dialogs\PrinterLocation\IPrinterLocationDialogFactory.cs" />
+    <Compile Include="Dialogs\PrinterLocation\PrinterLocationRootDialog.cs" />
+    <Compile Include="Dialogs\LuisDialog.cs" />
     <Compile Include="Dialogs\MessageTransferDialog.cs" />
     <Compile Include="Dialogs\RootDialog.cs" />
+    <Compile Include="Dialogs\Scorables\IScorableUtteranceResolver.cs" />
+    <Compile Include="Dialogs\Scorables\UndecidedScorable.cs" />
+    <Compile Include="Dialogs\Scorables\UndecidedScorableResolver.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Agent.cs" />
-    <Compile Include="Models\AgentStudentConnection.cs" />
-    <Compile Include="Models\LiveRequest.cs" />
-    <Compile Include="Models\ChatMessage.cs" />
-    <Compile Include="Models\Common\ConnectionEventType.cs" />
-    <Compile Include="Models\Common\TransferEventType.cs" />
+    <Compile Include="Models\ThreadMap.cs" />
     <Compile Include="Models\ConnectionEvent.cs" />
-    <Compile Include="Modules\GlobalMessageHandlerModule.cs" />
-    <Compile Include="Modules\TestModule.cs" />
+    <Compile Include="Modules\GlobalMessageHandlersModule.cs" />
+    <Compile Include="Modules\PrinterLocationModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Data\Repositories\ActivityRepository.cs" />
-    <Compile Include="Data\Repositories\IActivityRepository.cs" />
-    <Compile Include="Services\DevLogger.cs" />
+    <Compile Include="Services\ILocationDistanceService.cs" />
     <Compile Include="Services\MultibotCredentialProvider.cs" />
-    <Compile Include="Services\Stats\Teststats.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

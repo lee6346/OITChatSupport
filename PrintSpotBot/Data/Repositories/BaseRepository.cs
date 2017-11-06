@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace PrintSpotBot.Data.Repositories
@@ -16,19 +15,5 @@ namespace PrintSpotBot.Data.Repositories
             throw new NotImplementedException();
         }
 
-        public virtual Task Remove(TEntity entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public virtual Task Update(TEntity entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public virtual IEnumerable<TEntity> GetAll()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

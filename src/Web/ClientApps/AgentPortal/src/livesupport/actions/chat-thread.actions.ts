@@ -7,6 +7,9 @@ export const THREAD_REMOVED = '[Thread] THREAD_REMOVED';
 export const THREAD_DISCONNECTED = '[Thread] THREAD_DISCONNECTED'
 export const SWITCH_THREAD = '[Thread] SWITCH_THREAD';
 
+//ui actions
+export const EXPAND_THREAD_VIEW = '[Thread] EXPAND_THREAD_VIEW';
+
 export class ThreadCreatedAction implements Action {
     readonly type = THREAD_CREATED;
     constructor(public thread: ChatThread) { }
@@ -32,10 +35,15 @@ export class SwitchThreadAction implements Action {
     constructor(public threadId: string) { }
 }
 
+export class ExpandThreadViewAction implements Action {
+    readonly type = EXPAND_THREAD_VIEW;
+    constructor(public expand: boolean) { }
+}
 
 export type Actions
     = ThreadDisconnectedAction
     | RemoveThreadAction
     | ThreadRemovedAction
     | ThreadCreatedAction
-    | SwitchThreadAction;
+    | SwitchThreadAction
+    | ExpandThreadViewAction;

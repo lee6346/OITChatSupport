@@ -25,7 +25,8 @@
     <None Remove="ClientApps\AgentPortal\src\core\core.module.ts" />
     <None Remove="ClientApps\AgentPortal\src\livesupport\actions\app-timer.actions.ts" />
     <None Remove="ClientApps\AgentPortal\src\livesupport\actions\app-volume.actions.ts" />
-    <None Remove="ClientApps\AgentPortal\src\livesupport\components\chat-list-header\chat-list-header.component.ts" />
+    <None Remove="ClientApps\AgentPortal\src\livesupport\components\chat-message-filter\chat-message-filter.component.ts" />
+    <None Remove="ClientApps\AgentPortal\src\livesupport\components\chat-message-header\chat-message-header.component.ts" />
     <None Remove="ClientApps\AgentPortal\src\livesupport\components\pending-header\pending-header.component.ts" />
     <None Remove="ClientApps\AgentPortal\src\livesupport\models\accept-request.model.ts" />
     <None Remove="ClientApps\AgentPortal\src\livesupport\models\directline-schema.model.ts" />
@@ -96,7 +97,9 @@
     <TypeScriptCompile Include="ClientApps\AgentPortal\src\core\core.module.ts" />
     <TypeScriptCompile Include="ClientApps\AgentPortal\src\livesupport\actions\app-timer.actions.ts" />
     <TypeScriptCompile Include="ClientApps\AgentPortal\src\livesupport\actions\app-volume.actions.ts" />
-    <TypeScriptCompile Include="ClientApps\AgentPortal\src\livesupport\components\chat-list-header\chat-list-header.component.ts" />
+    <TypeScriptCompile Include="ClientApps\AgentPortal\src\livesupport\components\chat-message-filter\chat-message-filter.component.ts" />
+    <TypeScriptCompile Include="ClientApps\AgentPortal\src\livesupport\components\chat-message-header\chat-message-header.component.ts" />
+    <TypeScriptCompile Include="ClientApps\AgentPortal\src\livesupport\components\chat-threads-header\chat-threads-header.component.ts" />
     <TypeScriptCompile Include="ClientApps\AgentPortal\src\livesupport\components\pending-header\pending-header.component.ts" />
     <TypeScriptCompile Include="ClientApps\AgentPortal\src\livesupport\models\accept-request.model.ts" />
     <TypeScriptCompile Include="ClientApps\AgentPortal\src\livesupport\models\directline-schema.model.ts" />

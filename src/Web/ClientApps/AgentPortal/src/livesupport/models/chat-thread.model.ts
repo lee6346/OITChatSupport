@@ -1,6 +1,7 @@
-﻿export interface ChatThread{
+﻿import { Activity } from 'botframework-directlinejs';
+export interface ChatThread{
     threadId: string;
     active: boolean;
-    unseenMessages: string[];
+    unseenMessages: Activity[];
     lastSentTime?: string;
 }

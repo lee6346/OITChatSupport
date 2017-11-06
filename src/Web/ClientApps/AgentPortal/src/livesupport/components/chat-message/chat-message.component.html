@@ -1,4 +1,4 @@
-﻿    <div class="message-data"> {{chatMessage.text}} </div>
+﻿    <div> {{chatMessage.text | queryHighlight : textFilter}} </div>
     <div class="message-context">
         <span class="label label-sender" [ngClass]="labelColorSelector(chatMessage.from.id)">{{chatMessage.from.id[0]}}</span>
         <span class="message-sender">{{chatMessage.from.id}}</span>

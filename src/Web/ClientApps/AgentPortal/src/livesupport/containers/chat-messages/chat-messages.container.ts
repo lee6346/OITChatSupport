@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { Activity } from 'botframework-directlinejs';
 import { ChatPayload } from '../../models';
 import * as fromLiveSupport from '../../reducers/index';
-import { SendMessageActivityAction } from '../../actions/chat-message.actions';
+import { SendMessageActivityAction, FilterMessageTextAction } from '../../actions/chat-message.actions';
 
 @Component({
     selector: 'chat-messages',
@@ -13,12 +13,15 @@ import { SendMessageActivityAction } from '../../actions/chat-message.actions';
 })
 export class ChatMessagesContainer implements OnInit {
 
-
+    private textFilteredMessages$: Observable<Activity[]>;
+    private textFilter$: Observable<string>;
     private currentThreadMessages$: Observable<Activity[]>;
     private currentThreadId: string;
 
     constructor(private store: Store<fromLiveSupport.State>) {
         this.currentThreadMessages$ = store.select(fromLiveSupport.getMessageListBySelectedThread);
+        this.textFilteredMessages$ = store.select(fromLiveSupport.getMessagesByTextQuery);
+        this.textFilter$ = store.select(fromLiveSupport.getMessageFilterText);
     }
 
     ngOnInit() {
@@ -42,5 +45,9 @@ export class ChatMessagesContainer implements OnInit {
             };
             this.store.dispatch(new SendMessageActivityAction(payload));
         }
+    }
+
+    onTextFilter(text: string): void {
+        this.store.dispatch(new FilterMessageTextAction(text));
     }
 }

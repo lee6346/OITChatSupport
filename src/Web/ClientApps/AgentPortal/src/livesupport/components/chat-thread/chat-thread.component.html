@@ -1,55 +1,24 @@
 ﻿
 
-<div class="thread-item" [ngClass]="currentSelectContainer()">
-    <div>
-        <a class="thread-header" [ngClass]="currentSelectLink()" (click)="onToggleContent()">
-            <div>
-                <span class="thread-label">Last Sent:</span>
-                <span class="thread-text">{{thread.lastSentTime ? ( thread.lastSentTime | date: 'shortTime' ) : ''}}</span>
-            </div>
-            <div>
-                <span class="thread-label">Count:</span>
-                <span class="thread-text">{{thread.unseenMessages.length}} </span>
-            </div>
-        </a>
-        <span class="glyphicon glyphicon-unchecked thread-status" [ngClass]="threadStatusSelector()"></span>
+<div class="thread-item" [ngClass]="currentSelectContainer()" (click)="onToggleContent()">
+    <span class="label label-student">S</span>
+    <span *ngIf="thread.unseenMessages.length > 0" class="badge" [ngClass]="threadStatusSelector()">{{thread.unseenMessages.length}}</span>
 
-        <div class="dropdown thread-menu" aria-haspopup="true" aria-expanded="true">
-            <span class="glyphicon glyphicon-chevron-down dropdown-toggle" id="dropdownMenu" data-toggle="dropdown">
-            </span>
 
-            <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu">
-                <li [ngClass]="currentSelect()" (click)="onThreadClicked()"><span>Select</span></li>
-                <li role="separator" class="divider"></li>
-                <li (click)="onRemoveClicked()"><span>Remove</span></li>
+    <div *ngIf="opened" class="thread-messages">
+        <div>
+            <ul>
+                <li *ngFor="let message of thread.unseenMessages">
+                    <div><span class="message-time">{{message.timestamp | date: 'shortTime'}}</span></div>
+                    <div class="message-text">{{message.text}}</div>
+                </li>
             </ul>
+        </div>
+        <div>
 
-        </div> 
-    </div>
-    <div class="thread-last-message">
-        {{thread.unseenMessages[thread.unseenMessages.length-1]}}
-    </div>
-    <!--
-    <span class="glyphicon glyphicon-unchecked thread-status" [ngClass]="threadStatusSelector()"></span>
-        
-    <div class="dropdown thread-menu" aria-haspopup="true" aria-expanded="true">
-        <span class="glyphicon glyphicon-chevron-down dropdown-toggle" id="dropdownMenu" data-toggle="dropdown">
-        </span>
 
-        <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu">
-            <li [ngClass]="currentSelect()" (click)="onThreadClicked()"><span>Select</span></li>
-            <li role="separator" class="divider"></li>
-            <li (click)="onRemoveClicked()"><span>Remove</span></li>
-        </ul>
-
-    </div> -->
-        
-    
-    <div *ngIf="opened" class="thread-content" [@toggleAnimation]>
-        <ul class="recent-messages">
-            <li *ngFor="let message of thread.unseenMessages">
-                <div>{{message}}</div>
-            </li>
-        </ul>
+            <span class="label switch-thread" (click)="onThreadClicked()">Select</span>
+            <span class="label remove-thread" (click)="onRemoveClicked()">Remove</span>
+        </div>
     </div>
 </div> 

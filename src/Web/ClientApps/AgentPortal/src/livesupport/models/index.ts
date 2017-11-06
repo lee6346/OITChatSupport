@@ -11,3 +11,5 @@ export {
     DirectLineError, DirectLineErrorResponse,
     EndConversation
 } from './directline-schema.model';
+
+export { MessageFilter, FilterType, MessageSender } from './message-filter.model';

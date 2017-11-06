@@ -12,6 +12,9 @@ export class ChatMessageListComponent implements OnInit {
     @Input()
     chatMessages: Activity[];
 
+    @Input()
+    textFilter: string;
+
     @ViewChild('scrollContainer')
     chatScrollContainer: ElementRef;
 

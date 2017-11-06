@@ -15,6 +15,9 @@ export class ChatMessageComponent implements OnInit{
     chatMessage: Activity;
 
     @Input()
+    textFilter: string = '';
+
+    @Input()
     messageContinuation: boolean;
 
     @Output()

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import * as fromLiveSupport from '../../reducers/index';
-import { RemoveThreadAction, SwitchThreadAction } from '../../actions/chat-thread.actions';
+import { RemoveThreadAction, SwitchThreadAction, ExpandThreadViewAction } from '../../actions/chat-thread.actions';
 import { ChatThread } from '../../models';
 
 @Component({
@@ -15,12 +15,13 @@ export class ChatThreadsContainer implements OnInit {
     private directLineThreads$: Observable<ChatThread[]>;
     private selectedThreadId$: Observable<string>;
     private currentThreadCount$: Observable<number>;
-    groupExpandToggles: boolean = false;
+    private threadsToggle$: Observable<boolean>;
 
     constructor(private store: Store<fromLiveSupport.State>) {
         this.directLineThreads$ = store.select(fromLiveSupport.getThreadList).map(threadList => threadList.toArray());
         this.selectedThreadId$ = store.select(fromLiveSupport.getSelectedThreadId);
         this.currentThreadCount$ = this.directLineThreads$.map(x => x.length);
+        this.threadsToggle$ = store.select(fromLiveSupport.getThreadsExpanded);
     }
 
     ngOnInit() { }
@@ -35,6 +36,6 @@ export class ChatThreadsContainer implements OnInit {
     }
 
     onToggleCurrentThreads(expand: boolean) {
-        this.groupExpandToggles = expand;
+        this.store.dispatch(new ExpandThreadViewAction(expand));
     }
 }

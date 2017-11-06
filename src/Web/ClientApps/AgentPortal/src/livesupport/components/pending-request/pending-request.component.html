@@ -13,11 +13,6 @@
             <span class="request-details-label">Time:</span>
             <span class="request-details-text">{{ _liveRequest.timeRequested ? (_liveRequest.timeRequested | date: 'shortTime') : '' }}</span>
         </div>
-        <ul class="last-messages" *ngIf="_liveRequest.messageActivities?.length > 0">
-            <li *ngFor="let messageActivity of messageActivities">
-                {{messageActivity.text}}
-            </li>
-        </ul>
         <span class="label label-accept" (click)="onAcceptClicked()">
             Accept
         </span>

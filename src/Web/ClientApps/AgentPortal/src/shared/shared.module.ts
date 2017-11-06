@@ -3,14 +3,15 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { TimeSpanPipe } from './pipes/time-span.pipe';
-
+import { QueryHighlightPipe } from './pipes/query-highlight.pipe';
 @NgModule({
     imports: [CommonModule],
-    declarations: [TimeSpanPipe],
+    declarations: [TimeSpanPipe, QueryHighlightPipe],
     exports: [
         CommonModule,
         FormsModule,
-        TimeSpanPipe
+        TimeSpanPipe,
+        QueryHighlightPipe
     ]
 })
 export class SharedModule { }

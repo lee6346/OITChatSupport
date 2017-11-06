@@ -9,9 +9,17 @@ export interface State {
     threads: Map<string, ChatThread>;
 }
 
+export interface UiState {
+    expandView: boolean;
+}
+
 export const initialState: State = {
     selectedThreadId: '',
     threads: Map<string, ChatThread>(),
+};
+
+export const initialUiState: UiState = {
+    expandView: false
 };
 
 export function reducer(state = initialState, action: chatThread.Actions | MessageActivityReceivedAction): State {
@@ -47,7 +55,7 @@ export function reducer(state = initialState, action: chatThread.Actions | Messa
                         return Object.assign({}, thread, {
                             threadId: thread.threadId, active: thread.active, lastSentTime: new Date(Date.now()).toUTCString(),
                             unseenMessages: action.activity.type === 'message' ?
-                                [...thread.unseenMessages, action.activity.text] : state.threads
+                                [...thread.unseenMessages, action.activity] : state.threads
                         });
                     }) : state.threads
             });
@@ -71,3 +79,18 @@ export const getSelectedThread = (state: State) => state.threads.get(state.selec
 export const activeThreads = (state: State) => state.threads.filter((thread: ChatThread) => thread.active);
 export const getThreadIds = (state: State) => state.threads.keys;
 export const getSelectedThreadUnseenMessages = (state: State) => getSelectedThread(state).unseenMessages;
+
+
+export function uiReducer(state = initialUiState, action: chatThread.Actions): UiState {
+    switch (action.type) {
+        case chatThread.EXPAND_THREAD_VIEW:
+            return Object.assign({}, state, {
+                expandView: action.expand
+            });
+        default:
+            return state;
+    }
+
+}
+
+export const getExpandState = (state: UiState) => state.expandView;

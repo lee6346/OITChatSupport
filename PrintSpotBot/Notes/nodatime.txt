@@ -1,0 +1,23 @@
+﻿- 100 times more granular than DateTime/TimeSpan
+
+Global Timeline
+	Instant: point on global timeline (number of nanoseconds elapsed since Unix epoch)
+		- no time zone convept
+		- no calendar system concept
+		- evenything basedon nanosceonds of global timeline
+
+Calendars
+	CalendarSystem: 
+
+Time zones
+	DateTimeZone: time zones
+	Offset (struct): time zone offsets
+	ZonedDateTime
+	TimeZoneInfo
+	BclDateTimeZone
+	IDateTimeZoneProvider, DateTimeZonerProviders
+	OffsetDateTime
+
+Periods/Durations
+	Duration: simple, equivalent to Timespan
+	Period: complex type

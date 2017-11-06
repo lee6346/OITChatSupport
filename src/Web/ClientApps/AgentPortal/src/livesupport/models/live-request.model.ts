@@ -6,7 +6,6 @@ export interface LiveRequest {
     user: string;
     botHandle: string;
     timeRequested: string;
-    messageActivities?: Message[];
 
 }
 

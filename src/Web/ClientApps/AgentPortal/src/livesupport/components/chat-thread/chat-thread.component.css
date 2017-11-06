@@ -1,24 +1,48 @@
-﻿.thread-status {
-    float: right;
-    color: grey;
-}
-.thread-menu{
-    display:inline;
-    float: right;
-    margin-right: 10px;
-}
-.selected-thread{
-    pointer-events: none;
-    cursor: default;
-    color: grey;
-}
-.selected-thread-container {
-    box-shadow: none;
+﻿.thread-item {
+    padding: 7px 15px 7px 15px;
+    background-color: #f4faff;
+    box-shadow: 1px 1px 2px #888888;
+    -moz-box-shadow: 1px 1px 2px #888888;
+    -webkit-box-shadow: 1px 1px 2px #888888;
+    cursor: pointer;
 }
 
-.selected-thread-link {
-    pointer-events: none;
-    cursor: none;
+
+.label-student {
+    font-size: smaller;
+    background-color: #CFB095;
+}
+
+li{
+    margin: 5px 0px 5px 0px;
+}
+
+.badge{
+    float:right;
+}
+.thread-messages {
+    padding-top: 5px;
+    padding-bottom: 25px;
+}
+.switch-thread{
+    background-color: #1b81d7;
+    border: 0.5px solid #1b81d7;
+}
+
+.remove-thread {
+    background-color: #DC4C46;
+    border: 0.5px solid #DC4C46;
+}
+.switch-thread, .remove-thread {
+    float: right;
+    width: 25%;
+    cursor: pointer;
+    margin-right: 2px;
+}
+
+
+.selected-thread-container {
+    box-shadow: none;
 }
 
 ul {
@@ -30,68 +54,27 @@ ul {
 .inactive-thread{
     background-color:transparent;
 }
-.active-thread{
-    background-color: green;
-}
-.disconnected-thread{
-    background-color: red;
-}
-.dropdown-menu-container{
-    width:100%;
-}
-
-.thread-item {
-    padding: 5px 5px 20px 5px;
-    background-color: #f4faff;
-    box-shadow: 1px 1px 2px #888888;
-    -moz-box-shadow: 1px 1px 2px #888888;
-    -webkit-box-shadow: 1px 1px 2px #888888;
-}
-.current-thread-details {
+.active-thread {
     background-color: #1b81d7;
-    font-size: small;
-    padding: 0;
-    color: white;
 }
-.thread-label {
-    font-weight: bold;
-    color: black;
-}
-.thread-text{
-    padding-left: 10px;
-    color: black;
-}
-.thread-header {
-    cursor: pointer;
-    text-decoration: none;
-    display: inline-block;
-    width: 80%;
-
+.disconnected-thread {
+    background-color: #DC4C46;
 }
 
-.thread-last-message{
-    margin-top: 5px;
+
+
+
+.thread-item :hover{
+    background-color: white;
 }
 
-.label-select {
-    background-color: #d4d4d4;
-    border: 0.5px solid #333;
+.message-time {
     float: right;
-    font-size: smaller;
-    cursor: pointer;
-    color: #333;
-    font-weight: bold;
-    margin-right:5px;
+    font-size: 11px;
 }
 
-.label-danger{
-    font-size: smaller;
-    cursor: pointer;
-    font-weight: bold;
-    float: right;
-}
-
-.thread-content {
-    padding-top: 10px;
-    padding-bottom: 10px;
+.message-text {
+    font-size: 12px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }

@@ -17,7 +17,5 @@ namespace Web.Dtos
         public string BotHandle { get; set; }
         [JsonProperty("timeRequested")]
         public DateTime? TimeRequested { get; set; }
-        [JsonProperty("messageActivities")]
-        public IMessageActivity[] MessageActivities { get; set; }
     }
 }

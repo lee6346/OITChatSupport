@@ -41,7 +41,7 @@ export class ChatThreadComponent {
     thread: ChatThread;
 
     @Input()
-    opened: boolean = false;
+    opened: boolean;
     
     @Input()
     isSelectedId: boolean;
@@ -75,18 +75,9 @@ export class ChatThreadComponent {
             return { 'inactive-thread': true };
     }
 
-    currentSelect(): any {
-        if (this.isSelectedId) 
-            return { 'selected-thread': true };
-    }
-
     currentSelectContainer(): any {
         if (this.isSelectedId)
             return { 'selected-thread-container': true };
     }
 
-    currentSelectLink(): any {
-        if (this.isSelectedId) 
-            return { 'selected-thread-link': true };
-    }
 }

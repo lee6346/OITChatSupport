@@ -28,13 +28,6 @@ export class ChatBotComponent implements OnInit, OnDestroy {
         private store: Store<fromChatBot.State>
     ) {
         this.messageActivities$ = store.select(fromChatBot.getMessageLog).map(item => item.toArray());
-        store.select(fromChatBot.getLastMessageSet).map(item => item.toArray())
-        .subscribe(
-            set => {
-                this.recentMessageActivities = set;
-                console.log('message set :' + this.recentMessageActivities);
-            }
-        );
         store.select(fromChatBot.getCurrentBotThread).subscribe(item => {
             if (item !== '') {
                 this.notConnected = false;
@@ -72,8 +65,7 @@ export class ChatBotComponent implements OnInit, OnDestroy {
             {
                 botHandle: 'AskRowdy',
                 conversationId: this.currentThreadId,
-                user: this.user,
-                activitySet: this.recentMessageActivities
+                user: this.user
             } as LiveRequest));
     }
 
