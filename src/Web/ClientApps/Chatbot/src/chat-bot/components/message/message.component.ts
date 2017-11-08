@@ -17,6 +17,30 @@ export class MessageComponent {
 
     constructor() { }
 
+    bubbleProperties(id: string) {
+        if (id.toLowerCase() === 'student') {
+            return {
+                'host-bubble': true
+            };
+        }
+        else {
+            return {
+                'remote-bubble': true
+            };
+        }
+    }
 
+    wrapperAlignProperties(id: string) {
+        if (id.toLowerCase() === 'student') {
+            return {
+                'align-wrapper-right': true
+            };
+        }
+        else {
+            return {
+                'align-wrapper-left': true
+            };
+        }
+    }
 
 }

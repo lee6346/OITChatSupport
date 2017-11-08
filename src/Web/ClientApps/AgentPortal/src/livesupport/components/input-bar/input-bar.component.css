@@ -1,9 +1,11 @@
 .input-container{
-    padding-left: 20px;
-    padding-right: 20px;
+    padding: 0 20px 0 20px;
 }
 
 .text-bar {
+    resize: none;
+    overflow-y: auto;
+    height: 100%;
     width: 85%;
     border: 1px solid lightgrey;
     border-radius: 3px;
@@ -11,8 +13,11 @@
     font-size: 20px;
     text-align: right;
     overflow-wrap: break-word;
-    resize: none;
     float: left;
+    outline:none;
+}
+.text-bar:focus{
+    background-color: white;
 }
 
 button{

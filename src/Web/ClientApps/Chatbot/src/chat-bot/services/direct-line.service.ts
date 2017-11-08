@@ -1,26 +1,22 @@
 ﻿import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Store } from '@ngrx/store';
-import * as fromChatBot from '../chat-bot/store/chat-bot.actions';
-import * as chatBotReduc from '../chat-bot/store/chat-bot.reducer';
+import { MessageActivityReceivedAction } from '../actions/directline-activity.actions';
+import { State } from '../store/index';
 import { DirectLine, Conversation, Activity, Message } from 'botframework-directlinejs';
-import { Observable, Subject } from 'rxjs/Rx';
+import { Observable } from 'rxjs/Rx';
 
-import { SimpleMessage } from '../chat-bot/models';
-import { environment } from '../../environments/environment';
+import { SimpleMessage } from '../models';
+import { environment } from '../../../environments/environment';
 
 @Injectable()
 export class DirectLineService {
 
     private directLineSocket: DirectLine;
-    private connected: boolean = false;
-    private filterPredicate: string = 'AskRowdy';
-
-    private directLineUnsubscribe: Subject<void> = new Subject<void>();
 
     constructor(
         private http: HttpClient,
-        private store: Store<chatBotReduc.State>
+        private store: Store<State>
     ) { }
 
     getToken$(botHandle: string): Observable<Conversation> {
@@ -31,24 +27,18 @@ export class DirectLineService {
     }
 
     startDirectLineSession(conversation: Conversation): string {
-        if (this.connected === false) {
-            this.connected = true;
             this.directLineSocket = new DirectLine({
                 token: conversation.token,
                 webSocket: true,
             });
-            this.directLineSocket.activity$.filter((activity: Activity) => activity.from.id !== 'student').takeUntil(this.directLineUnsubscribe)
+            this.directLineSocket.activity$.filter((activity: Activity) => activity.from.id !== 'student')
                 .subscribe(
                 (activity: Activity) => {
-                    this.connected = true;
                     if(activity.type === 'message')
-                        this.store.dispatch(new fromChatBot.MessageActivityReceivedAction(activity));
+                        this.store.dispatch(new MessageActivityReceivedAction(activity));
                 },
-                (err: any) => console.log('error'),
-                () => console.log('complete')
+                (err: any) => { }
             );
-            this.directLineSocket.activity$.subscribe(next => console.log(next));
-        }
         return conversation.conversationId;
     }
 
@@ -56,8 +46,8 @@ export class DirectLineService {
         let messageActivity = this.normalizeToActivityMessage(message);
         this.directLineSocket
             .postActivity(messageActivity).subscribe(
-            next => console.log('success'),
-            (err: any) => console.log('error')
+            next => { },
+            (err: any) => { }
         );
         return messageActivity;
     }
@@ -69,9 +59,10 @@ export class DirectLineService {
             type: 'message',
             inputHint: 'disconnect',
             text: 'student has disconnected'
-        }).subscribe(next => console.log('disconnect activity sent: ' + next));
-        this.connected = false;
-        this.directLineUnsubscribe.next();
+        }).subscribe(
+            next => { },
+            (err: any) => { }
+        );
         this.directLineSocket.end();
     }
 
@@ -81,7 +72,8 @@ export class DirectLineService {
                 id: message.conversationId
             }, from: { id: 'student' },
             type: 'message',
-            text: message.text
+            text: message.text,
+            timestamp: new Date(Date.now()).toUTCString()
         } as Message;
     }
 

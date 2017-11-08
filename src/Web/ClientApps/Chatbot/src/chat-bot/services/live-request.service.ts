@@ -2,8 +2,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Rx';
 
-import { LiveRequest } from '../chat-bot/models';
-import { environment } from '../../environments/environment';
+import { LiveRequest } from '../models';
+import { environment } from '../../../environments/environment';
 
 @Injectable()
 export class LiveRequestService {

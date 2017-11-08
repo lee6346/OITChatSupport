@@ -10,6 +10,6 @@ export class QueryHighlightPipe implements PipeTransform {
             return t.length > 0;
         }).join('|');
         let regex = new RegExp(pattern, 'gi');
-        return search ? text.replace(regex, (match: string) => `<span class="highlight">${match}</span>`) : text;
+        return search ? text.replace(regex, (match: string) => `<span style="background-color: lightgrey">${match}</span>`) : text;
     }
 }

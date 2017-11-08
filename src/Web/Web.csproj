@@ -12,33 +12,13 @@
     <IsTransformWebConfigDisabled>true</IsTransformWebConfigDisabled>
   </PropertyGroup>
   <ItemGroup>
-    <None Remove="ClientApps\AgentPortal\src\auth\actions\auth.actions.ts" />
-    <None Remove="ClientApps\AgentPortal\src\auth\auth.module.ts" />
-    <None Remove="ClientApps\AgentPortal\src\auth\components\auth-form.component.ts" />
-    <None Remove="ClientApps\AgentPortal\src\auth\containers\auth.container.ts" />
-    <None Remove="ClientApps\AgentPortal\src\auth\effects\auth.effects.ts" />
-    <None Remove="ClientApps\AgentPortal\src\auth\reducers\auth.reducers.ts" />
-    <None Remove="ClientApps\AgentPortal\src\auth\reducers\index.ts" />
-    <None Remove="ClientApps\AgentPortal\src\auth\services\auth.service.ts" />
-    <None Remove="ClientApps\AgentPortal\src\auth\models\auth.model.ts" />
-    <None Remove="ClientApps\AgentPortal\src\auth\models\index.ts" />
-    <None Remove="ClientApps\AgentPortal\src\core\core.module.ts" />
-    <None Remove="ClientApps\AgentPortal\src\livesupport\actions\app-timer.actions.ts" />
-    <None Remove="ClientApps\AgentPortal\src\livesupport\actions\app-volume.actions.ts" />
-    <None Remove="ClientApps\AgentPortal\src\livesupport\components\chat-message-filter\chat-message-filter.component.ts" />
-    <None Remove="ClientApps\AgentPortal\src\livesupport\components\chat-message-header\chat-message-header.component.ts" />
-    <None Remove="ClientApps\AgentPortal\src\livesupport\components\pending-header\pending-header.component.ts" />
-    <None Remove="ClientApps\AgentPortal\src\livesupport\models\accept-request.model.ts" />
-    <None Remove="ClientApps\AgentPortal\src\livesupport\models\directline-schema.model.ts" />
-    <None Remove="ClientApps\AgentPortal\src\livesupport\models\guid-mock.model.ts" />
-    <None Remove="ClientApps\AgentPortal\src\livesupport\reducers\app-timer.reducers.ts" />
-    <None Remove="ClientApps\AgentPortal\src\livesupport\reducers\app-volume.reducers.ts" />
-    <None Remove="ClientApps\AgentPortal\src\livesupport\services\app-timer.service.ts" />
-    <None Remove="ClientApps\AgentPortal\src\shared\animations\fade-in-out.animation.ts" />
-    <None Remove="ClientApps\AgentPortal\src\shared\directives\end-auto-scroll.directive.ts" />
-    <None Remove="ClientApps\AgentPortal\src\shared\directives\flash-fade.directive.ts" />
-    <None Remove="ClientApps\AgentPortal\src\shared\pipes\time-span.pipe.ts" />
-    <None Remove="ClientApps\AgentPortal\src\shared\widgets\thread-list-header.component.ts" />
+    <None Remove="ClientApps\AgentPortal\src\livesupport\components\pending-header\pending-header.animations.ts" />
+    <None Remove="ClientApps\Chatbot\src\chat-bot\actions\directline-activity.actions.ts" />
+    <None Remove="ClientApps\Chatbot\src\chat-bot\actions\live-request.actions.ts" />
+    <None Remove="ClientApps\Chatbot\src\chat-bot\effects\directline.effects.ts" />
+    <None Remove="ClientApps\Chatbot\src\chat-bot\effects\live-request.effects.ts" />
+    <None Remove="ClientApps\Chatbot\src\chat-bot\store\chat-message.reducers.ts" />
+    <None Remove="ClientApps\Chatbot\src\chat-bot\store\chat-status.reducers.ts" />
   </ItemGroup>
 
   <ItemGroup>
@@ -82,38 +62,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <TypeScriptCompile Include="ClientApps\AgentPortal\src\auth\actions\auth.actions.ts" />
-    <TypeScriptCompile Include="ClientApps\AgentPortal\src\auth\auth.module.ts" />
-    <TypeScriptCompile Include="ClientApps\AgentPortal\src\auth\components\auth-form.component.ts" />
-    <TypeScriptCompile Include="ClientApps\AgentPortal\src\auth\containers\auth.container.ts" />
-    <TypeScriptCompile Include="ClientApps\AgentPortal\src\auth\effects\auth.effects.ts" />
-    <TypeScriptCompile Include="ClientApps\AgentPortal\src\auth\reducers\auth.reducers.ts" />
-    <TypeScriptCompile Include="ClientApps\AgentPortal\src\auth\reducers\index.ts" />
-    <TypeScriptCompile Include="ClientApps\AgentPortal\src\auth\services\auth.service.ts" />
-    <TypeScriptCompile Include="ClientApps\AgentPortal\src\auth\services\auth.guard.ts" />
-    <TypeScriptCompile Include="ClientApps\AgentPortal\src\auth\models\index.ts" />
-    <TypeScriptCompile Include="ClientApps\AgentPortal\src\auth\models\user.model.ts" />
-    <TypeScriptCompile Include="ClientApps\AgentPortal\src\auth\models\auth.model.ts" />
-    <TypeScriptCompile Include="ClientApps\AgentPortal\src\core\core.module.ts" />
-    <TypeScriptCompile Include="ClientApps\AgentPortal\src\livesupport\actions\app-timer.actions.ts" />
-    <TypeScriptCompile Include="ClientApps\AgentPortal\src\livesupport\actions\app-volume.actions.ts" />
-    <TypeScriptCompile Include="ClientApps\AgentPortal\src\livesupport\components\chat-message-filter\chat-message-filter.component.ts" />
-    <TypeScriptCompile Include="ClientApps\AgentPortal\src\livesupport\components\chat-message-header\chat-message-header.component.ts" />
-    <TypeScriptCompile Include="ClientApps\AgentPortal\src\livesupport\components\chat-threads-header\chat-threads-header.component.ts" />
-    <TypeScriptCompile Include="ClientApps\AgentPortal\src\livesupport\components\pending-header\pending-header.component.ts" />
-    <TypeScriptCompile Include="ClientApps\AgentPortal\src\livesupport\models\accept-request.model.ts" />
-    <TypeScriptCompile Include="ClientApps\AgentPortal\src\livesupport\models\directline-schema.model.ts" />
-    <TypeScriptCompile Include="ClientApps\AgentPortal\src\livesupport\models\guid-mock.model.ts" />
-    <TypeScriptCompile Include="ClientApps\AgentPortal\src\livesupport\reducers\app-timer.reducers.ts" />
-    <TypeScriptCompile Include="ClientApps\AgentPortal\src\livesupport\reducers\app-volume.reducers.ts" />
-    <TypeScriptCompile Include="ClientApps\AgentPortal\src\livesupport\services\app-timer.service.ts" />
-    <TypeScriptCompile Include="ClientApps\AgentPortal\src\shared\animations\fade-in-out.animation.ts" />
-    <TypeScriptCompile Include="ClientApps\AgentPortal\src\shared\directives\end-auto-scroll.directive.ts" />
-    <TypeScriptCompile Include="ClientApps\AgentPortal\src\shared\directives\flash-fade.directive.ts" />
-    <TypeScriptCompile Include="ClientApps\AgentPortal\src\shared\directives\toggle-details.directive.ts" />
-    <TypeScriptCompile Include="ClientApps\AgentPortal\src\shared\pipes\time-span.pipe.ts" />
-    <TypeScriptCompile Include="ClientApps\AgentPortal\src\shared\widgets\thread-list-header.component.ts" />
+    <TypeScriptCompile Include="ClientApps\AgentPortal\src\livesupport\components\pending-header\pending-header.animations.ts" />
+    <TypeScriptCompile Include="ClientApps\Chatbot\src\chat-bot\actions\directline-activity.actions.ts" />
+    <TypeScriptCompile Include="ClientApps\Chatbot\src\chat-bot\actions\directline-thread.actions.ts" />
+    <TypeScriptCompile Include="ClientApps\Chatbot\src\chat-bot\actions\live-request.actions.ts" />
+    <TypeScriptCompile Include="ClientApps\Chatbot\src\chat-bot\effects\directline.effects.ts" />
+    <TypeScriptCompile Include="ClientApps\Chatbot\src\chat-bot\effects\live-request.effects.ts" />
+    <TypeScriptCompile Include="ClientApps\Chatbot\src\chat-bot\store\chat-message.reducers.ts" />
+    <TypeScriptCompile Include="ClientApps\Chatbot\src\chat-bot\store\chat-status.reducers.ts" />
   </ItemGroup>
-
   
 </Project>

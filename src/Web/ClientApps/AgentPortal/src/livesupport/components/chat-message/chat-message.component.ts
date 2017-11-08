@@ -29,20 +29,31 @@ export class ChatMessageComponent implements OnInit{
         this.newMessageReceived.emit();
     }
 
-    labelColorSelector(sender: string): any {
+    labelProperties(sender: string): any {
         if (sender === 'student')
-            return { 'label-student': true };
-        else if (sender === 'AskRowdy')
-            return { 'label-bot': true };
+            return { 'label-remote': true };
         else
-            return { 'label-self': true };
+            return { 'label-host': true };
     }
 
-    textSenderAlignment(sender: string): any {
+    bubbleProperties(sender: string): any {
+        if (sender.toLowerCase() === 'student') {
+            return {
+                'remote-bubble': true
+            };
+        }
+        else {
+            return {
+                'host-bubble': true
+            };
+        }
+    }
+
+    alignWrapperProperties(sender: string): any {
         if (sender.toLowerCase() === 'student')
-            return { 'align-text-left': true };
+            return { 'align-wrapper-left': true };
         else
-            return { 'align-text-right': true };
+            return { 'align-wrapper-right': true };
     }
     
 }

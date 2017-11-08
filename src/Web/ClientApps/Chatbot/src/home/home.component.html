@@ -1,29 +1,20 @@
-<div class="main-content">
-    <div class="main-stage">
-        <div class="title-header">
-            <h1 class="home-title">OIT Chatbot</h1>
-        </div>
-        <div class="main-display">
-            <div class="chat-options">
-                <div class="chat-button">
-                    <img class="button-image" (click)="showChatWindow()" />
-                </div>
-            </div>
-            <div class="chat-window">
-                <chat-bot *ngIf="chatConnected" (disconnectSession)="onDisconnectSession()"></chat-bot>
-            </div>
-            <div class="feedback-center">
 
-            </div>
-        </div>
-        <div class="unknown">
-
-        </div>
+<div class="row main-content">
+    <div class="icon-bar">
 
     </div>
-    <div class="info-panel">
-        <div class="bot-menu"></div>
-        <div class="bot-info"></div>
-
+    <div class="main-stage col-sm-9">
+        <div class="chat-stage">
+            <div class="col-sm-4">
+                <button type="button" class="btn btn-default" (click)="onStartSession()">Chat</button>
+            </div>
+            <div class="col-sm-8">
+                <chat-bot *ngIf="chatConnected" (disconnectSession)="onDisconnectSession()"></chat-bot>
+            </div>
+        </div>
+        <div class="feedback-center">
+        </div>
+    </div>
+    <div class="col-sm-3">
     </div>
 </div> 

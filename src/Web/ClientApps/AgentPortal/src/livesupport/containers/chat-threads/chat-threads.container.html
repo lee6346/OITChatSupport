@@ -1,15 +1,13 @@
 <div class="current-threads-container">
     <chat-threads-header (toggleCurrentThreads)="onToggleCurrentThreads($event)" 
-                      [currentThreadCount]="(currentThreadCount$ | async)"></chat-threads-header>
-
-    
-        <chat-thread-list [threads]="directLineThreads$ | async"
-                          [selectedThreadId]="selectedThreadId$ | async"
-                          [listToggle]="threadsToggle$ | async"
-                          [timer]="timer$ | async"
-                          (switchThread)="onSwitchThread($event)"
-                          (removeThread)="onRemoveThread($event)"></chat-thread-list>
-    
+                         [expandView]="threadsToggle$ | async"
+                         [currentThreadCount]="currentThreadCount$ | async"></chat-threads-header>
+    <chat-thread-list [threads]="directLineThreads$ | async"
+                        [selectedThreadId]="selectedThreadId$ | async"
+                        [listToggle]="threadsToggle$ | async"
+                        [timer]="timer$ | async"
+                        (switchThread)="onSwitchThread($event)"
+                        (removeThread)="onRemoveThread($event)"></chat-thread-list> 
 </div>
 
 

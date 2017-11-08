@@ -1,23 +1,20 @@
 ﻿.request-item {
-    padding-top: 7px;
-    padding-bottom: 7px;
-    padding-left: 15px;
-    padding-right: 15px;
-    background-color: #f4faff;
+    padding: 7px 15px 7px 15px;
+    background-color: #e7f5fb;
 }
 .request-label {
     background-color: #1b81d7;
-    border: 0.5px solid #1b81d7;
-    font-size: smaller;
+    font-size: 12px;
     margin-right: 10px;
     cursor: pointer;
 }
-.request-label>:hover{
-    background-color: white;
-}
+    .request-label:hover {
+        background-color: #79bff8;
+    }
 
 .wait-time{
     float: right;
+    font-size: 11px;
 }
 
 .request-content{
@@ -26,9 +23,11 @@
 }
 .request-details-label{
     font-weight: bold;
+    font-size:12px;
 }
 .request-details-text{
     float: right;
+    font-size:11px;
 }
 
 .label-accept {

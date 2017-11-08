@@ -1,59 +1,108 @@
 ﻿
-.msg-row {
+.message-wrapper {
+    margin: 7px 18px 7px 18px;
+    line-height: 1.5em;
+    max-width: 80%;
+}
+
+.remote-message-time {
+    font-size: 10px;
+    float: left;
     width: 100%;
-    padding: 5px 5px 5px 5px;
-    margin: 5px 0 20px 0;
-    border-radius: 3px;
-    background: #f4faff;
 }
-.message-sender{
-    float: left;
-    font-weight: bold;
-    font-size: 14px;
-    text-transform: capitalize;
-    padding-right: 6px;
 
-
+.host-message-time {
+    font-size: 11px;
+    float: right;
+    width: 100%;
+    text-align: right;
 }
-.align-text-left{
+
+.align-wrapper-left{
     float: left;
 }
-.align-text-right{
+.align-wrapper-right{
     float: right;
 }
+
 .highlight{
     background-color: yellow;
 }
-.message-time{
-    font-size: 11px;
-}
+
 
 .label-sender {
-    font-size:14px;
+    font-size:15px;
     font-weight: bold;
     text-transform: uppercase;
-
 }
 
-.label-bot{
-    background-color: #38978D;
-    float: right;
-}
-.label-student {
+.label-remote {
     background-color: #CFB095;
     float: left;
 }
 
-.label-self {
+.label-host {
     background-color: #2bc0ec;
     float: right;
 }
 
-.message-context{
-    padding-top: 2px;
+.host-bubble {
+    background-color: #dfdfdf;
+    float: right;
+    border-radius: 6px 0px 6px 6px;
+    margin-right: 25px;
+    -webkit-box-shadow: 0 1px 0 darkgrey;
+    -moz-box-shadow: 0 1px 0 darkgrey;
+    box-shadow: 0 1px 0 darkgrey;
 }
 
-.message-text{
-    width: 92%;
-    float: right;
+.remote-bubble {
+    background-color: #d0ecf7;
+    float: left;
+    border-radius: 0 6px 6px 6px;
+    margin-left: 25px;
+    -webkit-box-shadow: 1px 1px 1px #1b81d7;
+    -moz-box-shadow: 1px 1px 1px #1b81d7;
+    box-shadow: 1px 1px 1px #1b81d7;
+}
+.bubble {
+    text-align: left;
+    padding: 5px 11px 5px 11px;
+    position: relative;
+    word-wrap: break-word;
+    font-size: 16px;
+    max-width: 80%;
+}
+
+.remote-bubble:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 4px;
+    width: 0;
+    height: 0;
+    border: 15px solid transparent;
+    border-right-color: #d0ecf7;
+    border-left: 0;
+    border-top: 0;
+    margin-top: -4px;
+    margin-left: -14px;
+}
+
+.host-bubble:after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 4px;
+    width: 0;
+    height: 0;
+    border: 15px solid transparent;
+    border-left-color: #dfdfdf;
+    border-right: 0;
+    border-bottom: 0;
+    margin-top: -4px;
+    margin-right: -12px;
+    box-shadow: 0 1px 0 darkgrey;
+    -webkit-box-shadow: 0 1px 0 darkgrey;
+    -moz-box-shadow: 0 1px 0 darkgrey;
 }

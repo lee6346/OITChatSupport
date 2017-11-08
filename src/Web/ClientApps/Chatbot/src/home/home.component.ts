@@ -11,11 +11,11 @@ export class HomeComponent {
 
     constructor() { }
 
-    showChatWindow() {
+    onStartSession() {
         this.chatConnected = true;
     }
 
-    onDisconnectSession(disconnect: boolean) {
+    onDisconnectSession() {
         this.chatConnected = false;
     }
 }

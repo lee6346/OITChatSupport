@@ -1,4 +1,2 @@
-﻿export { LiveRequest } from './live-request.model';
-export { DirectLineMessage } from './directline-message.model';
+﻿export { LiveRequest, LiveRequestStatus } from './live-request.model';
 export { SimpleMessage } from './simple-message.model';
-export { ErrorMessage, ErrorLevel } from './error-message.model';

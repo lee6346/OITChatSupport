@@ -10,12 +10,15 @@ import { LiveRequest } from '../../models';
         trigger(
             'toggleAnimation', [
                 transition(':enter', [
-                    style({ transform: 'translateY(0)', opacity: 0 }),
-                    animate('350ms', style({transform: 'translateY(10%)', opacity: 1}))
+                    style({
+                        transform: 'translateY(0)',
+                        opacity: 0
+                    }),
+                    animate('450ms ease-out', style({transform: 'translateY(5%)', opacity: 1}))
                 ]),
                 transition(':leave', [
-                    style({ transform: 'translateY(10%)', opacity: 1 }),
-                    animate('350ms', style({transform: 'translateY(0)', opacity: 0}))
+                    style({ transform: 'translateY(5%)', opacity: 1 }),
+                    animate('450ms ease-out', style({transform: 'translateY(0)', opacity: 0}))
                 ])
             ]
         ),
@@ -23,11 +26,11 @@ import { LiveRequest } from '../../models';
             'liveRequestInOut', [
                 transition(':enter', [
                     style({ transform: 'translateX(100%)', opacity: 0 }),
-                    animate('250ms', style({ transform: 'translateX(0)', opacity: 1 }))
+                    animate('150ms', style({ transform: 'translateX(0)', opacity: 1 }))
                 ]),
                 transition(':leave', [
                     style({ transform: 'translateX(0)', opacity: 1 }),
-                    animate('250ms', style({ transform: 'translateX(100%)', opacity: 0 }))
+                    animate('150ms', style({ transform: 'translateX(100%)', opacity: 0 }))
                 ])
             ]
         ),

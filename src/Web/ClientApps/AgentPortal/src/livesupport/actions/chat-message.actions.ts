@@ -10,10 +10,10 @@ export const CACHED_MESSAGES_LOADED = '[Message] CACHED_MESSAGES_LOADED';
 
 //ui actions
 
-export const FILTER_MESSAGE_SENDER = '[Message] FILTER_MESSAGE_SENDER';
 export const FILTER_MESSAGE_TEXT = '[Message] FILTER_MESSAGE_TEXT';
-export const REMOVE_SENDER_FILTER = '[Message] REMOVE_SENDER_FILTER';
-
+export const FILTER_BOT_MESSAGE = '[Message] FILTER_BOT_MESSAGE';
+export const FILTER_AGENT_MESSAGE = '[Message] FILTER_AGENT_MESSAGE';
+export const FILTER_STUDENT_MESSAGE = '[Message] FILTER_STUDENT_MESSAGE';
 
 export class SendMessageActivityAction implements Action {
     readonly type = SEND_MESSAGE_ACTIVITY;
@@ -40,20 +40,26 @@ export class CachedMessagesLoadedAction implements Action {
     constructor(public cachedLoad: CachedMessageLoad) { }
 }
 
-export class FilterMessageSenderAction implements Action {
-    readonly type = FILTER_MESSAGE_SENDER;
-    constructor(public sender: MessageSender) { }
-}
-
 export class FilterMessageTextAction implements Action {
     readonly type = FILTER_MESSAGE_TEXT;
     constructor(public text: string) { }
 }
 
-export class RemoveSenderFilterAction implements Action {
-    readonly type = REMOVE_SENDER_FILTER;
-    constructor(public sender: MessageSender) { }
+export class FilterBotMessageAction implements Action {
+    readonly type = FILTER_BOT_MESSAGE;
+    constructor() { }
 }
+
+export class FilterStudentMessageAction implements Action {
+    readonly type = FILTER_STUDENT_MESSAGE;
+    constructor() { }
+}
+
+export class FilterAgentMessageAction implements Action {
+    readonly type = FILTER_AGENT_MESSAGE;
+    constructor() { }
+}
+
 
 export type Actions
     = SendMessageActivityAction
@@ -61,6 +67,7 @@ export type Actions
     | MessageActivityReceivedAction
     | LoadCachedMessagesAction
     | CachedMessagesLoadedAction
-    | FilterMessageSenderAction
     | FilterMessageTextAction
-    | RemoveSenderFilterAction;
+    | FilterAgentMessageAction
+    | FilterBotMessageAction
+    | FilterStudentMessageAction;

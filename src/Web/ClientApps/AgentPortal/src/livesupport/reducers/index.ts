@@ -116,26 +116,16 @@ export const getMessageListBySelectedThread = createSelector(
     (messageSets, id) => messageSets.messages.get(id, [])
 );
 
-export const getMessageFilterSender = createSelector(
-    getMessageUiState,
-    fromMessages.getMessageFilterSender
-);
 
 export const getMessageFilterText = createSelector(
     getMessageUiState,
     fromMessages.getMessageFilterText
 );
-/*
-export const getMessagesBySender = createSelector(
-    getMessageListBySelectedThread,
-    fromMessages.getMessageFilterSender,
-    (messages, sender) => messages.filter()
-);
-*/
+
 export const getMessagesByTextQuery = createSelector(
     getMessageListBySelectedThread,
     fromMessages.getMessageFilterText,
-    (messages, text) => messages.filter(message => message.type === 'message' && message.text !== undefined && message.text.includes(text))
+    (messages, text) => messages.filter(message => message.type === 'message' && typeof message.text !== 'undefined' && message.text.includes(text))
 );
 
 

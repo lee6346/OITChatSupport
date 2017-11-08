@@ -1,11 +1,11 @@
 ﻿.thread-item {
     padding: 7px 15px 7px 15px;
-    background-color: #f4faff;
-    box-shadow: 1px 1px 2px #888888;
-    -moz-box-shadow: 1px 1px 2px #888888;
-    -webkit-box-shadow: 1px 1px 2px #888888;
+    background-color: #e7f5fb;
     cursor: pointer;
     border-radius: 4px;
+}
+.chat-duration{
+    font-size:11px;
 }
 .chat-duration, .chat-topic{
     float: right;

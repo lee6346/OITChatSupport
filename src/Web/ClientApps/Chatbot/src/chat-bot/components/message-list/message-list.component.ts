@@ -27,19 +27,4 @@ export class MessageListComponent {
             'align-window-left': true,
         };
     }
-
-    public bubbleProperties(id: string) {
-        if (id === 'student') {
-            return {
-                'align-window-right': true,
-                'host-bubble': true,
-            };
-        }
-        else {
-            return {
-                'align-window-left': true,
-                'remote-bubble': true,
-            };
-        }
-    }
 }

@@ -1,5 +1,9 @@
-﻿<ul>
-    <li *ngFor="let messageActivity of messageActivities" class="msg-row"  [ngClass]="msgAlignment(messageActivity.from.id)">
-        <message class="bubble" [messageActivity]="messageActivity" [ngClass]="bubbleProperties(messageActivity.from.id)"></message>
-    </li>
-</ul>
+﻿<div class="message-list-container">
+    <div class="message-list">
+        <ul>
+            <li *ngFor="let messageActivity of messageActivities" [ngClass]="msgAlignment(messageActivity.from.id)">
+                <message [messageActivity]="messageActivity"></message>
+            </li>
+        </ul>
+    </div>
+</div>

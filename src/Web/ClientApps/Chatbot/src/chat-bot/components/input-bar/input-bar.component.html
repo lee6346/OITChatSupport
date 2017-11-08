@@ -1,4 +1,6 @@
-﻿<div class="input-bar-container">
-    <textarea #msg class="text-bar" [(ngModel)]="defaultInput" (keyup.enter)="submitMessage(msg.value)"></textarea>
+﻿<div class="input-container">
+    <textarea #msg class="text-bar" rows="2" 
+              (keyup.enter)="onSubmitInput(msg.value); msg.value=''"></textarea>
+    <button type="button" class="btn btn-sm submit-btn" (click)="onSubmitInput(msg.value); msg.value=''"><span class="glyphicon glyphicon-arrow-up"></span></button>
 </div>
 

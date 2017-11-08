@@ -1,5 +1,4 @@
 ﻿import { Component, Output, EventEmitter } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 
 
 
@@ -13,15 +12,9 @@ export class InputBarComponent {
     @Output()
     messageSubmit: EventEmitter<string> = new EventEmitter<string>();
 
-    private defaultInput: string | null = null;
-
     constructor() { }
 
-    public submitMessage(message: string): void {
-        this.defaultInput = '';
-        if (message !== '') {
-
-            this.messageSubmit.emit(message);
-        }
+    onSubmitInput(message: string): void {
+        this.messageSubmit.emit(message);
     }
 }

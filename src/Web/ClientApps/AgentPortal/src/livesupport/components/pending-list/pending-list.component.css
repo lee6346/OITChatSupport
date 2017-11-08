@@ -10,8 +10,6 @@ ul {
 li {
     padding-top: 3px;
     padding-bottom: 3px;
-    border-bottom: 0.5px solid;
-    border-color: lightblue;
 }
 .waiting-threads-list{
     height: 100%;
@@ -26,7 +24,7 @@ li {
 }
 
 ::-webkit-scrollbar {
-    width: 8px;
+    width: 6px;
     background-color: #F5F5F5;
 }
 

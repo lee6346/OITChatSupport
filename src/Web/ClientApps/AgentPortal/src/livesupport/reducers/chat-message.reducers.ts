@@ -2,15 +2,17 @@
 import { MessageFilter, FilterType, MessageSender } from '../models';
 import * as directLineMessage from '../actions/chat-message.actions';
 import { THREAD_REMOVED, ThreadRemovedAction } from '../actions/chat-thread.actions';
-import { Map, List } from 'immutable';
+import { Map } from 'immutable';
 
 export interface State {
     messages: Map<string, Activity[]>;
 }
 
 export interface UiState {
-    filterSender: List<MessageSender>;
     filterText: string;
+    filterBot: boolean;
+    filterAgent: boolean;
+    filterStudent: boolean;
 }
 
 export const initialState: State = {
@@ -18,8 +20,10 @@ export const initialState: State = {
 };
 
 export const initialUiState: UiState = {
-    filterSender: List<MessageSender>(),
     filterText: '',
+    filterBot: false,
+    filterAgent: false,
+    filterStudent: false
 };
 
 export function reducer(state = initialState, action: directLineMessage.Actions | ThreadRemovedAction): State {
@@ -50,19 +54,32 @@ export function reducer(state = initialState, action: directLineMessage.Actions 
 export function uiReducer(state = initialUiState, action: directLineMessage.Actions): UiState {
 
     switch (action.type) {
-        case directLineMessage.FILTER_MESSAGE_SENDER:
+        case directLineMessage.FILTER_AGENT_MESSAGE:
             return Object.assign({}, state, {
-                filterSender: state.filterSender.push(action.sender),
+                filterAgent: !state.filterAgent,
+                filterBot: state.filterBot,
+                filterStudent: state.filterStudent,
                 filterText: state.filterText
             });
         case directLineMessage.FILTER_MESSAGE_TEXT:
             return Object.assign({}, state, {
-                filterType: state.filterSender,
+                filterAgent: state.filterAgent,
+                filterBot: state.filterBot,
+                filterStudent: state.filterStudent,
                 filterText: action.text
             });
-        case directLineMessage.REMOVE_SENDER_FILTER:
+        case directLineMessage.FILTER_BOT_MESSAGE:
             return Object.assign({}, state, {
-                filterType: state.filterSender.filter(sender => sender !== action.sender),
+                filterAgent: state.filterAgent,
+                filterBot: !state.filterBot,
+                filterStudent: state.filterStudent,
+                filterText: state.filterText
+            });
+        case directLineMessage.FILTER_STUDENT_MESSAGE:
+            return Object.assign({}, state, {
+                filterAgent: state.filterAgent,
+                filterBot: state.filterBot,
+                filterStudent: !state.filterStudent,
                 filterText: state.filterText
             });
         default:
@@ -70,5 +87,5 @@ export function uiReducer(state = initialUiState, action: directLineMessage.Acti
     }
 }
 
-export const getMessageFilterSender = (state: UiState) => state.filterSender;
+
 export const getMessageFilterText = (state: UiState) => state.filterText;
