@@ -1,12 +1,5 @@
 ﻿import { Component, Input, Output, EventEmitter } from '@angular/core';
-import {
-    trigger,
-    state,
-    style,
-    animate,
-    transition
-} from '@angular/animations';
-
+import { transition, trigger, state, animate, style } from '@angular/animations';
 
 @Component({
     selector: 'pending-header',
@@ -17,9 +10,9 @@ import {
             state('inactive', style({
                 backgroundColor: '#e3e3e3',
                 color: '#696969',
-                boxShadow: '0px 1px 0px #888888',
-                mozBoxShadow: '0px 1px 0px #888888',
-                webkitBoxShadow: '0px 1px 0px #888888'
+                boxShadow: '1px 1px 2px #888888',
+                mozBoxShadow: '1px 1px 2px #888888',
+                webkitBoxShadow: '1px 1px 2px #888888'
             })),
             state('active', style({
                 backgroundColor: '#c0c0c0',
@@ -29,7 +22,6 @@ import {
             transition('active => inactive', animate('300ms'))
         ])
     ]
-
 })
 export class PendingHeaderComponent {
 
@@ -55,7 +47,6 @@ export class PendingHeaderComponent {
     toggleRequests: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     constructor() { }
-
 
     expandRequests() {
         this.toggleRequests.emit(true);

@@ -20,46 +20,39 @@ import {  ChatThread } from '../../models';
                 ])
             ]
         ),
-        trigger('selectedThread', [
+        trigger('toggleThread', [
             state('inactive', style({
-                backgroundColor: '#eee',
-                transform: 'scale(1)'
+                transform: 'scale(1.01)'
             })),
             state('active', style({
-                backgroundColor: '#cfd8dc',
-                transform: 'scale(1.1)'
+                transform: 'scale(1)'
             })),
-            transition('inactive => active', animate('100ms ease-in')),
-            transition('active => inactive', animate('100ms ease-out'))
+            transition('inactive => active', animate('200ms')),
+            transition('active => inactive', animate('200ms'))
         ]),
     ],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ChatThreadComponent {
 
+    private currentToggleState: string = 'inactive';
 
-    //private _isSelectedId: boolean;
     @Input()
     thread: ChatThread;
 
     @Input()
-    opened: boolean;
+    set opened(opened: boolean) {
+        opened ? this.currentToggleState = 'active' : 'inactive';
+    }
     
     @Input()
     isSelectedId: boolean;
-    /*
-    set isSelectedId(isSelectedId: boolean) {
-        this._isSelectedId = isSelectedId;
-        isSelectedId ? this.state = 'active' : 'inactive';
-    }
-    */
+
     private _chatDuration: number = 0;
-    private incrementor: number = 0;
 
     @Input()
     set chatDuration(chatDuration: number) {
-        if (++this.incrementor % 30 == 0)
-            this._chatDuration += 30000;
+        this._chatDuration += 1000;
     }
 
     @Output()
@@ -86,12 +79,10 @@ export class ChatThreadComponent {
 
 
     threadStatusSelector(): any {
-        if (!this.thread.active) 
-            return { 'disconnected-thread': true };
-        else if (this.thread.unseenMessages.length > 0) 
-            return { 'active-thread': true };
+        if (this.thread.active) 
+            return { 'active-badge': true };
         else
-            return { 'inactive-thread': true };
+            return { 'inactive-badge': true };
     }
 
     currentSelectContainer(): any {

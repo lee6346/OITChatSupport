@@ -3,10 +3,15 @@
     background-color: #e7f5fb;
 }
 .request-label {
-    background-color: #1b81d7;
+    background-color: #2196f3;
     font-size: 12px;
     margin-right: 10px;
     cursor: pointer;
+    line-height: 1;
+    text-align: center;
+    padding: .2em .6em .3em; 
+    border-radius: 5px;
+    color: white;
 }
     .request-label:hover {
         background-color: #79bff8;
@@ -30,13 +35,17 @@
     font-size:11px;
 }
 
-.label-accept {
-    background-color: #1b81d7;
-    background-color: #1b81d7;
+.label-select {
+    background-color: #2196f3;
     float: right;
-    font-size: smaller;
+    font-size: 12px;
+    line-height: 1;
+    text-align: center;
+    border-radius: 5px;
     cursor: pointer;
     margin-top: 5px;
+    padding: .2em .6em .3em;
+    color: white;
 }
 
 .request-header {

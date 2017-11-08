@@ -48,7 +48,6 @@ export class ChatThreadsHeaderComponent {
 
     constructor() { }
 
-
     expandRequests() {
         this.toggleCurrentThreads.emit(true);
     }

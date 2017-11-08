@@ -33,7 +33,11 @@ export function reducer(state = initialState, action: chatThread.Actions | Messa
             return Object.assign({}, state, {
                 selectedThreadId: action.threadId,
                 threads: state.threads.update(action.threadId, (thread: ChatThread) =>
-                { return Object.assign({}, thread, { threadId: thread.threadId, active: thread.active, unseenMessages: [] }); })
+                {
+                    thread.unseenMessages = [];
+                    return thread;
+                    /*return Object.assign({}, thread, { threadId: thread.threadId, active: thread.active, unseenMessages: [] });*/
+                })
             });
         case chatThread.THREAD_DISCONNECTED:
             return Object.assign({}, state, {
@@ -52,11 +56,14 @@ export function reducer(state = initialState, action: chatThread.Actions | Messa
                 selectedThreadId: state.selectedThreadId,
                 threads: conversationId !== '' && conversationId !== state.selectedThreadId ?
                     state.threads.update(conversationId, (thread: ChatThread) => {
+                        thread.unseenMessages = [...thread.unseenMessages, action.activity];
+                        return thread;
+                        /*
                         return Object.assign({}, thread, {
                             threadId: thread.threadId, active: thread.active, lastSentTime: new Date(Date.now()).toUTCString(),
                             unseenMessages: action.activity.type === 'message' ?
-                                [...thread.unseenMessages, action.activity] : state.threads
-                        });
+                                [...thread.unseenMessages, action.activity] : state.threads 
+                        });*/
                     }) : state.threads
             });
         default:

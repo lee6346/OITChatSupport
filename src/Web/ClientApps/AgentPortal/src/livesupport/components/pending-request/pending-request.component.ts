@@ -40,7 +40,7 @@ import { LiveRequest } from '../../models';
 export class PendingRequestComponent {
 
     private _liveRequest: LiveRequest;
-    private _waitTime: number = 0;
+    private _waitTime: number;
 
     @Input()
     set liveRequest(liveRequest: LiveRequest) {
@@ -58,11 +58,7 @@ export class PendingRequestComponent {
 
     @Input()
     set waitTime(waitTime: number) {
-        if (this._waitTime != 0 && waitTime % 30 == 0) {
-            console.log('received: ' + waitTime);
-            this._waitTime = this._waitTime + 30000;
-        }
-            
+        this._waitTime += 1000;   
     }
 
     constructor() { }    

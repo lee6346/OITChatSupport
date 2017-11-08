@@ -6,6 +6,7 @@
     margin: 0;
     height: 45%;
 }
+
 .list-toggle-buttons {
     height: 50%;
 }
@@ -18,9 +19,6 @@
         cursor: pointer;
         font-size: smaller;
     }
-        .list-toggle-buttons > span:hover {
-            background-color: white;
-        }
 
 .page-header {
     margin: 0;

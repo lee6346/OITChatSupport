@@ -1,21 +1,24 @@
 ﻿
-
-<div class="thread-item" [ngClass]="currentSelectContainer()" (click)="onToggleContent()">
-    <div class="label-panel">
-        <span class="label label-student">{{thread.topic}}</span>
-        <span *ngIf="thread.unseenMessages.length > 0" class="badge" [ngClass]="threadStatusSelector()">{{thread.unseenMessages.length}}</span>
-        <span class="chat-duration">Duration: {{_chatDuration | date: 'mm:ss'}}</span>
+<div class="thread-item" [@toggleThread]="currentToggleState">
+    <div class="thread-summary" [ngClass]="currentSelectContainer()" (click)="onToggleContent()">
+        <span class="label-topic">{{thread.topic}}</span>
+        <span *ngIf="thread.unseenMessages.length > 0" [ngClass]="threadStatusSelector()">{{thread.unseenMessages.length}}</span>
+        <span class="chat-duration">
+            <span *ngIf="(_chatDuration | date : 'h') > 0">{{_chatDuration | date: 'h'}}hr </span>
+            <span>{{_chatDuration | date: 'm'}}min</span>
+        </span>
     </div>
-    <div *ngIf="opened" class="thread-messages">
+    <div *ngIf="opened">
         <ul *ngIf="thread.unseenMessages.length > 0">
-            <li class="message-text" *ngFor="let message of thread.unseenMessages">
-                <div><span class="message-time">{{message.timestamp | date: 'shortTime'}}</span></div>
-                <div class="message-text">{{message.text}}</div>
+            <li *ngFor="let message of thread.unseenMessages">
+
+                <span class="message-time">{{message.timestamp | date: 'shortTime'}}</span>
+                <span class="message-text">{{message.text}}</span>
             </li>
-        </ul>  
-        <div>
-            <span class="label switch-thread" (click)="onThreadClicked()">Select</span>
-            <span class="label remove-thread" (click)="onRemoveClicked()">Remove</span>
+        </ul>
+        <div class="thread-options-panel">
+            <span class="switch-thread" (click)="onThreadClicked()">Select</span>
+            <span class="remove-thread" (click)="onRemoveClicked()">Remove</span>
         </div>
     </div>
-</div> 
+</div>

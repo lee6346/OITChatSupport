@@ -14,13 +14,11 @@
     .list-toggle-buttons > span {
         float: right;
         font-weight: bold;
+        border: 0.5px solid lightgrey;
         margin: 0 3px 0 0;
         cursor: pointer;
         font-size: smaller;
     }
-        .list-toggle-buttons > span:hover{
-            background-color: white;
-        }
 
 .page-header {
     margin: 0;
