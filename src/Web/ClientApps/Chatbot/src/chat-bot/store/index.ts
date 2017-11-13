@@ -1,9 +1,8 @@
-﻿import * as fromChatMessages from './chat-message.reducers';
+﻿import { createSelector, createFeatureSelector } from '@ngrx/store';
+
+import * as fromChatMessages from './chat-message.reducers';
 import * as fromChatStatus from './chat-status.reducers';
 import * as fromRoot from '../../shared/index.reducer';
-import { Message } from 'botframework-directlinejs';
-import { createSelector, createFeatureSelector } from '@ngrx/store';
-
 
 export interface ChatBotState {
     chatMessages: fromChatMessages.State;
@@ -26,28 +25,12 @@ export const getChatMessageEntitiesState = createSelector(
     state => state.chatMessages
 );
 
-export const getChatStatusState = createSelector(
+export const getChatStatusEntity = createSelector(
     getChatBotState,
     state => state.chatStatus
 );
 
-
-export const getCurrentBotThread = createSelector(
-    getChatStatusState,
-    fromChatStatus.getThreadId
-);
-
-export const getConnectionState = createSelector(
-    getChatStatusState,
-    state => state.connected
-);
-
-export const getLiveRequestStatus = createSelector(
-    getChatStatusState,
-    fromChatStatus.getRequestStatus
-);
-
-export const getMessageLog = createSelector(
+export const getMessages = createSelector(
     getChatMessageEntitiesState,
     state => state.messages
 );
@@ -57,11 +40,7 @@ export const getDisconnectActivity = createSelector(
     fromChatMessages.getDisconnectEvent
 );
 
-export const getLastMessageSet = createSelector(
-    getMessageLog,
-    log => log.takeLast(4)
-);
 export const getLastStudentMessage = createSelector(
     getChatMessageEntitiesState,
-    fromChatMessages.getLastStudentMessage//state => state.messages.filter((msg: Message) => msg.from.id === 'student').last()
+    fromChatMessages.getLastStudentMessage
 );

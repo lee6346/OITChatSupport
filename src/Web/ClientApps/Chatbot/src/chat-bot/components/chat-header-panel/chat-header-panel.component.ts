@@ -9,10 +9,7 @@ export class ChatHeaderPanelComponent {
 
     @Output()
     private exitRequest: EventEmitter<void> = new EventEmitter<void>();
-    /*
-    @Output()
-    private hideWindow: EventEmitter<void> = new EventEmitter<void>();
-    */
+
     @Output()
     private transferRequest: EventEmitter<void> = new EventEmitter<void>();
 
@@ -21,13 +18,8 @@ export class ChatHeaderPanelComponent {
     onExitButtonClicked(): void {
         this.exitRequest.emit();
     }
-    /*
-    onHideButtonClicked(): void {
-        this.hideWindow.emit();
-    }
-    */
+
     onTransferButtonClicked(): void {
         this.transferRequest.emit();
     } 
-
 }

@@ -1,7 +1,5 @@
 ﻿import { Component, Output, EventEmitter } from '@angular/core';
 
-
-
 @Component({
     selector: 'input-bar',
     templateUrl: './input-bar.component.html',

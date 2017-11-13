@@ -1,11 +1,11 @@
 ﻿import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Store } from '@ngrx/store';
-import { MessageActivityReceivedAction } from '../actions/directline-activity.actions';
 import { State } from '../store/index';
-import { DirectLine, Conversation, Activity, Message } from 'botframework-directlinejs';
 import { Observable } from 'rxjs/Rx';
+import { DirectLine, Conversation, Activity, Message } from 'botframework-directlinejs';
 
+import { MessageActivityReceivedAction } from '../actions/directline-activity.actions';
 import { SimpleMessage } from '../models';
 import { environment } from '../../../environments/environment';
 
@@ -76,5 +76,4 @@ export class DirectLineService {
             timestamp: new Date(Date.now()).toUTCString()
         } as Message;
     }
-
 }

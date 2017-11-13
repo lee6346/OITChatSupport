@@ -2,10 +2,10 @@
 import { SimpleMessage } from '../models';
 import { Activity, Message } from 'botframework-directlinejs';
 
-export const MESSAGE_ACTIVITY_RECEIVED = '[Message] MESSAGE_ACTIVITY_RECEIVED';
-export const DISCONNECT_ACTIVITY_RECEIVED = '[Disconnect] DISCONNECT_ACTIVITY_RECEIVED';
-export const SEND_MESSAGE_ACTIVITY = '[Message] SEND_MESSAGE_ACTIVITY';
-export const MESSAGE_ACTIVITY_SENT = '[Message] MESSAGE_ACTIVITY_SENT';
+export const MESSAGE_ACTIVITY_RECEIVED = '[Activity] MESSAGE_ACTIVITY_RECEIVED';
+export const DISCONNECT_ACTIVITY_RECEIVED = '[Activity] DISCONNECT_ACTIVITY_RECEIVED';
+export const SEND_MESSAGE_ACTIVITY = '[Activity] SEND_MESSAGE_ACTIVITY';
+export const MESSAGE_ACTIVITY_SENT = '[Activity] MESSAGE_ACTIVITY_SENT';
 
 export class MessageActivityReceivedAction implements Action {
     readonly type = MESSAGE_ACTIVITY_RECEIVED;

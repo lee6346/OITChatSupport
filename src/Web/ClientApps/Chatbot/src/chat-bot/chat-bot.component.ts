@@ -1,12 +1,13 @@
 ﻿import { Component, OnInit, OnDestroy, EventEmitter, Output } from '@angular/core';
 import { Store } from '@ngrx/store';
-import * as fromChatBot from './store/index';
-import { RetrieveBotTokenAction, EndChatSessionAction } from './actions/directline-connection.actions';
-import { SendMessageActivityAction } from './actions/directline-activity.actions';
-import { RequestLiveSupportAction, CancelLiveSupportAction } from './actions/live-request.actions';
 import { Observable } from 'rxjs/Rx';
 import { Message } from 'botframework-directlinejs';
-import { LiveRequest, LiveRequestStatus, SimpleMessage } from './models';
+
+import * as fromChatBot from './store/index';
+import { RetrieveConnectionTokenAction, EndChatConnectionAction } from './actions/directline-connection.actions';
+import { SendMessageActivityAction } from './actions/directline-activity.actions';
+import { RequestAgentTransferAction } from './actions/agent-transfer.actions';
+import { TransferRequest, SimpleMessage } from './models';
 
 @Component({
     selector: 'chat-bot',
@@ -16,8 +17,7 @@ import { LiveRequest, LiveRequestStatus, SimpleMessage } from './models';
                                (transferRequest)="onTransferRequest()"></chat-header-panel>
             <message-list [messageActivities]=" messageActivities$ | async "></message-list>
             <input-bar (messageSubmit)="onMessageSubmitted($event)"></input-bar>
-        </div>
-    `,
+        </div>`,
     styles: [`
     .chat-window {
         width: 55%;
@@ -28,51 +28,51 @@ import { LiveRequest, LiveRequestStatus, SimpleMessage } from './models';
         -webkit-box-shadow: 1px 2px 2px #0c2340;
         -moz-box-shadow: 1px 2px 2px #0c2340;
         box-shadow: 1px 2px 2px #0c2340;
-    }
-        `
+    }`
     ]
 })
 export class ChatBotComponent implements OnInit, OnDestroy{
 
     @Output()
     private disconnectSession: EventEmitter<void> = new EventEmitter<void>();
+
     private messageActivities$: Observable<Message[]>;
     private currentThreadId: string;
-    private connectionStatus: boolean;
+    private connected: boolean;
     private disconnectActivity$: Observable<boolean>;
-    private requestStatus: LiveRequestStatus = 'none';
+    private requestPending: boolean = false;
     private user: string = 'student';
     private lastStudentMessage: string|undefined;
 
-    constructor(
-        private store: Store<fromChatBot.State>
-    ) {
-        this.messageActivities$ = store.select(fromChatBot.getMessageLog).map(item => item.toArray());
+    constructor(private store: Store<fromChatBot.State>) {
+        this.messageActivities$ = store.select(fromChatBot.getMessages);
         this.disconnectActivity$ = store.select(fromChatBot.getDisconnectActivity);
-        store.select(fromChatBot.getCurrentBotThread).subscribe(thread => this.currentThreadId = thread);
-        store.select(fromChatBot.getConnectionState).subscribe(connection => this.connectionStatus = connection);
-        store.select(fromChatBot.getLiveRequestStatus).subscribe(status => this.requestStatus = status);
-        store.select(fromChatBot.getLastStudentMessage).subscribe(msg => {
-            this.lastStudentMessage = msg;
-            console.log(msg);
-        });
     }
 
     ngOnInit() {
-        this.store.dispatch(new RetrieveBotTokenAction('AskRowdy'));
+        this.store.dispatch(new RetrieveConnectionTokenAction('AskRowdy'));
+        this.store.select(fromChatBot.getChatStatusEntity).subscribe(
+            status => {
+                this.currentThreadId = status.threadId;
+                this.connected = status.connected;
+                this.requestPending = status.requestPending;
+                console.log('pending status: ' + this.requestPending);
+            }
+        );
+        this.store.select(fromChatBot.getLastStudentMessage).subscribe(msg => this.lastStudentMessage = msg);
     }
+
     ngOnDestroy() {
-        this.store.dispatch(new EndChatSessionAction(this.currentThreadId));
+        this.store.dispatch(new EndChatConnectionAction(this.currentThreadId));
     }
     
     onMessageSubmitted(message: string): void {
         if (message !== '' && this.currentThreadId !== '') {
             this.store.dispatch(new SendMessageActivityAction(
-                {
-                    text: message,
-                    conversationId: this.currentThreadId
-                } as SimpleMessage
-            ));
+            {
+                text: message,
+                conversationId: this.currentThreadId
+            } as SimpleMessage));
         }
     }
 
@@ -81,14 +81,14 @@ export class ChatBotComponent implements OnInit, OnDestroy{
     }
 
     onTransferRequest(): void {
-        if (this.requestStatus === 'none') {
-            this.store.dispatch(new RequestLiveSupportAction(
+        if (!this.requestPending) {
+            this.store.dispatch(new RequestAgentTransferAction(
             {
                 botHandle: 'AskRowdy',
                 conversationId: this.currentThreadId,
                 user: this.user,
                 lastMessage: this.lastStudentMessage
-            } as LiveRequest));
+            } as TransferRequest));
         }
     }
 }

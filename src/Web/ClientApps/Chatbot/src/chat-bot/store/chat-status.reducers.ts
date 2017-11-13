@@ -1,45 +1,37 @@
-﻿
-import { LiveRequestStatus } from '../models';
-import * as liveRequest from '../actions/live-request.actions';
+﻿import * as agentTransfer from '../actions/agent-transfer.actions';
 import * as directLineConnection from '../actions/directline-connection.actions';
 
 export interface State {
     connected: boolean;
-    requestStatus: LiveRequestStatus;
+    requestPending: boolean;
     threadId: string;
 }
 
 export const initState: State = {
     connected: false,
-    requestStatus: 'none',
+    requestPending: false,
     threadId: ''
 };
 
-export function reducer(state = initState, action: liveRequest.Actions | directLineConnection.Actions): State {
+export function reducer(state = initState, action: agentTransfer.Actions | directLineConnection.Actions): State {
     switch (action.type) {
-        case liveRequest.LIVE_SUPPORT_REQUESTED:
+        case agentTransfer.AGENT_TRANSFER_REQUESTED:
             return Object.assign({}, state, {
                 connected: state.connected,
-                requestStatus: 'pending',
+                requestPending: true,
                 threadId: state.threadId
             });
-        case liveRequest.LIVE_SUPPORT_CANCELED:
-            return Object.assign({}, state, {
-                connected: state.connected,
-                requestStatus: 'none',
-                threadId: state.threadId
-            });
-        case directLineConnection.BOT_TOKEN_RETRIEVED:
+        case directLineConnection.CONNECTION_TOKEN_RETRIEVED:
             return Object.assign({}, state, {
                 connected: true,
-                requestStatus: state.requestStatus,
+                requestPending: state.requestPending,
                 threadId: action.conversationId
             });
-        case directLineConnection.CHAT_SESSION_ENDED:
-            return initState;
+        case directLineConnection.END_CHAT_CONNECTION:
+            return Object.assign({}, state, initState);
         default:
             return state;
     }
 }
+
 export const getThreadId = (state: State) => state.threadId;
-export const getRequestStatus = (state: State) => state.requestStatus;

@@ -27,6 +27,8 @@ Bin/
 obj/
 Obj/
 
+*.svn/
+
 /src/Web/[Dd]ebug/
 /src/Web/[Dd]ebugPublic
 /src/Web/[Rr]elease/

@@ -2,40 +2,40 @@
 import { SimpleMessage } from '../models';
 import { Activity } from 'botframework-directlinejs';
 
-export const RETRIEVE_BOT_TOKEN = '[Token] RETRIEVE_BOT_TOKEN';
-export const BOT_TOKEN_RETRIEVED = '[Token] BOT_TOKEN_RETRIEVED';
-export const END_CHAT_SESSION = '[Chat] END_CHAT_SESSION';
-export const CHAT_SESSION_ENDED = '[Chat] CHAT_SESSION_ENDED';
-export const CHANGE_CHAT_SUBSCRIBER = '[Chat] CHANGE_CHAT_SUBSCRIBER';
+export const RETRIEVE_CONNECTION_TOKEN = '[Connection] RETRIEVE_CONNECTION_TOKEN';
+export const CONNECTION_TOKEN_RETRIEVED = '[Connection] CONNECTION_TOKEN_RETRIEVED';
+export const END_CHAT_CONNECTION = '[Connection] END_CHAT_CONNECTION';
+export const CHAT_CONNECTION_ENDED = '[Connection] CHAT_CONNECTION_ENDED';
+export const CHANGE_CONNECTION_SUBSCRIBER = '[Connection] CHANGE_CHAT_SUBSCRIBER';
 
-export class RetrieveBotTokenAction implements Action {
-    readonly type = RETRIEVE_BOT_TOKEN;
+export class RetrieveConnectionTokenAction implements Action {
+    readonly type = RETRIEVE_CONNECTION_TOKEN;
     constructor(public botHandle: string) { }
 }
 
-export class BotTokenRetrievedAction implements Action {
-    readonly type = BOT_TOKEN_RETRIEVED;
+export class ConnectionTokenRetrievedAction implements Action {
+    readonly type = CONNECTION_TOKEN_RETRIEVED;
     constructor(public conversationId: string) { }
 }
 
-export class EndChatSessionAction implements Action {
-    readonly type = END_CHAT_SESSION;
+export class EndChatConnectionAction implements Action {
+    readonly type = END_CHAT_CONNECTION;
     constructor(public conversationId: string) { }
 }
 
-export class ChatSessionEndedAction implements Action {
-    readonly type = CHAT_SESSION_ENDED;
+export class ChatConnectionEndedAction implements Action {
+    readonly type = CHAT_CONNECTION_ENDED;
     constructor(public conversationId: string) { }
 }
 
-export class ChangeChatSubscriberAction implements Action {
-    readonly type = CHANGE_CHAT_SUBSCRIBER;
+export class ChangeConnectionSubscriberAction implements Action {
+    readonly type = CHANGE_CONNECTION_SUBSCRIBER;
     constructor(public id: string) { }
 }
 
 export type Actions
-    = RetrieveBotTokenAction
-    | BotTokenRetrievedAction
-    | EndChatSessionAction
-    | ChatSessionEndedAction
-    | ChangeChatSubscriberAction;
+    = RetrieveConnectionTokenAction
+    | ConnectionTokenRetrievedAction
+    | EndChatConnectionAction
+    | ChatConnectionEndedAction
+    | ChangeConnectionSubscriberAction;

@@ -8,10 +8,13 @@
     MetaReducer,
     MemoizedSelector
 } from '@ngrx/store';
+
 import { environment } from '../../environments/environment';
 
 export interface State { }
+
 export const reducers: ActionReducerMap<State> = {};
+
 export function logger(reducer: ActionReducer<State>): ActionReducer<State> {
     return function (state: State, action: any): State {
         console.log('state', state);
@@ -20,5 +23,6 @@ export function logger(reducer: ActionReducer<State>): ActionReducer<State> {
         return reducer(state, action);
     };
 }
+
 export const metaReducers: MetaReducer<State>[] = !environment.production ? [logger] : [];
 

@@ -5,11 +5,21 @@ import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
-
 import { Activity, Conversation } from 'botframework-directlinejs';
-import * as directLineConnection from '../actions/directline-connection.actions';
-import * as directLineActivity from '../actions/directline-activity.actions';
 
+import {
+    SendMessageActivityAction,
+    SEND_MESSAGE_ACTIVITY,
+    MessageActivitySentAction
+} from '../actions/directline-activity.actions';
+import {
+    RETRIEVE_CONNECTION_TOKEN,
+    RetrieveConnectionTokenAction,
+    ConnectionTokenRetrievedAction,
+    EndChatConnectionAction,
+    END_CHAT_CONNECTION,
+    ChatConnectionEndedAction
+} from '../actions/directline-connection.actions';
 import { DirectLineService } from '../services/direct-line.service';
 
 @Injectable()
@@ -20,31 +30,31 @@ export class DirectLineEffects {
     ) { }
 
     @Effect()
-    getToken$: Observable<Action> = this.actions$.ofType(directLineConnection.RETRIEVE_BOT_TOKEN)
-        .switchMap((action: directLineConnection.RetrieveBotTokenAction) =>
+    getToken$: Observable<Action> = this.actions$.ofType(RETRIEVE_CONNECTION_TOKEN)
+        .switchMap((action: RetrieveConnectionTokenAction) =>
             this.directLineService.getToken$(action.botHandle)
                 .map((conversation: Conversation) => {
-                    return new directLineConnection.BotTokenRetrievedAction(this.directLineService.startDirectLineSession(conversation));
+                    return new ConnectionTokenRetrievedAction(this.directLineService.startDirectLineSession(conversation));
                 }))
         .catch((err: any) => {
             return of({ type: 'effects error: getToken$' });
         });
 
     @Effect()
-    postActivity$: Observable<Action> = this.actions$.ofType(directLineActivity.SEND_MESSAGE_ACTIVITY)
-        .map((action: directLineActivity.SendMessageActivityAction) => {
+    postActivity$: Observable<Action> = this.actions$.ofType(SEND_MESSAGE_ACTIVITY)
+        .map((action: SendMessageActivityAction) => {
             let activity = this.directLineService.postMessage(action.message);
-            return new directLineActivity.MessageActivitySentAction(activity);
+            return new MessageActivitySentAction(activity);
         })
         .catch((err: any) => {
             return of({ type: 'effects error: sendMessageActivity$' });
         });
 
     @Effect({ dispatch: false })
-    endConnection$: Observable<Action> = this.actions$.ofType(directLineConnection.END_CHAT_SESSION)
-        .map((action: directLineConnection.EndChatSessionAction) => {
+    endConnection$: Observable<Action> = this.actions$.ofType(END_CHAT_CONNECTION)
+        .map((action: EndChatConnectionAction) => {
             this.directLineService.endConnection(action.conversationId);
-            return new directLineConnection.ChatSessionEndedAction(action.conversationId);
+            return new ChatConnectionEndedAction(action.conversationId);
         })
         .catch((err: any) => {
             return of({ type: 'effects error: endConnection$' });

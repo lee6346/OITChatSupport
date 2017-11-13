@@ -14,9 +14,7 @@
   <ItemGroup>
     <None Remove="ClientApps\AgentPortal\src\livesupport\components\pending-header\pending-header.animations.ts" />
     <None Remove="ClientApps\Chatbot\src\chat-bot\actions\directline-activity.actions.ts" />
-    <None Remove="ClientApps\Chatbot\src\chat-bot\actions\live-request.actions.ts" />
     <None Remove="ClientApps\Chatbot\src\chat-bot\effects\directline.effects.ts" />
-    <None Remove="ClientApps\Chatbot\src\chat-bot\effects\live-request.effects.ts" />
     <None Remove="ClientApps\Chatbot\src\chat-bot\store\chat-message.reducers.ts" />
     <None Remove="ClientApps\Chatbot\src\chat-bot\store\chat-status.reducers.ts" />
   </ItemGroup>
@@ -64,10 +62,9 @@
   <ItemGroup>
     <TypeScriptCompile Include="ClientApps\AgentPortal\src\livesupport\components\pending-header\pending-header.animations.ts" />
     <TypeScriptCompile Include="ClientApps\Chatbot\src\chat-bot\actions\directline-activity.actions.ts" />
-    <TypeScriptCompile Include="ClientApps\Chatbot\src\chat-bot\actions\directline-thread.actions.ts" />
-    <TypeScriptCompile Include="ClientApps\Chatbot\src\chat-bot\actions\live-request.actions.ts" />
+    <TypeScriptCompile Include="ClientApps\Chatbot\src\chat-bot\actions\agent-transfer.actions.ts" />
     <TypeScriptCompile Include="ClientApps\Chatbot\src\chat-bot\effects\directline.effects.ts" />
-    <TypeScriptCompile Include="ClientApps\Chatbot\src\chat-bot\effects\live-request.effects.ts" />
+    <TypeScriptCompile Include="ClientApps\Chatbot\src\chat-bot\effects\agent-transfer.effects.ts" />
     <TypeScriptCompile Include="ClientApps\Chatbot\src\chat-bot\store\chat-message.reducers.ts" />
     <TypeScriptCompile Include="ClientApps\Chatbot\src\chat-bot\store\chat-status.reducers.ts" />
   </ItemGroup>

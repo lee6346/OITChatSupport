@@ -6,5 +6,4 @@ import { Component } from '@angular/core';
       <div class="container-fluid"><home></home></div>  
     `,
 })
-export class ChatBotPortalComponent {
-}
+export class ChatBotPortalComponent { }

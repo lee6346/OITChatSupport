@@ -20,7 +20,7 @@ namespace Web.Services
 
         }
 
-        public async Task RequestLiveAgentAsync(LiveTransferDto liveTransferDto)
+        public async Task<bool> RequestLiveAgentAsync(LiveTransferDto liveTransferDto)
         {
             var available = (_hubTracker.AgentsOnline(liveTransferDto.BotHandle).Result.Count() > 0);
             if(available)
@@ -28,6 +28,7 @@ namespace Web.Services
                 if(await _liveRequestRepository.Create(liveTransferDto))
                     await _hubTracker.InvokeLiveRequest(liveTransferDto);
             }
+            return available;
             
         }
 
