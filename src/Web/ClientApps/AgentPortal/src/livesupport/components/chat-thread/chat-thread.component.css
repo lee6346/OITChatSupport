@@ -1,20 +1,22 @@
 ﻿.thread-item {
     border-radius: 6px;
-}
-
-.thread-summary {
-    cursor: pointer;
     padding: 10px;
-    height: 35px;
     background-color: #e7f5fb;
     box-shadow: 0px 2px 4px #a6d4fa;
     -moz-box-shadow: 0px 2px 4px #a6d4fa;
     -webkit-box-shadow: 0px 2px 4px #a6d4fa;
     border-radius: 5px 5px 0 0;
+    height: 90px;
 }
 
-.thread-options-panel {
-    height: 30px;
+.thread-top{
+    height: 25%;
+}
+.thread-middle{
+    height: 50%;
+}
+.thread-bottom {
+    height: 25%;
     padding: 5px;
     background-color: #e7f5fb;
     border-radius: 0 0 5px 5px;
@@ -59,20 +61,6 @@
         background-color: #2aa9db;
     }
 
-ul {
-    margin: 0 5px;
-    padding: 0;
-    list-style-type: none;
-    border-left: 0.5px solid lightblue;
-    border-right: 0.5px solid lightblue;
-    max-height: 100px;
-    overflow-y: auto;
-}
-li {
-    padding: 10px 0;
-    margin: 0 10px;
-    border-bottom: 1px solid #e7f5fb;
-}
 .active-badge {
     float: left;
     margin-left: 10px;
@@ -99,11 +87,6 @@ li {
     padding: 3px 7px;
     line-height: 1;
     border-radius: 50%;
-}
-
-.message-time {
-    float: right;
-    font-size: 10px;
 }
 
 .message-text {

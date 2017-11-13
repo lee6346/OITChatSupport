@@ -11,8 +11,10 @@
             <span class="request-details-text">{{_liveRequest.botHandle}}</span>
         </div>
         <div>
-            <span class="request-details-label">Requested:</span>
-            <span class="request-details-text">{{ _liveRequest.timeRequested ? (_liveRequest.timeRequested | date: 'shortTime') : '' }}</span>
+            <span class="request-details-label">Last Message:</span>
+        </div>
+        <div>
+            <span class="last-message">{{_liveRequest.lastMessage ? _liveRequest.lastMessage : ''}}</span>
         </div>
         <span class="label-select" (click)="onAcceptClicked()">Select</span>
     </div>

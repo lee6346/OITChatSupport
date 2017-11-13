@@ -1,36 +1,11 @@
 ﻿import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { NgClass } from '@angular/common';
-import { transition, trigger, state, animate, style } from '@angular/animations';
 import {  ChatThread } from '../../models';
 
 @Component({
     selector: 'chat-thread',
     templateUrl: './chat-thread.component.html',
     styleUrls: ['./chat-thread.component.css'],
-    animations: [
-        trigger(
-            'toggleAnimation', [
-                transition(':enter', [
-                    style({ transform: 'translateY(0)', opacity: 0 }),
-                    animate('350ms', style({ transform: 'translateY(10%)', opacity: 1 }))
-                ]),
-                transition(':leave', [
-                    style({ transform: 'translateY(10%)', opacity: 1 }),
-                    animate('350ms', style({ transform: 'translateY(0)', opacity: 0 }))
-                ])
-            ]
-        ),
-        trigger('toggleThread', [
-            state('inactive', style({
-                transform: 'scale(1.01)'
-            })),
-            state('active', style({
-                transform: 'scale(1)'
-            })),
-            transition('inactive => active', animate('200ms')),
-            transition('active => inactive', animate('200ms'))
-        ]),
-    ],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ChatThreadComponent {
@@ -39,11 +14,6 @@ export class ChatThreadComponent {
 
     @Input()
     thread: ChatThread;
-
-    @Input()
-    set opened(opened: boolean) {
-        opened ? this.currentToggleState = 'active' : 'inactive';
-    }
     
     @Input()
     isSelectedId: boolean;
@@ -64,10 +34,6 @@ export class ChatThreadComponent {
     constructor() {
     }
 
-    onToggleContent() {
-        this.opened ? this.opened = false : this.opened = true;
-    }
-
     onThreadClicked() {
         this.switchThread.emit(this.thread.threadId);
     }
@@ -75,8 +41,6 @@ export class ChatThreadComponent {
     onRemoveClicked() {
         this.removeThread.emit(this.thread.threadId);
     }
-
-
 
     threadStatusSelector(): any {
         if (this.thread.active) 

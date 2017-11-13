@@ -6,6 +6,7 @@ export interface LiveRequest {
     user: string;
     botHandle: string;
     timeRequested: string;
+    lastMessage: string | undefined;
 
 }
 
@@ -14,6 +15,7 @@ export function createMockLiveRequest(): LiveRequest {
         conversationId: '123456',
         user: 'student',
         botHandle: 'AskRowdy',
-        timeRequested: Date.now().toString()
+        timeRequested: Date.now().toString(),
+        lastMessage: ''
     };
 }

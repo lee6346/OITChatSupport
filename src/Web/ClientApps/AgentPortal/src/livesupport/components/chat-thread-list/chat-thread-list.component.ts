@@ -22,9 +22,6 @@ export class ChatThreadListComponent {
     selectedThreadId: string;
 
     @Input()
-    listToggle: boolean;
-
-    @Input()
     timer: number;
 
     @Output()

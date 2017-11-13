@@ -42,6 +42,7 @@ export class ChatBotComponent implements OnInit, OnDestroy{
     private disconnectActivity$: Observable<boolean>;
     private requestStatus: LiveRequestStatus = 'none';
     private user: string = 'student';
+    private lastStudentMessage: string|undefined;
 
     constructor(
         private store: Store<fromChatBot.State>
@@ -51,6 +52,10 @@ export class ChatBotComponent implements OnInit, OnDestroy{
         store.select(fromChatBot.getCurrentBotThread).subscribe(thread => this.currentThreadId = thread);
         store.select(fromChatBot.getConnectionState).subscribe(connection => this.connectionStatus = connection);
         store.select(fromChatBot.getLiveRequestStatus).subscribe(status => this.requestStatus = status);
+        store.select(fromChatBot.getLastStudentMessage).subscribe(msg => {
+            this.lastStudentMessage = msg;
+            console.log(msg);
+        });
     }
 
     ngOnInit() {
@@ -81,7 +86,8 @@ export class ChatBotComponent implements OnInit, OnDestroy{
             {
                 botHandle: 'AskRowdy',
                 conversationId: this.currentThreadId,
-                user: this.user
+                user: this.user,
+                lastMessage: this.lastStudentMessage
             } as LiveRequest));
         }
     }

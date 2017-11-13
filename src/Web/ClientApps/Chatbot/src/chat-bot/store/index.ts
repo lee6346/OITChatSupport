@@ -1,6 +1,7 @@
 ﻿import * as fromChatMessages from './chat-message.reducers';
 import * as fromChatStatus from './chat-status.reducers';
 import * as fromRoot from '../../shared/index.reducer';
+import { Message } from 'botframework-directlinejs';
 import { createSelector, createFeatureSelector } from '@ngrx/store';
 
 
@@ -59,4 +60,8 @@ export const getDisconnectActivity = createSelector(
 export const getLastMessageSet = createSelector(
     getMessageLog,
     log => log.takeLast(4)
+);
+export const getLastStudentMessage = createSelector(
+    getChatMessageEntitiesState,
+    fromChatMessages.getLastStudentMessage//state => state.messages.filter((msg: Message) => msg.from.id === 'student').last()
 );

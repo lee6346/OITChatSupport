@@ -1,6 +1,6 @@
 ﻿
-<div class="thread-item" [@toggleThread]="currentToggleState">
-    <div class="thread-summary" [ngClass]="currentSelectContainer()" (click)="onToggleContent()">
+<div class="thread-item" >
+    <div class="thread-top">
         <span class="label-topic">{{thread.topic}}</span>
         <span *ngIf="thread.unseenMessages.length > 0" [ngClass]="threadStatusSelector()">{{thread.unseenMessages.length}}</span>
         <span class="chat-duration">
@@ -8,17 +8,11 @@
             <span>{{_chatDuration | date: 'm'}}min</span>
         </span>
     </div>
-    <div *ngIf="opened">
-        <ul *ngIf="thread.unseenMessages.length > 0">
-            <li *ngFor="let message of thread.unseenMessages">
-
-                <span class="message-time">{{message.timestamp | date: 'shortTime'}}</span>
-                <span class="message-text">{{message.text}}</span>
-            </li>
-        </ul>
-        <div class="thread-options-panel">
-            <span class="switch-thread" (click)="onThreadClicked()">Select</span>
-            <span class="remove-thread" (click)="onRemoveClicked()">Remove</span>
-        </div>
+    <div class="thread-middle">
+        <span *ngIf="thread.unseenMessages.length > 0" class="message-text">{{thread.unseenMessages[thread.unseenMessages.length-1].text}}</span>
+    </div>
+    <div class="thread-bottom">
+        <span class="switch-thread" (click)="onThreadClicked()">Select</span>
+        <span class="remove-thread" (click)="onRemoveClicked()">Remove</span>
     </div>
 </div>
