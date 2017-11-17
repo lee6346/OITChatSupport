@@ -1,38 +1,7 @@
-﻿DDD uses various tools and design patterns for its architecture
-- some are used over others based on application needs
-- the fundamental principle of DDD = bounded context
-	1. bounded contexts are application context/features that are bounded 
-	2. each bound can communicate to antoher via shared kernels, and other mechanisms
-	3. the goal is to really differentiate between different paritions of what the app is supposed to do
-	4. often useful for larger enterprise level projects, complex infrastures where integrating multiple servers, or integrating legacy code, etc
+﻿
 
-	Ex: chatbot app with agent support and admin data analytics
-		- admin data = bounded context
-		- agent support = bounded context
-		- user - bot = bounded context
-
-- Domain:
-	- core of the application, consisting of entities, models, aggregate roots, value objects, domain events, etc, etc
-	- the domain driven ==> must know and develop the domain prior to other infrastructure, UI, Web design, etc
-	- difficult since the design is heavy 
-	- uses various patterns based on app needs: CQRS, repository, event source
 	https://github.com/zkavtaskin/Domain-Driven-Design-Example
 	https://lostechies.com/jimmybogard/2010/02/04/strengthening-your-domain-a-primer/
-
-Services: 3 types
-	1. domain services: used to encapsulate business logica that doesn't naturally fit within a domain object
-	2. application services: used by external consumers to talk to your system
-	3. infrastructure services: used to abstract technoical concerns (data access, email senders, authenticaion providers, message queues, etc)
-
-	Repositories:
-		data access and  consistency checks
-		- pure DDD ==> aggregate roots are responsible for consistency checks
-		- in non-pure DDD, you can use checkes via domain services layer
-
-
-Anemic vs Rich domain models
-	anemic (plain): only getters and setters, no different from DTOs
-	rich domain models (RDM): getters/setters, validators, etc
 	https://www.codeproject.com/Articles/1056964/Anemic-data-models-ADM-VS-Rich-Data-Models-RDM-in
 	https://www.devtrends.co.uk/blog/3-ways-to-avoid-an-anemic-domain-model-in-ef-core
 	General summary to test
@@ -55,3 +24,9 @@ Anemic vs Rich domain models
 
 
 	https://www.codeproject.com/Articles/187230/What-not-to-do-Anti-Patterns-and-the-Solutions
+
+	Static classes/methods:
+		reserve for helper classes/helper or extension methods
+		- ex: Math.pow()
+			  Currency.Convert()
+		

@@ -22,6 +22,7 @@ namespace Web.Services.ConfigBuilder
         public string SearchBase { get; set; }
         public string AttributeMapUsername { get; set; }
         public string PublicKeyToken { get; set; }
-        
+
+        public LdapConnectionOptions GetOptions() => this;
     }
 }
