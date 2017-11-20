@@ -10,6 +10,7 @@ using Web.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Web.Repositories;
 using AutoMapper;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace OITChatSupport.Web
 {
@@ -54,6 +55,13 @@ namespace OITChatSupport.Web
                     Description = "APIs and Angular SPAs for supporting student queries"
                 });
             });
+
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(opt =>
+                {
+                    
+                });
+
 
             services.AddScoped<ILiveRequestRepository, LiveRequestRepository>();
             services.AddScoped<IAgentRepository, AgentRepository>();
