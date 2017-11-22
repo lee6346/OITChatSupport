@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using Web.Repositories;
 using AutoMapper;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Web.Services.Authentication;
 
 namespace OITChatSupport.Web
 {
@@ -26,8 +27,8 @@ namespace OITChatSupport.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddOptions();
-            services.Configure<LdapConnectionOptions>(options => Configuration.Bind(options));
-            services.Configure<DirectLineOptions>(options => Configuration.Bind(options));
+            services.Configure<LdapConnectionOptions>(Configuration.GetSection("LdapConnection"));
+            services.Configure<DirectLineOptions>(Configuration);
             services.Configure<DataConnectionOptions>(options => Configuration.Bind(options));
 
             services.AddDbContext<OitChatSupportContext>(
@@ -55,13 +56,13 @@ namespace OITChatSupport.Web
                     Description = "APIs and Angular SPAs for supporting student queries"
                 });
             });
-
+            /*
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(opt =>
                 {
                     
                 });
-
+                */
 
             services.AddScoped<ILiveRequestRepository, LiveRequestRepository>();
             services.AddScoped<IAgentRepository, AgentRepository>();
@@ -69,6 +70,8 @@ namespace OITChatSupport.Web
             services.AddScoped<IDirectLineThreadRepository, DirectLineThreadRepository>();
             services.AddScoped<IEventLogRepository, EventLogRepository>();
 
+
+            services.AddScoped<IRemoteAuthentication, LdapAuthentication>();
             services.AddScoped<ILiveTransferService, LiveTransferService>();
             services.AddScoped<IAccountService, AccountService>();
             services.AddScoped<IBotConnectionService, BotConnectionService>();

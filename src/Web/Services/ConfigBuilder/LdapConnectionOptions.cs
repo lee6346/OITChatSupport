@@ -5,7 +5,7 @@ namespace Web.Services.ConfigBuilder
     {
         public LdapConnectionOptions()
         {
-            Hostname = "";
+            Hostname = "hostname";
             Port = 0;
             Url = "";
             SearchBase = "";

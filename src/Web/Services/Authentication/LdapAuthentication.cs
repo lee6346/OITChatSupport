@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.Options;
 using Novell.Directory.Ldap;
 using System;
-using Web.Dtos;
 using Web.Services.ConfigBuilder;
 
 namespace Web.Services.Authentication
@@ -28,7 +27,7 @@ namespace Web.Services.Authentication
             disposed = true;
         }
 
-        public bool AuthenticateUser(AccountDto accountDto)
+        public LdapEntry AuthenticateUser(string name, string pass)
         {
             if (disposed)
             {
@@ -36,17 +35,23 @@ namespace Web.Services.Authentication
             }
             try
             {
-                _connection.Connect(_options.Hostname, _options.Port);
-                _connection.Bind(null, null);
+                _connection.Connect("bush1604.utsarr.net", LdapConnection.DEFAULT_PORT/*_options.Port*/);
 
+                
+                _connection.Bind("OU=People,OU=Administrative Computing Services,DC=utsarr,DC=net", "b03f5f7f11d50a3a");
+                
                 var result = _connection.Search(
-                    _options.SearchBase, LdapConnection.SCOPE_BASE,
-                    $"(sAMAccountName={accountDto.UtsaId})", 
-                    new string[] { "samaccountname" }, false);
+                    _options.SearchBase,
+                    LdapConnection.SCOPE_BASE,
+                    $"(sAMAccountName={name})", 
+                    new string[] { "samaccountname" }, 
+                    false
+                );
 
-                return result.Count != 0;
+                return result.next();
+
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 throw e;
             }

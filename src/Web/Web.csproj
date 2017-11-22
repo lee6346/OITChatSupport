@@ -18,6 +18,9 @@
     <None Remove="ClientApps\Chatbot\src\chat-bot\store\chat-message.reducers.ts" />
     <None Remove="ClientApps\Chatbot\src\chat-bot\store\chat-status.reducers.ts" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\Login.aspx" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="4.2.0" />

@@ -21,6 +21,10 @@ namespace Web.Services.Authentication
         {
             if(httpContext.Request.Protocol.ToLower() == "post")
             {
+                using(StreamReader sr = new StreamReader(httpContext.Request.Body))
+                {
+
+                }
             }
             await _next.Invoke(httpContext);
         }
