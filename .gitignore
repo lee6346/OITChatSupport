@@ -2,7 +2,7 @@
 
 #node modules
 /node_modules
-/src/Web/node_modules
+/src/OITChatSupport/node_modules
 
 # User-specific files
 *.suo
@@ -29,65 +29,39 @@ Obj/
 
 *.svn/
 
-/src/Web/[Dd]ebug/
-/src/Web/[Dd]ebugPublic
-/src/Web/[Rr]elease/
-/src/Web/[Rr]eleases/
-/src/Web/x64
-/src/Web/x86/
-/src/Web/build/
-/src/Web/bin/
-/src/Web/Bin/
-/src/Web/obj/
-/src/Web/Obj/
-/src/Web/appsettings.json
-/src/Web/appsettings.Development.json
+/src/OITChatSupport/[Dd]ebug/
+/src/OITChatSupport/[Dd]ebugPublic
+/src/OITChatSupport/[Rr]elease/
+/src/OITChatSupport/[Rr]eleases/
+/src/OITChatSupport/x64
+/src/OITChatSupport/x86/
+/src/OITChatSupport/build/
+/src/OITChatSupport/bin/
+/src/OITChatSupport/Bin/
+/src/OITChatSupport/obj/
+/src/OITChatSupport/Obj/
+/src/OITChatSupport/appsettings.json
+/src/OITChatSupport/appsettings.Development.json
 
-
-/src/Domain/[Dd]ebug/
-/src/Domain/[Dd]ebugPublic
-/src/Domain/[Rr]elease/
-/src/Domain/[Rr]eleases/
-/src/Domain/x64
-/src/Domain/x86/
-/src/Domain/build/
-/src/Domain/bin/
-/src/Domain/Bin/
-/src/Domain/obj/
-/src/Domain/Obj/
-
-/src/Data/[Dd]ebug/
-/src/Data/[Dd]ebugPublic
-/src/Data/[Rr]elease/
-/src/Data/[Rr]eleases/
-/src/Data/x64
-/src/Data/x86/
-/src/Data/build/
-/src/Data/bin/
-/src/Data/Bin/
-/src/Data/obj/
-/src/Data/Obj/
-
-
-/tests/Web.Tests/[Dd]ebug/
-/tests/Web.Tests/[Dd]ebugPublic
-/tests/Web.Tests/[Rr]elease/
-/tests/Web.Tests/[Rr]eleases/
-/tests/Web.Tests/x64
-/tests/Web.Tests/x86/
-/tests/Web.Tests/build/
-/tests/Web.Tests/bin/
-/tests/Web.Tests/Bin/
-/tests/Web.Tests/obj/
-/tests/Web.Tests/Obj/
+/tests/OITChatSupport.Tests/[Dd]ebug/
+/tests/OITChatSupport.Tests/[Dd]ebugPublic
+/tests/OITChatSupport.Tests/[Rr]elease/
+/tests/OITChatSupport.Tests/[Rr]eleases/
+/tests/OITChatSupport.Tests/x64
+/tests/OITChatSupport.Tests/x86/
+/tests/OITChatSupport.Tests/build/
+/tests/OITChatSupport.Tests/bin/
+/tests/OITChatSupport.Tests/Bin/
+/tests/OITChatSupport.Tests/obj/
+/tests/OITChatSupport.Tests/Obj/
 
 # Visual Studio 2015 cache/options directory
 .vs/
 
 # Webpack-bundled static files
-/src/Web/wwwroot/agentdist/
-/src/Web/wwwroot/chatbotdist/
-/src/Web/wwwroot/vendordist/
+/src/OITChatSupport/wwwroot/agentdist/
+/src/OITChatSupport/wwwroot/chatbotdist/
+/src/OITChatSupport/wwwroot/vendordist/
 
 # MSTest test Results
 [Tt]est[Rr]esult*/

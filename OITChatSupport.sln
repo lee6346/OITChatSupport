@@ -4,13 +4,11 @@ VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{A805AAF1-B79E-47E0-9882-BDE1C29FDD65}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web", "src\Web\Web.csproj", "{D89F7A49-4EFB-4B46-8F76-36FC6F6D522E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OITChatSupport", "src\OITChatSupport\OITChatSupport.csproj", "{D89F7A49-4EFB-4B46-8F76-36FC6F6D522E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web.Tests", "tests\Web.Tests\Web.Tests.csproj", "{1F664E69-59A1-4954-B321-5D0B85296D5F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OITChatSupport.Tests", "tests\OITChatSupport.Tests\OITChatSupport.Tests.csproj", "{1F664E69-59A1-4954-B321-5D0B85296D5F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrintSpotBot", "PrintSpotBot\PrintSpotBot.csproj", "{744D71C3-E63B-4924-BDA6-301933700BEC}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleAppTest", "ConsoleAppTest\ConsoleAppTest.csproj", "{12481FCE-C1FF-4177-B319-94844A792370}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestChatBot", "TestChatBot\TestChatBot.csproj", "{744D71C3-E63B-4924-BDA6-301933700BEC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -58,18 +56,6 @@ Global
 		{744D71C3-E63B-4924-BDA6-301933700BEC}.Release|x64.Build.0 = Release|Any CPU
 		{744D71C3-E63B-4924-BDA6-301933700BEC}.Release|x86.ActiveCfg = Release|Any CPU
 		{744D71C3-E63B-4924-BDA6-301933700BEC}.Release|x86.Build.0 = Release|Any CPU
-		{12481FCE-C1FF-4177-B319-94844A792370}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{12481FCE-C1FF-4177-B319-94844A792370}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{12481FCE-C1FF-4177-B319-94844A792370}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{12481FCE-C1FF-4177-B319-94844A792370}.Debug|x64.Build.0 = Debug|Any CPU
-		{12481FCE-C1FF-4177-B319-94844A792370}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{12481FCE-C1FF-4177-B319-94844A792370}.Debug|x86.Build.0 = Debug|Any CPU
-		{12481FCE-C1FF-4177-B319-94844A792370}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{12481FCE-C1FF-4177-B319-94844A792370}.Release|Any CPU.Build.0 = Release|Any CPU
-		{12481FCE-C1FF-4177-B319-94844A792370}.Release|x64.ActiveCfg = Release|Any CPU
-		{12481FCE-C1FF-4177-B319-94844A792370}.Release|x64.Build.0 = Release|Any CPU
-		{12481FCE-C1FF-4177-B319-94844A792370}.Release|x86.ActiveCfg = Release|Any CPU
-		{12481FCE-C1FF-4177-B319-94844A792370}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
