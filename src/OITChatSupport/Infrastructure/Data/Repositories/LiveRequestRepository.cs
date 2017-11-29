@@ -3,11 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using OITChatSupport.Dtos;
+using OITChatSupport.Application.Dtos;
 using OITChatSupport.Infrastructure.Data.Sql;
 using OITChatSupport.Domain.LiveAgentSupport;
 
-namespace OITChatSupport.Repositories
+namespace OITChatSupport.Infrastructure.Data.Repositories
 {
     public class LiveRequestRepository: ILiveRequestRepository
     {

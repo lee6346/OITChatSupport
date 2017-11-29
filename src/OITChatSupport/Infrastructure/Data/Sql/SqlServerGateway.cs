@@ -1,6 +1,4 @@
-﻿using Microsoft.Extensions.Options;
-using OITChatSupport.Infrastructure.Configuration;
-using System;
+﻿using System;
 using System.Data;
 using System.Data.SqlClient;
 
@@ -11,9 +9,9 @@ namespace OITChatSupport.Infrastructure.Data.Sql
         private readonly string _connectionString;
         private IDbConnection _connection;
 
-        public SqlServerGateway(IOptions<SqlServerOptions> options)
+        public SqlServerGateway(string connectionString)
         {
-            _connectionString = options.Value.LocalConnectionString;
+            _connectionString = connectionString;
         }
 
         private IDbTransaction _transaction { get; set; }

@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
-using OITChatSupport.Dtos;
-using OITChatSupport.Services;
 using OITChatSupport.Infrastructure.REST;
+using OITChatSupport.Application.Services;
+using OITChatSupport.Application.Dtos;
 
 namespace OITChatSupport.Controllers
 {

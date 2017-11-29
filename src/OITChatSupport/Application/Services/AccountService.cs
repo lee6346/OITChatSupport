@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using OITChatSupport.Dtos;
-using OITChatSupport.Repositories;
-using OITChatSupport.Services.Hubs;
+using OITChatSupport.Infrastructure.Data.Repositories;
+using OITChatSupport.Application.RealTimeRPC;
+using OITChatSupport.Application.Dtos;
 
-namespace OITChatSupport.Services
+namespace OITChatSupport.Application.Services
 {
     public class AccountService: IAccountService
     {

@@ -1,0 +1,18 @@
+﻿Repositories:
+	- The layer between Data access and the domain 
+	- Provides loose coupling between the two
+	- used to store and manipulate objects in memory via add, update, retrieve, etc
+	- 1-1 mapping with aggregates, there shouldnt be any leaking between bounds when making transactions
+	https://docs.microsoft.com/en-us/ef/core/saving/transactions
+	https://github.com/jbogard/ContosoUniversityCore/blob/master/src/ContosoUniversityCore/Infrastructure/SchoolContext.cs
+	http://localcode.wikidot.com/asp-net-core-with-dapper-boilerplate
+	http://blog.gauffin.org/2013/01/ado-net-the-right-way/
+	https://chsakell.com/2015/02/15/asp-net-mvc-solution-architecture-best-practices/
+	https://iamrufio.com/2017/04/28/c-unit-of-work-pattern-with-dapper/
+	https://lostechies.com/jimmybogard/2009/09/03/ddd-repository-implementation-patterns/
+	http://www.talkingdotnet.com/use-dapper-orm-with-asp-net-core/
+	https://github.com/spritely/Cqrs/tree/master/Cqrs
+	http://enterprisecraftsmanship.com/2015/04/20/types-of-cqrs/
+	https://exceptionnotfound.net/implementing-cqrs-in-net-part-2-handling-commands-and-events/
+	https://codereview.stackexchange.com/questions/27598/following-repository-pattern-properly
+	https://cuttingedge.it/blogs/steven/pivot/entry.php?id=91

@@ -1,7 +1,7 @@
 using Newtonsoft.Json;
 using System;
 
-namespace OITChatSupport.Dtos
+namespace OITChatSupport.Application.Dtos
 {
     public class AgentDto
     {

@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using OITChatSupport.Dtos;
 using System.Threading.Tasks;
 using OITChatSupport.Infrastructure.Security;
 using OITChatSupport.Infrastructure.Configuration;
 using Microsoft.Extensions.Options;
+using OITChatSupport.Application.Dtos;
 
 namespace OITChatSupport.Controllers
 {

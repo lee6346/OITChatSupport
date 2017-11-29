@@ -3,14 +3,14 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using OITChatSupport.Infrastructure.Configuration;
-using OITChatSupport.Services;
 using Microsoft.AspNetCore.Antiforgery;
-using OITChatSupport.Services.Hubs;
 using OITChatSupport.Infrastructure.Data.Sql;
 using Microsoft.EntityFrameworkCore;
-using OITChatSupport.Repositories;
 using OITChatSupport.Infrastructure.Security;
 using OITChatSupport.Infrastructure.REST;
+using OITChatSupport.Infrastructure.Data.Repositories;
+using OITChatSupport.Application.Services;
+using OITChatSupport.Application.RealTimeRPC;
 
 namespace OITChatSupport
 {

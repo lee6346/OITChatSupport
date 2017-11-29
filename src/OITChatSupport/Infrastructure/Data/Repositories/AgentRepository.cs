@@ -2,11 +2,11 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using OITChatSupport.Dtos;
 using OITChatSupport.Infrastructure.Data.Sql;
 using OITChatSupport.Domain.LiveAgentSupport;
+using OITChatSupport.Application.Dtos;
 
-namespace OITChatSupport.Repositories
+namespace OITChatSupport.Infrastructure.Data.Repositories
 {
     public class AgentRepository: IAgentRepository
     {

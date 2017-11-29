@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
-using OITChatSupport.Dtos;
 using Microsoft.AspNetCore.SignalR;
+using OITChatSupport.Application.Dtos;
 
-namespace OITChatSupport.Services.Hubs
+namespace OITChatSupport.Application.RealTimeRPC
 {
     public class AgentHub: Hub
     {

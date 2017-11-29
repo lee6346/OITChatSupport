@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using OITChatSupport.Dtos;
+using OITChatSupport.Application.Dtos;
 
-namespace OITChatSupport.Services
+namespace OITChatSupport.Application.Services
 {
     public interface IAccountService
     {

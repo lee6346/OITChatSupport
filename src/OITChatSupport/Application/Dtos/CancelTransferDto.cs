@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace OITChatSupport.Dtos
+namespace OITChatSupport.Application.Dtos
 {
     public class CancelTransferDto
     {

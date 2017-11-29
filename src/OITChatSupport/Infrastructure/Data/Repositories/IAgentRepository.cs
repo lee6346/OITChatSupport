@@ -1,12 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using OITChatSupport.Dtos;
+using OITChatSupport.Application.Dtos;
 
-namespace OITChatSupport.Repositories
+namespace OITChatSupport.Infrastructure.Data.Repositories
 {
     public interface IAgentRepository
     {
-
         Task<IList<AgentDto>> GetAllAsync(bool connected);
         Task<AgentDto> GetByIdAsync(string utsaId);
         Task AddAsync(AgentDto agent);

@@ -1,12 +1,8 @@
-﻿using Microsoft.Bot.Connector.DirectLine;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
 
-namespace OITChatSupport.Dtos
+namespace OITChatSupport.Application.Dtos
 {
-    /// <summary>
-    /// Inbound Dto for removing a Live Transfer Request (used for agents who accept or users who exit)
-    /// </summary>
     public class LiveTransferDto
     {
         [JsonProperty("conversationId")]

@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using OITChatSupport.Dtos;
+using OITChatSupport.Application.Dtos;
 
-namespace OITChatSupport.Repositories
+namespace OITChatSupport.Infrastructure.Data.Repositories
 {
     public interface ILiveRequestRepository
     {

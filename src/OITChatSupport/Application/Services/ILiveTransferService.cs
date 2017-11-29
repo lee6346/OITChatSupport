@@ -1,8 +1,8 @@
-﻿using OITChatSupport.Dtos;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using System.Collections.Generic;
+using OITChatSupport.Application.Dtos;
 
-namespace OITChatSupport.Services
+namespace OITChatSupport.Application.Services
 {
     public interface ILiveTransferService
     {

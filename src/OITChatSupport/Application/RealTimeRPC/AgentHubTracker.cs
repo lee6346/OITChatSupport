@@ -3,9 +3,9 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using OITChatSupport.Dtos;
+using OITChatSupport.Application.Dtos;
 
-namespace OITChatSupport.Services.Hubs
+namespace OITChatSupport.Application.RealTimeRPC
 {
     public class AgentHubTracker: IAgentHubTracker
     {

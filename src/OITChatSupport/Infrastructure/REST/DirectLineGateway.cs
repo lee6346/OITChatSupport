@@ -1,8 +1,8 @@
 ﻿using Microsoft.Bot.Connector.DirectLine;
 using Microsoft.Extensions.Options;
 using System.Threading.Tasks;
-using OITChatSupport.Repositories;
 using OITChatSupport.Infrastructure.Configuration;
+using OITChatSupport.Infrastructure.Data.Repositories;
 
 namespace OITChatSupport.Infrastructure.REST
 {

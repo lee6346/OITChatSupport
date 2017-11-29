@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
-using OITChatSupport.Dtos;
 using Microsoft.Bot.Connector.DirectLine;
 using OITChatSupport.Infrastructure.Data.Sql;
 using OITChatSupport.Domain.DirectLineChat;
+using OITChatSupport.Application.Dtos;
 
-namespace OITChatSupport.Repositories
+namespace OITChatSupport.Infrastructure.Data.Repositories
 {
     public class DirectLineThreadRepository: IDirectLineThreadRepository
     {
