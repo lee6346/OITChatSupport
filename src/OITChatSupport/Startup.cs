@@ -11,6 +11,8 @@ using OITChatSupport.Infrastructure.REST;
 using OITChatSupport.Infrastructure.Data.Repositories;
 using OITChatSupport.Application.Services;
 using OITChatSupport.Application.RealTimeRPC;
+using MediatR;
+using AutoMapper;
 
 namespace OITChatSupport
 {
@@ -55,6 +57,11 @@ namespace OITChatSupport
                     Description = "APIs and Angular SPAs for supporting student queries"
                 });
             });
+
+            //registers commands, events, notifications, etc for the application
+            services.AddMediatR(typeof(Startup));
+
+            services.AddAutoMapper();
 
             services.AddScoped<ILiveRequestRepository, LiveRequestRepository>();
             services.AddScoped<IAgentRepository, AgentRepository>();

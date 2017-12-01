@@ -2,12 +2,12 @@
 
 namespace OITChatSupport.Domain.Core
 {
-    public interface IRepository<TItem, TKey>
+    public interface IRepository<TEntity, TKey>
     {
-        IEnumerable<TItem> GetAll();
-        IEnumerable<TItem> Get(string query, object[] @params);
-        TItem Find(TKey id);
-        void Add(TItem item);
+        IEnumerable<TEntity> GetAll();
+        IEnumerable<TEntity> Get(string query, object[] @params);
+        TEntity Find(TKey id);
+        void Add(TEntity item);
         //void Update(T item);
         //void Remove(T item);
     }

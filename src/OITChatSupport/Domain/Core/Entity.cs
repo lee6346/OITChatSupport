@@ -1,15 +1,15 @@
 ﻿
 namespace OITChatSupport.Domain.Core
 {
-    public abstract class Entity
+    public abstract class Entity<TId>
     {
 
-        public virtual int Id { get; protected set; }
-        public byte[] RowVersion { get; protected set; }
+        public virtual TId Id { get; protected set; }
+        //public byte[] RowVersion { get; protected set; }
 
         public override bool Equals(object obj)
         {
-            var other = obj as Entity;
+            var other = obj as Entity<TId>;
 
             if (ReferenceEquals(other, null))
                 return false;
@@ -17,13 +17,16 @@ namespace OITChatSupport.Domain.Core
             if (ReferenceEquals(this, other))
                 return true;
 
-            if (Id == 0 || other.Id == 0)
+            /*if (Id == null || other.Id == null)
                 return false;
 
-            return Id == other.Id;
+            return Id == other.Id;*/
+            return IdEquals(other.Id);
         }
 
-        public static bool operator ==(Entity a, Entity b)
+        public abstract bool IdEquals(TId id);
+
+        public static bool operator ==(Entity<TId> a, Entity<TId> b)
         {
             if (ReferenceEquals(a, null) && ReferenceEquals(b, null))
                 return true;
@@ -34,7 +37,7 @@ namespace OITChatSupport.Domain.Core
             return a.Equals(b);
         }
 
-        public static bool operator !=(Entity a, Entity b)
+        public static bool operator !=(Entity<TId> a, Entity<TId> b)
         {
             return !(a == b);
         }
@@ -51,4 +54,6 @@ namespace OITChatSupport.Domain.Core
         }
 
     }
+
+    public abstract
 }

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace OITChatSupport.Infrastructure.Data.Commands
+namespace OITChatSupport.Application.DirectLine
 {
-    public class StoreCommandHandler
+    public class DirectLineCommand
     {
     }
 }
