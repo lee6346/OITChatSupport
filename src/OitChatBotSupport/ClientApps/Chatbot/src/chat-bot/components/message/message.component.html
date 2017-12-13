@@ -1,0 +1,5 @@
+﻿<div class="message-wrapper"[ngClass]="wrapperAlignProperties(messageActivity.from.id)">
+    <span *ngIf="messageActivity.from.id.toLowerCase() !== 'student'" class="remote-message-time">{{messageActivity.timestamp | date : 'shortTime'}}</span>
+    <span class="bubble" [ngClass]="bubbleProperties(messageActivity.from.id)">{{messageActivity.text}}</span>
+    <span *ngIf="messageActivity.from.id.toLowerCase() === 'student'" class="host-message-time">{{messageActivity.timestamp | date : 'shortTime'}}</span>
+</div> 

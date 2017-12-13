@@ -1,3 +1,0 @@
-﻿https://daveaglick.com/posts/custom-entity-type-configurations-in-entity-framework-code-first-part-2
-https://blogs.msmvps.com/ricardoperes/tag/entity-framework-core/
-https://scottsauber.com/2017/09/11/customizing-ef-core-2-0-with-ientitytypeconfiguration/

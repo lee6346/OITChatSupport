@@ -1,0 +1,21 @@
+﻿
+<div class="request-item" [@liveRequestInOut]>
+    <span class="request-label" (click)="toggleContent()">Details</span>
+    <span class="wait-time">
+        <span *ngIf="(_waitTime | date: 'h')>0">{{_waitTime | date: 'h'}}hr </span>
+        <span>{{ _waitTime | date:'m' }}min</span>
+    </span>
+    <div *ngIf="groupToggle" class="request-content" [@toggleAnimation]>
+        <div>
+            <span class="request-details-label">Bot:</span>
+            <span class="request-details-text">{{_liveRequest.botHandle}}</span>
+        </div>
+        <div>
+            <span class="request-details-label">Last Message:</span>
+        </div>
+        <div>
+            <span class="last-message">{{_liveRequest.lastMessage ? _liveRequest.lastMessage : ''}}</span>
+        </div>
+        <span class="label-select" (click)="onAcceptClicked()">Select</span>
+    </div>
+</div>

@@ -1,0 +1,31 @@
+﻿.row.content{
+    height: 800px;
+}
+
+.agent-panel, .thread-panel, .chat-panel {
+    height: 100%;
+}
+
+.waiting-threads, .current-threads{
+    height: 50vh;
+}
+
+@media screen and (max-width: 767px){
+    .row.content{
+        height: auto;
+    }
+    .chat-panel, .thread-panel, .chat-panel{
+        height: auto;
+    }
+}
+
+.chat-panel-header {
+    color: #000000;
+    background: #f5f5f5;
+    border: 0.5px solid #e3e3e3;
+    border-radius: 3px;
+    padding: 10px 0 10px 10px;
+    font-weight: bold;
+    font-size: 18px;
+
+}

@@ -2,7 +2,7 @@
 
 #node modules
 /node_modules
-/src/Web/node_modules
+/src/OITChatBotSupport/node_modules
 
 # User-specific files
 *.suo

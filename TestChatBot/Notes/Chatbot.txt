@@ -1,0 +1,176 @@
+﻿Check joined/left members
+	ConversationUpdate.MembersAdded > 0 : "new member!" : "member left..."
+	ConversationUpdate.MembersRemoved > 0 : "member left..." : "member joined!"
+
+
+Create a message
+	IMessageActivity message = Activity.CreateMessageActivity();
+	message.Text = "Hello";
+
+Create message as reply
+	IMessageActivity reply = activity.CreateReply(....)
+
+Sending non-reply messages
+
+	Activty message = Activity.CreateMessageAsync();
+	message.ChannelAccount.From.Id = "Jvr632";
+	message.Conversation.Id = "jwoeijwe";
+	await connector.Conversations.SendToConversationAsync((Activity)newMessage);
+
+Global message handling:
+	certain messages like "don;t know, no, back, cancel, etc" can be handled via global message handlers
+	
+	Create a GlobalMessageHandlersBotModule: Module
+	register scorables (classes that assign 0 to 1 weight of importance used if many handlers are conflicting)
+
+	Ex: assume two scorable classes (SettingsScroable, CancelScoreable)
+	public class GlobalMessageHandlersBotModule: Module
+	{
+		protected override void Load(ContainerBuilder builder)
+		{
+			base.Load(builder);
+			builder
+				.Register(c => new SettingsScorable(c.Resolve<IDialogTask>()))
+				.As<IScorable<IActivity, double>>()
+				.InstancePerLifetimeScope();
+			builder
+				.Register(c => new CancelScorable(c.Resolve<IDialogTask>()))
+				.As<IScorable<IActivity, double>>()
+				.InstancePerLifetimeScope();
+		}
+	}
+	//in the CancelScorable's PrepareAsync(), the trigger is used to define if this scorable shall be used as the message handler
+	protected override async Task<string> PrepareAsync(IActivity activity, CancellationToken token)
+	{
+		var message = activity as IMessageActivity;
+		if(message != null && string.IsNullOrWhiteSpace(message.Text))
+		{
+			if(message.Text.Equals("cancel", StringComparison.InvariantCultureIgnoreCase))
+			{
+				return message.Text;
+			}
+		}
+		return null;
+	}
+	// in the CancelScorable's PostAsync() method, if the trigger was set, since cancelling, it will reset the dialog stack
+	protected override async Task PostAsync(IActivity item, string state, CancellationToken token)
+	{
+		this.task.Reset();
+	}
+
+	//if change settings request is received, the PostAsync() shall invoke  the SettingsDialog() method and passs the activity, state, etc to that dialog (ie, new dialog in stack)
+	protected override async Task PostAsync(IActivity item, string state, CancellationToken token)
+	{
+		var message = item as IMessageActivity;
+		if (message != null)
+		{
+			var settingsDialog = new SettingsDialog();
+			var interruption = settingsDialog.Void<object, IMessageActivity>();
+			this.task.Call(interruption, null);
+			await this.task.PollAsync(token);
+		}
+	}
+Configure authentication
+	1. in Web.config
+	<appSettings>
+		<add key="MicrosoftAppId" value="_appIdValue_" />
+		<add key="MicrosoftAppPassword" value="_passwordValue_" />
+	</appSettings>
+
+	2. in the MessagesController class, use the [BotAuthentication] attribute
+		optional params to specific the app id an dpassword if not wanting to use web.config
+		[BotAuthentication(MicrosoftAppId = "_appIdValue_", MicrosoftAppPassword="_passwordValue_")]
+
+
+	Ex:
+		public class MultiCredentialProvider : ICredentialProvider
+		{
+			public Dictionary<string, string> Credentials = new Dictionary<string, string>
+			{
+				{ "YOUR_MSAPP_ID_1", "YOUR_MSAPP_PASSWORD_1" },
+				{ "YOUR_MSAPP_ID_2", "YOUR_MSAPP_PASSWORD_2" }
+			};
+
+			public Task<bool> IsValidAppIdAsync(string appId)
+			{
+				return Task.FromResult(this.Credentials.ContainsKey(appId));
+			}
+
+			public Task<string> GetAppPasswordAsync(string appId)
+			{
+				return Task.FromResult(this.Credentials.ContainsKey(appId) ? this.Credentials[appId] : null);
+			}
+
+			public Task<bool> IsAuthenticationDisabledAsync()
+			{
+				return Task.FromResult(!this.Credentials.Any());
+			}
+		}
+
+		[BotAuthentication(CredentialProviderType = typeof(MultiCredentialProvider))]
+		public class MessagesController : ApiController
+		{
+			static MessagesController()
+			{
+				var builder = new ContainerBuilder();
+
+				builder.Register(c => ((ClaimsIdentity)HttpContext.Current.User.Identity).GetCredentialsFromClaims())
+					.AsSelf()
+					.InstancePerLifetimeScope();
+				builder.Update(Conversation.Container);
+			}
+			[ResponseType(typeof(void))]
+			public virtual async Task<HttpResponseMessage> Post([FromBody] Activity activity)
+			{
+				if (activity != null)
+				{
+					switch (activity.GetActivityType())
+					{
+						case ActivityTypes.Message:
+							await Conversation.SendAsync(activity, () => new EchoDialog());
+							break;
+
+						case ActivityTypes.ConversationUpdate:
+							IConversationUpdateActivity update = activity;
+							using (var scope = DialogModule.BeginLifetimeScope(Conversation.Container, activity))
+							{
+								var client = scope.Resolve<IConnectorClient>();
+								if (update.MembersAdded.Any())
+								{
+									var reply = activity.CreateReply();
+									foreach (var newMember in update.MembersAdded)
+									{
+										if (newMember.Id != activity.Recipient.Id)
+										{
+											reply.Text = $"Welcome {newMember.Name}!";
+											await client.Conversations.ReplyToActivityAsync(reply);
+										}
+									}
+								}
+							}
+							break;
+						case ActivityTypes.ContactRelationUpdate:
+						case ActivityTypes.Typing:
+						case ActivityTypes.DeleteUserData:
+						case ActivityTypes.Ping:
+						default:
+							Trace.TraceError($"Unknown activity type ignored: {activity.GetActivityType()}");
+							break;
+					}
+				}
+				return new HttpResponseMessage(System.Net.HttpStatusCode.Accepted);
+			}
+		}
+	}
+
+	var builder = new ContainerBuilder();
+	builder.Register(c => ((ClaimsIdentity)HttpContext.Current.User.Identity).GetCredentialsFromClaims())
+			   .AsSelf()
+			   .InstancePerLifetimeScope();
+	builder.Update(Conversation.Container);
+
+
+Referencing non-serializable services from my C# dialogs
+	- this way tyou can inject services components that are not serializable dialogs into dialog constructors, etc
+	1. Resolve through autofac's FiberModule.Key_DoNotSerialize, (best and cleanest method)
+	2. use [NonSerialized] and [OnDeserialized] attributes to restore the dependncy on deserialization (simplest method)

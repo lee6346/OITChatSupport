@@ -1,9 +1,0 @@
-﻿<div class="message-list-container">
-    <div class="message-list">
-        <ul>
-            <li *ngFor="let messageActivity of messageActivities" [ngClass]="msgAlignment(messageActivity.from.id)">
-                <message [messageActivity]="messageActivity"></message>
-            </li>
-        </ul>
-    </div>
-</div>
