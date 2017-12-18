@@ -1,0 +1,11 @@
+<div class="current-threads-container">
+    <chat-threads-header [currentThreadCount]="currentThreadCount$ | async"></chat-threads-header>
+    <chat-thread-list [threads]="directLineThreads$ | async"
+                        [selectedThreadId]="selectedThreadId$ | async"
+                        [timer]="timer$ | async"
+                        (switchThread)="onSwitchThread($event)"
+                        (removeThread)="onRemoveThread($event)"></chat-thread-list> 
+</div>
+
+
+

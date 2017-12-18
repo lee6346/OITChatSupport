@@ -4,11 +4,19 @@ VisualStudioVersion = 15.0.26730.8
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{A805AAF1-B79E-47E0-9882-BDE1C29FDD65}"
 EndProject
+<<<<<<< HEAD:OITChatBotSupport.sln
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OITChatBotSupport", "src\OITChatBotSupport\OITChatBotSupport.csproj", "{D89F7A49-4EFB-4B46-8F76-36FC6F6D522E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OITChatBotSupport.Tests", "tests\OITChatBotSupport.Tests\OITChatBotSupport.Tests.csproj", "{1F664E69-59A1-4954-B321-5D0B85296D5F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OITChatBot", "TestChatBot\OITChatBot.csproj", "{744D71C3-E63B-4924-BDA6-301933700BEC}"
+=======
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OITChatSupport", "src\OITChatSupport\OITChatSupport.csproj", "{D89F7A49-4EFB-4B46-8F76-36FC6F6D522E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OITChatSupport.Tests", "tests\OITChatSupport.Tests\OITChatSupport.Tests.csproj", "{1F664E69-59A1-4954-B321-5D0B85296D5F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestChatBot", "TestChatBot\TestChatBot.csproj", "{744D71C3-E63B-4924-BDA6-301933700BEC}"
+>>>>>>> d4a7f38683ce295392ee412c33ae443be27d500e:OITChatSupport.sln
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

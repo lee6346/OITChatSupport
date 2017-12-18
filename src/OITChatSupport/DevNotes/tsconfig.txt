@@ -1,0 +1,29 @@
+﻿Configuration file that indicates that its path directory is the root path for typescript projects
+
+Used to specify root files, configure compiler options, etc.
+
+	Properties:
+		"compilerOptions":
+			"module": [commonjs, ES6]
+			"noImplicitAny": true|false
+			removeComments: true|false
+			preserveConstEnums: true|false
+			sourceMap: true
+
+		"files": [] array of .ts files to include when compiling
+		"exclude":[] array files to exclude, supports wildcard **, *
+		"include":[] array of files to include
+		"types":[] array of module package types (node, webpack-env, lodash, express, etc ), by default all @types in node_modules/@types are included
+		"typeRoots":[] array of paths where any types under it will be included
+		"strict" true|false
+		"sourceMap" true|false, generate .map file
+		"skipLibCheck": true|fase, skip type checking for all declaration files (.d.ts), which are used for testing
+		Common files to exclude: 
+			node_modules, bin, bower_componets, jspm_packages, <outDir>
+
+		Graph: if one ts file imports another, that is automatically loaded unless in exclude list
+
+Use with package.json scripts:
+	npm run tsc: auto looks for the root tsconfig.json
+	npm run tsc --project <tsconfig.json>: searches for specified ts json file
+

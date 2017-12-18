@@ -1,0 +1,10 @@
+<div class="waiting-threads-container">
+    <pending-header (toggleRequests)="onToggleRequests($event)"
+                    [expandView]="groupToggle$ | async"
+                    [requestCount]="(requestCount$ | async)"></pending-header>
+    <pending-list [liveRequests]="liveRequests$ | async"
+                    [groupToggle]="groupToggle$ | async"
+                    [timer]="timer$ | async"
+                    (acceptRequest)="onRequestSelected($event)"></pending-list>
+</div>
+

@@ -1,0 +1,105 @@
+﻿
+.message-wrapper {
+    margin: 7px 18px 7px 18px;
+    line-height: 1.5em;
+    max-width: 80%;
+}
+
+.remote-message-time {
+    font-size: 10px;
+    float: left;
+    width: 100%;
+}
+
+.host-message-time {
+    font-size: 11px;
+    float: right;
+    width: 100%;
+    text-align: right;
+}
+
+.align-wrapper-left{
+    float: left;
+}
+.align-wrapper-right{
+    float: right;
+}
+
+.highlight{
+    background-color: yellow;
+}
+
+
+.label-sender {
+    font-size:15px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.label-remote {
+    background-color: #CFB095;
+    float: left;
+}
+
+.label-host {
+    background-color: #2bc0ec;
+    float: right;
+}
+
+.host-bubble {
+    background-color: #dfdfdf;
+    float: right;
+    border-radius: 6px 0px 6px 6px;
+    margin-right: 25px;
+    -webkit-box-shadow: 1px 1px 1px darkgrey;
+    -moz-box-shadow: 1px 1px 1px darkgrey;
+    box-shadow: 1px 1px 1px darkgrey;
+}
+
+.remote-bubble {
+    background-color: #d0ecf7;
+    float: left;
+    border-radius: 0 6px 6px 6px;
+    margin-left: 25px;
+    -webkit-box-shadow: 1px 1px 1px #1b81d7;
+    -moz-box-shadow: 1px 1px 1px #1b81d7;
+    box-shadow: 1px 1px 1px #1b81d7;
+}
+.bubble {
+    text-align: left;
+    padding: 5px 11px 5px 11px;
+    position: relative;
+    word-wrap: break-word;
+    font-size: 16px;
+    max-width: 80%;
+}
+
+.remote-bubble:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 4px;
+    width: 0;
+    height: 0;
+    border: 15px solid transparent;
+    border-right-color: #d0ecf7;
+    border-left: 0;
+    border-top: 0;
+    margin-top: -4px;
+    margin-left: -14px;
+}
+
+.host-bubble:after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 4px;
+    width: 0;
+    height: 0;
+    border: 15px solid transparent;
+    border-left-color: #dfdfdf;
+    border-right: 0;
+    border-top: 0;
+    margin-top: -4px;
+    margin-right: -12px;
+}

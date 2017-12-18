@@ -1,0 +1,327 @@
+﻿Dependencies:
+	SqlConnection(), SqlConnection(string connectionstring), SqlConnection(string connectionstring, SqlCredential credentials):
+		- used for first instantiate a connection and set the configurations (connection strings, credentials, etc)
+
+	IDbConnection: for the connection object
+		Properties:
+			.ConnectionString (string)
+			.ConnectionTimeOut (int)
+			.Database (string): name of database
+			.State (ConnectionState): enum of connection status
+		Methods:
+			IDbTransaction BeginTransaction(), BeginTransaction(IsolationLevel i1)
+			void ChangeDatabase(string databasename)
+			void Close(), void Open(): open/close ocnnection
+			IDbCommand CreateCommand(): 
+
+	IDbTransaction: represents a transaction to begin for a data source
+		Properties
+			IDbConnection connection
+			IsolationLevel level (enum): the locking behavior
+		Methods
+			commit(), rollback()
+
+	IDbCommand: a command executed while connected to the datasource
+		Properties
+			IDbConnection connection
+			IDbTransaction transaction
+			string commandtext
+			int commandtimeout
+			CommandType commandType (enum)
+			IDataParameterCollection parameters: The set of parameterized variables or the stored proc
+		Methods:
+			void Cancel(): cancel current command
+			IDbParameter CreateParameter(): create a new parameter variable
+
+
+Sql Commands
+	Query:
+		SELECT * FROM Message WHERE ConversationId = @ConversationId
+
+
+
+
+DAPPER:
+	builds on top of the connection object to supply different execute and query commands
+	Ex:
+		string sqlcommand = "SELECT * FROM .....";
+		connection.ExecuteAsync(sqlcommand);
+
+
+Execute(string sql, [object params=null], IDbTransaction transaction = null, int? commandTimeout = null, CommandType? commandType = null):
+	for all DB operations (create, update, remove, stored procedures, etc) except queries 
+	- returns an integer representing the number of rows affected
+	- if return = 0 and you expected a change, throw error
+
+	Create single
+		string sql="INSERT INTO Activities (Sender, Text, TimeStampe)=@Sender,@Text, @TimeStamp"
+	
+
+	Updates
+		string sql = "UPDATE Message SET Sender=@Sender WHERE ConversationId=@ConversationId";
+		connection.Execute(sql, new {....})
+	Execute Updates many times
+		string sql = "..."
+		connection.Execute(sql, new[] {....})
+
+	Execute Delete once
+		string sql = "DELETE FROM ConversationThread WHERE Id = @Id";
+		connection.Execute(....)
+
+	Execute Delete statement many times
+		string sql = "...."
+		connection.Execute(sql, new[] { new {Id=1}, new {Id=2}, ..)
+
+
+Queries:
+	- query methods can be mapped to 
+		anon objects, strong typed objects, multi-mapped (1-1), multi-mapped(1-many), multi-type
+	Query|Query<T>(string sql, [object params=null], IDbTransaction transaction = null, bool? buffered=true, int? commandTimeout = null, CommandType? commandType = null):
+	
+	connection.Query<T>(sqlcommand).ToList()
+	connection.Query(sqlcommand, new {Inv})
+
+	Multi-mapped (1-1)
+		string sql = "SELECT * FROM  Thread AS A INNER JOIN Message AS B ON A.ConversationId = B.ConversationId;";
+		connection.Query<Thread, Message, Thread>(
+			sql,
+			(thread, message)=>
+			{
+				thread.Message = message;
+				return thread;
+			},
+			splitOn: "ConversationID")
+			.Distinct()
+			.ToList();
+
+	Multi-mapped (1-many)
+		string sql = "SELECT * FROM Invoice AS A INNER JOIN InvoiceItem AS B ON A.InvoiceID = B.InvoiceID;";
+		    var invoiceDictionary = new Dictionary<int, Invoice>();
+
+			var invoices = connection.Query<Invoice, InvoiceItem, Invoice>(
+					sql,
+					(invoice, invoiceItem) =>
+					{
+						Invoice invoiceEntry;
+                
+						if (!invoiceDictionary.TryGetValue(invoice.InvoiceID, out invoiceEntry))
+						{
+							invoiceEntry = invoice;
+							invoiceEntry.Items = new List<InvoiceItem>();
+							invoiceDictionary.Add(invoiceEntry.InvoiceID, invoiceEntry);
+						}
+
+						invoiceEntry.Items.Add(invoiceItem);
+						return invoiceEntry;
+					},
+					splitOn: "InvoiceID")
+				.Distinct()
+				.ToList();
+        
+	Multi-Type: map result to list of different T types
+		string sql = "SELECT * FROM Invoice;";
+
+		using (var connection = My.ConnectionFactory())
+		{
+			connection.Open();
+
+			var invoices = new List<Invoice>();
+
+			using (var reader = connection.ExecuteReader(sql))
+			{
+				var storeInvoiceParser = reader.GetRowParser<StoreInvoice>();
+				var webInvoiceParser = reader.GetRowParser<WebInvoice>();
+
+				while (reader.Read())
+				{
+					Invoice invoice;
+
+					switch ((InvoiceKind) reader.GetInt32(reader.GetOrdinal("Kind")))
+					{
+						case InvoiceKind.StoreInvoice:
+							invoice = storeInvoiceParser(reader);
+							break;
+						case InvoiceKind.WebInvoice:
+							invoice = webInvoiceParser(reader);
+							break;
+						default:
+							throw new Exception(ExceptionMessage.GeneralException);
+					}
+
+					invoices.Add(invoice);
+				}
+			}
+    
+
+	Query Extension methods:
+		QueryFirst<T|none>|QueryFirstOrDefault<T|none>(sql, param, transaction?, timeout?, commandType);
+		QuerySingle<T|none>|QuerySingleOrDefault<T|none>(sql, param, trans?, timeout?, cT);
+
+		First: will only throw exception if no items found, if many found, it picks the first
+		Single: will throw if none found OR if many found
+		- OrDefault:  having no items returns NULL instead of throwing
+
+
+		QueryMultiple: execute multple different sql commands in sequential order within the same command set
+		using(var connection = ...)
+		{
+			using(var multi = connection.QueryMultiple(sqlcommand, new {params...}))
+			{
+				var firstThread = multi.Read<Thread>().First();
+				var messages = multi.Read<Activity>().ToList();
+			}
+		}
+
+Parameter List:
+	Use 'IN' instead of = to specify if it is one of the many in a lsit
+	var sql = "SELECT * FROM Activity WHERE Sender In @Sender";
+	connection.Query<Activity>(sql, new {Sender = new[]{MessageA.Sender, ...}})
+
+
+Parameter String:
+	the new{} can hold string literals instead of object properties or variables as well
+
+
+Parameter Dynamic:
+
+	var sqlproc = "EXEC Invoice_Insert";
+	DynamicParameters params = new DynamicParameters();
+	parameter.Add("@Sender", Actvity.Sender, DbType.String, ParameterDirection.Input);
+	paramter.Add("@TimeStamp", Activity.TimeStamp, DbType.Date?, ParameterDirection.Input);
+	parameter.Add("RowCount", dbType: DbType.Int32, direction: ParameterDirection.ReturnValue);
+	connection.Execute(sql, parameter, CommandType: CommandType.StoredProcedure);
+	int rowCount = parameter.Get<int>("@RowCount");
+
+Async: all methods and extension methods have asynchronous counterparts
+
+Buffered:
+	default value is true ==> return the entire set all at once
+	can set to false ==> streams on demant (useful for large queries to reduce memory usage)
+
+	connection.Query<Activity>(sqlcommand, buffered: false).ToList();
+
+Transactions:
+	to use transactions you need a nested using scope
+	using(connection = _sqlConnection.MakeConnection())
+	{
+		using(var transaction = connection.BeginTransaction())
+		{
+			var affectedRows = connection.Execute(sql, new {...}, commandType: CommandType.StoredProcedure, trnasaction: transaction);
+			transaction.Commit();
+		}
+	}
+
+TransactionScope:
+	invert the using (ie: using for ttransaction first, and the inner using creates the connection)
+
+
+Stored Procs:
+	need to mention command type explicitly in parameters
+	ex single insert: 
+		connection.Query<Author>(storedprocstring, commandType: CommandType.StoredProcedure)
+	ex mang inserts:
+		storedprocstring = "EXEUC Invoice_Insert";
+		...
+		connection.Execute(storedprocstring, new {Kind=InvoiceKind.WebInvoice, Code="Single_Insert_1"},
+		commandType: CommandType.StoredProcedure);
+
+
+
+Dapper.Contrib:
+	extension methods:
+		Get(), GetAll(), Insert(), Update(), Delete(), DeleteAll()
+
+	Data annotation support:
+		[Key]: indicate that it is auto-generate ID column
+		[ExplicityKey]: indicate that it is a key but NOT auto-generated by DB
+		[Table("Message")]: put on top of the model representing the table to map it to the table name
+		[Write(true|false)]: specifiy whether or not the property is writable (ie: when querying results to object, if Write=false, the property will be null)
+		[Computed]: to indicate that the properyy should be excluded from updates
+
+
+Dapper.FluentMap
+	allows for fluent based mapping similar to EF
+
+	Manual Mapping:
+		create a class implementing EntityMap, then use fluent on the properties
+
+		public class ActivityMap: EntityMap<Activity>
+		{
+			public ActivityMap()
+			{
+				Map(i => i.conversationId).ToColumn("Id");
+				Map(i => i.Detail).Ignore(); //ignore the properties for mappings
+
+			}
+		}
+
+
+	Convention Mapping
+		if using many entities, and your column names adhere to a consistent name convention...
+
+		public class TypePrefixConvention: Convention
+		{
+			public TypePrifxConvention()
+			{
+				// all properties of type int and name 'id' get mapped to column ID
+				Properties<int>()
+					.Where(c => c.Name.ToLower() == "id")
+					.Configure(c => c.HasColumnName("ID"));
+
+				// prefix all properties of type string with 'str' when mapping to column names
+				Properties<string>()
+					.Configure(c => c.HasPrefix("str"));
+			}
+		}
+
+		public class PropertyTransformConvention: Convention
+		{
+			public PropertyTransformConvention()
+			{
+				Properties().Configure(c => c.Transform(s => Regex.Replace(input: s, pattern: "([A-Z]....)", replcaement: "$1$3_$2$4")))
+			}
+		}
+
+	Configuring Mappers
+		now initialize the mapping at the start of the application (in configure services, global asax, etc)
+		FluentMapper.Initialize(config => 
+		{
+			config.AddMap(new ActivityMap());
+		})
+		FluentMapper.Initialize(cfg => 
+		{
+			//explicit configuration
+			cfg.AddConvention<TypePrefixConvention>()
+				.ForEntity<Agent>()
+				.ForEntity<Thread>;
+
+			//assembly configuration namespace=optional
+			cfg.AddConvention<TypePrefixConvention()
+				.ForEntitiesInAssembly(typeof(Product).Assembly, "App.Domain.Model");
+
+			//configure in current assembly namespace=optional
+			cfg...
+				.ForEntitiesinCurrentAssembly("App.Domain.Model.Catalog", "App.Domain.Model.Order");
+		})
+
+
+Dommel:
+	extends the FluentMapper by allowing you to map entity to table name
+	- extends the EntityMap<T> so u can also to property mappings togethre
+	- also adds a new property mapper: IsKey() , IsIdentity()
+	public class AgentMap: DommelEntityMap<Agent>
+	{
+		public AgentMap()
+		{
+			ToTable("Agent");
+			Map(p => p.Id).IsKey();
+			Map(p => p.Id).IsIdentity();
+		}
+	}
+
+	Must append .ForDommel() in config
+	FluentMapper.Initialize(config => 
+	{
+		config.AddMap(new AgentMap());
+		config.ForDommel();
+	})

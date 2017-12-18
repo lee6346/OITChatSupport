@@ -1,0 +1,29 @@
+﻿.username {
+    font-size: 14px;
+    color: black;
+    text-transform: capitalize;
+}
+
+.remote-bubble {
+    background-color: #c2dde6
+}
+
+.host-bubble {
+    background-color: #dbe9d8;
+}
+
+.default-bubble {
+    background-color: #a9a9a9;
+}
+
+.bubble {
+    padding: 5px 11px 5px 11px;
+    text-align: left;
+    line-height: 1.5em;
+    display: inline-block;
+    vertical-align: top;
+    margin: 5px 15px 5px 15px;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    position: relative;
+}

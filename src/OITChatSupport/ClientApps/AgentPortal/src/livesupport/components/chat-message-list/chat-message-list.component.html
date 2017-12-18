@@ -1,0 +1,12 @@
+﻿<div class="message-list-container">
+    <div #scrollContainer class="message-list">
+        <ul>
+            <li *ngFor="let chatMessage of chatMessages" [ngClass]="textAligner(chatMessage.from.id)">
+                <chat-message [chatMessage]="chatMessage" 
+                              [textFilter]="textFilter"
+                              (newMessageReceived)="onNewMessageReceived()"></chat-message>
+            </li>
+        </ul>
+    </div>
+</div>
+

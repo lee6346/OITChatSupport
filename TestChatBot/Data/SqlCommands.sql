@@ -1,0 +1,9 @@
+﻿CREATE TABLE [dbo].[Activity](
+	[Id]	INT IDENTITY (1, 1),
+	[ConversationId] NVARCHAR(30) NOT NULL,
+	[Sender] NVARCHAR(15) NOT NULL,
+	[Text] NVARCHAR(200) NOT NULL,
+	[TimeStamp] DATETIME2(7) NOT NULL,
+	CONSTRAINT [PK_Activity] PRIMARY KEY CLUSTERED ([Id] ASC)
+)
+

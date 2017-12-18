@@ -3,7 +3,11 @@ using System.Threading.Tasks;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Connector;
 
+<<<<<<< HEAD:TestChatBot/Dialogs/RootDialog.cs
 namespace OITChatBot.Dialogs
+=======
+namespace TestChatBot.Dialogs
+>>>>>>> d4a7f38683ce295392ee412c33ae443be27d500e:TestChatBot/Dialogs/RootDialog.cs
 {
     [Serializable]
     public class RootDialog : IDialog<object>

@@ -1,0 +1,89 @@
+﻿Activity types
+
+	IMessageActivity: message type
+	IConversationUpdateActivity: activity emitted when updates to conversation (participants left, joined, etc)
+		ConversationUpdate.MembersAdded > 0 : "new member!" : "member left..."
+		ConversationUpdate.MembersRemoved > 0 : "member left..." : "member joined!"
+		
+		ConversationUpdate.Recipient.Id == "jvr632" : "agent has joined"
+
+
+	IEndOfConversationActivity: activity emitted to indicate end of a conversation (ex: DirectLine().end())
+	IEventActivity: communication invisible to user
+	IMessageReactionActivity: User has reacted to existing activity (ex: like button on activity card, filling a form activity, etc)
+
+
+ACTIVITY CREATION:
+	1) General activity creation: IMessageActivity message = Activity.CreateMessageActivity();
+		- must manually set all properties
+	2) Derived reply from received activity: var reply = activity.CreateReply(....)
+		- auto-sets recipeint, from.id, conversaion.id
+
+
+SENDING ACTIVITIES:
+
+	1) Send as Reply: await connector.Conversations.ReplyToActivityAsync(reply);
+		- always use for replying
+	2) Send general unprompted: await connector.Conversations.SendToConversationAsync((Activity) newMessage);
+
+
+
+
+MESSAGE ACTIVITY PROPERTIES:
+	message.Text = "Hi";
+	message.TextFormat = "plain" | "xml" | "markdown";
+	message.Attachments = new Attachments[]{ 
+		new Attachment {},
+		new Attactment {},	
+	}
+
+	ENTITIES
+		- array of objects from schema.org, allowing exchange of common contextual metadata between channel/bot
+		
+		1. Mention Entities: user/bot can 'mention' another in the context of a conversation
+			var entity = new Entity() //used for adding entities (users, etc)
+			entity.SetAs(new Mention(){
+				Text = "@JamesLee",
+				Mentioned = new ChannelAccount()
+				{
+					Name = "James Lee",
+					Id = "jvr632"
+				}
+			});
+			entities.Add(entity);
+
+		2. Bot consume entities: since entities can be any JSON type in Schema.org and is dynamic, use 'dynamic' keyword
+			if(entity.Type == "Place"){
+				dynamic place = entity.Properties;
+				if(place.geo.latitude > 34){
+					...do somthing
+				}
+			}
+
+	SUGGESTED ACTIONS:
+		- uesd for presenting buttons and other user forms that users can click / interact with for input provision
+
+	ATTACHMENTS:
+		- used to send links, urls, files, etc
+			replayMessage.Attachments.Add(new Attachment()
+			{
+				ContentUrl = "https://upload.wikimedia.org/",
+				ContentType = "image/jpg",
+				Name = "utsamap.jpeg"
+			});
+
+	InputHints:
+		- used to indicate if bot is accepting, expecting, or ignoring user input
+		- can set the property on activities, and client via JS can filter to find out the bot current status
+
+		Activity reply = activity.CreateReply("test");
+		reply.InputHint = Inputs.AcceptingInput; 
+			-bot is passibely ready but not expecting
+			-can use this property to make client's input message box disabled for now, etc
+		reply.InputHint = Inputs.ExpectingInput;
+			-bot is activiely expecting a message from user
+			- use to sent client side box back to enabled, etc
+		reply.InputHint = Inputs.IgnoringInput
+			- bot is not ready to receive input
+
+						= Inputs.ExpectingInput; //
