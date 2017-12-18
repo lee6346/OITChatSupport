@@ -2,12 +2,11 @@
 
 #node modules
 /node_modules
-<<<<<<< HEAD
 /src/OITChatBotSupport/node_modules
-=======
 /src/OITChatSupport/node_modules
->>>>>>> d4a7f38683ce295392ee412c33ae443be27d500e
 
+/src/OITChatSupport
+/TestChatBot
 # User-specific files
 *.suo
 *.user
