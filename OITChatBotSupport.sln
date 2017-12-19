@@ -8,7 +8,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OITChatBotSupport", "src\OI
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OITChatBotSupport.Tests", "tests\OITChatBotSupport.Tests\OITChatBotSupport.Tests.csproj", "{1F664E69-59A1-4954-B321-5D0B85296D5F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OITChatBot", "TestChatBot\OITChatBot.csproj", "{744D71C3-E63B-4924-BDA6-301933700BEC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestChatBot", "src\TestChatBot\TestChatBot.csproj", "{744D71C3-E63B-4924-BDA6-301933700BEC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
