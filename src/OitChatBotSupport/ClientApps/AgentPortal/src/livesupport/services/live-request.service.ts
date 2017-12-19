@@ -14,16 +14,14 @@ export class LiveRequestService {
         private agentHubGateway: AgentHubGateway
     ) { }
 
-    getLiveRequests$(group: string): Observable<LiveRequest[]> {
+    getLiveRequests$(): Observable<LiveRequest[]> {
         return this.http.get<LiveRequest[]>(
             environment.baseWebUrl +
-            environment.liveRequests +
-            '/' + group
+            environment.liveRequests
         );
     }
 
     acceptLiveRequest$(liveRequest: LiveRequest): Observable<Conversation> {
-        console.log('accepting live request....');
         return this.http.post<Conversation>(
             environment.baseWebUrl +
             environment.acceptRequest,

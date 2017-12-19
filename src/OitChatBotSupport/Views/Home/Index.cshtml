@@ -1,14 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+    <base href="~/" />
+</head>
+<body>
+    <a asp-controller="Home" asp-action="Chatbot">Launch Chat Window</a>
 
-@{
-    ViewData["Title"] = "Home Page";
-}
-@{ 
-    Layout = "_Layout";
-}
-
-<chat-bot-portal>Loading...</chat-bot-portal>
-
-@section scripts {
-    <script src="~/vendordist/vendor.bundle.js" asp-append-version="true"></script>
-    <script src="~/chatbotdist/chatbotapp.bundle.js" asp-append-version="true"></script>
-}
+</body>
+</html>

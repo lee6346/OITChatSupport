@@ -22,5 +22,10 @@ namespace OITChatBotSupport.Controllers
         {
             return View();
         }
+
+        public IActionResult Chatbot()
+        {
+            return View();
+        }
     }
 }

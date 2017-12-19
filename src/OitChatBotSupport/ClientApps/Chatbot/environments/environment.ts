@@ -6,7 +6,7 @@
     error: 'home/error',
     chatToken: 'api/chattoken/newsession',
     makeTransferRequest: 'api/agentsupport/makerequest',
+    cancelTransferRequest: 'api/agentsupport/cancelrequest',
     directLineUrl: 'https://directline.botframework.com/',
-    postMessage: 'v3/directline/conversations/',
-    cancelTransferRequest: 'api/agentsupport/cancelrequest', //soon to come
+    postMessage: 'v3/directline/conversations/'
 };

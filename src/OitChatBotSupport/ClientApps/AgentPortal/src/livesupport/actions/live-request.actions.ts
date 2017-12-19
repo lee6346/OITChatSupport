@@ -1,5 +1,5 @@
 ﻿import { Action } from '@ngrx/store';
-import { LiveRequest } from '../models';
+import { LiveRequest, RemoveRequest } from '../models';
 import { Conversation } from 'botframework-directlinejs';
 
 export const ACCEPT_LIVE_REQUEST = '[Request] ACCEPT_LIVE_REQUEST';
@@ -23,7 +23,7 @@ export class LiveRequestAcceptedAction implements Action {
 
 export class LiveRequestRemovedAction implements Action {
     readonly type = LIVE_REQUEST_REMOVED;
-    constructor(public liveRequest: LiveRequest) { }
+    constructor(public removeRequest: RemoveRequest) { }
 }
 export class LiveRequestReceivedAction implements Action {
     readonly type = LIVE_REQUEST_RECEIVED;
@@ -31,7 +31,7 @@ export class LiveRequestReceivedAction implements Action {
 }
 export class LoadLiveRequestsAction implements Action {
     readonly type = LOAD_LIVE_REQUESTS;
-    constructor(public group: string) { }
+    constructor() { }
 }
 export class LiveRequestsLoadedAction implements Action {
     readonly type = LIVE_REQUESTS_LOADED;

@@ -1,9 +1,8 @@
-﻿using CacheManager.Core;
-using MediatR;
+﻿using MediatR;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.Bot.Connector.DirectLine;
 using OITChatBotSupport.Application.OITAgents.Commands;
 using OITChatBotSupport.Domain.AgentSupport;
-using OITChatBotSupport.Infrastructure.Data.InMemory;
 using OITChatBotSupport.Infrastructure.RPC;
 using System.Threading;
 using System.Threading.Tasks;
@@ -17,15 +16,15 @@ namespace OITChatBotSupport.Application.OITAgents.Handlers
     {
         private readonly IAgentTransferRepository _agentTransferRepository;
         private readonly IDirectLineGateway _directLine;
-        private readonly ICacheManager<PendingRequest> _pendingRequests;
+        private readonly IHubContext<AgentHub> _hubContext;
 
         public AcceptTransferHandler(
             IAgentTransferRepository agentTransferRepository,
-            IDirectLineGateway directLine, ICacheManager<PendingRequest> pendingRequests)
+            IDirectLineGateway directLine, IHubContext<AgentHub> hubContext)
         {
             _agentTransferRepository = agentTransferRepository;
             _directLine = directLine;
-            _pendingRequests = pendingRequests;
+            _hubContext = hubContext;
         }
 
         /// <summary>
@@ -37,8 +36,8 @@ namespace OITChatBotSupport.Application.OITAgents.Handlers
         /// <returns></returns>
         public async Task<Conversation> Handle(AcceptTransfer message, CancellationToken cts)
         {
-            _pendingRequests.Remove(message.ConversationId);
             await _agentTransferRepository.UpdateRequestStatusAsync(message.ConversationId, "Accepted", message.AgentId);
+            await _hubContext.Clients.Group("UTSA").InvokeAsync("RemoveTransferRequest", new { conversationId = message.ConversationId });
             return await _directLine.JoinConversation(message.ConversationId);
         }
     }

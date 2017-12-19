@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using OITChatBotSupport.Application.OITAgents.Commands;
 using OITChatBotSupport.Application.Student.Commands;
+using System;
 using System.Threading.Tasks;
 
 namespace OITChatBotSupport.Controllers
@@ -26,8 +27,15 @@ namespace OITChatBotSupport.Controllers
         [HttpPost("[action]")]
         public async Task<IActionResult> MakeRequest([FromBody] RequestTransfer transfer)
         {
-            var response = await _mediator.Send(transfer);
-            return Json(response);   
+            try
+            {
+                var response = await _mediator.Send(transfer);
+                return Json(response);
+            }
+            catch(Exception e)
+            {
+                return Json(new { Data = e.Data, Message = e.Message, Source = e.Source, Trace = e.StackTrace });
+            }
         }
 
         [HttpPost("[action]")]

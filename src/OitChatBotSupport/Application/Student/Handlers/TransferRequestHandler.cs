@@ -1,8 +1,10 @@
 ﻿using CacheManager.Core;
 using MediatR;
+using Microsoft.AspNetCore.SignalR;
 using OITChatBotSupport.Application.Student.Commands;
 using OITChatBotSupport.Domain.AgentSupport;
 using OITChatBotSupport.Infrastructure.Data.InMemory;
+using OITChatBotSupport.Infrastructure.RPC;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -16,13 +18,13 @@ namespace OITChatBotSupport.Application.Student.Handlers
     {
         private readonly IAgentTransferRepository _agentTransferRepository;
         private readonly IConnectedAgentTracker _connectedAgents;
-        private readonly ICacheManager<PendingRequest> _pendingRequests;
+        private readonly IHubContext<AgentHub> _hubContext;
 
-        public TransferRequestHandler(IAgentTransferRepository agentTransferRepository, IConnectedAgentTracker connectedAgents, ICacheManager<PendingRequest> pendingRequests)
+        public TransferRequestHandler(IAgentTransferRepository agentTransferRepository, IConnectedAgentTracker connectedAgents, IHubContext<AgentHub> hubContext)
         {
             _agentTransferRepository = agentTransferRepository;
             _connectedAgents = connectedAgents;
-            _pendingRequests = pendingRequests;
+            _hubContext = hubContext;
         }
 
         /// <summary>
@@ -34,8 +36,8 @@ namespace OITChatBotSupport.Application.Student.Handlers
         /// <returns></returns>
         public async Task Handle(CancelTransferRequest message, CancellationToken cts)
         {
-            _pendingRequests.Remove(message.ConversationId);
             await _agentTransferRepository.UpdateRequestStatusAsync(message.ConversationId, "Cancelled");
+            await _hubContext.Clients.Group("UTSA").InvokeAsync("RemoveTransferRequest", new {conversationId=message.ConversationId});
         }
 
         /// <summary>
@@ -48,14 +50,14 @@ namespace OITChatBotSupport.Application.Student.Handlers
         /// <returns>Response information about agent availability and average number of students in line</returns>
         public async Task<RequestTransferResponse> Handle(RequestTransfer request, CancellationToken cts)
         {
-            _pendingRequests.Add(request.ConversationId, new PendingRequest
-            {
-                BotHandle=request.BotHandle,
-                ConversationId=request.ConversationId,
-                LastMessage=request.LastMessage,
-                Requested=request.Requested
-            });
             await _agentTransferRepository.AddNewRequestAsync(new AgentTransfer(request.ConversationId, request.BotHandle, request.LastMessage, request.Requested));
+            await _hubContext.Clients.Group("UTSA").InvokeAsync("LiveTransfer", new
+            {
+                botHandle =request.BotHandle,
+                conversationId =request.ConversationId,
+                lastMessage =request.LastMessage,
+                requested =request.Requested
+            });
             return new RequestTransferResponse
             {
                 AgentsAvailable = _connectedAgents.ConnectedCount() > 0,

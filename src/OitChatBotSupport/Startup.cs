@@ -59,7 +59,7 @@ namespace OITChatBotSupport
             services.AddScoped<IChatSessionRepository, ChatSessionRepository>();
             services.AddScoped<IAgentRepository, AgentRepository>();
             services.AddScoped<IAgentTransferRepository, AgentTransferRepository>();
-            
+            /*
             services.AddCacheManager<PendingRequest>(configure: opt =>
             {
                 opt.WithJsonSerializer()
@@ -67,7 +67,7 @@ namespace OITChatBotSupport
                     .WithDictionaryHandle()
                         .WithExpiration(ExpirationMode.Absolute, TimeSpan.FromMinutes(30));
             });
-            
+            */
             services.AddScoped<IRequestHandler<StartChatSession, Conversation>, ChatSessionHandler>();
             services.AddScoped<IRequestHandler<RequestTransfer, RequestTransferResponse>, TransferRequestHandler>();
 

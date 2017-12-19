@@ -4,8 +4,6 @@ using Microsoft.AspNetCore.SignalR;
 using MediatR;
 using OITChatBotSupport.Infrastructure.Data.InMemory;
 using OITChatBotSupport.Application.OITAgents.Events;
-using CacheManager.Core;
-using CacheManager.Core.Internal;
 
 namespace OITChatBotSupport.Infrastructure.RPC
 {
@@ -13,15 +11,11 @@ namespace OITChatBotSupport.Infrastructure.RPC
     {
         private readonly IMediator _mediator;
         private readonly IConnectedAgentTracker _connectedAgents;
-        private readonly ICacheManager<PendingRequest> _requests;
 
-        public AgentHub(IMediator mediator, IConnectedAgentTracker connectedAgents, ICacheManager<PendingRequest> requests) 
+        public AgentHub(IMediator mediator, IConnectedAgentTracker connectedAgents) 
         {
             _mediator = mediator;
             _connectedAgents = connectedAgents;
-            _requests = requests;
-            requests.OnRemove += RemoveTransferRequest;
-            requests.OnAdd += LiveTransfer;
         }
 
         public override Task OnConnectedAsync()
@@ -55,27 +49,6 @@ namespace OITChatBotSupport.Infrastructure.RPC
                 await Clients.Group("UTSA").InvokeAsync("LeaveGroup", agent);
                 await _mediator.Publish(new AgentDisconnected(agent.AgentId));
             }
-        }
-
-        public async Task LiveTransfer(PendingRequest request)
-        {
-            await Clients.Group("UTSA").InvokeAsync("LiveTransfer", request);
-        }
-
-        private async void LiveTransfer(object sender, CacheActionEventArgs e)
-        {
-            var newRequest = _requests.Get(e.Key);
-            await Clients.Group("UTSA").InvokeAsync("LiveTransfer", newRequest);
-        }
-
-        public async Task RemoveTransferRequest(string conversationId)
-        {
-            await Clients.Group("UTSA").InvokeAsync("RemoveTransferRequest", new {ConversationId=conversationId});
-        }
-
-        private async void RemoveTransferRequest(object sender, CacheActionEventArgs e)
-        {
-            await Clients.Group("UTSA").InvokeAsync("RemoveTransferRequest", new { ConversationId = e.Key });
         }
     }
 }

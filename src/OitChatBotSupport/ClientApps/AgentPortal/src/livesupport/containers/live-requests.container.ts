@@ -41,15 +41,14 @@ export class LiveRequestsContainer implements OnInit {
     }
 
     ngOnInit() {
-        this.store.dispatch(new liveRequests.LoadLiveRequestsAction('askrowdy'));
+        this.store.dispatch(new liveRequests.LoadLiveRequestsAction());
     }
 
     onRequestSelected(liveRequest: LiveRequest): void {
         this.store.dispatch(new liveRequests.AcceptLiveRequestAction({
             botHandle: liveRequest.botHandle,
             conversationId: liveRequest.conversationId,
-            timeRequested: liveRequest.timeRequested,
-            user: 'jvr632'
+            requested: liveRequest.requested,
         } as LiveRequest));
     }
 

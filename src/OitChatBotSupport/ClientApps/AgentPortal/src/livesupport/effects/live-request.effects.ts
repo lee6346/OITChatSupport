@@ -32,7 +32,7 @@ export class LiveRequestEffects {
     @Effect()
     getLiveRequests$: Observable<Action> = this.actions$.ofType(LOAD_LIVE_REQUESTS)
         .switchMap((action: LoadLiveRequestsAction) =>
-            this.liveRequestService.getLiveRequests$(action.group)
+            this.liveRequestService.getLiveRequests$()
             .map((data: LiveRequest[]) => {
                 return new LiveRequestsLoadedAction(data);
             })

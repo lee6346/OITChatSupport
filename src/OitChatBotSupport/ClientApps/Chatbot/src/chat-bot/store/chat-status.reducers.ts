@@ -31,6 +31,12 @@ export function reducer(state = initState, action: agentTransfer.Actions | direc
                 requestPending: true,
                 threadId: state.threadId
             });
+        case agentTransfer.AGENT_TRANSFER_CANCELED:
+            return Object.assign({}, state, {
+                connected: state.connected,
+                requestPending: false,
+                threadId: state.threadId
+            });
         case directLineConnection.CONNECTION_TOKEN_RETRIEVED:
             return Object.assign({}, state, {
                 connected: true,

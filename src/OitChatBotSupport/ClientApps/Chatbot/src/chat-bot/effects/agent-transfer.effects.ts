@@ -9,6 +9,9 @@ import {
     REQUEST_AGENT_TRANSFER,
     RequestAgentTransferAction,
     AgentTransferRequestedAction,
+    CANCEL_AGENT_TRANSFER,
+    CancelAgentTransferAction,
+    AgentTransferCanceledAction
 } from '../actions/agent-transfer.actions';
 import { TransferRequest } from '../models';
 import { AgentTransferService } from '../services/agent-transfer.service';
@@ -37,5 +40,15 @@ export class AgentTransferEffects {
         })
         .catch((err: any) => {
             return of({ type: 'effects error: makeTransferRequest$' });
+        });
+
+    @Effect()
+    cancelTransferRequest$: Observable<Action> = this.actions$.ofType(CANCEL_AGENT_TRANSFER)
+        .map((action: CancelAgentTransferAction) => {
+            this.agentTransferService.cancelTransferRequest(action.cancelRequest);
+            return new AgentTransferCanceledAction();
+        })
+        .catch((err: any) => {
+            return of({ type: 'effects error: cancelTransferRequest$' });
         });
 }

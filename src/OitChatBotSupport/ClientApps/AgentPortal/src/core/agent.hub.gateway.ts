@@ -2,7 +2,7 @@
 import { Store } from '@ngrx/store';
 import { HubConnection } from '@aspnet/signalr-client';
 import { AgentMessage, Agent } from '../agent-group/models';
-import { LiveRequest } from '../livesupport/models';
+import { LiveRequest, RemoveRequest } from '../livesupport/models';
 
 import {
     ReceivedJoinedAgentAction,
@@ -37,28 +37,28 @@ export class AgentHubGateway{
         this._hubConnection.invoke('LeaveGroup', agent);
     }
 
-    acceptLiveRequest(liveRequest: LiveRequest): LiveRequest {
-        this._hubConnection.invoke('RemoveTransferRequest', liveRequest);
-        return liveRequest;
-    }
-
     init() {
         this._hubConnection = new HubConnection('/agent');
 
         this._hubConnection.on('JoinGroup', (agent: Agent) => {
+            console.log('joining group');
             this.store.dispatch(new ReceivedJoinedAgentAction(agent));
         });
         this._hubConnection.on('LeaveGroup', (agent: Agent) => {
+            console.log('leaving group');
             this.store.dispatch(new ReceivedLeftAgentAction(agent));
         });
         this._hubConnection.on('Send', (message: any) => {
+            console.log('Send message invoked');
             this.store.dispatch(new ReceiveGroupMessageAction(message));
         });
         this._hubConnection.on('LiveTransfer', (liveRequest: LiveRequest) => {
+            console.log('live transfer requested');
             this.store.dispatch(new LiveRequestReceivedAction(liveRequest));
         });
-        this._hubConnection.on('RemoveTransferRequest', (liveRequest: LiveRequest) => {
-            this.store.dispatch(new LiveRequestRemovedAction(liveRequest));
+        this._hubConnection.on('RemoveTransferRequest', (removeRequest: RemoveRequest) => {
+            console.log('remove request');
+            this.store.dispatch(new LiveRequestRemovedAction(removeRequest));
         });
         this._hubConnection.start()
             .then(() => {

@@ -2,7 +2,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Rx';
 
-import { TransferRequest, TransferResponse } from '../models';
+import { TransferRequest, TransferResponse, CancelRequest } from '../models';
 import { environment } from '../../../environments/environment';
 
 
@@ -31,6 +31,13 @@ export class AgentTransferService {
         this.http.post<TransferResponse>(
             environment.baseWebUrl +
             environment.makeTransferRequest, transfer)
+            .subscribe(next => console.log(next));
+    }
+
+    public cancelTransferRequest(cancel: CancelRequest): void {
+        this.http.post<any>(
+            environment.baseWebUrl +
+            environment.cancelTransferRequest, cancel)
             .subscribe(next => console.log(next));
     }
 }

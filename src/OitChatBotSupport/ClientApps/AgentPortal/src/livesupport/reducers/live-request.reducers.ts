@@ -1,4 +1,4 @@
-﻿import { LiveRequest } from '../models/live-request.model';
+﻿import { LiveRequest, RemoveRequest } from '../models';
 import * as liveRequest from '../actions/live-request.actions';
 import { List } from 'immutable';
 
@@ -27,7 +27,7 @@ export function reducer(state = initialState, action: liveRequest.Actions): Stat
         case liveRequest.LIVE_REQUEST_REMOVED:
             return Object.assign({}, state, {
                 liveRequests: state.liveRequests.filter((request: LiveRequest) =>
-                    request.conversationId !== action.liveRequest.conversationId),
+                    request.conversationId !== action.removeRequest.conversationId),
             });
         case liveRequest.LIVE_REQUESTS_LOADED:
             return Object.assign({}, state, {

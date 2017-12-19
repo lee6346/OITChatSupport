@@ -6,8 +6,8 @@ import { Message } from 'botframework-directlinejs';
 import * as fromChatBot from './store/index';
 import { RetrieveConnectionTokenAction, EndChatConnectionAction } from './actions/directline-connection.actions';
 import { SendMessageActivityAction } from './actions/directline-activity.actions';
-import { RequestAgentTransferAction } from './actions/agent-transfer.actions';
-import { TransferRequest, SimpleMessage } from './models';
+import { RequestAgentTransferAction, CancelAgentTransferAction } from './actions/agent-transfer.actions';
+import { TransferRequest, CancelRequest, SimpleMessage } from './models';
 
 /**
  * The root container component for the chat window
@@ -76,6 +76,11 @@ export class ChatBotComponent implements OnInit, OnDestroy{
      * When component is destroyed, send message to end chat connection
      */
     ngOnDestroy() {
+        this.store.dispatch(new CancelAgentTransferAction(
+            {
+                conversationId: this.currentThreadId
+            } as CancelRequest
+        ));
         this.store.dispatch(new EndChatConnectionAction(this.currentThreadId));
     }
 

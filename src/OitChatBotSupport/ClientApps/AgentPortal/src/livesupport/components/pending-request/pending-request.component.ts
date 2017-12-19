@@ -45,7 +45,7 @@ export class PendingRequestComponent {
     @Input()
     set liveRequest(liveRequest: LiveRequest) {
         this._liveRequest = liveRequest;
-        this._waitTime = Math.abs(Date.parse(liveRequest.timeRequested) - Date.now());
+        this._waitTime = Math.abs(Date.parse(liveRequest.requested) - Date.now());
         
     }
 

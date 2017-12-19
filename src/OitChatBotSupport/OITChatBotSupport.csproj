@@ -12,6 +12,8 @@
     <IsTransformWebConfigDisabled>true</IsTransformWebConfigDisabled>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="ClientApps\AgentPortal\src\livesupport\models\remove-request.model.ts" />
+    <None Remove="ClientApps\Chatbot\src\chat-bot\models\cancel-request.model.ts" />
     <None Remove="ClientApps\Chatbot\src\chat-bot\models\transfer-response.model.ts" />
   </ItemGroup>
 
@@ -42,6 +44,8 @@
   </ItemGroup>
     
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApps\AgentPortal\src\livesupport\models\remove-request.model.ts" />
+    <TypeScriptCompile Include="ClientApps\Chatbot\src\chat-bot\models\cancel-request.model.ts" />
     <TypeScriptCompile Include="ClientApps\Chatbot\src\chat-bot\models\transfer-response.model.ts" />
   </ItemGroup>
     
