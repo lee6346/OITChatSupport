@@ -1,12 +1,11 @@
 #/Properties/launchSettings.json
 
-#node modules
-/node_modules
 /src/OITChatBotSupport/node_modules
-/src/OITChatSupport/node_modules
+/OITChatBotSupport.Application
+/OITChatBotSupport.Domain
+/OITChatBotSupport.Domain.Core
+/OITChatBotSupport.Infrastructure
 
-/src/OITChatSupport
-/TestChatBot
 # User-specific files
 *.suo
 *.user
