@@ -3,7 +3,7 @@ using Microsoft.Bot.Builder.Internals.Fibers;
 using System;
 using System.Threading.Tasks;
 
-namespace OITChatBot.Dialogs.Common
+namespace TestChatBot.Dialogs.Common
 {
     public sealed class ErrorMessageDialog<T, E>: IDialog<T> where E : Exception 
     {

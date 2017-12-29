@@ -3,7 +3,7 @@ using System;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
-namespace PrintSpotBot.Infrastructure.Cache
+namespace TestChatBot.Infrastructure.Redis
 {
     public static class RedisCacheExtension
     {

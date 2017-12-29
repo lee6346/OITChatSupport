@@ -5,21 +5,11 @@ using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Builder.Internals.Fibers;
 using System.Web.Mvc;
 using Autofac.Integration.Mvc;
-<<<<<<< HEAD:TestChatBot/Global.asax.cs
-using OITChatBot.Infrastructure.Logging;
 using Microsoft.Bot.Connector;
-using OITChatBot.Models.DirectLine;
-using OITChatBot.Infrastructure.Persistence;
-using PrintSpotBot.Infrastructure;
-using System.Reflection;
-
-namespace OITChatBot
-=======
-using TestChatBot.Data.Logger;
-using TestChatBot.Data;
+using TestChatBot.Models.DirectLine;
+using TestChatBot.Infrastructure.Logging;
 
 namespace TestChatBot
->>>>>>> d4a7f38683ce295392ee412c33ae443be27d500e:TestChatBot/Global.asax.cs
 {
     public class WebApiApplication : HttpApplication
     {

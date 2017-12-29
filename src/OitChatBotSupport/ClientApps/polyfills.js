@@ -14,6 +14,7 @@ module.exports = () => {
                 'es6-promise',
                 'es6-shim',
                 'event-source-polyfill',
+                'web-animations-js'
             ],
         },
         output: {

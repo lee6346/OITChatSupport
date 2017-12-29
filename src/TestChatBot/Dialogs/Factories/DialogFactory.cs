@@ -3,7 +3,7 @@ using Microsoft.Bot.Builder.Internals.Fibers;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace OITChatBot.Dialogs.Factories
+namespace TestChatBot.Dialogs.Factories
 {
     public class DialogFactory: IDialogFactory
     {

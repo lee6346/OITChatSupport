@@ -5,13 +5,12 @@ using System.Web.Http;
 using Microsoft.Bot.Connector;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using TestChatBot.Services;
 using System;
 using System.Linq;
 using Microsoft.Bot.Builder.Dialogs;
 using TestChatBot.Dialogs;
 
-namespace TestChatBot
+namespace TestChatBot.Controllers
 {
     //[BotAuthentication/*(CredentialProviderType =typeof(MultibotCredentialProvider))*/]
     [BotAuthentication]

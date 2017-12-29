@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Web;
 
-namespace PrintSpotBot.Infrastructure.Cache
+namespace TestChatBot.Infrastructure.Redis
 {
     public class CacheHelper
     {

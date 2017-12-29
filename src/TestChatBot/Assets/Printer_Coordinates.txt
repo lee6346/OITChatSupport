@@ -1,0 +1,308 @@
+Latitude / Longitude are measured in decimal degrees (DD)
+
+NPB North Paseo Building Printers
+	Department(s): Computer Science Department
+	Notable areas: CS lab, Human Resources 5th floor, 
+	Address: North Paseo Building, San Antonio TX 78256
+
+	Printer 1: 
+		NPB 1.000
+		Latitude: 29.585821
+		Longitude: -98.61938
+		Floor: 1
+		Altitude: 308 meters
+		No color
+
+	Printer 2:
+		NPB 1.152
+		Latitude: 29.5860394
+		Longitude: -98.61942638888888
+		Floor: 1
+		Altitude: 308 meters
+		Color		
+
+BB Business Building Printers
+	Department(s): College of Business, Management Science & Statistics
+	Address: 5 Paseo Del Norte, San Antonio, TX 78249
+	
+	Printer 1: 
+		BB 3.00.02A, "near study"
+		Latitude: 29.58515062510166
+		Longitude: -98.61851826310158
+		Floor: 3
+		Altitude: 313 meters
+		No color
+	
+	Printer 2:
+		BB 2.01.20, "outside BB lab"
+		Latitude: 29.585071319716118
+		Longitude: -98.61773237586021
+		Floor: 2
+		Altitude: 309 meters
+		No color
+
+MH Mckinner Humanities Building Printers
+	Department(s):
+	Address: Mckinney Humanities Building, 10 Cocke Dr, San Antonio, TX 78249
+	
+	Printer 1:
+		MCKH 2.01.S4
+		Latitude: 29.58452900915942,
+		Longitude: -98.61906878650188
+		Floor: 2
+		Altitude: 312 meters
+		No Color
+
+	Printer 2:
+		MCKH 2.01.S3
+		Latitude: 29.584392556366957,
+		Longitude: -98.61934773623943
+		Floor: 2
+		Altitude: 312 meters
+		Color
+
+GSR Graduate School & Research Building Printers
+	Department(s):
+	Address: Piaza Norte Building, 17 Cook Rd, San Antonio, TX 78249
+	
+	Printer:
+		GSR 1.102
+		Latitude: 29.585976330413608,
+		Longitude: -98.62027779221535
+		Floor: 1
+		Altitude: 309 meters
+		No color
+
+JPL John Peace Library Printer
+	Department(s):
+	Notable Areas: Student registration, Financial aid, Fiscal services, Food court, VA department
+	Address: JPL John Peace Library San Antonio, TX 78249
+	
+	Printer 1, 2, 3, 4 (all 4 floors):
+		Latitude:29.584413549116263,
+		Longitude:-98.61768677830696
+		No Color
+
+UTSA Main Building Printer
+	Department(s):
+	Address: JPL John Peace Library San Antonio, TX 78249
+	
+	Printer 1:
+		MB 1.102, across from the stairs
+		latitude: 29.584555833190965
+		longitude: -98.6171905696392
+		Floor: 1
+		Altitude: 305 meters
+		Color
+
+	Printer 2:
+		MB 0.106-1, near rear exit
+		latitude: 29.584317915445123,
+		longitude: -98.61686870455742
+		Floor: ground/basement
+		Altitude 302 meters
+		No color
+
+Multidisciplinary Studies Building Printers
+	Department(s);
+	Address: Multidisciplinary Studies Building, 9 San Antonio, TX 78249 (both 306 meters),
+	
+	Printer 1, 2:
+		MS 2.02.34
+		latitude: 29.583655474845052,
+		longitude: -98.61902251839638
+		floor: 2
+		altitude: 306 meters
+		no color
+	
+	Printer 3:
+		MS 2.02.15
+		latitude: 29.58345254322783,
+		longitude: -98.61886963248253
+		floor: 2
+		altitude: 306
+		no color
+
+University Center Printers
+	Department(s)
+	Address: University Center, San Antonio, TX 78249
+	
+	Printer 1:
+		UCII UC 2.01.40A
+		latitude: 29.584047341640822,
+		longitude: -98.62034484744072,
+		floor: 2
+		altitude: 308 meters
+		no color
+	
+	Printer 2:
+		UCII UC 1.02.20
+		latitude: 29.584166300902762,
+		longitude: -98.62044677138329
+		floor: 1
+		altitude: 304 meters
+		color
+
+	Printer 3:
+		Food Court UC 1.01A
+		latitude: 29.583552842813777,
+		longitude: -98.62103149294853
+		altitude: 303 meters
+		floor: 1
+		no color
+
+UTSA Arts Building Printers
+	Department(s): Department of Art and Art History
+	Address Paseo Del Sur, San Antonio, TX 78249
+	
+	Printer 1:
+		ART 3.01.07 "near Arts lab"
+		latitude:29.583401227122064,
+		longitude:-98.61784502863884
+		floor: 3
+		altitude: 308 meters
+		color
+
+	Address: Key Cir, San Antonio 78249
+	
+	Printer 2:
+		ART 2.03.15
+		latitude: 29.582881066940914,
+		longitude: -98.61730054020882
+		altitude: 302 meters
+		floor: 2
+		no color
+	
+Flawn Sciences Building Printers
+	Department(s): Math Department
+	Address: One UTSA Circle, San Antonio, TX 78249
+
+	Printer 1, 2:
+		FLNSB 2.01.30 (1 has color, 1 no color)
+		latitude: 29.58256850303146,
+		longitude: -98.61827686429024
+		floor: 2
+		altitude: 302 meters
+		no color
+		
+BioSciences, Applied Engineering and Technology Building printers
+	Department(s):
+	Address: Crespa Walk, San Antonio, TX 78249
+	
+	Printer 1:
+		"near study"
+		latitude: 29.582195291125377
+		longitude: -98.61853167414665
+		floor: 1
+		altitude: 301 meters
+		Color
+
+	Printer 2:
+		"near study"
+		latitude: 29.58194803747761,
+		longitude: -98.61840292811394
+		altitude: 301 meters
+		floor: 1
+		no color
+
+Engineering Building Printers
+	Department(s):
+	Address: Paseo Del Sur, San Antonio, TX 78249
+	
+	Printer 1:
+		--
+		latitude: 29.582286261654666,
+		longitude: -98.6181078851223
+		floor: ground/basement
+		altitude: 300 meters
+		no color
+
+	Printer 2:
+		--
+	latitude: 29.582141641800426,
+	longitude: -98.61793622374535
+	floor: 1
+	altitude: 302 meters
+	no color	
+	
+DOWNTOWN CAMPUS
+
+Durango Bldg Printers
+	Department(s):
+	Address: Durango Building, 501 W Cesar E Chavez Blvd, San Antonio, TX 78207
+	
+	Printer 1:
+		DB 2.220 "across from elevator"
+		latitude: 29.42296950395277,
+		longitude: -98.50273534655571
+		altitude: 199 meters
+		floor: 2
+		no color
+
+Frio Street Bldg Printers
+	Department(s):
+	Address: Frio Street Building, 310 S Frio St San Antonio, TX 78207
+
+	Printer: 
+		FS 1.402 "next to ATM"
+		latitude: 29.424095569966454,
+		longitude: -98.50353196263313
+		altitude: 200 meters
+		floor: 1
+		color
+
+Buena Vista Street Bldg Printers
+	Department(s);
+	Address: 480-498 Buena Vista St San Antonio, TX 78207
+
+	Printer 1:
+		DT Library
+		latitude: 29.424688969026278,
+		longitude: -98.50325770676136
+		altitude: 200 meters
+		floor: 2
+		color
+
+	Printer 2: 
+		DT Library
+		latitude: 29.424686632816297,
+		longitude: -98.50318528711796
+		altitude: 200 meters
+		floor: 2
+		no color
+
+	Printer 3:
+		DT Library
+		latitude: 29.424681960396185,
+		longitude: -98.50307263433933
+		floor: 2
+		altitude: 200 meters
+		no color
+	
+Monterey Bldg Printers
+	Department(s):
+	Address: 712-796 Montery St San Antonio, TX 78207
+	
+	Printer 1:
+		MNT 1.120, "at front entrance"
+		latitude: 29.424420304527043,
+		longitude: -98.50527808070183
+		altitude: 200 meters
+		floor: 1
+		no color 
+	
+	Printer 2:
+		MNT 1.103B, College of Architecture Lab
+		latitude: 29.42427779524339,
+		longitude: -98.50532904267311
+		altitude: 200
+		floor: 1
+		color
+
+	printer 3:
+		MNT 3.360
+		latitude: 29.424565149823604,
+		longitude: -98.50570723414421
+		altitude: 205 meters
+		floor: 3
+		color

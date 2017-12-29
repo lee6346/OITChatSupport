@@ -1,7 +1,7 @@
 ﻿using System;
-using OITChatBot.Models.Abstractions;
+using TestChatBot.Models.Abstractions;
 
-namespace OITChatBot.Models.DirectLine
+namespace TestChatBot.Models.DirectLine
 {
     public class AgentTransferRequest: Entity
     {

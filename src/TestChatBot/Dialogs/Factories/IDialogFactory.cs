@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace OITChatBot.Dialogs.Factories
+namespace TestChatBot.Dialogs.Factories
 {
     public interface IDialogFactory
     {

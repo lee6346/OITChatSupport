@@ -6,7 +6,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace OITChatBot.Scorables
+namespace TestChatBot.Scorables
 {
     public class UndecidedScorable: ScorableBase<IActivity, string, double>
     {

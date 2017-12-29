@@ -1,5 +1,4 @@
-﻿using CacheManager.Core;
-using MediatR;
+﻿using MediatR;
 using Microsoft.AspNetCore.SignalR;
 using OITChatBotSupport.Application.Student.Commands;
 using OITChatBotSupport.Domain.AgentSupport;

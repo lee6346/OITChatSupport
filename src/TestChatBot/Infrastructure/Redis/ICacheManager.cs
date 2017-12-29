@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PrintSpotBot.Infrastructure.Cache
+namespace TestChatBot.Infrastructure.Redis
 {
     public interface ICacheManager
     {

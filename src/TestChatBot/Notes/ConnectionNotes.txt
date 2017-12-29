@@ -1,6 +1,0 @@
-﻿CONNECTING TO A CHANNEL
-	var connector = new ConnectorClient(new Uri(activity.ServiceUrl)) => creates a connector specifically for the requested URI via channel
-		- the reference is to make sure the reply from bot goes back to the same URI that sent the request
-		- channel end points may not be stable, so communications SHOULD BE directed to the endpoint that the connector references in the activity object
-		- if needing to rely on cache for specifying different end points (ie: forwarding to different conversation IDs), need to refresh chache often
-

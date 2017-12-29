@@ -11,28 +11,23 @@
   <PropertyGroup>
     <IsTransformWebConfigDisabled>true</IsTransformWebConfigDisabled>
   </PropertyGroup>
-  <ItemGroup>
-    <None Remove="ClientApps\AgentPortal\src\livesupport\models\remove-request.model.ts" />
-    <None Remove="ClientApps\Chatbot\src\chat-bot\models\cancel-request.model.ts" />
-    <None Remove="ClientApps\Chatbot\src\chat-bot\models\transfer-response.model.ts" />
-  </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="CacheManager.Core" Version="1.1.2" />
-    <PackageReference Include="CacheManager.Microsoft.Extensions.Configuration" Version="1.1.2" />
-    <PackageReference Include="CacheManager.Serialization.Json" Version="1.1.2" />
     <PackageReference Include="Dapper" Version="1.50.4" />
-    <PackageReference Include="FluentValidation" Version="7.2.1" />
-    <PackageReference Include="FluentValidation.AspNetCore" Version="7.2.1" />
-    <PackageReference Include="MediatR" Version="4.0.0" />
+    <PackageReference Include="FluentValidation" Version="7.3.3" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="7.3.3" />
+    <PackageReference Include="MediatR" Version="4.0.1" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="4.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.3" />
-    <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.0.0-alpha1-final" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.0.0-alpha2-final" />
+    <PackageReference Include="Microsoft.Bot.Connector" Version="3.12.2.4" />
     <PackageReference Include="Microsoft.Bot.Connector.DirectLine" Version="3.0.2" />
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="2.0.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.1" />
     <PackageReference Include="NewtonSoft.Json" Version="10.0.3" />
     <PackageReference Include="Novell.Directory.Ldap.NETStandard" Version="2.3.8" />
+    <PackageReference Include="RabbitMQ.Client" Version="5.0.1" />
+    <PackageReference Include="RestSharp" Version="106.1.0" />
   </ItemGroup>
     
   <ItemGroup>
@@ -44,13 +39,8 @@
   </ItemGroup>
     
   <ItemGroup>
-    <TypeScriptCompile Include="ClientApps\AgentPortal\src\livesupport\models\remove-request.model.ts" />
-    <TypeScriptCompile Include="ClientApps\Chatbot\src\chat-bot\models\cancel-request.model.ts" />
-    <TypeScriptCompile Include="ClientApps\Chatbot\src\chat-bot\models\transfer-response.model.ts" />
+    <Folder Include="Infrastructure\Security\NewFolder\" />
   </ItemGroup>
-    
-  <ItemGroup>
-    <Folder Include="ClientApps\AgentPortal\docs\" />
-  </ItemGroup>
+  
   
 </Project>

@@ -1,6 +1,6 @@
 ﻿using System.Data;
 
-namespace OITChatBot.Infrastructure.Persistence
+namespace TestChatBot.Infrastructure.Persistence
 {
     public interface ISqlConnectionFactory
     {

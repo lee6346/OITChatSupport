@@ -17,7 +17,7 @@ namespace OITChatBotSupport.Infrastructure.RPC
         public async Task<Conversation> StartConversation()
         {
             return await _directLineClient.Tokens.GenerateTokenForNewConversationAsync();
-        }
+        } 
 
         public async Task<Conversation> JoinConversation(string conversationId)
         {

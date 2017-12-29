@@ -1,5 +1,5 @@
 ﻿
-namespace OITChatBot.Models.Abstractions
+namespace TestChatBot.Models.Abstractions
 {
     public abstract class Entity
     {

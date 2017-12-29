@@ -1,7 +1,8 @@
-﻿using Microsoft.Bot.Connector;
+﻿
 using System;
+using TestChatBot.Models.Abstractions;
 
-namespace OITChatBot.Models.DirectLine
+namespace TestChatBot.Models.DirectLine
 {
     public class MessageActivity: Entity
     {

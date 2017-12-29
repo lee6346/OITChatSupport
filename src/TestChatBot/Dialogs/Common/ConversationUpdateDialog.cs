@@ -2,7 +2,7 @@
 using Microsoft.Bot.Connector;
 using System.Threading.Tasks;
 
-namespace OITChatBot.Dialogs.Common
+namespace TestChatBot.Dialogs.Common
 {
     public class ConversationUpdateDialog: IDialog<object>
     {

@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 using System.Configuration;
 using System.Data.SqlClient;
 using AutoMapper;
-using OITChatBot.Models.DirectLine;
+using TestChatBot.Models.DirectLine;
 
-namespace OITChatBot.Infrastructure.Logging
+namespace TestChatBot.Infrastructure.Logging
 {
     public class BotActivityLogger : IActivityLogger
     {
