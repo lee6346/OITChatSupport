@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <AssemblyName>OITChatBotSupport.Domain</AssemblyName>
+    <PackageId>OITChatBotSupport.Domain</PackageId>
+    <AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\OITChatBotSupport.Domain.Core\OITChatBotSupport.Domain.Core.csproj" />
+  </ItemGroup>
+
+</Project>

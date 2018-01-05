@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <AssemblyName>OITChatBotSupport.Application</AssemblyName>
+    <PackageId>OITChatBotSupport.Application</PackageId>
+    <AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="7.3.3" />
+    <PackageReference Include="MediatR" Version="4.0.1" />
+    <PackageReference Include="Microsoft.Bot.Connector.DirectLine" Version="3.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\OITChatBotSupport.Domain\OITChatBotSupport.Domain.csproj" />
+    <ProjectReference Include="..\OITChatBotSupport.Infrastructure\OITChatBotSupport.Infrastructure.csproj" />
+  </ItemGroup>
+  
+</Project>

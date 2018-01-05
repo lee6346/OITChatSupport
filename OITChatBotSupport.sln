@@ -4,19 +4,19 @@ VisualStudioVersion = 15.0.26730.8
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{A805AAF1-B79E-47E0-9882-BDE1C29FDD65}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OITChatBotSupport", "src\OITChatBotSupport\OITChatBotSupport.csproj", "{D89F7A49-4EFB-4B46-8F76-36FC6F6D522E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OITChatBotSupport.Web", "src\OITChatBotSupport.Web\OITChatBotSupport.Web.csproj", "{D89F7A49-4EFB-4B46-8F76-36FC6F6D522E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OITChatBotSupport.Tests", "tests\OITChatBotSupport.Tests\OITChatBotSupport.Tests.csproj", "{1F664E69-59A1-4954-B321-5D0B85296D5F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestChatBot", "src\TestChatBot\TestChatBot.csproj", "{363A1E37-0517-44F4-9C05-3755FE584D11}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OITChatBotSupport.ChatBot", "src\OITChatBotSupport.ChatBot\OITChatBotSupport.ChatBot.csproj", "{363A1E37-0517-44F4-9C05-3755FE584D11}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OITChatBotSupport.Domain.Core", "OITChatBotSupport.Domain.Core\OITChatBotSupport.Domain.Core.csproj", "{F031AEF9-64A2-4CEA-A5FC-9CB20C10F78F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OITChatBotSupport.Domain.Core", "src\OITChatBotSupport.Domain.Core\OITChatBotSupport.Domain.Core.csproj", "{F031AEF9-64A2-4CEA-A5FC-9CB20C10F78F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OITChatBotSupport.Application", "OITChatBotSupport.Application\OITChatBotSupport.Application.csproj", "{4A908806-499B-4CDB-8703-ED5D89AE3CB3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OITChatBotSupport.Application", "src\OITChatBotSupport.Application\OITChatBotSupport.Application.csproj", "{4A908806-499B-4CDB-8703-ED5D89AE3CB3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OITChatBotSupport.Domain", "OITChatBotSupport.Domain\OITChatBotSupport.Domain.csproj", "{E82E9D2E-1F51-4770-83F2-6F100AB12D40}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OITChatBotSupport.Domain", "src\OITChatBotSupport.Domain\OITChatBotSupport.Domain.csproj", "{E82E9D2E-1F51-4770-83F2-6F100AB12D40}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OITChatBotSupport.Infrastructure", "OITChatBotSupport.Infrastructure\OITChatBotSupport.Infrastructure.csproj", "{06AD5038-EE5B-4A62-9F29-72579EA9FD36}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OITChatBotSupport.Infrastructure", "src\OITChatBotSupport.Infrastructure\OITChatBotSupport.Infrastructure.csproj", "{06AD5038-EE5B-4A62-9F29-72579EA9FD36}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

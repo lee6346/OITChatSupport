@@ -1,20 +1,26 @@
-#/Properties/launchSettings.json
 
-/src/OITChatBotSupport/node_modules
-/src/OITChatBotSupport.Application/
-/src/OITChatBotSupport.Domain/
-/src/OITChatBotSupport.Domain.Core/
-/src/OITChatBotSupport.Infrastructure/
-/OITChatBotSupport.Application/
-/OITChatBotSupport.Domain/
-/OITChatBotSupport.Domain.Core/
-/OITChatBotSupport.Infrastructure/
+/src/OITChatBotSupport.Web/node_modules
 
 # User-specific files
 *.suo
 *.user
 *.userosscache
 *.sln.docstates
+
+# docfx .NET documentation
+/documentation/**/DROP/
+/documentation/**/TEMP/
+/documentation/**/packages/
+/documentation/**/bin/
+/documentation/**/obj/
+/documentation/_site
+
+# compodoc Angular documentation
+/src/OITChatBotSupport.Web/ClientApps/AgentPortal/docs
+/src/OITChatBotSupport.Web/ClientApps/Chatbot/docs
+
+# test lib
+/tests/obj
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
@@ -35,39 +41,14 @@ Obj/
 
 *.svn/
 
-/src/OITChatSupport/[Dd]ebug/
-/src/OITChatSupport/[Dd]ebugPublic
-/src/OITChatSupport/[Rr]elease/
-/src/OITChatSupport/[Rr]eleases/
-/src/OITChatSupport/x64
-/src/OITChatSupport/x86/
-/src/OITChatSupport/build/
-/src/OITChatSupport/bin/
-/src/OITChatSupport/Bin/
-/src/OITChatSupport/obj/
-/src/OITChatSupport/Obj/
-/src/OITChatSupport/appsettings.json
-/src/OITChatSupport/appsettings.Development.json
-
-/tests/OITChatSupport.Tests/[Dd]ebug/
-/tests/OITChatSupport.Tests/[Dd]ebugPublic
-/tests/OITChatSupport.Tests/[Rr]elease/
-/tests/OITChatSupport.Tests/[Rr]eleases/
-/tests/OITChatSupport.Tests/x64
-/tests/OITChatSupport.Tests/x86/
-/tests/OITChatSupport.Tests/build/
-/tests/OITChatSupport.Tests/bin/
-/tests/OITChatSupport.Tests/Bin/
-/tests/OITChatSupport.Tests/obj/
-/tests/OITChatSupport.Tests/Obj/
 
 # Visual Studio 2015 cache/options directory
 .vs/
 
 # Webpack-bundled static files
-/src/OITChatSupport/wwwroot/agentdist/
-/src/OITChatSupport/wwwroot/chatbotdist/
-/src/OITChatSupport/wwwroot/vendordist/
+/src/OITChatBotSupport.Web/wwwroot/agentdist/
+/src/OITChatBotSupport.Web/wwwroot/chatbotdist/
+/src/OITChatBotSupport.Web/wwwroot/vendordist/
 
 # MSTest test Results
 [Tt]est[Rr]esult*/
@@ -274,13 +255,4 @@ _Pvt_Extensions
 
 
 
-# docfx documentation
-/documentation/**/DROP/
-/documentation/**/TEMP/
-/documentation/**/packages/
-/documentation/**/bin/
-/documentation/**/obj/
-/documentation/_site
 
-# test lib
-/tests/obj
