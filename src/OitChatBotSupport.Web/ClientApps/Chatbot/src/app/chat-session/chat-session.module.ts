@@ -15,11 +15,6 @@ import { AgentTransferEffects } from './effects/agent-transfer.effects';
 import { reducers } from './store/index';
 
 
-/**
- * This module contains all necessary components to render the chat window,
-
- * services to make API requests to retrieve tokens and chat with the bot
- */
 @NgModule({
     imports: [
         SharedModule,

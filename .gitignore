@@ -19,8 +19,8 @@
 /src/OITChatBotSupport.Web/ClientApps/AgentPortal/docs
 /src/OITChatBotSupport.Web/ClientApps/Chatbot/docs
 
-# test lib
-/tests/obj
+# tests obj and bin caches
+/tests/**/obj/
 
 # Build results
 [Dd]ebug/
@@ -42,11 +42,18 @@ Obj/
 # Visual Studio 2015 cache/options directory
 .vs/
 
-# Webpack-bundled static files
-/src/OITChatBotSupport.Web/wwwroot/agentdist/
-/src/OITChatBotSupport.Web/wwwroot/chatbotdist/
-/src/OITChatBotSupport.Web/wwwroot/vendordist/
-/src/OITChatBotSupport.Web/wwwroot/polyfilldist/
+# Webpack-bundled files
+/src/OITChatBotSupport.Web/wwwroot/
+
+# Transpiled JS files and source mappings
+**/ClientApps/AgentPortal/src/**/*.js
+**/ClientApps/AgentPortal/src/**/*.map
+**/ClientApps/AgentPortal/src/*.js
+**/ClientApps/AgentPortal/src/*.map
+**/ClientApps/Chatbot/src/**/*.js
+**/ClientApps/Chatbot/src/**/*.map
+**/ClientApps/Chatbot/src/*.js
+**/ClientApps/Chatbot/src/*.map
 
 # NuGet Packages
 *.nupkg

@@ -1,10 +1,19 @@
 ﻿CREATE TABLE [dbo].[Agent] (
-    [Id]         INT(30)   IDENTITY (1, 1) NOT NULL,
+    [Id]         INT   IDENTITY (1, 1) NOT NULL,
 	[UtsaId]	 NVARCHAR(30) NOT NULL,
     [Connected]  BIT           DEFAULT ((0)) NOT NULL,
 	[RowVersion] ROWVERSION     NULL,
     CONSTRAINT [PK_Agent] PRIMARY KEY CLUSTERED ([Id] ASC),
 	CONSTRAINT [AK_Agent_UtsaId] UNIQUE NONCLUSTERED ([UtsaId])
+);
+GO;
+CREATE TABLE [dbo].[GroupMessage] (
+    [Id]         INT   IDENTITY (1, 1) NOT NULL,
+	[From]	 NVARCHAR(30) NOT NULL,
+    [Text]  NVARCHAR(200) NOT NULL,
+	[Timestamp] DATETIME2 (7) NOT NULL,
+	[RowVersion] ROWVERSION     NULL,
+    CONSTRAINT [PK_GroupMessage] PRIMARY KEY CLUSTERED ([Id] ASC)
 );
 GO;
 CREATE TABLE [dbo].[DirectLineMessage] (

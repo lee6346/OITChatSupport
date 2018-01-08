@@ -5,17 +5,17 @@ namespace OITChatBotSupport.Domain.AgentSupport
 {
     public class GroupMessage : ValueObject<GroupMessage>
     {
-        public GroupMessage(string from, string text, DateTime timestamp)
+        public GroupMessage(string from, string text, DateTimeOffset timestamp)
         {
             From = from;
             Text = text;
             Timestamp = timestamp;
         }
 
-        public GroupMessage(string from, string text) : this(from, text, DateTime.UtcNow) { }
+        public GroupMessage(string from, string text) : this(from, text, DateTimeOffset.UtcNow) { }
 
         public string From { get; private set; }
-        public DateTime Timestamp { get; private set; }
+        public DateTimeOffset Timestamp { get; private set; }
         public string Text { get; private set; }
 
         protected override int GetHashCodeCore()

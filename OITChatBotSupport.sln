@@ -1,22 +1,26 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.8
+VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{A805AAF1-B79E-47E0-9882-BDE1C29FDD65}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OITChatBotSupport.Web", "src\OITChatBotSupport.Web\OITChatBotSupport.Web.csproj", "{D89F7A49-4EFB-4B46-8F76-36FC6F6D522E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OITChatBotSupport.Tests", "tests\OITChatBotSupport.Tests\OITChatBotSupport.Tests.csproj", "{1F664E69-59A1-4954-B321-5D0B85296D5F}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OITChatBotSupport.ChatBot", "src\OITChatBotSupport.ChatBot\OITChatBotSupport.ChatBot.csproj", "{363A1E37-0517-44F4-9C05-3755FE584D11}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OITChatBotSupport.Domain.Core", "src\OITChatBotSupport.Domain.Core\OITChatBotSupport.Domain.Core.csproj", "{F031AEF9-64A2-4CEA-A5FC-9CB20C10F78F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OITChatBotSupport.Application", "src\OITChatBotSupport.Application\OITChatBotSupport.Application.csproj", "{4A908806-499B-4CDB-8703-ED5D89AE3CB3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OITChatBotSupport.Application", "src\OITChatBotSupport.Application\OITChatBotSupport.Application.csproj", "{4A908806-499B-4CDB-8703-ED5D89AE3CB3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OITChatBotSupport.Domain", "src\OITChatBotSupport.Domain\OITChatBotSupport.Domain.csproj", "{E82E9D2E-1F51-4770-83F2-6F100AB12D40}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OITChatBotSupport.Domain", "src\OITChatBotSupport.Domain\OITChatBotSupport.Domain.csproj", "{E82E9D2E-1F51-4770-83F2-6F100AB12D40}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OITChatBotSupport.Infrastructure", "src\OITChatBotSupport.Infrastructure\OITChatBotSupport.Infrastructure.csproj", "{06AD5038-EE5B-4A62-9F29-72579EA9FD36}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OITChatBotSupport.Infrastructure", "src\OITChatBotSupport.Infrastructure\OITChatBotSupport.Infrastructure.csproj", "{06AD5038-EE5B-4A62-9F29-72579EA9FD36}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{6076FAF0-0695-440F-9FD6-680C352193AD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OITChatBotSupport.Unit", "tests\OITChatBotSupport.Unit\OITChatBotSupport.Unit.csproj", "{9E5A61BC-F0DA-41ED-A5EE-30A153149048}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OITChatBotSupport.Integration", "tests\OITChatBotSupport.Integration\OITChatBotSupport.Integration.csproj", "{889CC61F-2EDC-4956-89CA-797CC11C5484}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -40,18 +44,6 @@ Global
 		{D89F7A49-4EFB-4B46-8F76-36FC6F6D522E}.Release|x64.Build.0 = Release|Any CPU
 		{D89F7A49-4EFB-4B46-8F76-36FC6F6D522E}.Release|x86.ActiveCfg = Release|Any CPU
 		{D89F7A49-4EFB-4B46-8F76-36FC6F6D522E}.Release|x86.Build.0 = Release|Any CPU
-		{1F664E69-59A1-4954-B321-5D0B85296D5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1F664E69-59A1-4954-B321-5D0B85296D5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1F664E69-59A1-4954-B321-5D0B85296D5F}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{1F664E69-59A1-4954-B321-5D0B85296D5F}.Debug|x64.Build.0 = Debug|Any CPU
-		{1F664E69-59A1-4954-B321-5D0B85296D5F}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{1F664E69-59A1-4954-B321-5D0B85296D5F}.Debug|x86.Build.0 = Debug|Any CPU
-		{1F664E69-59A1-4954-B321-5D0B85296D5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1F664E69-59A1-4954-B321-5D0B85296D5F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1F664E69-59A1-4954-B321-5D0B85296D5F}.Release|x64.ActiveCfg = Release|Any CPU
-		{1F664E69-59A1-4954-B321-5D0B85296D5F}.Release|x64.Build.0 = Release|Any CPU
-		{1F664E69-59A1-4954-B321-5D0B85296D5F}.Release|x86.ActiveCfg = Release|Any CPU
-		{1F664E69-59A1-4954-B321-5D0B85296D5F}.Release|x86.Build.0 = Release|Any CPU
 		{363A1E37-0517-44F4-9C05-3755FE584D11}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{363A1E37-0517-44F4-9C05-3755FE584D11}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{363A1E37-0517-44F4-9C05-3755FE584D11}.Debug|x64.ActiveCfg = Debug|Any CPU
@@ -112,6 +104,30 @@ Global
 		{06AD5038-EE5B-4A62-9F29-72579EA9FD36}.Release|x64.Build.0 = Release|Any CPU
 		{06AD5038-EE5B-4A62-9F29-72579EA9FD36}.Release|x86.ActiveCfg = Release|Any CPU
 		{06AD5038-EE5B-4A62-9F29-72579EA9FD36}.Release|x86.Build.0 = Release|Any CPU
+		{9E5A61BC-F0DA-41ED-A5EE-30A153149048}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E5A61BC-F0DA-41ED-A5EE-30A153149048}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E5A61BC-F0DA-41ED-A5EE-30A153149048}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{9E5A61BC-F0DA-41ED-A5EE-30A153149048}.Debug|x64.Build.0 = Debug|Any CPU
+		{9E5A61BC-F0DA-41ED-A5EE-30A153149048}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{9E5A61BC-F0DA-41ED-A5EE-30A153149048}.Debug|x86.Build.0 = Debug|Any CPU
+		{9E5A61BC-F0DA-41ED-A5EE-30A153149048}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E5A61BC-F0DA-41ED-A5EE-30A153149048}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E5A61BC-F0DA-41ED-A5EE-30A153149048}.Release|x64.ActiveCfg = Release|Any CPU
+		{9E5A61BC-F0DA-41ED-A5EE-30A153149048}.Release|x64.Build.0 = Release|Any CPU
+		{9E5A61BC-F0DA-41ED-A5EE-30A153149048}.Release|x86.ActiveCfg = Release|Any CPU
+		{9E5A61BC-F0DA-41ED-A5EE-30A153149048}.Release|x86.Build.0 = Release|Any CPU
+		{889CC61F-2EDC-4956-89CA-797CC11C5484}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{889CC61F-2EDC-4956-89CA-797CC11C5484}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{889CC61F-2EDC-4956-89CA-797CC11C5484}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{889CC61F-2EDC-4956-89CA-797CC11C5484}.Debug|x64.Build.0 = Debug|Any CPU
+		{889CC61F-2EDC-4956-89CA-797CC11C5484}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{889CC61F-2EDC-4956-89CA-797CC11C5484}.Debug|x86.Build.0 = Debug|Any CPU
+		{889CC61F-2EDC-4956-89CA-797CC11C5484}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{889CC61F-2EDC-4956-89CA-797CC11C5484}.Release|Any CPU.Build.0 = Release|Any CPU
+		{889CC61F-2EDC-4956-89CA-797CC11C5484}.Release|x64.ActiveCfg = Release|Any CPU
+		{889CC61F-2EDC-4956-89CA-797CC11C5484}.Release|x64.Build.0 = Release|Any CPU
+		{889CC61F-2EDC-4956-89CA-797CC11C5484}.Release|x86.ActiveCfg = Release|Any CPU
+		{889CC61F-2EDC-4956-89CA-797CC11C5484}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -123,6 +139,8 @@ Global
 		{4A908806-499B-4CDB-8703-ED5D89AE3CB3} = {A805AAF1-B79E-47E0-9882-BDE1C29FDD65}
 		{E82E9D2E-1F51-4770-83F2-6F100AB12D40} = {A805AAF1-B79E-47E0-9882-BDE1C29FDD65}
 		{06AD5038-EE5B-4A62-9F29-72579EA9FD36} = {A805AAF1-B79E-47E0-9882-BDE1C29FDD65}
+		{9E5A61BC-F0DA-41ED-A5EE-30A153149048} = {6076FAF0-0695-440F-9FD6-680C352193AD}
+		{889CC61F-2EDC-4956-89CA-797CC11C5484} = {6076FAF0-0695-440F-9FD6-680C352193AD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1DC08DF2-71ED-40DA-B5CB-7A8BFD35578D}

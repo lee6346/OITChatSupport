@@ -5,15 +5,15 @@ namespace OITChatBotSupport.Domain.DirectLineChat
 {
     public class ConversationThread : Entity<string>
     {
-        public DateTime Created { get; set; }
+        public DateTimeOffset Created { get; set; }
 
-        public ConversationThread(string id, DateTime created)
+        public ConversationThread(string id, DateTimeOffset created)
         {
             Id = id;
             Created = created;
         }
 
-        public ConversationThread(string id) : this(id, DateTime.UtcNow) { }
+        public ConversationThread(string id) : this(id, DateTimeOffset.UtcNow) { }
 
         protected override bool IdEquals(string id)
         {

@@ -11,9 +11,6 @@ import { ChatSessionModule } from './chat-session/chat-session.module';
 import { AppComponent } from './app.component';
 
 
-/**
- * The main module to bootstrap the application 
- */
 @NgModule({
     bootstrap: [AppComponent],
     declarations: [

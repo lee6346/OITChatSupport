@@ -10,11 +10,11 @@ namespace OITChatBotSupport.Domain.DirectLineChat
 
         public IEnumerable<ConversationMessage> Messages => _messages;
 
-        public ChatSession(string conversationId, DateTime created) :
+        public ChatSession(string conversationId, DateTimeOffset created) :
             this(conversationId, created, new List<ConversationMessage>())
         { }
 
-        public ChatSession(string conversationId, DateTime created, List<ConversationMessage> messages)
+        public ChatSession(string conversationId, DateTimeOffset created, List<ConversationMessage> messages)
             :base(conversationId, created)
         {
             _messages = messages;

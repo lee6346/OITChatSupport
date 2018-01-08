@@ -7,7 +7,7 @@ namespace OITChatBotSupport.Domain.DirectLineChat
     {
         public ConversationMessage(
             int id, string conversationId, string text,
-            string sender, DateTime timestamp)
+            string sender, DateTimeOffset timestamp)
         {
             Id = id;
             ConversationId = conversationId;
@@ -19,7 +19,7 @@ namespace OITChatBotSupport.Domain.DirectLineChat
         public string ConversationId { get; set; }
         public string Text { get; set; }
         public string Sender { get; set; }
-        public DateTime Timestamp { get; set; }
+        public DateTimeOffset Timestamp { get; set; }
 
         protected override bool IdEquals(int id)
         {

@@ -16,7 +16,7 @@ namespace OITChatBotSupport.Application.Student.Commands
         [JsonProperty("lastMessage")]
         public string LastMessage { get; set; }
         [JsonProperty("requested")]
-        public DateTime Requested { get; set; } = DateTime.UtcNow;
+        public DateTimeOffset Requested { get; set; } = DateTimeOffset.UtcNow;
     }
 
     /// <summary>

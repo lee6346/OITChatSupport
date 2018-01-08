@@ -1,11 +1,18 @@
 import { Component } from '@angular/core';
 
 
-/**
- * The root bootstrap component when the application loads
- */
 @Component({
     selector: 'chat-bot',
-    template: `<chat-session></chat-session>`,
+    template: `
+        <div class="container-fluid chat-window">
+            <chat-session></chat-session>
+        </div>
+    `,
+    styles: [`
+    .chat-window {
+        background-color: #c7bebe;
+        height: 100%;
+    }
+    `]
 })
 export class AppComponent { }

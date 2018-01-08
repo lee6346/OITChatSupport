@@ -3,14 +3,12 @@ using OITChatBotSupport.Application.OITAgents.Commands;
 using OITChatBotSupport.Application.OITAgents.Events;
 using OITChatBotSupport.Domain.AgentSupport;
 using OITChatBotSupport.Infrastructure.Data.InMemory;
-using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace OITChatBotSupport.Application.OITAgents.Handlers
 {
-    public class AgentConnectionHandler : INotificationHandler<AgentDisconnected>,
-        INotificationHandler<AgentConnected>, IRequestHandler<GetConnectedAgents, List<ConnectedAgent>>
+    public class AgentConnectionHandler : INotificationHandler<AgentDisconnected>, INotificationHandler<AgentConnected>
     {
         private readonly IAgentRepository _agentRepository;
         private readonly IConnectedAgentTracker _connectedAgents;
@@ -30,10 +28,5 @@ namespace OITChatBotSupport.Application.OITAgents.Handlers
         {
             await _agentRepository.UpdateAgentConnectionAsync(message.AgentId, false);
         }
-
-        public Task<List<ConnectedAgent>> Handle(GetConnectedAgents message, CancellationToken cts)
-        {
-            return Task.FromResult(_connectedAgents.GetAgents());
-        } 
     }
 }

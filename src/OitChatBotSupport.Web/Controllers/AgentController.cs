@@ -16,10 +16,17 @@ namespace OITChatBotSupport.Web.Controllers
         }
 
         [HttpGet("[action]")]
-        public async Task<IActionResult> Connected()
+        public async Task<IActionResult> Members()
         {
-            var agents = await _mediator.Send(new GetConnectedAgents());
+            var agents = await _mediator.Send(new GetAgentGroup(false));
             return Json(agents);
+        }
+
+        [HttpGet("[action]")]
+        public async Task<IActionResult> GroupMessages()
+        {
+            var messages = await _mediator.Send(new GetGroupMessages());
+            return Json(messages);
         }
     }
 }

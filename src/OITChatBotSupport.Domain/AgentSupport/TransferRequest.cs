@@ -7,11 +7,11 @@ namespace OITChatBotSupport.Domain.AgentSupport
     {
         public string BotHandle { get; set; }
         public string LastMessage { get; set; }
-        public DateTime Requested { get; set; }
+        public DateTimeOffset Requested { get; set; }
 
         public TransferRequest(
             string conversationId, string botHandle,
-            string lastMessage, DateTime timeRequested)
+            string lastMessage, DateTimeOffset timeRequested)
         {
             Id = conversationId;
             BotHandle = botHandle;

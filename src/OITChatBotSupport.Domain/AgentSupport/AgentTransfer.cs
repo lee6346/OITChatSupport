@@ -7,14 +7,14 @@ namespace OITChatBotSupport.Domain.AgentSupport
         public string TransferStatus { get; set; }
         public string AssistingAgent { get; set; }
 
-        public AgentTransfer():this(null, null, null, DateTime.UtcNow) { }
+        public AgentTransfer():this(null, null, null, DateTimeOffset.UtcNow) { }
 
         public AgentTransfer(string conversationId, string botHandle,
-            string lastMessage, DateTime requested)
+            string lastMessage, DateTimeOffset requested)
             : this(conversationId, botHandle, lastMessage, requested, "Waiting", null) { }
 
         public AgentTransfer(string conversationId, string botHandle, 
-            string lastMessage, DateTime requested, string transferStatus, string agent)
+            string lastMessage, DateTimeOffset requested, string transferStatus, string agent)
             :base(conversationId, botHandle, lastMessage, requested)
         {
             TransferStatus = transferStatus;

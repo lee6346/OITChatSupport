@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.SignalR;
 using MediatR;
 using OITChatBotSupport.Application.OITAgents.Events;
 using OITChatBotSupport.Infrastructure.Data.InMemory;
+using OITChatBotSupport.Application.OITAgents.Dtos;
 
 namespace OITChatBotSupport.Web.Hubs
 {
@@ -49,6 +50,12 @@ namespace OITChatBotSupport.Web.Hubs
                 await Clients.Group("UTSA").InvokeAsync("LeaveGroup", agent);
                 await _mediator.Publish(new AgentDisconnected(agent.AgentId));
             }
+        }
+
+        public async Task SendMessage(GroupMessageDto message)
+        {
+            await Clients.Group("UTSA").InvokeAsync("SendMessage", message);
+            await _mediator.Publish(new GroupMessageSent(message));
         }
     }
 }

@@ -4,91 +4,55 @@ import { Observable } from 'rxjs/Rx';
 import { Message } from 'botframework-directlinejs';
 
 import * as fromChatBot from './store/index';
-import { RetrieveConnectionTokenAction, EndChatConnectionAction } from './actions/directline-connection.actions';
-import { SendMessageActivityAction } from './actions/directline-activity.actions';
-import { RequestAgentTransferAction, CancelAgentTransferAction } from './actions/agent-transfer.actions';
+import * as agentTransfer from './actions/agent-transfer.actions';
+import * as directLine from './actions/direct-line.actions';
+import { AgentStatus } from './store/chat-session.state';
 import { TransferRequest, CancelRequest, SimpleMessage } from './models';
 
-/**
- * The root container component for the chat window
- *
- * Coordinates chat functionality by dispatching actions when events are emitted from child components, and
- *
- * listening for changes in the store and reflecting that changes by passing the data to child compoennts
- */
+
 @Component({
     selector: 'chat-session',
     template: `
-    <div class="container-fluid">
-        <div class="chat-window row">
-                <chat-header-panel (transferRequest)="onTransferRequest()"></chat-header-panel>
-                <message-list [messageActivities]=" messageActivities$ | async "></message-list>
-                <input-bar (messageSubmit)="onMessageSubmitted($event)"></input-bar>
-        </div>
-    </div>`,
-    styles: [`
-    .chat-window {
-        min-width: 100%;
-        min-height: 100%;
-        background-color: #c7bebe;
-    }
-    .container-fluid{
-        padding: 0;
-    }
-    `
-    ]
+        <chat-header-panel (transferRequest)="onTransferRequest()"></chat-header-panel>
+        <message-list [messageActivities]=" messageActivities$ | async "></message-list>
+        <input-bar (messageSubmit)="onMessageSubmitted($event)"></input-bar>`
 })
 export class ChatSessionComponent implements OnInit, OnDestroy{
-    /**
-     * Local references for chat session data
-     */
+
     private messageActivities$: Observable<Message[]>;
-    private currentThreadId: string;
-    private connected: boolean;
-    private disconnectActivity$: Observable<boolean>;
-    private requestPending: boolean = false;
-    private lastStudentMessage: string|undefined;
+    private currentThreadId: string | undefined;
+    private requestPending: AgentStatus;
+    private lastStudentMessage: string | undefined;
 
-    constructor(private store: Store<fromChatBot.State>) {
-        this.messageActivities$ = store.select(fromChatBot.getMessages);
-        this.disconnectActivity$ = store.select(fromChatBot.getDisconnectActivity);
-    }
+    constructor(private store: Store<fromChatBot.State>) { }
 
-    /**
-     * When the component is created, make request for chat token, assign store selectors to track chat session data
-     */
     ngOnInit() {
-        this.store.dispatch(new RetrieveConnectionTokenAction());
-        this.store.select(fromChatBot.getChatStatusEntity).subscribe(
+        this.store.dispatch(new directLine.RetrieveConnectionTokenAction());
+        this.messageActivities$ = this.store.select(fromChatBot.getMessages);
+        this.store.select(fromChatBot.getChatSessionEntity).subscribe(
             status => {
                 this.currentThreadId = status.threadId;
-                this.connected = status.connected;
-                this.requestPending = status.requestPending;
-                console.log('pending status: ' + this.requestPending);
+                this.requestPending = status.agentStatus;
             }
         );
-        this.store.select(fromChatBot.getLastStudentMessage).subscribe(msg => this.lastStudentMessage = msg);
+        this.store.select(fromChatBot.getLastStudentMessage).subscribe(lastMessage =>
+        {
+            if (typeof (lastMessage) !== 'undefined')
+                this.lastStudentMessage = lastMessage.text;
+        });
     }
 
-    /**
-     * When component is destroyed, send message to end chat connection
-     */
     ngOnDestroy() {
-        this.store.dispatch(new CancelAgentTransferAction(
+        this.store.dispatch(new agentTransfer.CancelAgentTransferAction(
             {
                 conversationId: this.currentThreadId
             } as CancelRequest
         ));
     }
 
-    /**
-     * Event handler  to dispatch message action to store
-     *
-     * @param {string} message the message text
-     */
     onMessageSubmitted(message: string): void {
-        if (message !== '' && this.currentThreadId !== '') {
-            this.store.dispatch(new SendMessageActivityAction(
+        if (message !== '' && typeof(this.currentThreadId) !== 'undefined') {
+            this.store.dispatch(new directLine.SendMessageActivityAction(
             {
                 text: message,
                 conversationId: this.currentThreadId
@@ -96,12 +60,9 @@ export class ChatSessionComponent implements OnInit, OnDestroy{
         }
     }
 
-    /**
-     * Event handler to send request for agent transfer
-     */
     onTransferRequest(): void {
-        if (!this.requestPending) {
-            this.store.dispatch(new RequestAgentTransferAction(
+        if (this.requestPending === 'none' && typeof(this.lastStudentMessage) !== 'undefined') {
+            this.store.dispatch(new agentTransfer.RequestAgentTransferAction(
             {
                 botHandle: 'AskRowdy',
                 conversationId: this.currentThreadId,

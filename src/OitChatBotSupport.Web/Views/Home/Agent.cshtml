@@ -1,14 +1,15 @@
-
-@{
-    ViewData["Title"] = "Agent Portal";
-}
-@{
-    Layout = "_Layout";
-}
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<agent-portal>Loading...</agent-portal>
-<script src="~/vendordist/vendor.bundle.js" asp-append-version="true"></script>
-@section scripts {
-    
-    <script src="~/agentdist/agentapp.bundle.js" asp-append-version="true"></script>
-}
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>UTSA Agent Portal</title>
+    <base href="/">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <agent-portal>Loading...</agent-portal>
+    <script type="text/javascript" src="~/oitagents/dist/polyfills.bundle.js"></script>
+    <script type="text/javascript" src="~/oitagents/dist/vendor.bundle.js"></script>
+    <script type="text/javascript" src="~/oitagents/dist/agent-portal.bundle.js"></script>
+</body>
+</html>

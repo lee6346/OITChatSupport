@@ -16,12 +16,20 @@ namespace OITChatBotSupport.Infrastructure.Data.Repositories
             var status = await ExecuteAsync(sqlCommand, new { Id = agentId, Connected = connected });
         }
 
-        public async Task<IEnumerable<Agent>> GetConnectedAgentsAsync()
+        public async Task<IEnumerable<Agent>> GetAgentsAsync(bool connected)
         {
-            
-            string sqlQuery = "SELECT UtsaId AS Id, Connected FROM Agent WHERE Connected=@Connected";
-            var results = await GetAsync(sqlQuery, new { Connected=true });
-            return results;
+            string sqlQuery;
+
+            if (connected)
+            {
+                sqlQuery = "SELECT UtsaId AS Id, Connected FROM Agent WHERE Connected=@Connected";
+                return await GetAsync(sqlQuery, new { Connected = connected });
+            }
+            else
+            {
+                sqlQuery = "SELECT UtsaId AS Id, Connected FROM Agent";
+                return await GetAsync(sqlQuery, null);
+            }
         }
     }
 }

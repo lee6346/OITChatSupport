@@ -5,21 +5,11 @@ import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { map } from 'rxjs/operators';
 
-import {
-    REQUEST_AGENT_TRANSFER,
-    RequestAgentTransferAction,
-    AgentTransferRequestedAction,
-    CANCEL_AGENT_TRANSFER,
-    CancelAgentTransferAction,
-    AgentTransferCanceledAction
-} from '../actions/agent-transfer.actions';
+import * as  agentTransfer from '../actions/agent-transfer.actions';
 import { TransferRequest } from '../models';
 import { AgentTransferService } from '../services/agent-transfer.service';
 
 
-/**
- * Handles NGRX side effects for making agent transfer requests
- */
 @Injectable()
 export class AgentTransferEffects {
     constructor(
@@ -27,26 +17,21 @@ export class AgentTransferEffects {
         private agentTransferService: AgentTransferService
     ) { }
 
-    /**
-     * Intercepts the {@link RequestAgentTransferAction} to retrieve a connection token via {@link AgentTransferService}
-     *
-     * Then dispatches the new {@link AgentTransferRequestedAction} to update the store
-     */
     @Effect()
-    makeTransferRequest$: Observable<Action> = this.actions$.ofType<RequestAgentTransferAction>(REQUEST_AGENT_TRANSFER).pipe(
-        map((action: RequestAgentTransferAction) => {
+    makeTransferRequest$: Observable<Action> = this.actions$.ofType<agentTransfer.RequestAgentTransferAction>(agentTransfer.REQUEST_AGENT_TRANSFER).pipe(
+        map((action: agentTransfer.RequestAgentTransferAction) => {
             this.agentTransferService.sendTransferRequest(action.request);
-            return new AgentTransferRequestedAction();
+            return new agentTransfer.AgentTransferRequestedAction();
         }))
         .catch((err: any) => {
             return of({ type: 'effects error: makeTransferRequest$' });
         });
 
     @Effect()
-    cancelTransferRequest$: Observable<Action> = this.actions$.ofType<CancelAgentTransferAction>(CANCEL_AGENT_TRANSFER).pipe(
-        map((action: CancelAgentTransferAction) => {
+    cancelTransferRequest$: Observable<Action> = this.actions$.ofType<agentTransfer.CancelAgentTransferAction>(agentTransfer.CANCEL_AGENT_TRANSFER).pipe(
+        map((action: agentTransfer.CancelAgentTransferAction) => {
             this.agentTransferService.cancelTransferRequest(action.cancelRequest);
-            return new AgentTransferCanceledAction();
+            return new agentTransfer.AgentTransferCanceledAction();
         }))
         .catch((err: any) => {
             return of({ type: 'effects error: cancelTransferRequest$' });

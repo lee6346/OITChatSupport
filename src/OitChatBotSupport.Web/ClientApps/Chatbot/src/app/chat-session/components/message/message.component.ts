@@ -3,9 +3,6 @@ import { NgClass } from '@angular/common';
 import { Message } from 'botframework-directlinejs';
 
 
-/**
- * The message component that renders individual chat messages in a bubble
- */
 @Component({
     selector: 'message',
     templateUrl: './message.component.html',
@@ -14,19 +11,11 @@ import { Message } from 'botframework-directlinejs';
 })
 export class MessageComponent {
 
-    /**
-     * The message object containing sender, text, timestamp
-     */
     @Input()
     messageActivity: Message;
 
     constructor() { }
 
-    /**
-     * Renders message bubble layout by the sender
-     *
-     * @param {string} id The ID of the message sender
-     */
     bubbleProperties(id: string) {
         if (id.toLowerCase() === 'student') {
             return {
@@ -40,11 +29,6 @@ export class MessageComponent {
         }
     }
 
-    /**
-     * Renders message alignment layout by the sender
-     *
-     * @param {string} id The ID of the message sender
-     */
     wrapperAlignProperties(id: string) {
         if (id.toLowerCase() === 'student') {
             return {

@@ -1,60 +1,45 @@
-﻿import { createSelector, createFeatureSelector } from '@ngrx/store';
+﻿import { createSelector, createFeatureSelector, ActionReducer, ActionReducerMap, MetaReducer } from '@ngrx/store';
 
-import * as fromChatMessages from './chat-message.reducers';
-import * as fromChatStatus from './chat-status.reducers';
+import * as fromChatSession from './chat-session.reducer';
 import * as fromRoot from '../../shared/index.reducer';
+import { ChatSessionState } from './chat-session.state';
 
-/**
- * The parent state for this module
- */
+
 export interface ChatBotState {
-    chatMessages: fromChatMessages.State;
-    chatStatus: fromChatStatus.State;
+    chatSession: ChatSessionState;
 }
 
-/**
- * Extend the root state to include states for this module
- */
 export interface State extends fromRoot.State {
     'chatbot': ChatBotState;
 }
 
-/**
- * The parent reducer 
- */
-export const reducers = {
-    chatMessages: fromChatMessages.reducer,
-    chatStatus: fromChatStatus.reducer
+export const reducers: ActionReducerMap<ChatBotState> = {
+    chatSession: fromChatSession.reducer
 };
 
-/**
- * Selectors  to reference the state for this module
- * 
- * and subsets, combinations of the different states (like SQL Joins, etc)
- */
 export const getChatBotState = createFeatureSelector<ChatBotState>('chatbot');
 
-export const getChatMessageEntitiesState = createSelector(
+export const getChatSessionEntity = createSelector(
     getChatBotState,
-    state => state.chatMessages
-);
-
-export const getChatStatusEntity = createSelector(
-    getChatBotState,
-    state => state.chatStatus
+    state => state.chatSession
 );
 
 export const getMessages = createSelector(
-    getChatMessageEntitiesState,
+    getChatSessionEntity,
     state => state.messages
 );
 
-export const getDisconnectActivity = createSelector(
-    getChatMessageEntitiesState,
-    fromChatMessages.getDisconnectEvent
+export const getThreadId = createSelector(
+    getChatSessionEntity,
+    state => state.threadId
+);
+
+export const getPendingStatus = createSelector(
+    getChatSessionEntity,
+    state => state.agentStatus
 );
 
 export const getLastStudentMessage = createSelector(
-    getChatMessageEntitiesState,
-    fromChatMessages.getLastStudentMessage
+    getMessages,
+    state => state.reverse().find(message => message.from.id === 'student')
 );

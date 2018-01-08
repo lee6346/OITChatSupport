@@ -6,6 +6,6 @@ namespace OITChatBotSupport.Domain.AgentSupport
     public interface IAgentRepository
     {
         Task UpdateAgentConnectionAsync(string agentId, bool connected);
-        Task<IEnumerable<Agent>> GetConnectedAgentsAsync();
+        Task<IEnumerable<Agent>> GetAgentsAsync(bool connected);
     }
 }
