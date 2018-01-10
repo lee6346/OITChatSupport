@@ -1,33 +1,30 @@
+Error.stackTraceLimit = Infinity;
+
 // Load required polyfills and testing libraries
 import 'reflect-metadata';
-import 'zone.js';
+import 'core-js';
+import 'zone.js/dist/zone';
 import 'zone.js/dist/long-stack-trace-zone';
-import 'zone.js/dist/proxy.js';
+import 'zone.js/dist/proxy';
 import 'zone.js/dist/sync-test';
 import 'zone.js/dist/jasmine-patch';
 import 'zone.js/dist/async-test';
 import 'zone.js/dist/fake-async-test';
+import 'rxjs/Rx';
+
 import * as testing from '@angular/core/testing';
 import * as testingBrowser from '@angular/platform-browser-dynamic/testing';
 
-// There's no typing for the `__karma__` variable. Just declare it as any
-declare var __karma__: any;
-declare var require: any;
 
-// Prevent Karma from running prematurely
-__karma__.loaded = function () { };
-
-// First, initialize the Angular testing environment
+// Initialize the Angular testing environment
 testing.getTestBed().initTestEnvironment(
     testingBrowser.BrowserDynamicTestingModule,
     testingBrowser.platformBrowserDynamicTesting()
 );
 
-// Then we find all the tests
-const context = require.context('../', true, /\.spec\.ts$/);
+// find all the tests files in src
+const context = require.context('../src', true, /\.spec\.ts$/);
 
-// And load the modules
+// load all modules
 context.keys().map(context);
 
-// Finally, start Karma to run the tests
-__karma__.start();

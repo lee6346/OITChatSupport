@@ -9,7 +9,7 @@
 export class ChatHeaderPanelComponent {
 
     @Output()
-    private transferRequest: EventEmitter<void> = new EventEmitter<void>();
+    transferRequest: EventEmitter<void> = new EventEmitter<void>();
 
     constructor() { }
 

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace OITChatBotSupport.ChatBot.Dialogs.Locator
+﻿namespace OITChatBotSupport.ChatBot.Models.PrintSpot
 {
     public class UtsaPrinter
     {

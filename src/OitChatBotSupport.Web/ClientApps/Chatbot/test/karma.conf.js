@@ -1,26 +1,41 @@
-// Karma configuration file, see link for more information
-// https://karma-runner.github.io/0.13/config/configuration-file.html
 
 module.exports = function (config) {
-    config.set({
-        basePath: '.',
+    const webpackConfig = require('../config/webpack.test.js')
+
+    const configuration = {
+        //base path for resolving all patterns
+        basePath: '',
+        //frameworks to use
         frameworks: ['jasmine'],
+        // list of files/patterns to load on browser
         files: [
-            '../../wwwroot/dist/vendor.js',
-            './boot-tests.ts'
+            { pattern: '../config/spec.bundle.js', watched: false }
         ],
+        //list of files to exclude
+        exclude: [],
+        //preprocess matching files before serving to browser
         preprocessors: {
-            './boot-tests.ts': ['webpack']
+            '../config/spec.bundle.js': ['webpack', 'sourcemap']
         },
+        //webpack
+        webpack: webpackConfig,
+        webpackServer: {
+            noInfo: true
+        },
+        //test results reporter to use (dots, progress)
         reporters: ['progress'],
+        //test web server port
         port: 9876,
+        // enable colors in reporter/log output
         colors: true,
+        // LOG_DISABLE || LOG_ERROR || LOG_WARN || LOG_INFO || LOG_DEBUG
         logLevel: config.LOG_INFO,
+        // enable watchign file/executing tests when files change
         autoWatch: true,
+        // apply to chrome browser
         browsers: ['Chrome'],
-        mime: { 'application/javascript': ['ts','tsx'] },
-        singleRun: false,
-        webpack: require('../../webpack.config.js')().filter(config => config.target !== 'node'), // Test against client bundle, because tests run in a browser
-        webpackMiddleware: { stats: 'errors-only' }
-    });
-};
+        //CI mode, karma captures browsers, runs tests, then exits
+        singleRun: false
+    };
+    config.set(configuration);
+}

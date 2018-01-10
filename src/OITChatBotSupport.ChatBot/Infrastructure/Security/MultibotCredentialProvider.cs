@@ -9,8 +9,8 @@ namespace OITChatBotSupport.ChatBot.Infrastructure.Security
     {
         public Dictionary<string, string> Credentials = new Dictionary<string, string>
         {
-            { "app id of bot on webside", "app passsword of bot on site"},
-            { "same as above" , "same as aboe" }
+            { "app-id of first registered bot on site", "app-passsword of first registered bot on site"},
+            { "same for second registered bot" , "same for second registered bot" }
         };
 
         public Task<bool> IsValidAppIdAsync(string appId)

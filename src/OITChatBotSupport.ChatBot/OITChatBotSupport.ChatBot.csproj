@@ -230,8 +230,7 @@
     <Compile Include="Dialogs\Factories\DialogFactory.cs" />
     <Compile Include="Dialogs\Factories\IDialogFactory.cs" />
     <Compile Include="Dialogs\Locator\PrinterLocaterDialog.cs" />
-    <Compile Include="Dialogs\Locator\UtsaPrinter.cs" />
-    <Compile Include="Dialogs\Luis\LuisDialog.cs" />
+    <Compile Include="Models\PrintSpot\UtsaPrinter.cs" />
     <Compile Include="Dialogs\RootDialog.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -240,10 +239,7 @@
     <Compile Include="Infrastructure\Redis\RedisCacheExtension.cs" />
     <Compile Include="Infrastructure\Redis\RedisCacheManager.cs" />
     <Compile Include="Infrastructure\Logging\BotActivityLogger.cs" />
-    <Compile Include="Infrastructure\Persistence\ISqlConnectionFactory.cs" />
-    <Compile Include="Infrastructure\Persistence\SqlConnectionFactory.cs" />
     <Compile Include="Infrastructure\Security\MultibotCredentialProvider.cs" />
-    <Compile Include="Models\Abstractions\Entity.cs" />
     <Compile Include="Models\DirectLine\AgentTransferRequest.cs" />
     <Compile Include="Models\DirectLine\MessageActivity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -260,9 +256,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Dialogs\Core\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

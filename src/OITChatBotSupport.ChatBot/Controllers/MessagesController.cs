@@ -3,10 +3,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using Microsoft.Bot.Connector;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using System;
-using System.Linq;
 using Microsoft.Bot.Builder.Dialogs;
 using OITChatBotSupport.ChatBot.Dialogs;
 
@@ -25,8 +22,6 @@ namespace OITChatBotSupport.ChatBot.Controllers
             if (activity.Type == ActivityTypes.Message)
             {
                 await Conversation.SendAsync(activity, () => new RootDialog());
-                //Activity reply = activity.CreateReply("it worked!");
-                //await connector.Conversations.ReplyToActivityAsync(reply);
             }
             else
             {

@@ -1,15 +1,13 @@
-﻿
-using System;
-using OITChatBotSupport.ChatBot.Models.Abstractions;
+﻿using System;
 
 namespace OITChatBotSupport.ChatBot.Models.DirectLine
 {
-    public class MessageActivity: Entity
+    public class MessageActivity
     {
+        public int Id { get; set; }
         public string Sender { get; set; }
         public string ConversationId { get; set; }
         public string Text { get; set; }
         public DateTime Timestamp { get; set; }
     }
-
 }

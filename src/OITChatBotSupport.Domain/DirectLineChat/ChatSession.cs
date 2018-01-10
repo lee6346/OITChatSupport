@@ -4,10 +4,21 @@ using System.Linq;
 
 namespace OITChatBotSupport.Domain.DirectLineChat
 {
+    /// <summary>
+    /// Direct line chat session aggregate
+    /// Inherits the conversation thread and contains all messages for the thread
+    /// </summary>
     public class ChatSession: ConversationThread
     {
+        /// <summary>
+        /// List of <see cref="ConversationMessage"/> from this <see cref="ConversationThread"/>
+        /// </summary>
         private readonly IList<ConversationMessage> _messages;
 
+        /// <summary>
+        /// Returns the list of <see cref="ConversationMessage"/>
+        /// </summary>
+        /// <returns><see cref="IEnumerable{T}"/></returns>
         public IEnumerable<ConversationMessage> Messages => _messages;
 
         public ChatSession(string conversationId, DateTimeOffset created) :
@@ -20,6 +31,10 @@ namespace OITChatBotSupport.Domain.DirectLineChat
             _messages = messages;
         }
 
+        /// <summary>
+        /// Add messages to the session
+        /// </summary>
+        /// <param name="messages">list of messages to combine with current list</param>
         public void AddMessages(IList<ConversationMessage> messages)
         {
             Messages.Concat(messages);

@@ -12,6 +12,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="ClientApps\Chatbot\src\app\app.component.spec.ts" />
+    <None Remove="ClientApps\Chatbot\src\app\chat-session\services\agent-transfer.service.spec.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.Extensions.SecretManager.Tools" Version="2.0.0" />
   </ItemGroup>
   
@@ -29,6 +34,11 @@
   <ItemGroup>
     <ProjectReference Include="..\OITChatBotSupport.Application\OITChatBotSupport.Application.csproj" />
     <ProjectReference Include="..\OITChatBotSupport.Infrastructure\OITChatBotSupport.Infrastructure.csproj" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApps\Chatbot\src\app\app.component.spec.ts" />
+    <TypeScriptCompile Include="ClientApps\Chatbot\src\app\chat-session\services\agent-transfer.service.spec.ts" />
   </ItemGroup>
   
 </Project>
